@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="detailTitle">عبدالله عباس | تفاصيل</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* تنسيقات إضافية للصفحة التفصيلية */
+        .detail-hero { background: var(--gray-50); padding: 2rem 0 3rem; border-bottom: 1px solid var(--gray-200); }
+        .detail-content { max-width: 800px; margin: 0 auto; }
+        .detail-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: var(--radius); margin-bottom: 2rem; box-shadow: var(--shadow-md); }
+        .detail-price { font-size: 2rem; font-weight: 800; color: var(--primary); }
+        .detail-features { list-style: disc; padding-right: 1.5rem; margin: 1rem 0; }
+        .detail-features li { margin-bottom: 0.5rem; color: var(--gray-600); }
+        .order-form { background: white; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow-md); margin-top: 2rem; border: 1px solid var(--gray-200); }
+        .order-form .btn { width: 100%; justify-content: center; padding: 0.8rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .gallery-grid img { aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); cursor: pointer; transition: var(--transition); }
+        .gallery-grid img:hover { transform: scale(1.05); }
+        .back-link { display: inline-block; margin-bottom: 1.5rem; color: var(--gray-500); }
+        .back-link i { margin-left: 0.5rem; }
+        body.ltr .back-link i { margin-left: 0; margin-right: 0.5rem; }
+    </style>
+</head>
+<body>
+
+    <header class="header" style="position:relative; border-bottom:1px solid var(--gray-200);">
+        <div class="container header-inner">
+            <div class="logo"><a href="/"><span class="logo-text">عبدالله عباس</span></a></div>
+            <div class="header-actions">
+                <button class="lang-switch" id="langSwitch"><i class="fas fa-globe"></i> <span id="langLabel">EN</span></button>
+                <a href="/" class="btn btn-outline"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="detail-hero">
+            <div class="container">
+                <a href="/" class="back-link"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+                <div class="detail-content" id="detailContent">
+                    <!-- سيتم تعبئتها عبر JavaScript -->
+                    <div class="loading-spinner" style="text-align:center;padding:4rem 0;">جاري التحميل...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" style="margin-top:2rem;">
+        <div class="container"><div class="footer-bottom"><p>&copy; 2026 عبدالله عباس</p></div></div>
+    </footer>
+
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        
+        const firebaseConfig = { /* ضع config هنا */ };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // جلب المعامل من الرابط
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type'); // service, template, product, portfolio, post
+        const slug = params.get('slug');
+
+        async function loadDetail() {
+            const container = document.getElementById('detailContent');
+            if (!type || !slug) {
+                container.innerHTML = `<p style="color:red;">رابط غير صحيح</p>`;
+                return;
+            }
+
+            let collectionName = '';
+            let titleKey = 'title';
+            let descKey = 'description';
+            let priceKey = 'price';
+            let imageKey = 'image';
+
+            switch(type) {
+                case 'service': collectionName = 'services'; break;
+                case 'template': collectionName = 'templates'; break;
+                case 'product': collectionName = 'products'; break;
+                case 'portfolio': collectionName = 'portfolio'; titleKey = 'title'; descKey = 'description'; imageKey = 'coverImage'; break;
+                case 'post': collectionName = 'posts'; titleKey = 'title'; descKey = 'excerpt'; imageKey = 'featuredImage'; break;
+                default: container.innerHTML = `<p>نوع غير معروف</p>`; return;
+            }
+
+            try {
+                // البحث باستخدام slug (يفضل أن يكون حقل فريد)
+                const q = query(collection(db, collectionName), where("slug", "==", slug));
+                const snap = await getDocs(q);
+                if (snap.empty) {
+                    container.innerHTML = `<p style="color:red;">العنصر غير موجود</p>`;
+                    return;
+                }
+                const docData = snap.docs[0].data();
+                const id = snap.docs[0].id;
+                renderDetail(container, docData, type, id);
+            } catch (e) {
+                container.innerHTML = `<p style="color:red;">حدث خطأ: ${e.message}</p>`;
+            }
+        }
+
+        function renderDetail(container, data, type, docId) {
+            const lang = document.documentElement.lang || 'ar';
+            const isAr = lang === 'ar';
+            
+            const title = isAr ? data.title : (data.title_en || data.title);
+            const desc = isAr ? data.description : (data.description_en || data.description || '');
+            const price = data.price || 0;
+            const currency = data.currency || 'SAR';
+            const image = data.image || data.coverImage || data.featuredImage || '';
+            const features = isAr ? data.features : (data.features_en || data.features || []);
+            const gallery = data.gallery || [];
+            
+            let priceHtml = '';
+            if (type === 'product' && data.type === 'free') priceHtml = '<span class="detail-price">مجاني</span>';
+            else if (price > 0) priceHtml = `<span class="detail-price">${price} ${currency}</span>`;
+            else priceHtml = `<span class="detail-price">مجاني</span>`;
+
+            let galleryHtml = '';
+            if (gallery.length > 0) {
+                galleryHtml = `<div class="gallery-grid">${gallery.map(img => `<img src="${img}" alt="Gallery" loading="lazy" />`).join('')}</div>`;
+            }
+
+            let featuresHtml = '';
+            if (features && features.length > 0) {
+                featuresHtml = `<ul class="detail-features">${features.map(f => `<li>${f}</li>`).join('')}</ul>`;
+            }
+
+            let actionHtml = '';
+            if (type === 'post') {
+                // عرض المحتوى الكامل للمقالة (يفترض وجود حقل content)
+                const content = isAr ? data.content : (data.content_en || data.content || '');
+                actionHtml = `<div style="margin-top:1rem;line-height:1.9;">${content}</div>`;
+            } else if (type === 'product' && data.type === 'free' && data.downloadUrl) {
+                actionHtml = `<a href="${data.downloadUrl}" class="btn btn-primary" style="margin-top:1rem;"><i class="fas fa-download"></i> تحميل المنتج</a>`;
+            } else {
+                // نموذج الطلب لجميع الخدمات والمنتجات المدفوعة والقوالب
+                actionHtml = `
+                    <div class="order-form" id="orderForm">
+                        <h3>طلب ${title}</h3>
+                        <form id="orderSubmitForm">
+                            <input type="hidden" name="itemType" value="${type}" />
+                            <input type="hidden" name="itemId" value="${docId}" />
+                            <input type="hidden" name="itemTitle" value="${title}" />
+                            <div class="form-group"><label>الاسم كاملاً</label><input type="text" name="name" required /></div>
+                            <div class="form-group"><label>البريد الإلكتروني</label><input type="email" name="email" required /></div>
+                            <div class="form-group"><label>رقم الجوال (واتساب)</label><input type="text" name="phone" required /></div>
+                            <div class="form-group"><label>تفاصيل إضافية</label><textarea name="details" rows="3" placeholder="اكتب متطلباتك..."></textarea></div>
+                            <button type="submit" class="btn btn-primary">إرسال الطلب <i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <h1 id="detailTitle">${title}</h1>
+                ${image ? `<img src="${image}" alt="${title}" class="detail-image" />` : ''}
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:1rem;">
+                    ${priceHtml}
+                    ${data.featured ? '<span class="badge-status" style="background:#FF6600;color:white;padding:0.2rem 0.8rem;border-radius:999px;">⭐ مميز</span>' : ''}
+                </div>
+                <p style="font-size:1.1rem;color:var(--gray-600);">${desc}</p>
+                ${featuresHtml}
+                ${galleryHtml}
+                ${actionHtml}
+            `;
+
+            // معالجة نموذج الطلب
+            const form = document.getElementById('orderSubmitForm');
+            if (form) {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const order = {
+                        userId: auth.currentUser?.uid || 'guest',
+                        userEmail: auth.currentUser?.email || formData.get('email'),
+                        userName: formData.get('name'),
+                        phone: formData.get('phone'),
+                        itemType: formData.get('itemType'),
+                        itemId: formData.get('itemId'),
+                        itemTitle: formData.get('itemTitle'),
+                        details: formData.get('details'),
+                        status: 'new',
+                        createdAt: new Date()
+                    };
+                    try {
+                        const { addDoc, collection } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+                        await addDoc(collection(db, "orders"), order);
+                        alert('تم إرسال طلبك بنجاح! سنتواصل معك قريباً.');
+                        form.reset();
+                    } catch (err) {
+                        alert('حدث خطأ: ' + err.message);
+                    }
+                });
+            }
+        }
+
+        // تغيير اللغة
+        document.getElementById('langSwitch')?.addEventListener('click', () => {
+            const isAr = document.documentElement.lang === 'ar';
+            document.documentElement.lang = isAr ? 'en' : 'ar';
+            document.documentElement.dir = isAr ? 'ltr' : 'rtl';
+            document.body.classList.toggle('ltr', !isAr);
+            document.getElementById('langLabel').textContent = isAr ? 'عربي' : 'EN';
+            loadDetail(); // إعادة تحميل المحتوى
+        });
+
+        loadDetail();
+    </script>
+</body>
+</html>
