@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>عبدالله عباس | حلول رقمية احترافية</title>
-    <meta name="description" content="منصة عبدالله عباس للخدمات الرقمية الاحترافية: تصميم مواقع، قوالب بلوجر، تطبيقات، وتحسين محركات البحث." />
-    <link rel="canonical" href="https://abdallahsst.web.app/" />
+    <title>تواصل معنا | Abdallah Abas</title>
+    <meta name="description" content="تواصل مع Abdallah Abas للاستفسار عن الخدمات الرقمية والاستشارات." />
+    <link rel="canonical" href="https://abdallahsst.web.app/contact.html" />
     
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="عبدالله عباس | حلول رقمية احترافية" />
-    <meta property="og:description" content="منصة متكاملة للخدمات الرقمية بتصميم عصري وأداء خارق." />
+    <meta property="og:title" content="تواصل معنا | Abdallah Abas" />
+    <meta property="og:description" content="نحن هنا لمساعدتك. تواصل معنا للحصول على استشارة مجانية." />
     <meta property="og:image" content="https://abdallahsst.web.app/assets/og-image.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
     
     <link rel="icon" href="assets/favicon.ico" />
 
@@ -27,6 +26,184 @@
 
     <!-- التصميم الرئيسي -->
     <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+        .contact-hero {
+            padding: 3rem 0 4rem;
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .contact-form-box {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+        }
+        .contact-form-box h2 {
+            margin-bottom: 0.5rem;
+        }
+        .contact-form-box .sub {
+            color: var(--gray-500);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+            color: var(--gray-700);
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            font-family: var(--font-ar);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--white);
+            color: var(--gray-900);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.08);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .contact-info-box {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+        }
+        .contact-info-box h3 {
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--gray-900);
+        }
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem 1rem;
+            background: var(--gray-50);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        .contact-info-item:hover {
+            background: rgba(var(--primary-rgb), 0.05);
+            border-color: var(--primary-light);
+        }
+        .contact-info-item i {
+            width: 2.2rem;
+            height: 2.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .contact-info-item .text {
+            flex: 1;
+        }
+        .contact-info-item .text strong {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            font-weight: 400;
+        }
+        .contact-info-item .text span {
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+        .contact-social {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+        }
+        .contact-social .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .contact-social .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+        }
+        .contact-social .social-links a:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+        #contactResponse {
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: var(--radius);
+            font-weight: 700;
+            text-align: center;
+            display: none;
+        }
+        #contactResponse.success {
+            display: block;
+            background: #DCFCE7;
+            color: #15803D;
+            border: 1px solid #86EFAC;
+        }
+        #contactResponse.error {
+            display: block;
+            background: #FEE2E2;
+            color: #DC2626;
+            border: 1px solid #FCA5A5;
+        }
+
+        @media (max-width: 992px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .contact-form-box,
+            .contact-info-box {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -35,26 +212,24 @@
         <div class="container header-inner">
             <div class="logo">
                 <a href="/">
-                    <img src="assets/logo.svg" alt="عبدالله عباس" class="logo-img" />
-                    <span class="logo-text">عبدالله <span>عباس</span></span>
+                    <img src="assets/logo.svg" alt="Abdallah Abas" class="logo-img" />
+                    <span class="logo-text">Abdallah <span>Abas</span></span>
                 </a>
             </div>
             <nav class="main-nav" id="main-nav">
                 <ul class="nav-list">
-                    <li><a href="#services">الخدمات</a></li>
-                    <li><a href="#templates">القوالب</a></li>
-                    <li><a href="#products">المنتجات</a></li>
-                    <li><a href="#portfolio">الأعمال</a></li>
-                    <li><a href="#blog">المدونة</a></li>
-                    <li><a href="contact.html">تواصل</a></li>
+                    <li><a href="/#services">الخدمات</a></li>
+                    <li><a href="/#templates">القوالب</a></li>
+                    <li><a href="/#products">المنتجات</a></li>
+                    <li><a href="/#portfolio">الأعمال</a></li>
+                    <li><a href="/#blog">المدونة</a></li>
+                    <li><a href="contact.html" style="color:var(--primary);">تواصل</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
                 <button class="lang-switch" id="langSwitch"><i class="fas fa-globe"></i> <span id="langLabel">EN</span></button>
                 <div class="auth-buttons" id="authButtons">
-                    <!-- ✅ زر دخول → يفتح نافذة تسجيل الدخول -->
                     <a href="#" class="btn btn-outline" id="loginBtn">دخول</a>
-                    <!-- ✅ زر حساب جديد → يفتح نافذة التسجيل -->
                     <a href="#" class="btn btn-primary" id="registerBtn">حساب جديد</a>
                 </div>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
@@ -64,142 +239,95 @@
 
     <!-- ===== MAIN CONTENT ===== -->
     <main>
+        <section class="contact-hero">
+            <div class="container">
+                <div class="section-header" style="margin-bottom:2.5rem;">
+                    <h2 class="section-title">تواصل <span class="highlight">معنا</span></h2>
+                    <p class="section-subtitle">نحن هنا للإجابة على استفساراتك وتقديم الدعم اللازم</p>
+                </div>
 
-        <!-- ===== HERO ===== -->
-        <section id="hero" class="hero">
-            <div class="container hero-inner">
-                <div class="hero-content">
-                    <h1 class="hero-title">حلول رقمية <span class="highlight">احترافية</span> تنمو مع أعمالك</h1>
-                    <p class="hero-desc">أقدم لك خدمات تصميم وتطوير مواقع، قوالب بلوجر، وتحسين محركات البحث بجودة عالية ودعم مستمر.</p>
-                    <div class="hero-actions">
-                        <!-- ✅ زر استكشف الخدمات → تمرير سلس لقسم الخدمات -->
-                        <a href="#services" class="btn btn-primary btn-large" id="exploreServicesBtn">استكشف الخدمات</a>
-                        <!-- ✅ زر شاهد أعمالي → تمرير سلس لقسم معرض الأعمال -->
-                        <a href="#portfolio" class="btn btn-outline btn-large" id="viewPortfolioBtn">شاهد أعمالي</a>
+                <div class="contact-wrapper">
+                    <!-- ===== نموذج التواصل ===== -->
+                    <div class="contact-form-box">
+                        <h2>أرسل رسالتك</h2>
+                        <p class="sub">سنقوم بالرد عليك في أقرب وقت ممكن.</p>
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cName">الاسم كاملاً <span style="color:red;">*</span></label>
+                                    <input type="text" id="cName" name="name" required placeholder="أدخل اسمك" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="cEmail">البريد الإلكتروني <span style="color:red;">*</span></label>
+                                    <input type="email" id="cEmail" name="email" required placeholder="example@domain.com" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cPhone">رقم الجوال</label>
+                                <input type="text" id="cPhone" name="phone" placeholder="05xxxxxxxx" />
+                            </div>
+                            <div class="form-group">
+                                <label for="cSubject">الموضوع <span style="color:red;">*</span></label>
+                                <input type="text" id="cSubject" name="subject" required placeholder="ماذا تريد؟" />
+                            </div>
+                            <div class="form-group">
+                                <label for="cMessage">الرسالة <span style="color:red;">*</span></label>
+                                <textarea id="cMessage" name="message" rows="5" required placeholder="اكتب رسالتك بالتفصيل..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width:100%;padding:0.9rem;font-size:1.05rem;">
+                                <i class="fas fa-paper-plane"></i> إرسال الرسالة
+                            </button>
+                        </form>
+                        <div id="contactResponse"></div>
                     </div>
-                </div>
-                <div class="hero-visual">
-                    <img src="assets/hero-illustration.svg" alt="تصميم رقمي" />
-                </div>
-            </div>
-        </section>
 
-        <!-- ===== SERVICES ===== -->
-        <section id="services" class="section section-light">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">خدماتي <span class="highlight">الاحترافية</span></h2>
-                    <p class="section-subtitle">أقدم مجموعة من الخدمات الرقمية المصممة خصيصاً لنجاح مشروعك</p>
-                </div>
-                <div class="services-grid" id="servicesGrid"></div>
-            </div>
-        </section>
+                    <!-- ===== معلومات التواصل ===== -->
+                    <div class="contact-info-box">
+                        <h3>معلومات الاتصال</h3>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="text">
+                                <strong>البريد الإلكتروني</strong>
+                                <span>info@abdallahsst.com</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div class="text">
+                                <strong>رقم الجوال</strong>
+                                <span>+966 50 000 0000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div class="text">
+                                <strong>واتساب</strong>
+                                <span>+966 50 000 0000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="text">
+                                <strong>الموقع</strong>
+                                <span>المملكة العربية السعودية</span>
+                            </div>
+                        </div>
 
-        <!-- ===== TEMPLATES ===== -->
-        <section id="templates" class="section section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">قوالب <span class="highlight">احترافية</span></h2>
-                    <p class="section-subtitle">قوالب بلوجر ووردبريس مصممة بأعلى معايير الجودة والأداء</p>
-                </div>
-                <div class="templates-grid" id="templatesGrid"></div>
-            </div>
-        </section>
-
-        <!-- ===== PRODUCTS ===== -->
-        <section id="products" class="section section-light">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">المنتجات <span class="highlight">الرقمية</span></h2>
-                    <p class="section-subtitle">إضافات وأدوات رقمية لتسريع نمو أعمالك</p>
-                </div>
-                <div class="products-grid" id="productsGrid"></div>
-            </div>
-        </section>
-
-        <!-- ===== PORTFOLIO ===== -->
-        <section id="portfolio" class="section section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">معرض <span class="highlight">الأعمال</span></h2>
-                    <p class="section-subtitle">نماذج من مشاريعي السابقة التي تعكس الجودة والاحترافية</p>
-                </div>
-                <div class="portfolio-grid" id="portfolioGrid"></div>
-            </div>
-        </section>
-
-        <!-- ===== BLOG ===== -->
-        <section id="blog" class="section section-light">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">المدونة <span class="highlight">التقنية</span></h2>
-                    <p class="section-subtitle">أحدث المقالات والنصائح في عالم التصميم والتطوير</p>
-                </div>
-                <div class="blog-grid" id="blogGrid"></div>
-            </div>
-        </section>
-
-        <!-- ===== WHY US ===== -->
-        <section class="section section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">لماذا <span class="highlight">عبدالله عباس</span>؟</h2>
-                </div>
-                <div class="features-grid">
-                    <div class="feature-card"><i class="fas fa-rocket"></i><h3>احترافية عالية</h3><p>خبرة سنوات في تقديم حلول رقمية مبتكرة.</p></div>
-                    <div class="feature-card"><i class="fas fa-headset"></i><h3>دعم فني مستمر</h3><p>أنا معك خطوة بخطوة حتى إطلاق مشروعك.</p></div>
-                    <div class="feature-card"><i class="fas fa-bolt"></i><h3>أداء وسرعة</h3><p>أكواد نظيفة ومحسنة لأسرع تجربة تحميل.</p></div>
-                    <div class="feature-card"><i class="fas fa-shield-alt"></i><h3>أمان وحماية</h3><p>أحدث معايير الأمان لحماية بياناتك.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== HOW IT WORKS ===== -->
-        <section class="section section-light">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">كيف <span class="highlight">نعمل</span>؟</h2>
-                </div>
-                <div class="steps">
-                    <div class="step"><span class="step-num">1</span><h3>استشارة مجانية</h3><p>نتواصل لفهم احتياجاتك وأهدافك.</p></div>
-                    <div class="step"><span class="step-num">2</span><h3>تخطيط وتصميم</h3><p>نضع خارطة طريق ونبدأ التصميم.</p></div>
-                    <div class="step"><span class="step-num">3</span><h3>تطوير ومراجعة</h3><p>نطور الحل ونرسله لك للمراجعة.</p></div>
-                    <div class="step"><span class="step-num">4</span><h3>إطلاق ودعم</h3><p>نطلق المشروع وندعمك باستمرار.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== TESTIMONIALS ===== -->
-        <section class="section section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">آراء <span class="highlight">العملاء</span></h2>
-                </div>
-                <div class="testimonials-grid" id="testimonialsGrid"></div>
-            </div>
-        </section>
-
-        <!-- ===== FAQ ===== -->
-        <section class="section section-light">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">الأسئلة <span class="highlight">الشائعة</span></h2>
-                </div>
-                <div class="faq-list" id="faqList"></div>
-            </div>
-        </section>
-
-        <!-- ===== CTA ===== -->
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-box">
-                    <div class="badge"><i class="fas fa-crown"></i> احترافية بلا حدود</div>
-                    <h2>جاهز لبدء <span class="highlight">مشروعك</span>؟</h2>
-                    <p>تواصل معي اليوم لتحويل فكرتك إلى واقع رقمي متميز.</p>
-                    <!-- ✅ زر احصل على استشارة مجانية → يوجه إلى صفحة التواصل -->
-                    <a href="contact.html" class="btn btn-primary btn-large" id="ctaContactBtn">
-                        <i class="fas fa-arrow-left"></i> احصل على استشارة مجانية
-                    </a>
+                        <div class="contact-social">
+                            <h4 style="font-weight:700;color:var(--gray-800);margin-bottom:0.5rem;">تابعني على</h4>
+                            <div class="social-links">
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -210,7 +338,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3>عبدالله <span>عباس</span></h3>
+                    <h3>Abdallah <span>Abas</span></h3>
                     <p>منصة خدمات رقمية متكاملة تهدف لتقديم حلول احترافية في التصميم والتطوير.</p>
                     <div class="social-links">
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -219,10 +347,10 @@
                         <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
-                <div class="footer-col"><h4>روابط سريعة</h4><ul><li><a href="#services">الخدمات</a></li><li><a href="#templates">القوالب</a></li><li><a href="#products">المنتجات</a></li><li><a href="#blog">المدونة</a></li></ul></div>
+                <div class="footer-col"><h4>روابط سريعة</h4><ul><li><a href="/#services">الخدمات</a></li><li><a href="/#templates">القوالب</a></li><li><a href="/#products">المنتجات</a></li><li><a href="/#blog">المدونة</a></li></ul></div>
                 <div class="footer-col"><h4>تواصل معي</h4><ul><li><i class="fas fa-envelope"></i> info@abdallahsst.com</li><li><i class="fas fa-phone"></i> +966 50 000 0000</li><li><i class="fab fa-whatsapp"></i> +966 50 000 0000</li></ul></div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2026 <span>عبدالله عباس</span> جميع الحقوق محفوظة</p></div>
+            <div class="footer-bottom"><p>&copy; 2026 <span>Abdallah Abas</span> جميع الحقوق محفوظة</p></div>
         </div>
     </footer>
 
@@ -250,14 +378,11 @@
                         <input type="text" id="authName" style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" />
                     </div>
                     <div id="magicLinkSection" style="margin-top:0.5rem;">
-                        <!-- ✅ زر الرابط السحري -->
                         <button type="button" id="sendMagicLinkBtn" class="btn btn-outline" style="width:100%;border-color:var(--primary);color:var(--primary);background:transparent;">📧 أرسل لي رابط سحري</button>
                     </div>
                 </div>
-                <!-- ✅ زر إرسال النموذج (تسجيل الدخول / إنشاء حساب) -->
                 <button type="submit" id="authSubmitBtn" class="btn btn-primary" style="width:100%;margin-top:1.2rem;">تسجيل الدخول</button>
             </form>
-            <!-- ✅ زر تسجيل الدخول بـ Google -->
             <button id="googleAuthBtn" class="btn btn-outline" style="width:100%;margin-top:0.75rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;border-color:var(--gray-300);color:var(--gray-700);"><i class="fab fa-google"></i> Google</button>
             <p id="authError" style="color:#EF4444;margin-top:1rem;text-align:center;"></p>
         </div>
@@ -280,8 +405,7 @@
         // ===== Firebase Config =====
         import { initializeApp } from "firebase/app";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, signOut } from "firebase/auth";
-        import { getFirestore, collection, doc, setDoc, getDoc } from "firebase/firestore";
-        import { getStorage } from "firebase/storage";
+        import { getFirestore, collection, addDoc } from "firebase/firestore";
         import { getAnalytics } from "firebase/analytics";
 
         const firebaseConfig = {
@@ -297,14 +421,55 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const storage = getStorage(app);
         const analytics = getAnalytics(app);
         const provider = new GoogleAuthProvider();
 
-        window.__firebase = { app, auth, db, storage, analytics };
+        // ============================================================
+        // 1. نموذج التواصل
+        // ============================================================
+        const contactForm = document.getElementById('contactForm');
+        const responseDiv = document.getElementById('contactResponse');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                responseDiv.style.display = 'none';
+                responseDiv.className = '';
+
+                const formData = new FormData(contactForm);
+                const data = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    subject: formData.get('subject'),
+                    message: formData.get('message'),
+                    status: 'new',
+                    createdAt: new Date()
+                };
+
+                if (!data.name || !data.email || !data.subject || !data.message) {
+                    responseDiv.className = 'error';
+                    responseDiv.textContent = '❌ الرجاء تعبئة جميع الحقول المطلوبة.';
+                    responseDiv.style.display = 'block';
+                    return;
+                }
+
+                try {
+                    await addDoc(collection(db, "contact_messages"), data);
+                    responseDiv.className = 'success';
+                    responseDiv.textContent = '✅ تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.';
+                    responseDiv.style.display = 'block';
+                    contactForm.reset();
+                } catch (err) {
+                    responseDiv.className = 'error';
+                    responseDiv.textContent = '❌ حدث خطأ: ' + err.message;
+                    responseDiv.style.display = 'block';
+                }
+            });
+        }
 
         // ============================================================
-        // 1. نظام المصادقة الكامل
+        // 2. نظام المصادقة (مباشر في contact.html)
         // ============================================================
         let currentUser = null;
 
@@ -339,7 +504,6 @@
             updateUI(user);
         });
 
-        // --- دوال النافذة المنبثقة ---
         function openAuthModal(tab = 'login') {
             const modal = document.getElementById('authModal');
             modal.style.display = 'flex';
@@ -351,7 +515,6 @@
             document.getElementById('authModal').style.display = 'none';
         };
 
-        // --- أحداث النموذج ---
         document.querySelectorAll('.auth-tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 const tabName = this.dataset.tab;
@@ -379,15 +542,7 @@
                 if (isLogin) {
                     await signInWithEmailAndPassword(auth, email, password);
                 } else {
-                    const cred = await createUserWithEmailAndPassword(auth, email, password);
-                    if (name) {
-                        await setDoc(doc(db, "users", cred.user.uid), {
-                            uid: cred.user.uid,
-                            email: email,
-                            displayName: name,
-                            createdAt: new Date()
-                        });
-                    }
+                    await createUserWithEmailAndPassword(auth, email, password);
                 }
                 closeAuthModal();
                 window.location.reload();
@@ -406,12 +561,11 @@
             }
         });
 
-        // --- الرابط السحري ---
         document.getElementById('sendMagicLinkBtn')?.addEventListener('click', async () => {
             const email = document.getElementById('authEmail').value;
             if (!email) { document.getElementById('authError').textContent = 'أدخل بريدك الإلكتروني أولاً.'; return; }
             const actionCodeSettings = {
-                url: window.location.origin,
+                url: window.location.origin + '/contact.html',
                 handleCodeInApp: true,
             };
             try {
@@ -430,13 +584,13 @@
             if (email) {
                 signInWithEmailLink(auth, email, window.location.href).then(() => {
                     window.localStorage.removeItem('emailForSignIn');
-                    window.location.reload();
+                    window.location.href = '/';
                 }).catch(err => alert(err.message));
             }
         }
 
         // ============================================================
-        // 2. زر الهامبرغر (القائمة المتنقلة)
+        // 3. زر الهامبرغر
         // ============================================================
         const menuToggle = document.getElementById('mobileMenuToggle');
         const nav = document.getElementById('main-nav');
@@ -446,18 +600,10 @@
                 const icon = menuToggle.querySelector('i');
                 icon.className = nav.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
             });
-            // إغلاق القائمة عند النقر على أي رابط
-            document.querySelectorAll('.nav-list a').forEach(link => {
-                link.addEventListener('click', () => {
-                    nav.classList.remove('open');
-                    const icon = menuToggle.querySelector('i');
-                    if (icon) icon.className = 'fas fa-bars';
-                });
-            });
         }
 
         // ============================================================
-        // 3. تبديل اللغة
+        // 4. تبديل اللغة
         // ============================================================
         document.getElementById('langSwitch')?.addEventListener('click', () => {
             const isAr = document.documentElement.lang === 'ar';
@@ -466,34 +612,7 @@
             document.body.classList.toggle('ltr', !isAr);
             document.body.classList.toggle('rtl', isAr);
             document.getElementById('langLabel').textContent = isAr ? 'عربي' : 'EN';
-            
-            // تحديث النصوص المعربة (إذا كنت تستخدم i18n)
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                // يمكنك إضافة نظام الترجمة هنا
-            });
         });
-
-        // ============================================================
-        // 4. تمرير سلس للأقسام (لأزرار الهيرو)
-        // ============================================================
-        document.getElementById('exploreServicesBtn')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
-        document.getElementById('viewPortfolioBtn')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
-        // ============================================================
-        // 5. تحميل البيانات من Firebase (Mock أو حقيقي)
-        // ============================================================
-        // يمكنك استيراد ملف app.js هنا أو كتابة دوال جلب البيانات
-        // مثال: import('./js/app.js');
-
-        console.log('🔥 Index.html initialized successfully!');
     </script>
 </body>
 </html>
