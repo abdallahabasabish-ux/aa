@@ -324,7 +324,33 @@
         window.__firebase = { app, db, auth, storage };
         console.log("🔥 Firebase initialized successfully!");
     </script>
+<!-- ===== AUTH MODAL ===== -->
+<div class="auth-modal" id="authModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;justify-content:center;align-items:center;backdrop-filter:blur(4px);">
+    <div class="auth-box" style="background:white;padding:2rem;border-radius:var(--radius);max-width:400px;width:90%;position:relative;max-height:90vh;overflow-y:auto;">
+        <button onclick="closeAuthModal()" style="position:absolute;top:1rem;left:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;">✕</button>
+        <h2 id="authTitle" style="margin-bottom:1.5rem;text-align:center;">تسجيل الدخول</h2>
+        
+        <!-- Tabs -->
+        <div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;border-bottom:2px solid var(--gray-200);">
+            <button class="auth-tab active" data-tab="login" style="flex:1;padding:0.5rem;background:none;border:none;font-weight:700;color:var(--primary);border-bottom:3px solid var(--primary);cursor:pointer;">تسجيل دخول</button>
+            <button class="auth-tab" data-tab="register" style="flex:1;padding:0.5rem;background:none;border:none;font-weight:700;color:var(--gray-500);cursor:pointer;">حساب جديد</button>
+        </div>
 
+        <form id="authForm">
+            <div id="authFields">
+                <div class="form-group"><label>البريد الإلكتروني</label><input type="email" id="authEmail" required /></div>
+                <div class="form-group"><label>كلمة المرور</label><input type="password" id="authPassword" required minlength="6" /></div>
+                <div id="nameField" style="display:none;" class="form-group"><label>الاسم</label><input type="text" id="authName" /></div>
+            </div>
+            <button type="submit" id="authSubmitBtn" class="btn btn-primary" style="width:100%;margin-top:1rem;">تسجيل الدخول</button>
+        </form>
+        
+        <button id="googleAuthBtn" class="btn btn-outline" style="width:100%;margin-top:0.75rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+            <i class="fab fa-google"></i> تسجيل الدخول بـ Google
+        </button>
+        <p id="authError" style="color:red;margin-top:1rem;text-align:center;"></p>
+    </div>
+</div>
     <!-- App Scripts (Type="module" or defer) -->
     <script type="module" src="js/i18n.js"></script>
     <script type="module" src="js/modules/data.js"></script>
