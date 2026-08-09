@@ -7,7 +7,7 @@
     <meta name="description" content="حلول رقمية مخصصة في تطوير الويب، ووردبريس، وتحسين محركات البحث. نبني حول هدفك، ليس حول قالب جاهز." />
     <link rel="canonical" href="https://abdallahabas.github.io/" />
 
-    <!-- ===== GOOGLE FONTS (Almarai + Cairo + Inter) ===== -->
+    <!-- ===== GOOGLE FONTS ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Cairo:wght@200..1000&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -26,14 +26,14 @@
             --primary: #FF6600;
             --primary-dark: #E05A00;
             --primary-light: #FFF0E6;
-            --text-dark: #1A1A1A;
-            --text-mid: #4A4A4A;
-            --text-light: #7A7A7A;
+            --text-dark: #0A0A0A;
+            --text-mid: #333333;
+            --text-light: #666666;
             --bg-white: #FFFFFF;
-            --bg-soft: #F8F8F8;
-            --border-subtle: #EEEEEE;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08);
+            --bg-soft: #F7F7F7;
+            --border-subtle: #E5E5E5;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.10);
             --radius-sm: 6px;
             --radius-md: 12px;
             --max-width: 1200px;
@@ -52,10 +52,8 @@
             background: var(--bg-white);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ===== RTL / LTR BASE ===== */
         [dir="rtl"] {
             font-family: var(--font-ar);
         }
@@ -70,10 +68,6 @@
             padding: 0 24px;
         }
 
-        img {
-            max-width: 100%;
-            display: block;
-        }
         a {
             text-decoration: none;
             color: inherit;
@@ -94,7 +88,7 @@
             text-transform: uppercase;
             color: var(--primary);
             background: var(--primary-light);
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 20px;
             margin-bottom: 16px;
             border: 1px solid rgba(255, 102, 0, 0.15);
@@ -105,15 +99,13 @@
             line-height: 1.2;
             margin-bottom: 16px;
             letter-spacing: -0.02em;
+            color: var(--text-dark);
         }
         .section-subtitle {
             font-size: 1.1rem;
             color: var(--text-mid);
             max-width: 560px;
             line-height: 1.6;
-        }
-        [dir="ltr"] .section-subtitle {
-            max-width: 560px;
         }
 
         .btn-primary {
@@ -129,20 +121,18 @@
             border: none;
             cursor: pointer;
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
             font-family: inherit;
+            box-shadow: 0 4px 16px rgba(255, 102, 0, 0.25);
         }
         .btn-primary:hover {
             background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 102, 0, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(255, 102, 0, 0.35);
         }
         .btn-primary .arrow-icon {
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
-            justify-content: center;
         }
         .btn-primary:hover .arrow-icon {
             transform: translateX(4px);
@@ -172,43 +162,45 @@
             background: var(--primary-light);
         }
 
-        /* ===== SVG ICON STYLES ===== */
+        /* ===== SVG ICONS ===== */
         .icon-svg {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             flex-shrink: 0;
-            color: var(--primary);
-            stroke: currentColor;
+            stroke: var(--primary);
             fill: none;
             stroke-width: 1.8;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
-        .icon-svg.filled {
-            fill: var(--primary);
-            stroke: none;
-        }
         .arrow-svg {
             width: 18px;
             height: 18px;
-            flex-shrink: 0;
             stroke: currentColor;
             fill: none;
             stroke-width: 2.5;
             stroke-linecap: round;
             stroke-linejoin: round;
+        }
+        .social-svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--text-light);
             transition: var(--transition);
+        }
+        .social-svg:hover {
+            fill: var(--primary);
         }
 
         /* ===== NAV ===== */
         .navbar {
-            padding: 20px 0;
+            padding: 16px 0;
             border-bottom: 1px solid var(--border-subtle);
             position: sticky;
             top: 0;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             z-index: 1000;
         }
         .navbar .container {
@@ -216,14 +208,36 @@
             align-items: center;
             justify-content: space-between;
         }
-        .logo {
+        .brand-group {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+        .logo-ar {
             font-size: 1.5rem;
             font-weight: 800;
             letter-spacing: -0.02em;
+            color: var(--text-dark);
         }
-        .logo span {
+        .logo-ar span {
             color: var(--primary);
         }
+        .logo-en {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-light);
+            font-family: var(--font-en);
+            letter-spacing: 0.02em;
+            border-left: 1.5px solid var(--border-subtle);
+            padding-left: 12px;
+        }
+        [dir="rtl"] .logo-en {
+            border-left: none;
+            border-right: 1.5px solid var(--border-subtle);
+            padding-left: 0;
+            padding-right: 12px;
+        }
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -269,8 +283,6 @@
             padding: 4px;
             display: flex;
             gap: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
         }
         .lang-toggle button {
             background: transparent;
@@ -281,6 +293,7 @@
             transition: var(--transition);
             color: var(--text-light);
             font-weight: 700;
+            font-size: 0.8rem;
             font-family: var(--font-en);
         }
         .lang-toggle button.active {
@@ -299,7 +312,7 @@
         }
         .hamburger span {
             width: 24px;
-            height: 2px;
+            height: 2.5px;
             background: var(--text-dark);
             border-radius: 4px;
             transition: var(--transition);
@@ -308,8 +321,6 @@
         /* ===== HERO ===== */
         .hero {
             padding: 60px 0 80px;
-            position: relative;
-            overflow: hidden;
         }
         .hero-grid {
             display: grid;
@@ -319,14 +330,14 @@
         }
         .hero-content .badge {
             display: inline-block;
-            background: var(--primary-light);
-            color: var(--primary);
-            font-size: 0.8rem;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.75rem;
             font-weight: 700;
-            padding: 6px 16px;
+            padding: 4px 16px;
             border-radius: 30px;
             margin-bottom: 20px;
-            border: 1px solid rgba(255, 102, 0, 0.15);
+            letter-spacing: 0.05em;
         }
         .hero h1 {
             font-size: clamp(2.6rem, 5.5vw, 4.2rem);
@@ -334,10 +345,10 @@
             line-height: 1.1;
             letter-spacing: -0.02em;
             margin-bottom: 20px;
+            color: var(--text-dark);
         }
         .hero h1 .highlight {
             color: var(--primary);
-            position: relative;
         }
         .hero p {
             font-size: 1.2rem;
@@ -354,13 +365,13 @@
         }
         .hero-stats {
             display: flex;
-            gap: 40px;
+            gap: 48px;
             margin-top: 48px;
             padding-top: 32px;
             border-top: 1px solid var(--border-subtle);
         }
         .hero-stats .stat h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
             color: var(--primary);
         }
@@ -368,7 +379,6 @@
             font-size: 0.85rem;
             color: var(--text-light);
             margin: 0;
-            max-width: 100%;
         }
 
         .hero-visual {
@@ -383,7 +393,6 @@
             max-width: 460px;
             background: var(--primary-light);
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -393,7 +402,7 @@
             font-size: 4rem;
             font-weight: 800;
             color: var(--primary);
-            opacity: 0.15;
+            opacity: 0.12;
             letter-spacing: -0.05em;
         }
         .hero-visual .floating-tag {
@@ -402,10 +411,11 @@
             padding: 12px 20px;
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-hover);
-            font-size: 0.85rem;
             font-weight: 600;
+            font-size: 0.85rem;
             border: 1px solid var(--border-subtle);
             animation: float 6s ease-in-out infinite;
+            color: var(--text-dark);
         }
         .hero-visual .floating-tag:nth-child(2) {
             top: 10%;
@@ -427,17 +437,17 @@
 
         /* ===== TRUST ===== */
         .trust-bar {
-            background: var(--bg-soft);
+            background: var(--bg-white);
             border-top: 1px solid var(--border-subtle);
             border-bottom: 1px solid var(--border-subtle);
-            padding: 32px 0;
+            padding: 28px 0;
         }
         .trust-bar .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
         }
         .trust-bar .item {
             display: flex;
@@ -450,8 +460,8 @@
         .trust-bar .item .dot-svg {
             width: 16px;
             height: 16px;
-            flex-shrink: 0;
             fill: var(--primary);
+            flex-shrink: 0;
         }
 
         /* ===== SERVICES ===== */
@@ -467,7 +477,6 @@
             border-radius: var(--radius-md);
             padding: 36px 32px;
             transition: var(--transition);
-            position: relative;
         }
         .service-card:hover {
             transform: translateY(-6px);
@@ -482,15 +491,11 @@
             margin-bottom: 16px;
             color: var(--primary);
         }
-        .service-card .icon-wrap .icon-svg {
-            width: 28px;
-            height: 28px;
-            stroke-width: 1.8;
-        }
         .service-card h3 {
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 8px;
+            color: var(--text-dark);
         }
         .service-card p {
             color: var(--text-mid);
@@ -507,10 +512,6 @@
         }
         .service-card .link:hover {
             gap: 12px;
-        }
-        .service-card .link .arrow-svg {
-            width: 16px;
-            height: 16px;
         }
         .services-grid .service-card:nth-child(2) {
             transform: translateY(30px);
@@ -533,7 +534,6 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
             margin-top: 48px;
-            position: relative;
         }
         .process-step {
             text-align: center;
@@ -549,20 +549,11 @@
         .process-step h4 {
             font-size: 1.1rem;
             font-weight: 700;
+            color: var(--text-dark);
         }
         .process-step p {
             font-size: 0.9rem;
             color: var(--text-light);
-        }
-        @media (max-width: 768px) {
-            .process-steps {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        @media (max-width: 480px) {
-            .process-steps {
-                grid-template-columns: 1fr;
-            }
         }
 
         /* ===== KNOWLEDGE ===== */
@@ -595,6 +586,7 @@
             padding: 8px 28px;
             font-size: 1.2rem;
             font-weight: 700;
+            color: var(--text-dark);
         }
         .knowledge-card p {
             padding: 0 28px 24px;
@@ -609,10 +601,10 @@
             justify-content: center;
             color: var(--primary);
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
-        /* ===== FINAL CTA ===== */
+        /* ===== CTA ===== */
         .cta-section {
             background: var(--text-dark);
             color: #fff;
@@ -635,6 +627,7 @@
         .cta-section .btn-primary {
             background: #fff;
             color: var(--text-dark);
+            box-shadow: none;
         }
         .cta-section .btn-primary:hover {
             background: var(--primary);
@@ -644,31 +637,78 @@
 
         /* ===== FOOTER ===== */
         footer {
-            padding: 48px 0 32px;
+            padding: 48px 0 24px;
             border-top: 1px solid var(--border-subtle);
             margin-top: 20px;
+            background: var(--bg-white);
         }
-        footer .container {
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-bottom: 32px;
+        }
+        .footer-brand .logo-ar {
+            font-size: 1.3rem;
+        }
+        .footer-brand .logo-en {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 4px;
+            border: none;
+            padding: 0;
+        }
+        .footer-brand p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        .footer-legal {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .footer-legal a {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .footer-legal a:hover {
+            color: var(--primary);
+        }
+        .footer-socials {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+        }
+        .footer-socials a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition);
+            background: var(--bg-white);
+        }
+        .footer-socials a:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            transform: translateY(-3px);
+        }
+        .footer-bottom {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 24px;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 24px;
+            gap: 12px;
         }
-        footer .copy {
+        .footer-bottom .copy {
             color: var(--text-light);
-            font-size: 0.9rem;
-        }
-        footer .socials {
-            display: flex;
-            gap: 20px;
-        }
-        footer .socials a {
-            color: var(--text-mid);
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        footer .socials a:hover {
-            color: var(--primary);
+            font-size: 0.85rem;
         }
 
         /* ===== RESPONSIVE ===== */
@@ -682,6 +722,12 @@
             }
             .hero-visual .floating-tag {
                 display: none;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-socials {
+                justify-content: flex-start;
             }
         }
 
@@ -706,25 +752,32 @@
             .hamburger {
                 display: flex;
             }
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
+            .services-grid,
             .knowledge-grid {
                 grid-template-columns: 1fr;
             }
+            .process-steps {
+                grid-template-columns: 1fr 1fr;
+            }
             .hero-stats {
+                gap: 24px;
                 flex-wrap: wrap;
-                gap: 20px;
             }
             .cta-section {
                 padding: 40px 24px;
-                margin: 20px 0;
             }
             .section-padding {
                 padding: 48px 0;
             }
-            .trust-bar .container {
-                justify-content: center;
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .footer-socials {
+                justify-content: flex-start;
+            }
+            .brand-group .logo-en {
+                display: none;
             }
         }
 
@@ -741,12 +794,13 @@
                 width: 100%;
                 justify-content: center;
             }
-            .logo {
-                font-size: 1.2rem;
+            .process-steps {
+                grid-template-columns: 1fr;
             }
-            .service-card .icon-wrap .icon-svg {
-                width: 24px;
-                height: 24px;
+            .footer-bottom {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
             }
         }
 
@@ -778,7 +832,6 @@
             *::before,
             *::after {
                 animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
             .reveal {
@@ -794,7 +847,10 @@
     <!-- ===== NAVIGATION ===== -->
     <nav class="navbar" role="navigation" aria-label="القائمة الرئيسية">
         <div class="container">
-            <div class="logo">عبدالله <span>عباس</span></div>
+            <div class="brand-group">
+                <div class="logo-ar">عبدالله <span>عباس</span></div>
+                <span class="logo-en">Abdallah Abbas</span>
+            </div>
 
             <ul class="nav-links" id="navLinks">
                 <li><a href="#services">الخدمات</a></li>
@@ -898,7 +954,6 @@
             </div>
 
             <div class="services-grid">
-                <!-- 1. Web Development -->
                 <div class="service-card reveal reveal-delay-1">
                     <div class="icon-wrap">
                         <svg class="icon-svg" viewBox="0 0 24 24">
@@ -915,7 +970,6 @@
                     </a>
                 </div>
 
-                <!-- 2. WordPress -->
                 <div class="service-card reveal reveal-delay-2">
                     <div class="icon-wrap">
                         <svg class="icon-svg" viewBox="0 0 24 24">
@@ -932,7 +986,6 @@
                     </a>
                 </div>
 
-                <!-- 3. SEO -->
                 <div class="service-card reveal reveal-delay-3">
                     <div class="icon-wrap">
                         <svg class="icon-svg" viewBox="0 0 24 24">
@@ -950,7 +1003,6 @@
                     </a>
                 </div>
 
-                <!-- 4. UI/UX Design -->
                 <div class="service-card reveal reveal-delay-4">
                     <div class="icon-wrap">
                         <svg class="icon-svg" viewBox="0 0 24 24">
@@ -1047,11 +1099,46 @@
     <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
-            <div class="copy">© ٢٠٢٦ عبدالله عباس — جميع الحقوق محفوظة</div>
-            <div class="socials">
-                <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                <a href="#" aria-label="GitHub">GitHub</a>
-                <a href="#" aria-label="X">X</a>
+            <div class="footer-grid">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <div class="logo-ar">عبدالله <span>عباس</span></div>
+                    <div class="logo-en">Abdallah Abbas</div>
+                    <p>حلول رقمية مبنية على الهدف،<br />ليس على القوالب الجاهزة.</p>
+                </div>
+
+                <!-- Legal -->
+                <div class="footer-legal">
+                    <a href="#">سياسة الخصوصية</a>
+                    <a href="#">الشروط والأحكام</a>
+                    <a href="#">سياسة ملفات الارتباط</a>
+                </div>
+
+                <!-- Social -->
+                <div class="footer-socials">
+                    <a href="#" aria-label="LinkedIn" title="LinkedIn">
+                        <svg class="social-svg" viewBox="0 0 24 24">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="GitHub" title="GitHub">
+                        <svg class="social-svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025.8-.223 1.65-.334 2.5-.334.85 0 1.7.111 2.5.334 1.91-1.294 2.75-1.025 2.75-1.025.545 1.376.201 2.393.099 2.646.64.698 1.03 1.591 1.03 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="X" title="X">
+                        <svg class="social-svg" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copy">© ٢٠٢٦ عبدالله عباس — جميع الحقوق محفوظة</div>
+                <div class="copy" style="font-size:0.8rem; color:var(--text-light);">Abdallah Abbas — All Rights Reserved</div>
             </div>
         </div>
     </footer>
@@ -1064,7 +1151,6 @@
             // ===== MOBILE MENU =====
             const hamburger = document.getElementById('hamburger');
             const navLinks = document.getElementById('navLinks');
-
             if (hamburger && navLinks) {
                 hamburger.addEventListener('click', function() {
                     const isOpen = navLinks.classList.toggle('open');
@@ -1078,7 +1164,8 @@
 
             const contentMap = {
                 ar: {
-                    logo: 'عبدالله <span>عباس</span>',
+                    logoAr: 'عبدالله <span>عباس</span>',
+                    logoEn: 'Abdallah Abbas',
                     nav1: 'الخدمات',
                     nav2: 'الأعمال',
                     nav3: 'المعرفة',
@@ -1128,10 +1215,16 @@
                     ctaTitle: 'هل لديك مشروع في ذهنك؟',
                     ctaDesc: 'دعنا نناقشه معاً. أنا هنا لأساعدك في تحويل فكرتك إلى منتج رقمي مميز.',
                     ctaBtn: 'احجز استشارة مجانية',
-                    footer: '© ٢٠٢٦ عبدالله عباس — جميع الحقوق محفوظة',
+                    footerBrand: 'حلول رقمية مبنية على الهدف،<br />ليس على القوالب الجاهزة.',
+                    legal1: 'سياسة الخصوصية',
+                    legal2: 'الشروط والأحكام',
+                    legal3: 'سياسة ملفات الارتباط',
+                    footerCopy: '© ٢٠٢٦ عبدالله عباس — جميع الحقوق محفوظة',
+                    footerCopyEn: 'Abdallah Abbas — All Rights Reserved',
                 },
                 en: {
-                    logo: 'Abdallah <span>Abbas</span>',
+                    logoAr: 'Abdallah <span>Abbas</span>',
+                    logoEn: 'Abdallah Abbas',
                     nav1: 'Services',
                     nav2: 'Work',
                     nav3: 'Knowledge',
@@ -1181,7 +1274,12 @@
                     ctaTitle: 'Have a project in mind?',
                     ctaDesc: 'Let\'s discuss it together. I\'m here to help you turn your idea into a standout digital product.',
                     ctaBtn: 'Book a Free Consultation',
-                    footer: '© 2026 Abdallah Abbas — All Rights Reserved',
+                    footerBrand: 'Digital solutions built around goals,<br />not ready-made templates.',
+                    legal1: 'Privacy Policy',
+                    legal2: 'Terms & Conditions',
+                    legal3: 'Cookie Policy',
+                    footerCopy: '© 2026 Abdallah Abbas — All Rights Reserved',
+                    footerCopyEn: 'Abdallah Abbas — All Rights Reserved',
                 }
             };
 
@@ -1195,124 +1293,104 @@
                     btn.setAttribute('aria-pressed', isActive);
                 });
 
-                const content = contentMap[lang];
-                if (!content) return;
+                const c = contentMap[lang];
+                if (!c) return;
 
                 // Logo
-                const logo = document.querySelector('.logo');
-                if (logo) logo.innerHTML = content.logo;
+                document.querySelector('.logo-ar').innerHTML = c.logoAr;
+                document.querySelector('.logo-en').textContent = c.logoEn;
 
                 // Nav
                 const navItems = document.querySelectorAll('.nav-links li');
                 if (navItems.length >= 4) {
-                    navItems[0].querySelector('a').textContent = content.nav1;
-                    navItems[1].querySelector('a').textContent = content.nav2;
-                    navItems[2].querySelector('a').textContent = content.nav3;
-                    navItems[3].querySelector('a').innerHTML = content.nav4;
+                    navItems[0].querySelector('a').textContent = c.nav1;
+                    navItems[1].querySelector('a').textContent = c.nav2;
+                    navItems[2].querySelector('a').textContent = c.nav3;
+                    navItems[3].querySelector('a').innerHTML = c.nav4;
                 }
 
                 // Hero
-                const badge = document.querySelector('.hero .badge');
-                if (badge) badge.textContent = content.heroBadge;
-                const heroTitle = document.querySelector('.hero h1');
-                if (heroTitle) heroTitle.innerHTML = content.heroTitle;
-                const heroDesc = document.querySelector('.hero p');
-                if (heroDesc) heroDesc.textContent = content.heroDesc;
-                const ctaBtn = document.querySelector('.hero-actions .btn-primary');
-                if (ctaBtn) ctaBtn.innerHTML = content.heroCta + ' <span class="arrow-icon"><svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>';
-                const ctaBtn2 = document.querySelector('.hero-actions .btn-outline');
-                if (ctaBtn2) ctaBtn2.textContent = content.heroCta2;
+                document.querySelector('.hero .badge').textContent = c.heroBadge;
+                document.querySelector('.hero h1').innerHTML = c.heroTitle;
+                document.querySelector('.hero p').textContent = c.heroDesc;
+                document.querySelector('.hero-actions .btn-primary').innerHTML = c.heroCta +
+                    ' <span class="arrow-icon"><svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>';
+                document.querySelector('.hero-actions .btn-outline').textContent = c.heroCta2;
 
-                // Stats
-                const stats = document.querySelectorAll('.hero-stats .stat');
-                if (stats.length >= 3) {
-                    stats[0].querySelector('p').textContent = content.stat1;
-                    stats[1].querySelector('p').textContent = content.stat2;
-                    stats[2].querySelector('p').textContent = content.stat3;
-                }
+                const stats = document.querySelectorAll('.hero-stats .stat p');
+                stats[0].textContent = c.stat1;
+                stats[1].textContent = c.stat2;
+                stats[2].textContent = c.stat3;
 
                 // Trust
                 const trustItems = document.querySelectorAll('.trust-bar .item');
-                if (trustItems.length >= 4) {
-                    trustItems[0].innerHTML =
-                        '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + content.trust1;
-                    trustItems[1].innerHTML =
-                        '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + content.trust2;
-                    trustItems[2].innerHTML =
-                        '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + content.trust3;
-                    trustItems[3].innerHTML =
-                        '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + content.trust4;
-                }
+                trustItems[0].innerHTML =
+                    '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + c.trust1;
+                trustItems[1].innerHTML =
+                    '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + c.trust2;
+                trustItems[2].innerHTML =
+                    '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + c.trust3;
+                trustItems[3].innerHTML =
+                    '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + c.trust4;
 
                 // Services
-                const sLabel = document.querySelector('#services .section-label');
-                if (sLabel) sLabel.textContent = content.servicesLabel;
-                const sTitle = document.querySelector('#services .section-title');
-                if (sTitle) sTitle.innerHTML = content.servicesTitle;
-                const sSub = document.querySelector('#services .section-subtitle');
-                if (sSub) sSub.textContent = content.servicesSub;
+                document.querySelector('#services .section-label').textContent = c.servicesLabel;
+                document.querySelector('#services .section-title').innerHTML = c.servicesTitle;
+                document.querySelector('#services .section-subtitle').textContent = c.servicesSub;
                 const sCards = document.querySelectorAll('.service-card');
-                if (sCards.length >= 4) {
-                    sCards[0].querySelector('h3').textContent = content.s1Title;
-                    sCards[0].querySelector('p').textContent = content.s1Desc;
-                    sCards[1].querySelector('h3').textContent = content.s2Title;
-                    sCards[1].querySelector('p').textContent = content.s2Desc;
-                    sCards[2].querySelector('h3').textContent = content.s3Title;
-                    sCards[2].querySelector('p').textContent = content.s3Desc;
-                    sCards[3].querySelector('h3').textContent = content.s4Title;
-                    sCards[3].querySelector('p').textContent = content.s4Desc;
-                }
+                sCards[0].querySelector('h3').textContent = c.s1Title;
+                sCards[0].querySelector('p').textContent = c.s1Desc;
+                sCards[1].querySelector('h3').textContent = c.s2Title;
+                sCards[1].querySelector('p').textContent = c.s2Desc;
+                sCards[2].querySelector('h3').textContent = c.s3Title;
+                sCards[2].querySelector('p').textContent = c.s3Desc;
+                sCards[3].querySelector('h3').textContent = c.s4Title;
+                sCards[3].querySelector('p').textContent = c.s4Desc;
                 document.querySelectorAll('.service-card .link').forEach(el => {
-                    el.innerHTML = content.sLink +
+                    el.innerHTML = c.sLink +
                         ' <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
                 });
 
                 // Process
-                const pLabel = document.querySelector('#services + .section-padding .section-label');
-                if (pLabel) pLabel.textContent = content.processLabel;
-                const pTitle = document.querySelector('#services + .section-padding .section-title');
-                if (pTitle) pTitle.textContent = content.processTitle;
-                const pSub = document.querySelector('#services + .section-padding .section-subtitle');
-                if (pSub) pSub.textContent = content.processSub;
-                const steps = document.querySelectorAll('.process-step');
-                if (steps.length >= 4) {
-                    steps[0].querySelector('h4').textContent = content.p1;
-                    steps[0].querySelector('p').textContent = content.p1d;
-                    steps[1].querySelector('h4').textContent = content.p2;
-                    steps[1].querySelector('p').textContent = content.p2d;
-                    steps[2].querySelector('h4').textContent = content.p3;
-                    steps[2].querySelector('p').textContent = content.p3d;
-                    steps[3].querySelector('h4').textContent = content.p4;
-                    steps[3].querySelector('p').textContent = content.p4d;
-                }
+                const pSection = document.querySelector('#services + .section-padding');
+                pSection.querySelector('.section-label').textContent = c.processLabel;
+                pSection.querySelector('.section-title').textContent = c.processTitle;
+                pSection.querySelector('.section-subtitle').textContent = c.processSub;
+                const steps = pSection.querySelectorAll('.process-step');
+                steps[0].querySelector('h4').textContent = c.p1;
+                steps[0].querySelector('p').textContent = c.p1d;
+                steps[1].querySelector('h4').textContent = c.p2;
+                steps[1].querySelector('p').textContent = c.p2d;
+                steps[2].querySelector('h4').textContent = c.p3;
+                steps[2].querySelector('p').textContent = c.p3d;
+                steps[3].querySelector('h4').textContent = c.p4;
+                steps[3].querySelector('p').textContent = c.p4d;
 
                 // Knowledge
-                const kLabel = document.querySelector('#knowledge .section-label');
-                if (kLabel) kLabel.textContent = content.knowledgeLabel;
-                const kTitle = document.querySelector('#knowledge .section-title');
-                if (kTitle) kTitle.innerHTML = content.knowledgeTitle;
-                const kSub = document.querySelector('#knowledge .section-subtitle');
-                if (kSub) kSub.textContent = content.knowledgeSub;
+                document.querySelector('#knowledge .section-label').textContent = c.knowledgeLabel;
+                document.querySelector('#knowledge .section-title').innerHTML = c.knowledgeTitle;
+                document.querySelector('#knowledge .section-subtitle').textContent = c.knowledgeSub;
                 const kCards = document.querySelectorAll('.knowledge-card');
-                if (kCards.length >= 2) {
-                    kCards[0].querySelector('h3').textContent = content.k1Title;
-                    kCards[0].querySelector('p').textContent = content.k1Desc;
-                    kCards[1].querySelector('h3').textContent = content.k2Title;
-                    kCards[1].querySelector('p').textContent = content.k2Desc;
-                }
+                kCards[0].querySelector('h3').textContent = c.k1Title;
+                kCards[0].querySelector('p').textContent = c.k1Desc;
+                kCards[1].querySelector('h3').textContent = c.k2Title;
+                kCards[1].querySelector('p').textContent = c.k2Desc;
 
                 // CTA
                 const cta = document.querySelector('.cta-section');
-                if (cta) {
-                    cta.querySelector('h2').textContent = content.ctaTitle;
-                    cta.querySelector('p').textContent = content.ctaDesc;
-                    cta.querySelector('.btn-primary').innerHTML = content.ctaBtn +
-                        ' <span class="arrow-icon"><svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>';
-                }
+                cta.querySelector('h2').textContent = c.ctaTitle;
+                cta.querySelector('p').textContent = c.ctaDesc;
+                cta.querySelector('.btn-primary').innerHTML = c.ctaBtn +
+                    ' <span class="arrow-icon"><svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>';
 
                 // Footer
-                const footer = document.querySelector('footer .copy');
-                if (footer) footer.textContent = content.footer;
+                document.querySelector('.footer-brand p').innerHTML = c.footerBrand;
+                const legalLinks = document.querySelectorAll('.footer-legal a');
+                legalLinks[0].textContent = c.legal1;
+                legalLinks[1].textContent = c.legal2;
+                legalLinks[2].textContent = c.legal3;
+                document.querySelector('.footer-bottom .copy:first-child').textContent = c.footerCopy;
+                document.querySelector('.footer-bottom .copy:last-child').textContent = c.footerCopyEn;
             }
 
             langButtons.forEach(btn => {
@@ -1333,14 +1411,9 @@
                         entry.target.classList.add('visible');
                     }
                 });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -20px 0px'
-            });
+            }, { threshold: 0.1 });
 
-            document.querySelectorAll('.reveal').forEach(el => {
-                observer.observe(el);
-            });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         })();
     </script>
