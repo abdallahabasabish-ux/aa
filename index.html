@@ -6,22 +6,27 @@
     <title>عبدالله عباس | استشارات رقمية</title>
     <meta name="description" content="حلول رقمية راقية في تطوير الويب، ووردبريس، وتحسين محركات البحث. نبني حول هدفك، لا حول قالب." />
     <link rel="canonical" href="https://abdallahabas.github.io/" />
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <!-- Master CSS (External) -->
+    <!-- Master CSS -->
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-    <!-- ===== NAVIGATION ===== -->
+    <!-- ===== NAVIGATION (مع الشعار الجديد) ===== -->
     <nav class="navbar" role="navigation">
         <div class="container">
             <div class="brand-group">
-                <div class="logo-ar">عبدالله <span>عباس</span></div>
-                <span class="logo-en">Abdallah Abbas</span>
+                <!-- الشعار SVG -->
+                <img src="assets/logo.svg" alt="شعار عبدالله عباس" width="44" height="44" class="brand-logo" />
+                <div class="brand-text">
+                    <div class="logo-ar">عبدالله <span>عباس</span></div>
+                    <div class="logo-en">Abdallah Abbas</div>
+                </div>
             </div>
 
             <ul class="nav-links" id="navLinks">
@@ -42,7 +47,7 @@
         </div>
     </nav>
 
-    <!-- ===== HERO (خلفية سوداء - عريقة) ===== -->
+    <!-- ===== HERO ===== -->
     <section class="hero" id="hero">
         <div class="container">
             <div class="hero-grid">
@@ -173,7 +178,7 @@
         </div>
     </section>
 
-    <!-- ===== CTA (خلفية سوداء - جريئة) ===== -->
+    <!-- ===== CTA ===== -->
     <section class="section-padding" id="contact">
         <div class="container">
             <div class="cta-section reveal">
@@ -187,7 +192,7 @@
         </div>
     </section>
 
-    <!-- ===== FOOTER (خلفية سوداء) ===== -->
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
             <div class="footer-grid">
@@ -216,7 +221,6 @@
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
-        // (نفس الكود السابق مع الحفاظ على الوظائف)
         (function() {
             'use strict';
             const hamburger = document.getElementById('hamburger');
@@ -227,58 +231,120 @@
                 });
             }
 
-            // لغة
             const langButtons = document.querySelectorAll('.lang-toggle button');
             const html = document.documentElement;
             const contentMap = {
-                ar: { logoAr: 'عبدالله <span>عباس</span>', logoEn: 'Abdallah Abbas', nav1: 'الخدمات', nav2: 'المعرفة',
-                        nav3: 'تواصل الآن', heroBadge: 'استشارات رقمية', heroTitle: 'نبني حلولاً رقمية<br /><span class="highlight">حول هدفك</span>،<br />ليس حول قالب.',
+                ar: {
+                    logoAr: 'عبدالله <span>عباس</span>',
+                    logoEn: 'Abdallah Abbas',
+                    nav1: 'الخدمات',
+                    nav2: 'المعرفة',
+                    nav3: 'تواصل الآن',
+                    heroBadge: 'استشارات رقمية',
+                    heroTitle: 'نبني حلولاً رقمية<br /><span class="highlight">حول هدفك</span>،<br />ليس حول قالب.',
                     heroDesc: 'أنا عبدالله عباس. خبرة تمتد لأكثر من عشر سنوات في تطوير الويب، ووردبريس، واستراتيجيات السيو التي تُحدث فرقاً حقيقياً.',
-                    heroCta: 'ناقش مشروعك', stat1: 'سنوات خبرة', stat2: 'مشروع', stat3: 'رضا', trust1: 'تطوير ويب مخصص',
-                    trust2: 'ووردبريس احترافي', trust3: 'تصميم تجربة مستخدم', trust4: 'سيو واستراتيجية محتوى',
-                    servicesLabel: 'الخدمات', servicesTitle: 'مجالات الخبرة', servicesSub: 'كل خدمة تصمم خصيصاً لتناسب طبيعة عملك.',
-                    s1Title: 'تطوير ويب', s1Desc: 'مواقع سريعة وآمنة ومتوافقة مع أعلى معايير الأداء والبحث.',
-                    s2Title: 'ووردبريس', s2Desc: 'تصميم وبرمجة قوالب احترافية مع حلول مخصصة لإدارة المحتوى.',
-                    s3Title: 'تحسين محركات البحث', s3Desc: 'استراتيجيات مدروسة لتصدر نتائج البحث وجلب زوار متفاعلين.',
-                    s4Title: 'تصميم واجهات UX/UI', s4Desc: 'تجارب مستخدم فريدة تجمع بين الجمال البصري وسهولة الاستخدام.',
-                    sLink: 'اعرف المزيد', processLabel: 'منهجية العمل', processTitle: 'خطوات مدروسة لنجاحك',
-                    p1: 'فهم الهدف', p1d: 'نستمع لرؤيتك ونحلل احتياجاتك الحقيقية.', p2: 'التخطيط والتصميم',
-                    p2d: 'نضع الهيكل ونصمم واجهات تناسب جمهورك.', p3: 'التطوير والبناء',
-                    p3d: 'نبرمج بجودة عالية مع مراعاة الأداء.', p4: 'الإطلاق والمتابعة',
-                    p4d: 'نطلق مشروعك وندعمك لتحقيق نتائج مستدامة.', knowledgeLabel: 'المعرفة',
-                    knowledgeTitle: 'أحدث الرؤى التقنية', knowledgeSub: 'خبرة عملية تنعكس في محتوى مفيد يساعدك على اتخاذ قرارات رقمية.',
-                    k1Title: 'ووردبريس أم حلول مخصصة?', k1Desc: 'مقارنة شاملة بين أشهر المنصات لمساعدتك في اختيار الأنسب لمشروعك.',
-                    k2Title: 'أهم تحديثات جوجل وكيف تستفيد منها', k2Desc: 'نستعرض أحدث تغييرات خوارزميات البحث ونقدم خطة عمل عملية لتحسين ترتيبك.',
-                    ctaTitle: 'هل لديك مشروع في ذهنك?', ctaDesc: 'دعنا نناقشه معاً. أنا هنا لأساعدك في تحويل فكرتك إلى واقع رقمي مميز.',
-                    ctaBtn: 'احجز استشارة مجانية', footerBrand: 'حلول رقمية مبنية على الهدف،<br />ليس على القوالب الجاهزة.',
-                    legal1: 'سياسة الخصوصية', legal2: 'الشروط والأحكام', legal3: 'سياسة ملفات الارتباط',
-                    footerCopy: '© ٢٠٢٦ عبدالله عباس', footerCopyEn: 'Abdallah Abbas — All Rights Reserved'
+                    heroCta: 'ناقش مشروعك',
+                    stat1: 'سنوات خبرة',
+                    stat2: 'مشروع',
+                    stat3: 'رضا',
+                    trust1: 'تطوير ويب مخصص',
+                    trust2: 'ووردبريس احترافي',
+                    trust3: 'تصميم تجربة مستخدم',
+                    trust4: 'سيو واستراتيجية محتوى',
+                    servicesLabel: 'الخدمات',
+                    servicesTitle: 'مجالات الخبرة',
+                    servicesSub: 'كل خدمة تصمم خصيصاً لتناسب طبيعة عملك.',
+                    s1Title: 'تطوير ويب',
+                    s1Desc: 'مواقع سريعة وآمنة ومتوافقة مع أعلى معايير الأداء والبحث.',
+                    s2Title: 'ووردبريس',
+                    s2Desc: 'تصميم وبرمجة قوالب احترافية مع حلول مخصصة لإدارة المحتوى.',
+                    s3Title: 'تحسين محركات البحث',
+                    s3Desc: 'استراتيجيات مدروسة لتصدر نتائج البحث وجلب زوار متفاعلين.',
+                    s4Title: 'تصميم واجهات UX/UI',
+                    s4Desc: 'تجارب مستخدم فريدة تجمع بين الجمال البصري وسهولة الاستخدام.',
+                    sLink: 'اعرف المزيد',
+                    processLabel: 'منهجية العمل',
+                    processTitle: 'خطوات مدروسة لنجاحك',
+                    p1: 'فهم الهدف',
+                    p1d: 'نستمع لرؤيتك ونحلل احتياجاتك الحقيقية.',
+                    p2: 'التخطيط والتصميم',
+                    p2d: 'نضع الهيكل ونصمم واجهات تناسب جمهورك.',
+                    p3: 'التطوير والبناء',
+                    p3d: 'نبرمج بجودة عالية مع مراعاة الأداء.',
+                    p4: 'الإطلاق والمتابعة',
+                    p4d: 'نطلق مشروعك وندعمك لتحقيق نتائج مستدامة.',
+                    knowledgeLabel: 'المعرفة',
+                    knowledgeTitle: 'أحدث الرؤى التقنية',
+                    knowledgeSub: 'خبرة عملية تنعكس في محتوى مفيد يساعدك على اتخاذ قرارات رقمية.',
+                    k1Title: 'ووردبريس أم حلول مخصصة?',
+                    k1Desc: 'مقارنة شاملة بين أشهر المنصات لمساعدتك في اختيار الأنسب لمشروعك.',
+                    k2Title: 'أهم تحديثات جوجل وكيف تستفيد منها',
+                    k2Desc: 'نستعرض أحدث تغييرات خوارزميات البحث ونقدم خطة عمل عملية لتحسين ترتيبك.',
+                    ctaTitle: 'هل لديك مشروع في ذهنك?',
+                    ctaDesc: 'دعنا نناقشه معاً. أنا هنا لأساعدك في تحويل فكرتك إلى واقع رقمي مميز.',
+                    ctaBtn: 'احجز استشارة مجانية',
+                    footerBrand: 'حلول رقمية مبنية على الهدف،<br />ليس على القوالب الجاهزة.',
+                    legal1: 'سياسة الخصوصية',
+                    legal2: 'الشروط والأحكام',
+                    legal3: 'سياسة ملفات الارتباط',
+                    footerCopy: '© ٢٠٢٦ عبدالله عباس',
+                    footerCopyEn: 'Abdallah Abbas — All Rights Reserved'
                 },
-                en: { logoAr: 'Abdallah <span>Abbas</span>', logoEn: 'Abdallah Abbas', nav1: 'Services', nav2: 'Knowledge',
-                        nav3: 'Contact Now', heroBadge: 'Digital Consulting',
+                en: {
+                    logoAr: 'Abdallah <span>Abbas</span>',
+                    logoEn: 'Abdallah Abbas',
+                    nav1: 'Services',
+                    nav2: 'Knowledge',
+                    nav3: 'Contact Now',
+                    heroBadge: 'Digital Consulting',
                     heroTitle: 'Building digital solutions<br /><span class="highlight">around your goal</span>,<br />not around a template.',
                     heroDesc: 'I\'m Abdallah Abbas. Over ten years of experience in web development, WordPress, and SEO strategies that make a real difference.',
-                    heroCta: 'Discuss Your Project', stat1: 'Years Experience', stat2: 'Projects', stat3: 'Satisfaction',
-                    trust1: 'Custom Web Dev', trust2: 'Professional WordPress', trust3: 'UI/UX Design',
-                    trust4: 'SEO & Content Strategy', servicesLabel: 'Services', servicesTitle: 'Areas of Expertise',
+                    heroCta: 'Discuss Your Project',
+                    stat1: 'Years Experience',
+                    stat2: 'Projects',
+                    stat3: 'Satisfaction',
+                    trust1: 'Custom Web Dev',
+                    trust2: 'Professional WordPress',
+                    trust3: 'UI/UX Design',
+                    trust4: 'SEO & Content Strategy',
+                    servicesLabel: 'Services',
+                    servicesTitle: 'Areas of Expertise',
                     servicesSub: 'Every service is custom-tailored to fit your business.',
-                    s1Title: 'Web Development', s1Desc: 'Fast, secure websites built to the highest performance and search standards.',
-                    s2Title: 'WordPress', s2Desc: 'Professional theme design and custom content management solutions.',
-                    s3Title: 'SEO', s3Desc: 'Strategic SEO to rank higher and attract engaged visitors.',
-                    s4Title: 'UX/UI Design', s4Desc: 'Unique user experiences blending visual beauty with ease of use.',
-                    sLink: 'Learn More', processLabel: 'Process', processTitle: 'Thoughtful Steps for Your Success',
-                    p1: 'Understand Goal', p1d: 'We listen to your vision and analyze your real needs.',
-                    p2: 'Plan & Design', p2d: 'We structure and design interfaces that fit your audience.',
-                    p3: 'Develop & Build', p3d: 'We code with high quality, focusing on performance.',
-                    p4: 'Launch & Support', p4d: 'We launch your project and support you for sustainable results.',
-                    knowledgeLabel: 'Knowledge', knowledgeTitle: 'Latest Tech Insights',
+                    s1Title: 'Web Development',
+                    s1Desc: 'Fast, secure websites built to the highest performance and search standards.',
+                    s2Title: 'WordPress',
+                    s2Desc: 'Professional theme design and custom content management solutions.',
+                    s3Title: 'SEO',
+                    s3Desc: 'Strategic SEO to rank higher and attract engaged visitors.',
+                    s4Title: 'UX/UI Design',
+                    s4Desc: 'Unique user experiences blending visual beauty with ease of use.',
+                    sLink: 'Learn More',
+                    processLabel: 'Process',
+                    processTitle: 'Thoughtful Steps for Your Success',
+                    p1: 'Understand Goal',
+                    p1d: 'We listen to your vision and analyze your real needs.',
+                    p2: 'Plan & Design',
+                    p2d: 'We structure and design interfaces that fit your audience.',
+                    p3: 'Develop & Build',
+                    p3d: 'We code with high quality, focusing on performance.',
+                    p4: 'Launch & Support',
+                    p4d: 'We launch your project and support you for sustainable results.',
+                    knowledgeLabel: 'Knowledge',
+                    knowledgeTitle: 'Latest Tech Insights',
                     knowledgeSub: 'Practical experience reflected in useful content to help you make smart digital decisions.',
-                    k1Title: 'WordPress vs Custom Solutions?', k1Desc: 'A comprehensive comparison of popular platforms to help you choose the best fit for your project.',
-                    k2Title: 'Top Google Updates & How to Benefit', k2Desc: 'We review the latest search algorithm changes and provide a practical action plan to improve your ranking.',
-                    ctaTitle: 'Have a project in mind?', ctaDesc: 'Let\'s discuss it together. I\'m here to help you turn your idea into a standout digital reality.',
-                    ctaBtn: 'Book a Free Consultation', footerBrand: 'Digital solutions built around goals,<br />not ready-made templates.',
-                    legal1: 'Privacy Policy', legal2: 'Terms & Conditions', legal3: 'Cookie Policy',
-                    footerCopy: '© 2026 Abdallah Abbas', footerCopyEn: 'Abdallah Abbas — All Rights Reserved'
+                    k1Title: 'WordPress vs Custom Solutions?',
+                    k1Desc: 'A comprehensive comparison of popular platforms to help you choose the best fit for your project.',
+                    k2Title: 'Top Google Updates & How to Benefit',
+                    k2Desc: 'We review the latest search algorithm changes and provide a practical action plan to improve your ranking.',
+                    ctaTitle: 'Have a project in mind?',
+                    ctaDesc: 'Let\'s discuss it together. I\'m here to help you turn your idea into a standout digital reality.',
+                    ctaBtn: 'Book a Free Consultation',
+                    footerBrand: 'Digital solutions built around goals,<br />not ready-made templates.',
+                    legal1: 'Privacy Policy',
+                    legal2: 'Terms & Conditions',
+                    legal3: 'Cookie Policy',
+                    footerCopy: '© 2026 Abdallah Abbas',
+                    footerCopyEn: 'Abdallah Abbas — All Rights Reserved'
                 }
             };
 
