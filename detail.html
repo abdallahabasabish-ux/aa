@@ -4,61 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="detailTitle">Abdallah Abas | تفاصيل</title>
-    <meta name="description" content="تفاصيل الخدمة أو المنتج المطلوب من Abdallah Abas" />
+    <meta name="description" content="تفاصيل الخدمة أو المنتج من Abdallah Abas" />
     <link rel="canonical" href="https://abdallahsst.web.app/detail.html" />
     
-    <!-- Open Graph -->
     <meta property="og:type" content="article" />
     <meta property="og:title" content="تفاصيل الخدمة | Abdallah Abas" />
-    <meta property="og:description" content="عرض تفصيلي للخدمات والمنتجات الرقمية من Abdallah Abas." />
+    <meta property="og:description" content="عرض تفصيلي للخدمات والمنتجات الرقمية." />
     <meta property="og:image" content="https://abdallahsst.web.app/assets/og-image.jpg" />
     
     <link rel="icon" href="assets/favicon.ico" />
 
-    <!-- ===== GOOGLE FONTS ===== -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" rel="stylesheet" />
 
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- التصميم الرئيسي -->
     <link rel="stylesheet" href="css/style.css" />
 
     <style>
-        /* تنسيقات خاصة بصفحة التفاصيل */
-        .detail-hero { background: var(--gray-50); padding: 2rem 0 4rem; border-bottom: 1px solid var(--gray-200); }
+        .detail-hero { background: var(--gray-100); padding: 2rem 0 4rem; border-bottom: 1px solid var(--gray-200); }
         .detail-content { max-width: 850px; margin: 0 auto; }
-        .detail-image { width: 100%; max-height: 450px; object-fit: cover; border-radius: var(--radius); margin-bottom: 2rem; box-shadow: var(--shadow-md); }
-        .detail-price { font-size: 2.4rem; font-weight: 800; color: var(--primary); }
+        .detail-image { width: 100%; max-height: 420px; object-fit: cover; border-radius: var(--radius); margin-bottom: 2rem; box-shadow: var(--shadow-md); }
+        .detail-price { font-size: 2.2rem; font-weight: 800; color: var(--primary); }
         .detail-features { list-style: disc; padding-right: 1.5rem; margin: 1.2rem 0; }
         .detail-features li { margin-bottom: 0.5rem; color: var(--gray-600); }
         .order-form { background: var(--white); padding: 2.5rem; border-radius: var(--radius); box-shadow: var(--shadow-lg); margin-top: 2.5rem; border: 1px solid var(--gray-200); }
         .order-form .form-group { margin-bottom: 1.2rem; }
         .order-form .form-group label { display: block; font-weight: 700; margin-bottom: 0.3rem; font-size: 0.95rem; color: var(--gray-700); }
-        .order-form .form-group input,
-        .order-form .form-group textarea { width: 100%; padding: 0.8rem 1rem; border: 2px solid var(--gray-200); border-radius: var(--radius); font-family: var(--font-ar); font-size: 1rem; transition: var(--transition); background: var(--white); }
-        .order-form .form-group input:focus,
-        .order-form .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.08); }
+        .order-form .form-group input, .order-form .form-group textarea { width: 100%; padding: 0.8rem 1rem; border: 2px solid var(--gray-200); border-radius: var(--radius); font-family: var(--font-ar); font-size: 1rem; transition: var(--transition); background: var(--white); }
+        .order-form .form-group input:focus, .order-form .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.06); }
         .order-form .btn { width: 100%; justify-content: center; padding: 1rem; font-size: 1.05rem; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
         .gallery-grid img { aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); cursor: pointer; transition: var(--transition); border: 2px solid transparent; }
-        .gallery-grid img:hover { transform: scale(1.06); border-color: var(--primary); box-shadow: var(--shadow-md); }
+        .gallery-grid img:hover { transform: scale(1.04); border-color: var(--primary); }
         .back-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: var(--gray-500); font-weight: 600; transition: var(--transition); }
         .back-link:hover { color: var(--primary); }
         body.ltr .back-link i { transform: rotate(180deg); }
         .loading-spinner { text-align: center; padding: 4rem 0; color: var(--gray-500); font-size: 1.2rem; }
-        .badge-featured { background: var(--primary); color: white; padding: 0.2rem 1.2rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700; display: inline-block; }
+        .badge-featured { background: var(--primary); color: white; padding: 0.15rem 1.2rem; border-radius: var(--radius-full); font-size: 0.7rem; font-weight: 700; display: inline-block; }
         .detail-meta { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 1.5rem; }
         .detail-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-        .detail-tags span { background: var(--gray-100); padding: 0.2rem 1rem; border-radius: var(--radius-full); font-size: 0.8rem; color: var(--gray-600); }
+        .detail-tags span { background: var(--gray-100); padding: 0.15rem 1rem; border-radius: var(--radius-full); font-size: 0.8rem; color: var(--gray-600); }
         #orderResponse { margin-top: 1rem; text-align: center; font-weight: 700; padding: 0.5rem; border-radius: var(--radius); }
         #orderResponse.success { color: #15803D; background: #DCFCE7; }
         #orderResponse.error { color: #DC2626; background: #FEE2E2; }
-        
-        @media (max-width: 480px) {
-            .detail-hero { padding: 1rem 0 2.5rem; }
-            .order-form { padding: 1.5rem; }
-        }
+
+        @media (max-width: 480px) { .order-form { padding: 1.5rem; } }
     </style>
 </head>
 <body>
@@ -78,13 +74,12 @@
         </div>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
+    <!-- ===== MAIN ===== -->
     <main>
         <section class="detail-hero">
             <div class="container">
                 <a href="/" class="back-link"><i class="fas fa-arrow-right"></i> <span id="backLabel">العودة للرئيسية</span></a>
                 <div class="detail-content" id="detailContent">
-                    <!-- سيتم التعبئة عبر JavaScript -->
                     <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</div>
                 </div>
             </div>
@@ -112,10 +107,9 @@
     </script>
 
     <script type="module">
-        // ===== Firebase Config =====
         import { initializeApp } from "firebase/app";
-        import { getFirestore, doc, getDoc, collection, query, where, getDocs, addDoc } from "firebase/firestore";
-        import { getAuth, onAuthStateChanged } from "firebase/auth";
+        import { getFirestore, collection, query, where, getDocs, addDoc } from "firebase/firestore";
+        import { getAuth } from "firebase/auth";
         import { getAnalytics } from "firebase/analytics";
 
         const firebaseConfig = {
@@ -133,31 +127,26 @@
         const auth = getAuth(app);
         const analytics = getAnalytics(app);
 
-        // ===== جلب المعامل من الرابط =====
         const params = new URLSearchParams(window.location.search);
-        const type = params.get('type'); // service, template, product, portfolio, post
+        const type = params.get('type');
         const slug = params.get('slug');
 
-        // ===== تحميل البيانات =====
         async function loadDetail() {
             const container = document.getElementById('detailContent');
             if (!type || !slug) {
-                container.innerHTML = `<div style="text-align:center;padding:3rem;color:red;"><i class="fas fa-exclamation-triangle"></i> رابط غير صحيح</div>`;
+                container.innerHTML = `<div style="text-align:center;padding:3rem;color:red;">رابط غير صحيح</div>`;
                 return;
             }
 
             let collectionName = '';
-            let titleKey = 'title';
-            let descKey = 'description';
-            let imageKey = 'image';
             let contentKey = 'content';
 
             switch(type) {
                 case 'service': collectionName = 'services'; break;
                 case 'template': collectionName = 'templates'; break;
                 case 'product': collectionName = 'products'; break;
-                case 'portfolio': collectionName = 'portfolio'; titleKey = 'title'; descKey = 'description'; imageKey = 'coverImage'; break;
-                case 'post': collectionName = 'posts'; titleKey = 'title'; descKey = 'excerpt'; imageKey = 'featuredImage'; contentKey = 'content'; break;
+                case 'portfolio': collectionName = 'portfolio'; break;
+                case 'post': collectionName = 'posts'; contentKey = 'content'; break;
                 default: container.innerHTML = `<div style="text-align:center;padding:3rem;color:red;">نوع غير معروف</div>`; return;
             }
 
@@ -165,22 +154,19 @@
                 const q = query(collection(db, collectionName), where("slug", "==", slug));
                 const snap = await getDocs(q);
                 if (snap.empty) {
-                    container.innerHTML = `<div style="text-align:center;padding:3rem;color:red;"><i class="fas fa-search"></i> العنصر غير موجود</div>`;
+                    container.innerHTML = `<div style="text-align:center;padding:3rem;color:red;">العنصر غير موجود</div>`;
                     return;
                 }
-                const docData = snap.docs[0].data();
+                const data = snap.docs[0].data();
                 const docId = snap.docs[0].id;
-                renderDetail(container, docData, type, docId);
-                // تحديث عنوان الصفحة
+                renderDetail(container, data, type, docId);
                 const lang = document.documentElement.lang || 'ar';
-                const isAr = lang === 'ar';
-                document.title = (isAr ? docData.title : (docData.title_en || docData.title)) + ' | Abdallah Abas';
+                document.title = ((lang === 'ar') ? data.title : (data.title_en || data.title)) + ' | Abdallah Abas';
             } catch (e) {
                 container.innerHTML = `<div style="text-align:center;padding:3rem;color:red;">⚠️ حدث خطأ: ${e.message}</div>`;
             }
         }
 
-        // ===== عرض التفاصيل =====
         function renderDetail(container, data, type, docId) {
             const lang = document.documentElement.lang || 'ar';
             const isAr = lang === 'ar';
@@ -196,43 +182,36 @@
             const content = isAr ? data[contentKey] : (data[contentKey + '_en'] || data[contentKey] || '');
             const featured = data.featured || false;
             
-            // السعر
             let priceHtml = '';
             if (type === 'product' && data.type === 'free') priceHtml = '<span class="detail-price">مجاني 🎁</span>';
             else if (price > 0) priceHtml = `<span class="detail-price">${price} ${currency}</span>`;
             else priceHtml = '<span class="detail-price">مجاني</span>';
 
-            // معرض الصور
             let galleryHtml = '';
             if (gallery && gallery.length > 0) {
                 galleryHtml = `<div class="gallery-grid">${gallery.map(img => `<img src="${img}" alt="صورة" loading="lazy" />`).join('')}</div>`;
             }
 
-            // المميزات
             let featuresHtml = '';
             if (features && features.length > 0) {
                 featuresHtml = `<h3 style="margin-top:1.5rem;font-weight:800;">${isAr ? 'المميزات' : 'Features'}</h3><ul class="detail-features">${features.map(f => `<li>${f}</li>`).join('')}</ul>`;
             }
 
-            // الوسوم
             let tagsHtml = '';
             if (tags && tags.length > 0) {
                 tagsHtml = `<div class="detail-tags">${tags.map(t => `<span>#${t}</span>`).join('')}</div>`;
             }
 
-            // المحتوى (للمقالات)
             let contentHtml = '';
             if (type === 'post' && content) {
                 contentHtml = `<div style="margin-top:1.5rem;line-height:2;font-weight:400;color:var(--gray-700);">${content}</div>`;
             }
 
-            // زر التحميل (للمنتجات المجانية)
             let downloadHtml = '';
             if (type === 'product' && data.type === 'free' && data.downloadUrl) {
                 downloadHtml = `<a href="${data.downloadUrl}" class="btn btn-primary" style="margin-top:1.5rem;width:auto;"><i class="fas fa-download"></i> تحميل المنتج</a>`;
             }
 
-            // نموذج الطلب (للباقي)
             let orderHtml = '';
             if (type !== 'post' && !(type === 'product' && data.type === 'free')) {
                 orderHtml = `
@@ -245,7 +224,7 @@
                             <div class="form-group"><label>الاسم كاملاً</label><input type="text" name="name" required placeholder="أدخل اسمك" /></div>
                             <div class="form-group"><label>البريد الإلكتروني</label><input type="email" name="email" required placeholder="example@domain.com" /></div>
                             <div class="form-group"><label>رقم الجوال (واتساب)</label><input type="text" name="phone" required placeholder="05xxxxxxxx" /></div>
-                            <div class="form-group"><label>تفاصيل إضافية</label><textarea name="details" rows="4" placeholder="اكتب متطلباتك أو استفساراتك..."></textarea></div>
+                            <div class="form-group"><label>تفاصيل إضافية</label><textarea name="details" rows="4" placeholder="اكتب متطلباتك..."></textarea></div>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> إرسال الطلب</button>
                         </form>
                         <div id="orderResponse"></div>
@@ -253,9 +232,8 @@
                 `;
             }
 
-            // تجميع المحتوى النهائي
             container.innerHTML = `
-                <h1 style="font-size:2.6rem;font-weight:800;margin-bottom:0.5rem;">${title}</h1>
+                <h1 style="font-size:2.4rem;font-weight:800;margin-bottom:0.5rem;">${title}</h1>
                 <div class="detail-meta">
                     ${priceHtml}
                     ${featured ? '<span class="badge-featured"><i class="fas fa-star"></i> مميز</span>' : ''}
@@ -270,7 +248,6 @@
                 ${orderHtml}
             `;
 
-            // ===== معالجة نموذج الطلب =====
             const form = document.getElementById('orderSubmitForm');
             const responseDiv = document.getElementById('orderResponse');
             if (form) {
@@ -305,19 +282,16 @@
             }
         }
 
-        // ===== تبديل اللغة =====
         document.getElementById('langSwitch')?.addEventListener('click', () => {
             const isAr = document.documentElement.lang === 'ar';
             document.documentElement.lang = isAr ? 'en' : 'ar';
             document.documentElement.dir = isAr ? 'ltr' : 'rtl';
             document.body.classList.toggle('ltr', !isAr);
-            document.body.classList.toggle('rtl', isAr);
             document.getElementById('langLabel').textContent = isAr ? 'عربي' : 'EN';
             document.getElementById('backLabel').textContent = isAr ? 'العودة للرئيسية' : 'Back to Home';
             loadDetail();
         });
 
-        // ===== التشغيل =====
         loadDetail();
     </script>
 </body>
