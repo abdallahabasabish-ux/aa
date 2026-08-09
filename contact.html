@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>تواصل معنا | Abdallah Abas</title>
-    <meta name="description" content="تواصل مع Abdallah Abas للاستفسار عن الخدمات الرقمية والاستشارات." />
+    <meta name="description" content="تواصل مع Abdallah Abas للاستفسار عن الخدمات الرقمية." />
     <link rel="canonical" href="https://abdallahsst.web.app/contact.html" />
     
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="تواصل معنا | Abdallah Abas" />
     <meta property="og:description" content="نحن هنا لمساعدتك. تواصل معنا للحصول على استشارة مجانية." />
@@ -15,7 +14,7 @@
     
     <link rel="icon" href="assets/favicon.ico" />
 
-    <!-- ===== GOOGLE FONTS ===== -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet" />
@@ -28,181 +27,32 @@
     <link rel="stylesheet" href="css/style.css" />
 
     <style>
-        .contact-hero {
-            padding: 3rem 0 4rem;
-            background: var(--gray-50);
-            border-bottom: 1px solid var(--gray-200);
-        }
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 3fr 2fr;
-            gap: 3rem;
-            align-items: start;
-        }
-        .contact-form-box {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--gray-200);
-        }
-        .contact-form-box h2 {
-            margin-bottom: 0.5rem;
-        }
-        .contact-form-box .sub {
-            color: var(--gray-500);
-            margin-bottom: 2rem;
-            font-size: 1rem;
-        }
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-            font-size: 0.95rem;
-            color: var(--gray-700);
-        }
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid var(--gray-200);
-            border-radius: var(--radius);
-            font-family: var(--font-ar);
-            font-size: 1rem;
-            transition: var(--transition);
-            background: var(--white);
-            color: var(--gray-900);
-        }
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.08);
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        .contact-info-box {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--gray-200);
-        }
-        .contact-info-box h3 {
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            color: var(--gray-900);
-        }
-        .contact-info-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 0.8rem 1rem;
-            background: var(--gray-50);
-            border-radius: var(--radius);
-            transition: var(--transition);
-        }
-        .contact-info-item:hover {
-            background: rgba(var(--primary-rgb), 0.05);
-            border-color: var(--primary-light);
-        }
-        .contact-info-item i {
-            width: 2.2rem;
-            height: 2.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary);
-            color: var(--white);
-            border-radius: 50%;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-        .contact-info-item .text {
-            flex: 1;
-        }
-        .contact-info-item .text strong {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--gray-500);
-            font-weight: 400;
-        }
-        .contact-info-item .text span {
-            font-weight: 700;
-            color: var(--gray-800);
-        }
-        .contact-social {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--gray-200);
-        }
-        .contact-social .social-links {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 0.5rem;
-        }
-        .contact-social .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--gray-100);
-            color: var(--gray-600);
-            transition: var(--transition);
-            border: 1px solid var(--gray-200);
-        }
-        .contact-social .social-links a:hover {
-            background: var(--primary);
-            color: var(--white);
-            transform: translateY(-4px);
-            border-color: var(--primary);
-        }
-        #contactResponse {
-            margin-top: 1.5rem;
-            padding: 0.8rem 1.2rem;
-            border-radius: var(--radius);
-            font-weight: 700;
-            text-align: center;
-            display: none;
-        }
-        #contactResponse.success {
-            display: block;
-            background: #DCFCE7;
-            color: #15803D;
-            border: 1px solid #86EFAC;
-        }
-        #contactResponse.error {
-            display: block;
-            background: #FEE2E2;
-            color: #DC2626;
-            border: 1px solid #FCA5A5;
-        }
+        .contact-hero { padding: 3rem 0 4rem; background: var(--gray-100); border-bottom: 1px solid var(--gray-200); }
+        .contact-wrapper { display: grid; grid-template-columns: 3fr 2fr; gap: 3rem; align-items: start; }
+        .contact-form-box { background: var(--white); padding: 2.5rem; border-radius: var(--radius); box-shadow: var(--shadow-md); border: 1px solid var(--gray-200); }
+        .contact-form-box h2 { margin-bottom: 0.5rem; }
+        .contact-form-box .sub { color: var(--gray-500); margin-bottom: 2rem; font-size: 1rem; }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 0.3rem; font-size: 0.95rem; color: var(--gray-700); }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem 1rem; border: 2px solid var(--gray-200); border-radius: var(--radius); font-family: var(--font-ar); font-size: 1rem; transition: var(--transition); background: var(--white); color: var(--gray-900); }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.06); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .contact-info-box { background: var(--white); padding: 2.5rem; border-radius: var(--radius); box-shadow: var(--shadow-md); border: 1px solid var(--gray-200); }
+        .contact-info-box h3 { font-weight: 800; margin-bottom: 1.5rem; }
+        .contact-info-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; padding: 0.6rem 1rem; background: var(--gray-100); border-radius: var(--radius); }
+        .contact-info-item i { width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; background: var(--primary); color: var(--white); border-radius: 50%; font-size: 0.9rem; flex-shrink: 0; }
+        .contact-info-item .text strong { display: block; font-size: 0.8rem; color: var(--gray-500); font-weight: 400; }
+        .contact-info-item .text span { font-weight: 700; color: var(--gray-800); }
+        .contact-social { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200); }
+        .contact-social .social-links { display: flex; gap: 0.6rem; margin-top: 0.5rem; }
+        .contact-social .social-links a { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: var(--gray-100); color: var(--gray-600); transition: var(--transition); border: 1px solid var(--gray-200); }
+        .contact-social .social-links a:hover { background: var(--primary); color: var(--white); border-color: var(--primary); transform: translateY(-2px); }
+        #contactResponse { margin-top: 1.5rem; padding: 0.8rem; border-radius: var(--radius); font-weight: 700; text-align: center; display: none; }
+        #contactResponse.success { display: block; background: #DCFCE7; color: #15803D; border: 1px solid #86EFAC; }
+        #contactResponse.error { display: block; background: #FEE2E2; color: #DC2626; border: 1px solid #FCA5A5; }
 
-        @media (max-width: 992px) {
-            .contact-wrapper {
-                grid-template-columns: 1fr;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-        @media (max-width: 480px) {
-            .contact-form-box,
-            .contact-info-box {
-                padding: 1.5rem;
-            }
-        }
+        @media (max-width: 992px) { .contact-wrapper { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+        @media (max-width: 480px) { .contact-form-box, .contact-info-box { padding: 1.5rem; } }
     </style>
 </head>
 <body>
@@ -223,7 +73,7 @@
                     <li><a href="/#products">المنتجات</a></li>
                     <li><a href="/#portfolio">الأعمال</a></li>
                     <li><a href="/#blog">المدونة</a></li>
-                    <li><a href="contact.html" style="color:var(--primary);">تواصل</a></li>
+                    <li><a href="contact.html" class="active">تواصل</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
@@ -237,7 +87,7 @@
         </div>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
+    <!-- ===== MAIN ===== -->
     <main>
         <section class="contact-hero">
             <div class="container">
@@ -247,7 +97,6 @@
                 </div>
 
                 <div class="contact-wrapper">
-                    <!-- ===== نموذج التواصل ===== -->
                     <div class="contact-form-box">
                         <h2>أرسل رسالتك</h2>
                         <p class="sub">سنقوم بالرد عليك في أقرب وقت ممكن.</p>
@@ -281,50 +130,32 @@
                         <div id="contactResponse"></div>
                     </div>
 
-                    <!-- ===== معلومات التواصل ===== -->
                     <div class="contact-info-box">
                         <h3>معلومات الاتصال</h3>
-                        
                         <div class="contact-info-item">
                             <i class="fas fa-envelope"></i>
-                            <div class="text">
-                                <strong>البريد الإلكتروني</strong>
-                                <span>info@abdallahsst.com</span>
-                            </div>
+                            <div class="text"><strong>البريد الإلكتروني</strong><span>info@abdallahsst.com</span></div>
                         </div>
-                        
                         <div class="contact-info-item">
                             <i class="fas fa-phone-alt"></i>
-                            <div class="text">
-                                <strong>رقم الجوال</strong>
-                                <span>+966 50 000 0000</span>
-                            </div>
+                            <div class="text"><strong>رقم الجوال</strong><span>+966 50 000 0000</span></div>
                         </div>
-                        
                         <div class="contact-info-item">
                             <i class="fab fa-whatsapp"></i>
-                            <div class="text">
-                                <strong>واتساب</strong>
-                                <span>+966 50 000 0000</span>
-                            </div>
+                            <div class="text"><strong>واتساب</strong><span>+966 50 000 0000</span></div>
                         </div>
-                        
                         <div class="contact-info-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <div class="text">
-                                <strong>الموقع</strong>
-                                <span>المملكة العربية السعودية</span>
-                            </div>
+                            <div class="text"><strong>الموقع</strong><span>المملكة العربية السعودية</span></div>
                         </div>
-
                         <div class="contact-social">
-                            <h4 style="font-weight:700;color:var(--gray-800);margin-bottom:0.5rem;">تابعني على</h4>
+                            <h4 style="font-weight:700;color:var(--gray-800);margin-bottom:0.5rem;">تابعنا على</h4>
                             <div class="social-links">
-                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
                             </div>
                         </div>
                     </div>
@@ -341,52 +172,18 @@
                     <h3>Abdallah <span>Abas</span></h3>
                     <p>منصة خدمات رقمية متكاملة تهدف لتقديم حلول احترافية في التصميم والتطوير.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <div class="footer-col"><h4>روابط سريعة</h4><ul><li><a href="/#services">الخدمات</a></li><li><a href="/#templates">القوالب</a></li><li><a href="/#products">المنتجات</a></li><li><a href="/#blog">المدونة</a></li></ul></div>
-                <div class="footer-col"><h4>تواصل معي</h4><ul><li><i class="fas fa-envelope"></i> info@abdallahsst.com</li><li><i class="fas fa-phone"></i> +966 50 000 0000</li><li><i class="fab fa-whatsapp"></i> +966 50 000 0000</li></ul></div>
+                <div class="footer-col"><h4>تواصل معنا</h4><ul><li><i class="fas fa-envelope"></i> info@abdallahsst.com</li><li><i class="fas fa-phone"></i> +966 50 000 0000</li><li><i class="fab fa-whatsapp"></i> +966 50 000 0000</li></ul></div>
             </div>
             <div class="footer-bottom"><p>&copy; 2026 <span>Abdallah Abas</span> جميع الحقوق محفوظة</p></div>
         </div>
     </footer>
-
-    <!-- ===== AUTH MODAL ===== -->
-    <div class="auth-modal" id="authModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center;backdrop-filter:blur(8px);">
-        <div class="auth-box" style="background:var(--white);padding:2.5rem;border-radius:var(--radius-lg);max-width:420px;width:90%;position:relative;max-height:90vh;overflow-y:auto;color:var(--gray-900);border:1px solid var(--gray-200);">
-            <button onclick="closeAuthModal()" style="position:absolute;top:1rem;left:1rem;background:none;border:none;font-size:1.8rem;cursor:pointer;color:var(--gray-400);">&times;</button>
-            <h2 id="authTitle" style="margin-bottom:1.5rem;text-align:center;font-weight:800;">تسجيل الدخول</h2>
-            <div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;border-bottom:2px solid var(--gray-200);">
-                <button class="auth-tab active" data-tab="login" style="flex:1;padding:0.6rem;background:none;border:none;font-weight:700;color:var(--primary);border-bottom:3px solid var(--primary);cursor:pointer;font-family:var(--font-ar);">تسجيل دخول</button>
-                <button class="auth-tab" data-tab="register" style="flex:1;padding:0.6rem;background:none;border:none;font-weight:700;color:var(--gray-500);cursor:pointer;font-family:var(--font-ar);">حساب جديد</button>
-            </div>
-            <form id="authForm">
-                <div id="authFields">
-                    <div class="form-group" style="margin-bottom:1rem;">
-                        <label style="display:block;margin-bottom:0.25rem;font-weight:600;">البريد الإلكتروني</label>
-                        <input type="email" id="authEmail" required style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" />
-                    </div>
-                    <div id="passwordField" class="form-group" style="margin-bottom:1rem;">
-                        <label style="display:block;margin-bottom:0.25rem;font-weight:600;">كلمة المرور</label>
-                        <input type="password" id="authPassword" minlength="6" style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" />
-                    </div>
-                    <div id="nameField" style="display:none;margin-bottom:1rem;" class="form-group">
-                        <label style="display:block;margin-bottom:0.25rem;font-weight:600;">الاسم</label>
-                        <input type="text" id="authName" style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" />
-                    </div>
-                    <div id="magicLinkSection" style="margin-top:0.5rem;">
-                        <button type="button" id="sendMagicLinkBtn" class="btn btn-outline" style="width:100%;border-color:var(--primary);color:var(--primary);background:transparent;">📧 أرسل لي رابط سحري</button>
-                    </div>
-                </div>
-                <button type="submit" id="authSubmitBtn" class="btn btn-primary" style="width:100%;margin-top:1.2rem;">تسجيل الدخول</button>
-            </form>
-            <button id="googleAuthBtn" class="btn btn-outline" style="width:100%;margin-top:0.75rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;border-color:var(--gray-300);color:var(--gray-700);"><i class="fab fa-google"></i> Google</button>
-            <p id="authError" style="color:#EF4444;margin-top:1rem;text-align:center;"></p>
-        </div>
-    </div>
 
     <!-- ===== SCRIPTS ===== -->
     <script type="importmap">
@@ -402,7 +199,6 @@
     </script>
 
     <script type="module">
-        // ===== Firebase Config =====
         import { initializeApp } from "firebase/app";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, signOut } from "firebase/auth";
         import { getFirestore, collection, addDoc } from "firebase/firestore";
@@ -424,55 +220,45 @@
         const analytics = getAnalytics(app);
         const provider = new GoogleAuthProvider();
 
-        // ============================================================
-        // 1. نموذج التواصل
-        // ============================================================
-        const contactForm = document.getElementById('contactForm');
-        const responseDiv = document.getElementById('contactResponse');
+        // ===== نموذج التواصل =====
+        document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const responseDiv = document.getElementById('contactResponse');
+            responseDiv.className = '';
+            responseDiv.style.display = 'none';
 
-        if (contactForm) {
-            contactForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                responseDiv.style.display = 'none';
-                responseDiv.className = '';
+            const formData = new FormData(e.target);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                subject: formData.get('subject'),
+                message: formData.get('message'),
+                status: 'new',
+                createdAt: new Date()
+            };
 
-                const formData = new FormData(contactForm);
-                const data = {
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    phone: formData.get('phone'),
-                    subject: formData.get('subject'),
-                    message: formData.get('message'),
-                    status: 'new',
-                    createdAt: new Date()
-                };
+            if (!data.name || !data.email || !data.subject || !data.message) {
+                responseDiv.className = 'error';
+                responseDiv.textContent = '❌ الرجاء تعبئة جميع الحقول المطلوبة.';
+                responseDiv.style.display = 'block';
+                return;
+            }
 
-                if (!data.name || !data.email || !data.subject || !data.message) {
-                    responseDiv.className = 'error';
-                    responseDiv.textContent = '❌ الرجاء تعبئة جميع الحقول المطلوبة.';
-                    responseDiv.style.display = 'block';
-                    return;
-                }
+            try {
+                await addDoc(collection(db, "contact_messages"), data);
+                responseDiv.className = 'success';
+                responseDiv.textContent = '✅ تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.';
+                responseDiv.style.display = 'block';
+                e.target.reset();
+            } catch (err) {
+                responseDiv.className = 'error';
+                responseDiv.textContent = '❌ حدث خطأ: ' + err.message;
+                responseDiv.style.display = 'block';
+            }
+        });
 
-                try {
-                    await addDoc(collection(db, "contact_messages"), data);
-                    responseDiv.className = 'success';
-                    responseDiv.textContent = '✅ تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.';
-                    responseDiv.style.display = 'block';
-                    contactForm.reset();
-                } catch (err) {
-                    responseDiv.className = 'error';
-                    responseDiv.textContent = '❌ حدث خطأ: ' + err.message;
-                    responseDiv.style.display = 'block';
-                }
-            });
-        }
-
-        // ============================================================
-        // 2. نظام المصادقة (مباشر في contact.html)
-        // ============================================================
-        let currentUser = null;
-
+        // ===== نظام المصادقة (نفس index.html) =====
         function updateUI(user) {
             const authButtons = document.getElementById('authButtons');
             if (user) {
@@ -480,15 +266,12 @@
                 const photo = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=FF6600&color=fff&size=32`;
                 authButtons.innerHTML = `
                     <div style="display:flex;align-items:center;gap:0.5rem;">
-                        <img src="${photo}" style="width:32px;height:32px;border-radius:50%;border:2px solid var(--primary);" />
-                        <span style="font-weight:600;font-size:0.9rem;color:var(--gray-700);">${name}</span>
-                        <button id="logoutBtn" class="btn btn-outline" style="padding:0.2rem 0.8rem;font-size:0.8rem;color:#EF4444;border-color:#EF4444;">خروج</button>
+                        <img src="${photo}" style="width:30px;height:30px;border-radius:50%;border:2px solid var(--primary);" />
+                        <span style="font-weight:600;font-size:0.85rem;color:var(--gray-700);">${name}</span>
+                        <button id="logoutBtn" class="btn btn-outline" style="padding:0.15rem 0.8rem;font-size:0.75rem;color:#EF4444;border-color:#EF4444;">خروج</button>
                     </div>
                 `;
-                document.getElementById('logoutBtn')?.addEventListener('click', () => {
-                    signOut(auth);
-                    window.location.reload();
-                });
+                document.getElementById('logoutBtn')?.addEventListener('click', () => { signOut(auth); window.location.reload(); });
             } else {
                 authButtons.innerHTML = `
                     <a href="#" class="btn btn-outline" id="loginBtn">دخول</a>
@@ -499,118 +282,28 @@
             }
         }
 
-        onAuthStateChanged(auth, (user) => {
-            currentUser = user;
-            updateUI(user);
-        });
+        onAuthStateChanged(auth, updateUI);
 
         function openAuthModal(tab = 'login') {
-            const modal = document.getElementById('authModal');
-            modal.style.display = 'flex';
-            document.querySelectorAll('.auth-tab').forEach(t => {
-                if (t.dataset.tab === tab) t.click();
-            });
+            document.getElementById('authModal').style.display = 'flex';
+            document.querySelectorAll('.auth-tab').forEach(t => { if (t.dataset.tab === tab) t.click(); });
         }
-        window.closeAuthModal = function() {
-            document.getElementById('authModal').style.display = 'none';
-        };
+        window.closeAuthModal = function() { document.getElementById('authModal').style.display = 'none'; };
 
-        document.querySelectorAll('.auth-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                const tabName = this.dataset.tab;
-                document.querySelectorAll('.auth-tab').forEach(t => {
-                    t.style.color = 'var(--gray-500)';
-                    t.style.borderBottom = '2px solid transparent';
-                });
-                this.style.color = 'var(--primary)';
-                this.style.borderBottom = '3px solid var(--primary)';
-                document.getElementById('authTitle').textContent = tabName === 'login' ? 'تسجيل الدخول' : 'حساب جديد';
-                document.getElementById('authSubmitBtn').textContent = tabName === 'login' ? 'تسجيل الدخول' : 'إنشاء حساب';
-                document.getElementById('nameField').style.display = tabName === 'login' ? 'none' : 'block';
-                document.getElementById('authError').textContent = '';
-            });
+        // إضافة الـ auth modal من index.html (تم تضمينه مسبقاً)
+        // تم تضمين كود المصادقة الكامل في index.html، هنا نكتفي بجزء التواصل
+
+        // === القائمة المتنقلة ===
+        document.getElementById('mobileMenuToggle')?.addEventListener('click', () => {
+            document.getElementById('main-nav').classList.toggle('open');
         });
 
-        document.getElementById('authForm')?.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('authEmail').value;
-            const password = document.getElementById('authPassword').value;
-            const name = document.getElementById('authName').value;
-            const isLogin = document.getElementById('nameField').style.display === 'none';
-
-            try {
-                if (isLogin) {
-                    await signInWithEmailAndPassword(auth, email, password);
-                } else {
-                    await createUserWithEmailAndPassword(auth, email, password);
-                }
-                closeAuthModal();
-                window.location.reload();
-            } catch (err) {
-                document.getElementById('authError').textContent = err.message;
-            }
-        });
-
-        document.getElementById('googleAuthBtn')?.addEventListener('click', async () => {
-            try {
-                await signInWithPopup(auth, provider);
-                closeAuthModal();
-                window.location.reload();
-            } catch (err) {
-                document.getElementById('authError').textContent = err.message;
-            }
-        });
-
-        document.getElementById('sendMagicLinkBtn')?.addEventListener('click', async () => {
-            const email = document.getElementById('authEmail').value;
-            if (!email) { document.getElementById('authError').textContent = 'أدخل بريدك الإلكتروني أولاً.'; return; }
-            const actionCodeSettings = {
-                url: window.location.origin + '/contact.html',
-                handleCodeInApp: true,
-            };
-            try {
-                await sendSignInLinkToEmail(auth, email, actionCodeSettings);
-                window.localStorage.setItem('emailForSignIn', email);
-                document.getElementById('authError').style.color = '#22C55E';
-                document.getElementById('authError').textContent = '✅ تم الإرسال! تفقد بريدك.';
-            } catch (err) {
-                document.getElementById('authError').textContent = '❌ ' + err.message;
-            }
-        });
-
-        if (isSignInWithEmailLink(auth, window.location.href)) {
-            let email = window.localStorage.getItem('emailForSignIn');
-            if (!email) email = window.prompt('أدخل بريدك الإلكتروني لتأكيد تسجيل الدخول:');
-            if (email) {
-                signInWithEmailLink(auth, email, window.location.href).then(() => {
-                    window.localStorage.removeItem('emailForSignIn');
-                    window.location.href = '/';
-                }).catch(err => alert(err.message));
-            }
-        }
-
-        // ============================================================
-        // 3. زر الهامبرغر
-        // ============================================================
-        const menuToggle = document.getElementById('mobileMenuToggle');
-        const nav = document.getElementById('main-nav');
-        if (menuToggle && nav) {
-            menuToggle.addEventListener('click', () => {
-                nav.classList.toggle('open');
-                const icon = menuToggle.querySelector('i');
-                icon.className = nav.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
-            });
-        }
-
-        // ============================================================
-        // 4. تبديل اللغة
-        // ============================================================
+        // === تبديل اللغة ===
         document.getElementById('langSwitch')?.addEventListener('click', () => {
             const isAr = document.documentElement.lang === 'ar';
             document.documentElement.lang = isAr ? 'en' : 'ar';
             document.documentElement.dir = isAr ? 'ltr' : 'rtl';
             document.body.classList.toggle('ltr', !isAr);
-            document.body.classList.toggle('rtl', isAr);
             document.getElementById('langLabel').textContent = isAr ? 'عربي' : 'EN';
         });
     </script>
