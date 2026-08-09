@@ -1,5 +1,3 @@
-// i18n.js - نظام الترجمة
-
 export const translations = {
   ar: {
     // Navigation
