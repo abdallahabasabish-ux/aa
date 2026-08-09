@@ -3,34 +3,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>عبدالله عباس | منصة خدمات رقمية</title>
-
-    <!-- SEO Meta -->
+    <title>عبدالله عباس | حلول رقمية احترافية</title>
     <meta name="description" content="منصة عبدالله عباس للخدمات الرقمية الاحترافية: تصميم مواقع، قوالب بلوجر، تطبيقات، وتحسين محركات البحث." />
-    <link rel="canonical" href="https://abdallahabbas.com/" />
-
-    <!-- Open Graph / Facebook -->
+    <link rel="canonical" href="https://abdallahsst.web.app/" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://abdallahabbas.com/" />
-    <meta property="og:title" content="عبدالله عباس | منصة خدمات رقمية" />
-    <meta property="og:description" content="منصة متكاملة للخدمات الرقمية: تصميم، تطوير، وقوالب احترافية." />
-    <meta property="og:image" content="https://abdallahabbas.com/assets/og-image.jpg" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-
-    <!-- Favicon -->
+    <meta property="og:title" content="عبدالله عباس | حلول رقمية احترافية" />
+    <meta property="og:description" content="منصة متكاملة للخدمات الرقمية بتصميم عصري وأداء خارق." />
+    <meta property="og:image" content="https://abdallahsst.web.app/assets/og-image.jpg" />
     <link rel="icon" href="assets/favicon.ico" />
-
-    <!-- Google Fonts (Cairo for Arabic + Inter for English) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-    <!-- Font Awesome (Icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-    <!-- Main Stylesheet -->
+    
+<!-- ===== GOOGLE FONTS (Almarai + Inter) ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- الخط العربي الأساسي -->
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+<!-- الخط الإنجليزي (احتياطي للنصوص اللاتينية) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" rel="stylesheet">
+    
+    <!-- التصميم الرئيسي (مع الخطوط المستضافة) -->
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -40,218 +30,162 @@
         <div class="container header-inner">
             <div class="logo">
                 <a href="/">
-                    <img src="assets/logo.svg" alt="عبدالله عباس" class="logo-img" />
-                    <span class="logo-text">عبدالله عباس</span>
+                    <img src="assets/logo-white.svg" alt="عبدالله عباس" class="logo-img" />
+                    <span class="logo-text">عبدالله <span>عباس</span></span>
                 </a>
             </div>
-
             <nav class="main-nav" id="main-nav">
                 <ul class="nav-list">
                     <li><a href="#services" data-i18n="nav.services">الخدمات</a></li>
                     <li><a href="#templates" data-i18n="nav.templates">القوالب</a></li>
                     <li><a href="#products" data-i18n="nav.products">المنتجات</a></li>
-                    <li><a href="#portfolio" data-i18n="nav.portfolio">معرض الأعمال</a></li>
+                    <li><a href="#portfolio" data-i18n="nav.portfolio">الأعمال</a></li>
                     <li><a href="#blog" data-i18n="nav.blog">المدونة</a></li>
                     <li><a href="#contact" data-i18n="nav.contact">تواصل</a></li>
                 </ul>
             </nav>
-
             <div class="header-actions">
-                <!-- Language Switcher -->
-                <button class="lang-switch" id="langSwitch" aria-label="Switch Language">
-                    <i class="fas fa-globe"></i>
-                    <span id="langLabel">EN</span>
-                </button>
-
-                <!-- Auth Buttons -->
+                <button class="lang-switch" id="langSwitch"><i class="fas fa-globe"></i> <span id="langLabel">EN</span></button>
                 <div class="auth-buttons" id="authButtons">
                     <a href="#" class="btn btn-outline" id="loginBtn" data-i18n="nav.login">دخول</a>
                     <a href="#" class="btn btn-primary" id="registerBtn" data-i18n="nav.register">حساب جديد</a>
                 </div>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
             </div>
         </div>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
+    <!-- ===== MAIN ===== -->
     <main>
-        <!-- ===== HERO ===== -->
+        <!-- HERO -->
         <section id="hero" class="hero">
             <div class="container hero-inner">
                 <div class="hero-content">
-                    <h1 class="hero-title" data-i18n="hero.title">حلول رقمية <span class="highlight">احترافية</span> تنمو مع أعمالك</h1>
-                    <p class="hero-desc" data-i18n="hero.desc">أقدم لك خدمات تصميم وتطوير مواقع، قوالب بلوجر، وتحسين محركات البحث بجودة عالية ودعم مستمر.</p>
+                    <h1 class="hero-title">حلول رقمية <span class="highlight">احترافية</span> تنمو مع أعمالك</h1>
+                    <p class="hero-desc">أقدم لك خدمات تصميم وتطوير مواقع، قوالب بلوجر، وتحسين محركات البحث بجودة عالية ودعم مستمر.</p>
                     <div class="hero-actions">
-                        <a href="#services" class="btn btn-primary btn-large" data-i18n="hero.cta">استكشف الخدمات</a>
-                        <a href="#portfolio" class="btn btn-outline btn-large" data-i18n="hero.cta2">شاهد أعمالي</a>
+                        <a href="#services" class="btn btn-primary btn-large">استكشف الخدمات</a>
+                        <a href="#portfolio" class="btn btn-outline btn-large">شاهد أعمالي</a>
                     </div>
                 </div>
                 <div class="hero-visual">
-                    <img src="assets/hero-illustration.svg" alt="Illustration" />
+                    <img src="assets/hero-illustration.svg" alt="تصميم رقمي" />
                 </div>
             </div>
         </section>
 
-        <!-- ===== SERVICES ===== -->
+        <!-- SERVICES -->
         <section id="services" class="section services">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="services.title">خدماتي الاحترافية</h2>
-                    <p class="section-subtitle" data-i18n="services.subtitle">أقدم مجموعة من الخدمات الرقمية المصممة خصيصاً لنجاح مشروعك</p>
+                    <h2 class="section-title">خدماتي <span class="highlight">الاحترافية</span></h2>
+                    <p class="section-subtitle">أقدم مجموعة من الخدمات الرقمية المصممة خصيصاً لنجاح مشروعك</p>
                 </div>
-                <div class="services-grid" id="servicesGrid">
-                    <!-- سيتم جلب البيانات عبر JavaScript -->
-                </div>
+                <div class="services-grid" id="servicesGrid"></div>
             </div>
         </section>
 
-        <!-- ===== TEMPLATES ===== -->
+        <!-- TEMPLATES -->
         <section id="templates" class="section templates alt-bg">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="templates.title">قوالب احترافية</h2>
-                    <p class="section-subtitle" data-i18n="templates.subtitle">قوالب بلوجر ووردبريس مصممة بأعلى معايير الجودة والأداء</p>
+                    <h2 class="section-title">قوالب <span class="highlight">احترافية</span></h2>
+                    <p class="section-subtitle">قوالب بلوجر ووردبريس مصممة بأعلى معايير الجودة والأداء</p>
                 </div>
-                <div class="templates-grid" id="templatesGrid">
-                    <!-- سيتم جلب البيانات عبر JavaScript -->
-                </div>
+                <div class="templates-grid" id="templatesGrid"></div>
             </div>
         </section>
 
-        <!-- ===== PRODUCTS ===== -->
+        <!-- PRODUCTS -->
         <section id="products" class="section products">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="products.title">المنتجات الرقمية</h2>
-                    <p class="section-subtitle" data-i18n="products.subtitle">إضافات وأدوات رقمية لتسريع نمو أعمالك</p>
+                    <h2 class="section-title">المنتجات <span class="highlight">الرقمية</span></h2>
+                    <p class="section-subtitle">إضافات وأدوات رقمية لتسريع نمو أعمالك</p>
                 </div>
-                <div class="products-grid" id="productsGrid">
-                    <!-- سيتم جلب البيانات عبر JavaScript -->
-                </div>
+                <div class="products-grid" id="productsGrid"></div>
             </div>
         </section>
 
-        <!-- ===== PORTFOLIO ===== -->
+        <!-- PORTFOLIO -->
         <section id="portfolio" class="section portfolio alt-bg">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="portfolio.title">معرض الأعمال</h2>
-                    <p class="section-subtitle" data-i18n="portfolio.subtitle">نماذج من مشاريعي السابقة التي تعكس الجودة والاحترافية</p>
+                    <h2 class="section-title">معرض <span class="highlight">الأعمال</span></h2>
+                    <p class="section-subtitle">نماذج من مشاريعي السابقة التي تعكس الجودة والاحترافية</p>
                 </div>
-                <div class="portfolio-grid" id="portfolioGrid">
-                    <!-- سيتم جلب البيانات عبر JavaScript -->
-                </div>
+                <div class="portfolio-grid" id="portfolioGrid"></div>
             </div>
         </section>
 
-        <!-- ===== BLOG ===== -->
+        <!-- BLOG -->
         <section id="blog" class="section blog">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="blog.title">المدونة</h2>
-                    <p class="section-subtitle" data-i18n="blog.subtitle">أحدث المقالات والنصائح في عالم التصميم والتطوير</p>
+                    <h2 class="section-title">المدونة <span class="highlight">التقنية</span></h2>
+                    <p class="section-subtitle">أحدث المقالات والنصائح في عالم التصميم والتطوير</p>
                 </div>
-                <div class="blog-grid" id="blogGrid">
-                    <!-- سيتم جلب البيانات عبر JavaScript -->
-                </div>
+                <div class="blog-grid" id="blogGrid"></div>
             </div>
         </section>
 
-        <!-- ===== WHY US ===== -->
-        <section class="section why-us alt-bg">
+        <!-- WHY US (خلفية سوداء) -->
+        <section class="section dark-bg">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="why.title">لماذا عبدالله عباس؟</h2>
+                    <h2 class="section-title">لماذا <span class="highlight">عبدالله عباس</span>؟</h2>
                 </div>
                 <div class="features-grid">
-                    <div class="feature-card">
-                        <i class="fas fa-rocket"></i>
-                        <h3 data-i18n="why.f1.title">احترافية عالية</h3>
-                        <p data-i18n="why.f1.desc">خبرة سنوات في تقديم حلول رقمية مبتكرة.</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-headset"></i>
-                        <h3 data-i18n="why.f2.title">دعم فني مستمر</h3>
-                        <p data-i18n="why.f2.desc">أنا معك خطوة بخطوة حتى إطلاق مشروعك.</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-bolt"></i>
-                        <h3 data-i18n="why.f3.title">أداء وسرعة</h3>
-                        <p data-i18n="why.f3.desc">أكواد نظيفة ومحسنة لأسرع تجربة تحميل.</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-shield-alt"></i>
-                        <h3 data-i18n="why.f4.title">أمان وحماية</h3>
-                        <p data-i18n="why.f4.desc">أحدث معايير الأمان لحماية بياناتك.</p>
-                    </div>
+                    <div class="feature-card"><i class="fas fa-rocket"></i><h3>احترافية عالية</h3><p>خبرة سنوات في تقديم حلول رقمية مبتكرة.</p></div>
+                    <div class="feature-card"><i class="fas fa-headset"></i><h3>دعم فني مستمر</h3><p>أنا معك خطوة بخطوة حتى إطلاق مشروعك.</p></div>
+                    <div class="feature-card"><i class="fas fa-bolt"></i><h3>أداء وسرعة</h3><p>أكواد نظيفة ومحسنة لأسرع تجربة تحميل.</p></div>
+                    <div class="feature-card"><i class="fas fa-shield-alt"></i><h3>أمان وحماية</h3><p>أحدث معايير الأمان لحماية بياناتك.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- ===== HOW IT WORKS ===== -->
-        <section class="section how-it-works">
+        <!-- HOW IT WORKS -->
+        <section class="section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="how.title">كيف نعمل؟</h2>
+                    <h2 class="section-title">كيف <span class="highlight">نعمل</span>؟</h2>
                 </div>
                 <div class="steps">
-                    <div class="step">
-                        <span class="step-num">1</span>
-                        <h3 data-i18n="how.s1.title">استشارة مجانية</h3>
-                        <p data-i18n="how.s1.desc">نتواصل لفهم احتياجاتك وأهدافك.</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-num">2</span>
-                        <h3 data-i18n="how.s2.title">تخطيط وتصميم</h3>
-                        <p data-i18n="how.s2.desc">نضع خارطة طريق ونبدأ التصميم.</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-num">3</span>
-                        <h3 data-i18n="how.s3.title">تطوير ومراجعة</h3>
-                        <p data-i18n="how.s3.desc">نطور الحل ونرسله لك للمراجعة.</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-num">4</span>
-                        <h3 data-i18n="how.s4.title">إطلاق ودعم</h3>
-                        <p data-i18n="how.s4.desc">نطلق المشروع وندعمك باستمرار.</p>
-                    </div>
+                    <div class="step"><span class="step-num">1</span><h3>استشارة مجانية</h3><p>نتواصل لفهم احتياجاتك وأهدافك.</p></div>
+                    <div class="step"><span class="step-num">2</span><h3>تخطيط وتصميم</h3><p>نضع خارطة طريق ونبدأ التصميم.</p></div>
+                    <div class="step"><span class="step-num">3</span><h3>تطوير ومراجعة</h3><p>نطور الحل ونرسله لك للمراجعة.</p></div>
+                    <div class="step"><span class="step-num">4</span><h3>إطلاق ودعم</h3><p>نطلق المشروع وندعمك باستمرار.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- ===== TESTIMONIALS ===== -->
-        <section class="section testimonials alt-bg">
+        <!-- TESTIMONIALS -->
+        <section class="section alt-bg">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="testimonials.title">آراء العملاء</h2>
+                    <h2 class="section-title">آراء <span class="highlight">العملاء</span></h2>
                 </div>
-                <div class="testimonials-grid" id="testimonialsGrid">
-                    <!-- سيتم جلب البيانات عبر JavaScript -->
-                </div>
+                <div class="testimonials-grid" id="testimonialsGrid"></div>
             </div>
         </section>
 
-        <!-- ===== FAQ ===== -->
-        <section class="section faq">
+        <!-- FAQ -->
+        <section class="section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="faq.title">الأسئلة الشائعة</h2>
+                    <h2 class="section-title">الأسئلة <span class="highlight">الشائعة</span></h2>
                 </div>
-                <div class="faq-list" id="faqList">
-                    <!-- سيتم جلب البيانات عبر JavaScript -->
-                </div>
+                <div class="faq-list" id="faqList"></div>
             </div>
         </section>
 
-        <!-- ===== CTA ===== -->
+        <!-- CTA -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-box">
-                    <h2 data-i18n="cta.title">جاهز لبدء مشروعك؟</h2>
-                    <p data-i18n="cta.desc">تواصل معي اليوم لتحويل فكرتك إلى واقع رقمي.</p>
-                    <a href="#contact" class="btn btn-primary btn-large" data-i18n="cta.btn">احصل على استشارة مجانية</a>
+                    <h2>جاهز لبدء <span class="highlight">مشروعك</span>؟</h2>
+                    <p>تواصل معي اليوم لتحويل فكرتك إلى واقع رقمي.</p>
+                    <a href="#contact" class="btn btn-primary btn-large">احصل على استشارة مجانية</a>
                 </div>
             </div>
         </section>
@@ -262,98 +196,65 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3>عبدالله عباس</h3>
-                    <p data-i18n="footer.about">منصة خدمات رقمية متكاملة تهدف لتقديم حلول احترافية في التصميم والتطوير.</p>
+                    <h3>عبدالله <span>عباس</span></h3>
+                    <p>منصة خدمات رقمية متكاملة تهدف لتقديم حلول احترافية في التصميم والتطوير.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
-                <div class="footer-col">
-                    <h4 data-i18n="footer.links">روابط سريعة</h4>
-                    <ul>
-                        <li><a href="#services" data-i18n="nav.services">الخدمات</a></li>
-                        <li><a href="#templates" data-i18n="nav.templates">القوالب</a></li>
-                        <li><a href="#products" data-i18n="nav.products">المنتجات</a></li>
-                        <li><a href="#blog" data-i18n="nav.blog">المدونة</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4 data-i18n="footer.contact">تواصل معي</h4>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> info@abdallahabbas.com</li>
-                        <li><i class="fas fa-phone"></i> +966 50 000 0000</li>
-                        <li><i class="fab fa-whatsapp"></i> +966 50 000 0000</li>
-                    </ul>
-                </div>
+                <div class="footer-col"><h4>روابط سريعة</h4><ul><li><a href="#services">الخدمات</a></li><li><a href="#templates">القوالب</a></li><li><a href="#products">المنتجات</a></li><li><a href="#blog">المدونة</a></li></ul></div>
+                <div class="footer-col"><h4>تواصل معي</h4><ul><li><i class="fas fa-envelope"></i> info@abdallahsst.com</li><li><i class="fas fa-phone"></i> +966 50 000 0000</li><li><i class="fab fa-whatsapp"></i> +966 50 000 0000</li></ul></div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 <span data-i18n="footer.copyright">جميع الحقوق محفوظة لعبدالله عباس</span></p>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2026 <span>عبدالله عباس</span> جميع الحقوق محفوظة</p></div>
         </div>
     </footer>
 
     <!-- ===== SCRIPTS ===== -->
-    <!-- Firebase SDK -->
+    <script type="importmap">
+    {
+        "imports": {
+            "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
+            "firebase/auth": "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js",
+            "firebase/firestore": "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js",
+            "firebase/storage": "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js",
+            "firebase/analytics": "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js"
+        }
+    }
+    </script>
+    
     <script type="module">
-        // Import Firebase modules (using CDN for simplicity)
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getStorage } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+        // Firebase Config (خاص بك)
+        import { initializeApp } from "firebase/app";
+        import { getAuth } from "firebase/auth";
+        import { getFirestore } from "firebase/firestore";
+        import { getStorage } from "firebase/storage";
+        import { getAnalytics } from "firebase/analytics";
 
-        // Firebase Config (استبدل بالقيم الخاصة بك من Firebase Console)
         const firebaseConfig = {
-            apiKey: "AIzaSyDemoKeyReplaceMe",
-            authDomain: "your-project.firebaseapp.com",
-            projectId: "your-project",
-            storageBucket: "your-project.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef"
+            apiKey: "AIzaSyDg-oSbA_UdlzMS8HZGE0pHtr_zWg5rrXY",
+            authDomain: "abdallahsst.firebaseapp.com",
+            projectId: "abdallahsst",
+            storageBucket: "abdallahsst.firebasestorage.app",
+            messagingSenderId: "1011946194938",
+            appId: "1:1011946194938:web:9bee94362711431368c643",
+            measurementId: "G-ZP5BJH98CS"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
         const auth = getAuth(app);
+        const db = getFirestore(app);
         const storage = getStorage(app);
+        const analytics = getAnalytics(app);
 
-        // Make them globally accessible for other scripts (or use modules)
-        window.__firebase = { app, db, auth, storage };
-        console.log("🔥 Firebase initialized successfully!");
+        window.__firebase = { app, auth, db, storage, analytics };
+
+        // استيراد وحدات التطبيق
+        import('./js/i18n.js');
+        import('./js/app.js');
+        import('./js/modules/auth.js');
     </script>
-<!-- ===== AUTH MODAL ===== -->
-<div class="auth-modal" id="authModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;justify-content:center;align-items:center;backdrop-filter:blur(4px);">
-    <div class="auth-box" style="background:white;padding:2rem;border-radius:var(--radius);max-width:400px;width:90%;position:relative;max-height:90vh;overflow-y:auto;">
-        <button onclick="closeAuthModal()" style="position:absolute;top:1rem;left:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;">✕</button>
-        <h2 id="authTitle" style="margin-bottom:1.5rem;text-align:center;">تسجيل الدخول</h2>
-        
-        <!-- Tabs -->
-        <div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;border-bottom:2px solid var(--gray-200);">
-            <button class="auth-tab active" data-tab="login" style="flex:1;padding:0.5rem;background:none;border:none;font-weight:700;color:var(--primary);border-bottom:3px solid var(--primary);cursor:pointer;">تسجيل دخول</button>
-            <button class="auth-tab" data-tab="register" style="flex:1;padding:0.5rem;background:none;border:none;font-weight:700;color:var(--gray-500);cursor:pointer;">حساب جديد</button>
-        </div>
-
-        <form id="authForm">
-            <div id="authFields">
-                <div class="form-group"><label>البريد الإلكتروني</label><input type="email" id="authEmail" required /></div>
-                <div class="form-group"><label>كلمة المرور</label><input type="password" id="authPassword" required minlength="6" /></div>
-                <div id="nameField" style="display:none;" class="form-group"><label>الاسم</label><input type="text" id="authName" /></div>
-            </div>
-            <button type="submit" id="authSubmitBtn" class="btn btn-primary" style="width:100%;margin-top:1rem;">تسجيل الدخول</button>
-        </form>
-        
-        <button id="googleAuthBtn" class="btn btn-outline" style="width:100%;margin-top:0.75rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-            <i class="fab fa-google"></i> تسجيل الدخول بـ Google
-        </button>
-        <p id="authError" style="color:red;margin-top:1rem;text-align:center;"></p>
-    </div>
-</div>
-    <!-- App Scripts (Type="module" or defer) -->
-    <script type="module" src="js/i18n.js"></script>
-    <script type="module" src="js/modules/data.js"></script>
-    <script type="module" src="js/app.js"></script>
 </body>
 </html>
