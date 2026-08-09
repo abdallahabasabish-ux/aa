@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>تواصل معنا | عبدالله عباس</title>
-    <meta name="description" content="تواصل مع عبدالله عباس للاستفسار عن الخدمات الرقمية والاستشارات." />
+    <title>تواصل معنا | Abdallah Abas</title>
+    <meta name="description" content="تواصل مع Abdallah Abas للاستفسار عن الخدمات الرقمية والاستشارات." />
     <link rel="canonical" href="https://abdallahsst.web.app/contact.html" />
     
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="تواصل معنا | عبدالله عباس" />
+    <meta property="og:title" content="تواصل معنا | Abdallah Abas" />
     <meta property="og:description" content="نحن هنا لمساعدتك. تواصل معنا للحصول على استشارة مجانية." />
     <meta property="og:image" content="https://abdallahsst.web.app/assets/og-image.jpg" />
     
@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="css/style.css" />
 
     <style>
-        /* تنسيقات خاصة بصفحة التواصل */
         .contact-hero {
             padding: 3rem 0 4rem;
             background: var(--gray-50);
@@ -208,13 +207,13 @@
 </head>
 <body>
 
-    <!-- ===== HEADER (نفس هيكل الموقع الرئيسي) ===== -->
+    <!-- ===== HEADER ===== -->
     <header id="main-header" class="header">
         <div class="container header-inner">
             <div class="logo">
                 <a href="/">
-                    <img src="assets/logo.svg" alt="عبدالله عباس" class="logo-img" />
-                    <span class="logo-text">عبدالله <span>عباس</span></span>
+                    <img src="assets/logo.svg" alt="Abdallah Abas" class="logo-img" />
+                    <span class="logo-text">Abdallah <span>Abas</span></span>
                 </a>
             </div>
             <nav class="main-nav" id="main-nav">
@@ -339,7 +338,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3>عبدالله <span>عباس</span></h3>
+                    <h3>Abdallah <span>Abas</span></h3>
                     <p>منصة خدمات رقمية متكاملة تهدف لتقديم حلول احترافية في التصميم والتطوير.</p>
                     <div class="social-links">
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -351,11 +350,11 @@
                 <div class="footer-col"><h4>روابط سريعة</h4><ul><li><a href="/#services">الخدمات</a></li><li><a href="/#templates">القوالب</a></li><li><a href="/#products">المنتجات</a></li><li><a href="/#blog">المدونة</a></li></ul></div>
                 <div class="footer-col"><h4>تواصل معي</h4><ul><li><i class="fas fa-envelope"></i> info@abdallahsst.com</li><li><i class="fas fa-phone"></i> +966 50 000 0000</li><li><i class="fab fa-whatsapp"></i> +966 50 000 0000</li></ul></div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2026 <span>عبدالله عباس</span> جميع الحقوق محفوظة</p></div>
+            <div class="footer-bottom"><p>&copy; 2026 <span>Abdallah Abas</span> جميع الحقوق محفوظة</p></div>
         </div>
     </footer>
 
-    <!-- ===== AUTH MODAL (منقول من index.html للتوحيد) ===== -->
+    <!-- ===== AUTH MODAL ===== -->
     <div class="auth-modal" id="authModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center;backdrop-filter:blur(8px);">
         <div class="auth-box" style="background:var(--white);padding:2.5rem;border-radius:var(--radius-lg);max-width:420px;width:90%;position:relative;max-height:90vh;overflow-y:auto;color:var(--gray-900);border:1px solid var(--gray-200);">
             <button onclick="closeAuthModal()" style="position:absolute;top:1rem;left:1rem;background:none;border:none;font-size:1.8rem;cursor:pointer;color:var(--gray-400);">&times;</button>
@@ -366,9 +365,18 @@
             </div>
             <form id="authForm">
                 <div id="authFields">
-                    <div class="form-group" style="margin-bottom:1rem;"><label style="display:block;margin-bottom:0.25rem;font-weight:600;">البريد الإلكتروني</label><input type="email" id="authEmail" required style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" /></div>
-                    <div id="passwordField" class="form-group" style="margin-bottom:1rem;"><label style="display:block;margin-bottom:0.25rem;font-weight:600;">كلمة المرور</label><input type="password" id="authPassword" minlength="6" style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" /></div>
-                    <div id="nameField" style="display:none;margin-bottom:1rem;" class="form-group"><label style="display:block;margin-bottom:0.25rem;font-weight:600;">الاسم</label><input type="text" id="authName" style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" /></div>
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label style="display:block;margin-bottom:0.25rem;font-weight:600;">البريد الإلكتروني</label>
+                        <input type="email" id="authEmail" required style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" />
+                    </div>
+                    <div id="passwordField" class="form-group" style="margin-bottom:1rem;">
+                        <label style="display:block;margin-bottom:0.25rem;font-weight:600;">كلمة المرور</label>
+                        <input type="password" id="authPassword" minlength="6" style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" />
+                    </div>
+                    <div id="nameField" style="display:none;margin-bottom:1rem;" class="form-group">
+                        <label style="display:block;margin-bottom:0.25rem;font-weight:600;">الاسم</label>
+                        <input type="text" id="authName" style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" />
+                    </div>
                     <div id="magicLinkSection" style="margin-top:0.5rem;">
                         <button type="button" id="sendMagicLinkBtn" class="btn btn-outline" style="width:100%;border-color:var(--primary);color:var(--primary);background:transparent;">📧 أرسل لي رابط سحري</button>
                     </div>
@@ -417,7 +425,7 @@
         const provider = new GoogleAuthProvider();
 
         // ============================================================
-        // 1. معالجة نموذج التواصل
+        // 1. نموذج التواصل
         // ============================================================
         const contactForm = document.getElementById('contactForm');
         const responseDiv = document.getElementById('contactResponse');
@@ -439,7 +447,6 @@
                     createdAt: new Date()
                 };
 
-                // تحقق بسيط من العميل
                 if (!data.name || !data.email || !data.subject || !data.message) {
                     responseDiv.className = 'error';
                     responseDiv.textContent = '❌ الرجاء تعبئة جميع الحقول المطلوبة.';
@@ -462,15 +469,12 @@
         }
 
         // ============================================================
-        // 2. نظام المصادقة (منقول ومُوحّد)
+        // 2. نظام المصادقة (مباشر في contact.html)
         // ============================================================
         let currentUser = null;
 
         function updateUI(user) {
-            const loginBtn = document.getElementById('loginBtn');
-            const registerBtn = document.getElementById('registerBtn');
             const authButtons = document.getElementById('authButtons');
-
             if (user) {
                 const name = user.displayName || user.email?.split('@')[0] || 'مستخدم';
                 const photo = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=FF6600&color=fff&size=32`;
@@ -500,7 +504,6 @@
             updateUI(user);
         });
 
-        // --- دوال النافذة المنبثقة ---
         function openAuthModal(tab = 'login') {
             const modal = document.getElementById('authModal');
             modal.style.display = 'flex';
@@ -512,9 +515,6 @@
             document.getElementById('authModal').style.display = 'none';
         };
 
-        // --- أحداث النموذج ---
-        const modal = document.getElementById('authModal');
-        const form = document.getElementById('authForm');
         document.querySelectorAll('.auth-tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 const tabName = this.dataset.tab;
@@ -531,7 +531,7 @@
             });
         });
 
-        form?.addEventListener('submit', async (e) => {
+        document.getElementById('authForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('authEmail').value;
             const password = document.getElementById('authPassword').value;
@@ -561,7 +561,6 @@
             }
         });
 
-        // --- الرابط السحري ---
         document.getElementById('sendMagicLinkBtn')?.addEventListener('click', async () => {
             const email = document.getElementById('authEmail').value;
             if (!email) { document.getElementById('authError').textContent = 'أدخل بريدك الإلكتروني أولاً.'; return; }
@@ -579,7 +578,6 @@
             }
         });
 
-        // التحقق من الرابط السحري عند التحميل
         if (isSignInWithEmailLink(auth, window.location.href)) {
             let email = window.localStorage.getItem('emailForSignIn');
             if (!email) email = window.prompt('أدخل بريدك الإلكتروني لتأكيد تسجيل الدخول:');
@@ -591,7 +589,9 @@
             }
         }
 
-        // --- زر الهامبرغر ---
+        // ============================================================
+        // 3. زر الهامبرغر
+        // ============================================================
         const menuToggle = document.getElementById('mobileMenuToggle');
         const nav = document.getElementById('main-nav');
         if (menuToggle && nav) {
@@ -602,7 +602,9 @@
             });
         }
 
-        // --- تبديل اللغة ---
+        // ============================================================
+        // 4. تبديل اللغة
+        // ============================================================
         document.getElementById('langSwitch')?.addEventListener('click', () => {
             const isAr = document.documentElement.lang === 'ar';
             document.documentElement.lang = isAr ? 'en' : 'ar';
@@ -611,7 +613,6 @@
             document.body.classList.toggle('rtl', isAr);
             document.getElementById('langLabel').textContent = isAr ? 'عربي' : 'EN';
         });
-
     </script>
 </body>
 </html>
