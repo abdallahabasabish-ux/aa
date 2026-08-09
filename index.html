@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>عبدالله عباس | حلول رقمية مبنية على هدفك</title>
-    <meta name="description" content="حلول رقمية مخصصة في تطوير الويب، ووردبريس، وتحسين محركات البحث. نبني حول هدفك، ليس حول قالب جاهز." />
+    <meta name="description" content="حلول رقمية مخصصة في تطوير الويب، ووردبريس، وتحسين محركات البحث." />
     <link rel="canonical" href="https://abdallahabas.github.io/" />
 
     <!-- ===== GOOGLE FONTS ===== -->
@@ -12,836 +12,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Cairo:wght@200..1000&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <style>
-        /* ===== RESET & ROOT ===== */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #FF6600;
-            --primary-dark: #E05A00;
-            --primary-light: #FFF0E6;
-            --text-dark: #0A0A0A;
-            --text-mid: #333333;
-            --text-light: #666666;
-            --bg-white: #FFFFFF;
-            --bg-soft: #F7F7F7;
-            --border-subtle: #E5E5E5;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-            --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.10);
-            --radius-sm: 6px;
-            --radius-md: 12px;
-            --max-width: 1200px;
-            --font-ar: 'Almarai', 'Cairo', sans-serif;
-            --font-en: 'Inter', 'Cairo', sans-serif;
-            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-ar);
-            color: var(--text-dark);
-            background: var(--bg-white);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        [dir="rtl"] {
-            font-family: var(--font-ar);
-        }
-        [dir="ltr"] {
-            font-family: var(--font-en);
-            text-align: left;
-        }
-
-        .container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        ul {
-            list-style: none;
-        }
-
-        /* ===== UTILITY ===== */
-        .section-padding {
-            padding: 80px 0;
-        }
-        .section-label {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--primary);
-            background: var(--primary-light);
-            padding: 4px 14px;
-            border-radius: 20px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(255, 102, 0, 0.15);
-        }
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-            color: var(--text-dark);
-        }
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-mid);
-            max-width: 560px;
-            line-height: 1.6;
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--primary);
-            color: #fff;
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 14px 32px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-            box-shadow: 0 4px 16px rgba(255, 102, 0, 0.25);
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 32px rgba(255, 102, 0, 0.35);
-        }
-        .btn-primary .arrow-icon {
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-        }
-        .btn-primary:hover .arrow-icon {
-            transform: translateX(4px);
-        }
-        [dir="rtl"] .btn-primary:hover .arrow-icon {
-            transform: translateX(-4px);
-        }
-
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: transparent;
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 1rem;
-            padding: 12px 28px;
-            border-radius: 50px;
-            border: 1.5px solid var(--border-subtle);
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-        }
-        .btn-outline:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: var(--primary-light);
-        }
-
-        /* ===== SVG ICONS ===== */
-        .icon-svg {
-            width: 28px;
-            height: 28px;
-            flex-shrink: 0;
-            stroke: var(--primary);
-            fill: none;
-            stroke-width: 1.8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .arrow-svg {
-            width: 18px;
-            height: 18px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .social-svg {
-            width: 22px;
-            height: 22px;
-            fill: var(--text-light);
-            transition: var(--transition);
-        }
-        .social-svg:hover {
-            fill: var(--primary);
-        }
-
-        /* ===== NAV ===== */
-        .navbar {
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border-subtle);
-            position: sticky;
-            top: 0;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            z-index: 1000;
-        }
-        .navbar .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .brand-group {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-        }
-        .logo-ar {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: var(--text-dark);
-        }
-        .logo-ar span {
-            color: var(--primary);
-        }
-        .logo-en {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-light);
-            font-family: var(--font-en);
-            letter-spacing: 0.02em;
-            border-left: 1.5px solid var(--border-subtle);
-            padding-left: 12px;
-        }
-        [dir="rtl"] .logo-en {
-            border-left: none;
-            border-right: 1.5px solid var(--border-subtle);
-            padding-left: 0;
-            padding-right: 12px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-        .nav-links a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-mid);
-            transition: var(--transition);
-            position: relative;
-            padding: 4px 0;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            right: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-        .nav-links a:hover {
-            color: var(--text-dark);
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        [dir="ltr"] .nav-links a::after {
-            right: auto;
-            left: 0;
-        }
-        .nav-links .btn-primary {
-            padding: 8px 20px;
-            font-size: 0.85rem;
-        }
-
-        .lang-toggle {
-            background: var(--bg-soft);
-            border: 1px solid var(--border-subtle);
-            border-radius: 30px;
-            padding: 4px;
-            display: flex;
-            gap: 4px;
-        }
-        .lang-toggle button {
-            background: transparent;
-            border: none;
-            padding: 4px 12px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--text-light);
-            font-weight: 700;
-            font-size: 0.8rem;
-            font-family: var(--font-en);
-        }
-        .lang-toggle button.active {
-            background: var(--primary);
-            color: #fff;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 4px;
-        }
-        .hamburger span {
-            width: 24px;
-            height: 2.5px;
-            background: var(--text-dark);
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-
-        /* ===== HERO ===== */
-        .hero {
-            padding: 60px 0 80px;
-        }
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        .hero-content .badge {
-            display: inline-block;
-            background: var(--primary);
-            color: #fff;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 4px 16px;
-            border-radius: 30px;
-            margin-bottom: 20px;
-            letter-spacing: 0.05em;
-        }
-        .hero h1 {
-            font-size: clamp(2.6rem, 5.5vw, 4.2rem);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 20px;
-            color: var(--text-dark);
-        }
-        .hero h1 .highlight {
-            color: var(--primary);
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-mid);
-            max-width: 480px;
-            margin-bottom: 36px;
-            line-height: 1.7;
-        }
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            align-items: center;
-        }
-        .hero-stats {
-            display: flex;
-            gap: 48px;
-            margin-top: 48px;
-            padding-top: 32px;
-            border-top: 1px solid var(--border-subtle);
-        }
-        .hero-stats .stat h3 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-        .hero-stats .stat p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin: 0;
-        }
-
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        .hero-visual .decoration {
-            width: 100%;
-            aspect-ratio: 1/1;
-            max-width: 460px;
-            background: var(--primary-light);
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid rgba(255, 102, 0, 0.1);
-        }
-        .hero-visual .decoration .inner {
-            font-size: 4rem;
-            font-weight: 800;
-            color: var(--primary);
-            opacity: 0.12;
-            letter-spacing: -0.05em;
-        }
-        .hero-visual .floating-tag {
-            position: absolute;
-            background: #fff;
-            padding: 12px 20px;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-hover);
-            font-weight: 600;
-            font-size: 0.85rem;
-            border: 1px solid var(--border-subtle);
-            animation: float 6s ease-in-out infinite;
-            color: var(--text-dark);
-        }
-        .hero-visual .floating-tag:nth-child(2) {
-            top: 10%;
-            right: -10%;
-        }
-        .hero-visual .floating-tag:nth-child(3) {
-            bottom: 10%;
-            left: -10%;
-        }
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-12px);
-            }
-        }
-
-        /* ===== TRUST ===== */
-        .trust-bar {
-            background: var(--bg-white);
-            border-top: 1px solid var(--border-subtle);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 28px 0;
-        }
-        .trust-bar .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-        }
-        .trust-bar .item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 600;
-            color: var(--text-mid);
-            font-size: 0.95rem;
-        }
-        .trust-bar .item .dot-svg {
-            width: 16px;
-            height: 16px;
-            fill: var(--primary);
-            flex-shrink: 0;
-        }
-
-        /* ===== SERVICES ===== */
-        .services-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 48px;
-        }
-        .service-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            padding: 36px 32px;
-            transition: var(--transition);
-        }
-        .service-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary);
-        }
-        .service-card .icon-wrap {
-            display: inline-flex;
-            padding: 12px;
-            background: var(--primary-light);
-            border-radius: var(--radius-sm);
-            margin-bottom: 16px;
-            color: var(--primary);
-        }
-        .service-card h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-        .service-card p {
-            color: var(--text-mid);
-            font-size: 0.95rem;
-            margin-bottom: 16px;
-        }
-        .service-card .link {
-            color: var(--primary);
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: var(--transition);
-        }
-        .service-card .link:hover {
-            gap: 12px;
-        }
-        .services-grid .service-card:nth-child(2) {
-            transform: translateY(30px);
-        }
-        .services-grid .service-card:nth-child(3) {
-            transform: translateY(-20px);
-        }
-        .services-grid .service-card:nth-child(4) {
-            transform: translateY(10px);
-        }
-        @media (max-width: 768px) {
-            .services-grid .service-card {
-                transform: translateY(0) !important;
-            }
-        }
-
-        /* ===== PROCESS ===== */
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-top: 48px;
-        }
-        .process-step {
-            text-align: center;
-            padding: 24px;
-        }
-        .process-step .num {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary-light);
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-        .process-step h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-        .process-step p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        /* ===== KNOWLEDGE ===== */
-        .knowledge-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 48px;
-        }
-        .knowledge-card {
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            transition: var(--transition);
-            background: var(--bg-white);
-        }
-        .knowledge-card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-4px);
-        }
-        .knowledge-card .meta {
-            padding: 24px 28px 0;
-            display: flex;
-            gap: 16px;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-        .knowledge-card h3 {
-            padding: 8px 28px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-        .knowledge-card p {
-            padding: 0 28px 24px;
-            color: var(--text-mid);
-            font-size: 0.95rem;
-        }
-        .knowledge-card .thumb {
-            height: 180px;
-            background: var(--primary-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        /* ===== CTA ===== */
-        .cta-section {
-            background: var(--text-dark);
-            color: #fff;
-            border-radius: var(--radius-md);
-            padding: 64px 48px;
-            margin: 40px auto;
-            text-align: center;
-        }
-        .cta-section h2 {
-            font-size: clamp(2rem, 3vw, 2.8rem);
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-        .cta-section p {
-            color: rgba(255, 255, 255, 0.7);
-            max-width: 500px;
-            margin: 0 auto 32px;
-            font-size: 1.1rem;
-        }
-        .cta-section .btn-primary {
-            background: #fff;
-            color: var(--text-dark);
-            box-shadow: none;
-        }
-        .cta-section .btn-primary:hover {
-            background: var(--primary);
-            color: #fff;
-            box-shadow: 0 8px 32px rgba(255, 102, 0, 0.3);
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            padding: 48px 0 24px;
-            border-top: 1px solid var(--border-subtle);
-            margin-top: 20px;
-            background: var(--bg-white);
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-            margin-bottom: 32px;
-        }
-        .footer-brand .logo-ar {
-            font-size: 1.3rem;
-        }
-        .footer-brand .logo-en {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-top: 4px;
-            border: none;
-            padding: 0;
-        }
-        .footer-brand p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-top: 8px;
-        }
-        .footer-legal {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .footer-legal a {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-        .footer-legal a:hover {
-            color: var(--primary);
-        }
-        .footer-socials {
-            display: flex;
-            gap: 16px;
-            justify-content: flex-end;
-        }
-        .footer-socials a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 1px solid var(--border-subtle);
-            transition: var(--transition);
-            background: var(--bg-white);
-        }
-        .footer-socials a:hover {
-            border-color: var(--primary);
-            background: var(--primary-light);
-            transform: translateY(-3px);
-        }
-        .footer-bottom {
-            border-top: 1px solid var(--border-subtle);
-            padding-top: 24px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        .footer-bottom .copy {
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .hero-visual .decoration {
-                max-width: 300px;
-            }
-            .hero-visual .floating-tag {
-                display: none;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .footer-socials {
-                justify-content: flex-start;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 72px;
-                right: 0;
-                left: 0;
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(12px);
-                padding: 24px;
-                gap: 16px;
-                border-bottom: 1px solid var(--border-subtle);
-                box-shadow: var(--shadow-sm);
-            }
-            .nav-links.open {
-                display: flex;
-            }
-            .hamburger {
-                display: flex;
-            }
-            .services-grid,
-            .knowledge-grid {
-                grid-template-columns: 1fr;
-            }
-            .process-steps {
-                grid-template-columns: 1fr 1fr;
-            }
-            .hero-stats {
-                gap: 24px;
-                flex-wrap: wrap;
-            }
-            .cta-section {
-                padding: 40px 24px;
-            }
-            .section-padding {
-                padding: 48px 0;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            .footer-socials {
-                justify-content: flex-start;
-            }
-            .brand-group .logo-en {
-                display: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .hero-actions {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .btn-primary,
-            .btn-outline {
-                width: 100%;
-                justify-content: center;
-            }
-            .process-steps {
-                grid-template-columns: 1fr;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-        }
-
-        /* ===== ANIMATIONS ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .reveal-delay-1 {
-            transition-delay: 0.1s;
-        }
-        .reveal-delay-2 {
-            transition-delay: 0.2s;
-        }
-        .reveal-delay-3 {
-            transition-delay: 0.3s;
-        }
-        .reveal-delay-4 {
-            transition-delay: 0.4s;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-            .reveal {
-                opacity: 1;
-                transform: none;
-            }
-        }
-    </style>
+    <!-- ===== EXTERNAL CSS (Modules) ===== -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/utilities.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
 </head>
-
 <body>
 
     <!-- ===== NAVIGATION ===== -->
@@ -896,25 +73,14 @@
                         <a href="#services" class="btn-outline">استكشف الخدمات</a>
                     </div>
                     <div class="hero-stats">
-                        <div class="stat">
-                            <h3>+١٠</h3>
-                            <p>سنوات خبرة</p>
-                        </div>
-                        <div class="stat">
-                            <h3>+١٢٠</h3>
-                            <p>مشروع رقمي</p>
-                        </div>
-                        <div class="stat">
-                            <h3>٩٨٪</h3>
-                            <p>رضا العملاء</p>
-                        </div>
+                        <div class="stat"><h3>+١٠</h3><p>سنوات خبرة</p></div>
+                        <div class="stat"><h3>+١٢٠</h3><p>مشروع رقمي</p></div>
+                        <div class="stat"><h3>٩٨٪</h3><p>رضا العملاء</p></div>
                     </div>
                 </div>
 
                 <div class="hero-visual reveal reveal-delay-2">
-                    <div class="decoration">
-                        <span class="inner">AB</span>
-                    </div>
+                    <div class="decoration"><span class="inner">AB</span></div>
                     <div class="floating-tag">🚀 ووردبريس</div>
                     <div class="floating-tag">⚡ SEO متقدم</div>
                 </div>
@@ -925,22 +91,10 @@
     <!-- ===== TRUST BAR ===== -->
     <div class="trust-bar">
         <div class="container">
-            <span class="item">
-                <svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg>
-                تطوير ويب مخصص
-            </span>
-            <span class="item">
-                <svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg>
-                ووردبريس احترافي
-            </span>
-            <span class="item">
-                <svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg>
-                تصميم تجربة مستخدم
-            </span>
-            <span class="item">
-                <svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg>
-                سيو واستراتيجية محتوى
-            </span>
+            <span class="item"><svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> تطوير ويب مخصص</span>
+            <span class="item"><svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ووردبريس احترافي</span>
+            <span class="item"><svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> تصميم تجربة مستخدم</span>
+            <span class="item"><svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> سيو واستراتيجية محتوى</span>
         </div>
     </div>
 
@@ -952,71 +106,34 @@
                 <h2 class="section-title">أعمل في مجالات <br />رقمية متكاملة</h2>
                 <p class="section-subtitle">كل خدمة مصممة خصيصاً لتناسب طبيعة عملك، وليس العكس.</p>
             </div>
-
             <div class="services-grid">
+                <!-- Web Dev -->
                 <div class="service-card reveal reveal-delay-1">
-                    <div class="icon-wrap">
-                        <svg class="icon-svg" viewBox="0 0 24 24">
-                            <rect x="2" y="4" width="20" height="14" rx="2" ry="2"/>
-                            <path d="M8 20h8M12 18v2M8 2v2M16 2v2"/>
-                            <path d="M6 7l2 2-2 2M18 7l-2 2 2 2"/>
-                        </svg>
-                    </div>
+                    <div class="icon-wrap"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="14" rx="2" ry="2"/><path d="M8 20h8M12 18v2M8 2v2M16 2v2"/><path d="M6 7l2 2-2 2M18 7l-2 2 2 2"/></svg></div>
                     <h3>تطوير ويب</h3>
                     <p>مواقع سريعة وآمنة ومتوافقة مع معايير السيو، مبنية بأحدث التقنيات.</p>
-                    <a href="#" class="link">
-                        اعرف المزيد
-                        <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
+                    <a href="#" class="link">اعرف المزيد <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                 </div>
-
+                <!-- WordPress -->
                 <div class="service-card reveal reveal-delay-2">
-                    <div class="icon-wrap">
-                        <svg class="icon-svg" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 2a10 10 0 0 0-9.5 6.8M12 2a10 10 0 0 1 9.5 6.8M12 2v20M2 12h20M12 22a10 10 0 0 1-9.5-6.8M12 22a10 10 0 0 0 9.5-6.8"/>
-                            <path d="M4.5 8.5L19.5 15.5M19.5 8.5L4.5 15.5"/>
-                        </svg>
-                    </div>
+                    <div class="icon-wrap"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0-9.5 6.8M12 2a10 10 0 0 1 9.5 6.8M12 2v20M2 12h20M12 22a10 10 0 0 1-9.5-6.8M12 22a10 10 0 0 0 9.5-6.8"/><path d="M4.5 8.5L19.5 15.5M19.5 8.5L4.5 15.5"/></svg></div>
                     <h3>ووردبريس</h3>
                     <p>تصميم وبرمجة قوالب ووردبريس احترافية، مع حلول مخصصة لإدارة المحتوى.</p>
-                    <a href="#" class="link">
-                        اعرف المزيد
-                        <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
+                    <a href="#" class="link">اعرف المزيد <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                 </div>
-
+                <!-- SEO -->
                 <div class="service-card reveal reveal-delay-3">
-                    <div class="icon-wrap">
-                        <svg class="icon-svg" viewBox="0 0 24 24">
-                            <circle cx="11" cy="11" r="7"/>
-                            <path d="M16.5 16.5L21 21"/>
-                            <path d="M7 11l2 2 4-4"/>
-                            <path d="M13 6l1-2M16 8l2-1M18 11l2 1"/>
-                        </svg>
-                    </div>
+                    <div class="icon-wrap"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/><path d="M7 11l2 2 4-4"/><path d="M13 6l1-2M16 8l2-1M18 11l2 1"/></svg></div>
                     <h3>تحسين محركات البحث (SEO)</h3>
                     <p>استراتيجيات مدروسة لتصدر نتائج البحث وجلب زوار متفاعلين لموقعك.</p>
-                    <a href="#" class="link">
-                        اعرف المزيد
-                        <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
+                    <a href="#" class="link">اعرف المزيد <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                 </div>
-
+                <!-- UI/UX -->
                 <div class="service-card reveal reveal-delay-4">
-                    <div class="icon-wrap">
-                        <svg class="icon-svg" viewBox="0 0 24 24">
-                            <path d="M12 3v4M12 17v4M3 12h4M17 12h4"/>
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M7.5 7.5l2.8 2.8M13.7 13.7l2.8 2.8M7.5 16.5l2.8-2.8M13.7 10.3l2.8-2.8"/>
-                        </svg>
-                    </div>
+                    <div class="icon-wrap"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="3"/><path d="M7.5 7.5l2.8 2.8M13.7 13.7l2.8 2.8M7.5 16.5l2.8-2.8M13.7 10.3l2.8-2.8"/></svg></div>
                     <h3>تصميم واجهات (UI/UX)</h3>
                     <p>تصميم تجارب مستخدم فريدة تجمع بين الجمال البصري وسهولة الاستخدام.</p>
-                    <a href="#" class="link">
-                        اعرف المزيد
-                        <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
+                    <a href="#" class="link">اعرف المزيد <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                 </div>
             </div>
         </div>
@@ -1031,26 +148,10 @@
                 <p class="section-subtitle" style="margin:0 auto;">خطوات واضحة وشفافة من الفكرة حتى الإطلاق.</p>
             </div>
             <div class="process-steps">
-                <div class="process-step reveal reveal-delay-1">
-                    <div class="num">٠١</div>
-                    <h4>فهم الهدف</h4>
-                    <p>نستمع لرؤيتك ونحلل احتياجاتك الحقيقية.</p>
-                </div>
-                <div class="process-step reveal reveal-delay-2">
-                    <div class="num">٠٢</div>
-                    <h4>التخطيط والتصميم</h4>
-                    <p>نضع الهيكل ونصمم واجهات تناسب جمهورك.</p>
-                </div>
-                <div class="process-step reveal reveal-delay-3">
-                    <div class="num">٠٣</div>
-                    <h4>التطوير والبناء</h4>
-                    <p>نبرمج بجودة عالية مع مراعاة الأداء والسرعة.</p>
-                </div>
-                <div class="process-step reveal reveal-delay-4">
-                    <div class="num">٠٤</div>
-                    <h4>الإطلاق والمتابعة</h4>
-                    <p>نطلق مشروعك وندعمك لتحقيق النتائج المستدامة.</p>
-                </div>
+                <div class="process-step reveal reveal-delay-1"><div class="num">٠١</div><h4>فهم الهدف</h4><p>نستمع لرؤيتك ونحلل احتياجاتك الحقيقية.</p></div>
+                <div class="process-step reveal reveal-delay-2"><div class="num">٠٢</div><h4>التخطيط والتصميم</h4><p>نضع الهيكل ونصمم واجهات تناسب جمهورك.</p></div>
+                <div class="process-step reveal reveal-delay-3"><div class="num">٠٣</div><h4>التطوير والبناء</h4><p>نبرمج بجودة عالية مع مراعاة الأداء والسرعة.</p></div>
+                <div class="process-step reveal reveal-delay-4"><div class="num">٠٤</div><h4>الإطلاق والمتابعة</h4><p>نطلق مشروعك وندعمك لتحقيق النتائج المستدامة.</p></div>
             </div>
         </div>
     </section>
@@ -1080,7 +181,7 @@
         </div>
     </section>
 
-    <!-- ===== FINAL CTA ===== -->
+    <!-- ===== CTA ===== -->
     <section class="section-padding" id="contact">
         <div class="container">
             <div class="cta-section reveal">
@@ -1088,9 +189,7 @@
                 <p>دعنا نناقشه معاً. أنا هنا لأساعدك في تحويل فكرتك إلى منتج رقمي مميز.</p>
                 <a href="#" class="btn-primary">
                     احجز استشارة مجانية
-                    <span class="arrow-icon">
-                        <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </span>
+                    <span class="arrow-icon"><svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
                 </a>
             </div>
         </div>
@@ -1100,42 +199,22 @@
     <footer>
         <div class="container">
             <div class="footer-grid">
-                <!-- Brand -->
                 <div class="footer-brand">
                     <div class="logo-ar">عبدالله <span>عباس</span></div>
                     <div class="logo-en">Abdallah Abbas</div>
                     <p>حلول رقمية مبنية على الهدف،<br />ليس على القوالب الجاهزة.</p>
                 </div>
-
-                <!-- Legal -->
                 <div class="footer-legal">
                     <a href="#">سياسة الخصوصية</a>
                     <a href="#">الشروط والأحكام</a>
                     <a href="#">سياسة ملفات الارتباط</a>
                 </div>
-
-                <!-- Social -->
                 <div class="footer-socials">
-                    <a href="#" aria-label="LinkedIn" title="LinkedIn">
-                        <svg class="social-svg" viewBox="0 0 24 24">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                            <rect x="2" y="9" width="4" height="12"/>
-                            <circle cx="4" cy="4" r="2"/>
-                        </svg>
-                    </a>
-                    <a href="#" aria-label="GitHub" title="GitHub">
-                        <svg class="social-svg" viewBox="0 0 24 24">
-                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025.8-.223 1.65-.334 2.5-.334.85 0 1.7.111 2.5.334 1.91-1.294 2.75-1.025 2.75-1.025.545 1.376.201 2.393.099 2.646.64.698 1.03 1.591 1.03 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
-                        </svg>
-                    </a>
-                    <a href="#" aria-label="X" title="X">
-                        <svg class="social-svg" viewBox="0 0 24 24">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                    </a>
+                    <a href="#" aria-label="LinkedIn"><svg class="social-svg" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+                    <a href="#" aria-label="GitHub"><svg class="social-svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025.8-.223 1.65-.334 2.5-.334.85 0 1.7.111 2.5.334 1.91-1.294 2.75-1.025 2.75-1.025.545 1.376.201 2.393.099 2.646.64.698 1.03 1.591 1.03 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg></a>
+                    <a href="#" aria-label="X"><svg class="social-svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <div class="copy">© ٢٠٢٦ عبدالله عباس — جميع الحقوق محفوظة</div>
                 <div class="copy" style="font-size:0.8rem; color:var(--text-light);">Abdallah Abbas — All Rights Reserved</div>
@@ -1143,280 +222,7 @@
         </div>
     </footer>
 
-    <!-- ===== SCRIPTS ===== -->
-    <script>
-        (function() {
-            'use strict';
-
-            // ===== MOBILE MENU =====
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.getElementById('navLinks');
-            if (hamburger && navLinks) {
-                hamburger.addEventListener('click', function() {
-                    const isOpen = navLinks.classList.toggle('open');
-                    hamburger.setAttribute('aria-expanded', isOpen);
-                });
-            }
-
-            // ===== LANGUAGE TOGGLE =====
-            const langButtons = document.querySelectorAll('.lang-toggle button');
-            const html = document.documentElement;
-
-            const contentMap = {
-                ar: {
-                    logoAr: 'عبدالله <span>عباس</span>',
-                    logoEn: 'Abdallah Abbas',
-                    nav1: 'الخدمات',
-                    nav2: 'الأعمال',
-                    nav3: 'المعرفة',
-                    nav4: 'تواصل الآن',
-                    heroBadge: 'خبير تقني معتمد',
-                    heroTitle: 'حلول رقمية <br /> <span class="highlight">تُبنى حول هدفك</span><br /> لا حول قالب جاهز.',
-                    heroDesc: 'أنا عبدالله عباس، أساعدك في بناء هوية رقمية قوية من خلال تطوير ويب مخصص، ووردبريس احترافي، واستراتيجيات سيو تجلب لك الزوار الحقيقيين.',
-                    heroCta: 'استشر الآن',
-                    heroCta2: 'استكشف الخدمات',
-                    stat1: 'سنوات خبرة',
-                    stat2: 'مشروع رقمي',
-                    stat3: 'رضا العملاء',
-                    trust1: 'تطوير ويب مخصص',
-                    trust2: 'ووردبريس احترافي',
-                    trust3: 'تصميم تجربة مستخدم',
-                    trust4: 'سيو واستراتيجية محتوى',
-                    servicesLabel: 'الخدمات',
-                    servicesTitle: 'أعمل في مجالات <br />رقمية متكاملة',
-                    servicesSub: 'كل خدمة مصممة خصيصاً لتناسب طبيعة عملك، وليس العكس.',
-                    s1Title: 'تطوير ويب',
-                    s1Desc: 'مواقع سريعة وآمنة ومتوافقة مع معايير السيو، مبنية بأحدث التقنيات.',
-                    s2Title: 'ووردبريس',
-                    s2Desc: 'تصميم وبرمجة قوالب ووردبريس احترافية، مع حلول مخصصة لإدارة المحتوى.',
-                    s3Title: 'تحسين محركات البحث (SEO)',
-                    s3Desc: 'استراتيجيات مدروسة لتصدر نتائج البحث وجلب زوار متفاعلين لموقعك.',
-                    s4Title: 'تصميم واجهات (UI/UX)',
-                    s4Desc: 'تصميم تجارب مستخدم فريدة تجمع بين الجمال البصري وسهولة الاستخدام.',
-                    sLink: 'اعرف المزيد',
-                    processLabel: 'منهجية العمل',
-                    processTitle: 'كيف نعمل معاً؟',
-                    processSub: 'خطوات واضحة وشفافة من الفكرة حتى الإطلاق.',
-                    p1: 'فهم الهدف',
-                    p1d: 'نستمع لرؤيتك ونحلل احتياجاتك الحقيقية.',
-                    p2: 'التخطيط والتصميم',
-                    p2d: 'نضع الهيكل ونصمم واجهات تناسب جمهورك.',
-                    p3: 'التطوير والبناء',
-                    p3d: 'نبرمج بجودة عالية مع مراعاة الأداء والسرعة.',
-                    p4: 'الإطلاق والمتابعة',
-                    p4d: 'نطلق مشروعك وندعمك لتحقيق النتائج المستدامة.',
-                    knowledgeLabel: 'المعرفة',
-                    knowledgeTitle: 'أحدث المقالات <br />والرؤى التقنية',
-                    knowledgeSub: 'خبرة عملية تنعكس في محتوى مفيد يساعدك على اتخاذ قرارات رقمية ذكية.',
-                    k1Title: 'ووردبريس أم حلول مخصصة؟',
-                    k1Desc: 'مقارنة شاملة بين أشهر منصات إدارة المحتوى لمساعدتك في اختيار الأنسب لمشروعك.',
-                    k2Title: 'أهم تحديثات جوجل وكيف تستفيد منها',
-                    k2Desc: 'نستعرض أحدث تغييرات خوارزميات البحث ونقدم خطة عمل عملية لتحسين ترتيب موقعك.',
-                    ctaTitle: 'هل لديك مشروع في ذهنك؟',
-                    ctaDesc: 'دعنا نناقشه معاً. أنا هنا لأساعدك في تحويل فكرتك إلى منتج رقمي مميز.',
-                    ctaBtn: 'احجز استشارة مجانية',
-                    footerBrand: 'حلول رقمية مبنية على الهدف،<br />ليس على القوالب الجاهزة.',
-                    legal1: 'سياسة الخصوصية',
-                    legal2: 'الشروط والأحكام',
-                    legal3: 'سياسة ملفات الارتباط',
-                    footerCopy: '© ٢٠٢٦ عبدالله عباس — جميع الحقوق محفوظة',
-                    footerCopyEn: 'Abdallah Abbas — All Rights Reserved',
-                },
-                en: {
-                    logoAr: 'Abdallah <span>Abbas</span>',
-                    logoEn: 'Abdallah Abbas',
-                    nav1: 'Services',
-                    nav2: 'Work',
-                    nav3: 'Knowledge',
-                    nav4: 'Contact Now',
-                    heroBadge: 'Certified Tech Expert',
-                    heroTitle: 'Digital solutions <br /> <span class="highlight">built around your goal</span><br /> not around a ready-made template.',
-                    heroDesc: 'I\'m Abdallah Abbas. I help you build a strong digital identity through custom web development, professional WordPress, and SEO strategies that bring real visitors.',
-                    heroCta: 'Consult Now',
-                    heroCta2: 'Explore Services',
-                    stat1: 'Years Experience',
-                    stat2: 'Digital Projects',
-                    stat3: 'Client Satisfaction',
-                    trust1: 'Custom Web Dev',
-                    trust2: 'Professional WordPress',
-                    trust3: 'UI/UX Design',
-                    trust4: 'SEO & Content Strategy',
-                    servicesLabel: 'Services',
-                    servicesTitle: 'Integrated <br />Digital Solutions',
-                    servicesSub: 'Every service is custom-tailored to fit your business, not the other way around.',
-                    s1Title: 'Web Development',
-                    s1Desc: 'Fast, secure, SEO-friendly websites built with modern technologies.',
-                    s2Title: 'WordPress',
-                    s2Desc: 'Professional WordPress theme design and custom solutions for content management.',
-                    s3Title: 'SEO',
-                    s3Desc: 'Strategic SEO to rank higher in search results and attract engaged visitors.',
-                    s4Title: 'UI/UX Design',
-                    s4Desc: 'Unique user experiences that blend visual beauty with ease of use.',
-                    sLink: 'Learn More',
-                    processLabel: 'Process',
-                    processTitle: 'How we work together?',
-                    processSub: 'Clear and transparent steps from idea to launch.',
-                    p1: 'Understand Goal',
-                    p1d: 'We listen to your vision and analyze your real needs.',
-                    p2: 'Plan & Design',
-                    p2d: 'We structure and design interfaces that fit your audience.',
-                    p3: 'Develop & Build',
-                    p3d: 'We code with high quality, focusing on performance and speed.',
-                    p4: 'Launch & Support',
-                    p4d: 'We launch your project and support you for sustainable results.',
-                    knowledgeLabel: 'Knowledge',
-                    knowledgeTitle: 'Latest Articles <br />& Tech Insights',
-                    knowledgeSub: 'Practical experience reflected in useful content to help you make smart digital decisions.',
-                    k1Title: 'WordPress vs Custom Solutions?',
-                    k1Desc: 'A comprehensive comparison of popular CMS platforms to help you choose the best fit for your project.',
-                    k2Title: 'Top Google Updates & How to Benefit',
-                    k2Desc: 'We review the latest search algorithm changes and provide a practical action plan to improve your ranking.',
-                    ctaTitle: 'Have a project in mind?',
-                    ctaDesc: 'Let\'s discuss it together. I\'m here to help you turn your idea into a standout digital product.',
-                    ctaBtn: 'Book a Free Consultation',
-                    footerBrand: 'Digital solutions built around goals,<br />not ready-made templates.',
-                    legal1: 'Privacy Policy',
-                    legal2: 'Terms & Conditions',
-                    legal3: 'Cookie Policy',
-                    footerCopy: '© 2026 Abdallah Abbas — All Rights Reserved',
-                    footerCopyEn: 'Abdallah Abbas — All Rights Reserved',
-                }
-            };
-
-            function setLanguage(lang) {
-                html.dir = lang === 'ar' ? 'rtl' : 'ltr';
-                html.lang = lang;
-
-                langButtons.forEach(btn => {
-                    const isActive = btn.dataset.lang === lang;
-                    btn.classList.toggle('active', isActive);
-                    btn.setAttribute('aria-pressed', isActive);
-                });
-
-                const c = contentMap[lang];
-                if (!c) return;
-
-                // Logo
-                document.querySelector('.logo-ar').innerHTML = c.logoAr;
-                document.querySelector('.logo-en').textContent = c.logoEn;
-
-                // Nav
-                const navItems = document.querySelectorAll('.nav-links li');
-                if (navItems.length >= 4) {
-                    navItems[0].querySelector('a').textContent = c.nav1;
-                    navItems[1].querySelector('a').textContent = c.nav2;
-                    navItems[2].querySelector('a').textContent = c.nav3;
-                    navItems[3].querySelector('a').innerHTML = c.nav4;
-                }
-
-                // Hero
-                document.querySelector('.hero .badge').textContent = c.heroBadge;
-                document.querySelector('.hero h1').innerHTML = c.heroTitle;
-                document.querySelector('.hero p').textContent = c.heroDesc;
-                document.querySelector('.hero-actions .btn-primary').innerHTML = c.heroCta +
-                    ' <span class="arrow-icon"><svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>';
-                document.querySelector('.hero-actions .btn-outline').textContent = c.heroCta2;
-
-                const stats = document.querySelectorAll('.hero-stats .stat p');
-                stats[0].textContent = c.stat1;
-                stats[1].textContent = c.stat2;
-                stats[2].textContent = c.stat3;
-
-                // Trust
-                const trustItems = document.querySelectorAll('.trust-bar .item');
-                trustItems[0].innerHTML =
-                    '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + c.trust1;
-                trustItems[1].innerHTML =
-                    '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + c.trust2;
-                trustItems[2].innerHTML =
-                    '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + c.trust3;
-                trustItems[3].innerHTML =
-                    '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + c.trust4;
-
-                // Services
-                document.querySelector('#services .section-label').textContent = c.servicesLabel;
-                document.querySelector('#services .section-title').innerHTML = c.servicesTitle;
-                document.querySelector('#services .section-subtitle').textContent = c.servicesSub;
-                const sCards = document.querySelectorAll('.service-card');
-                sCards[0].querySelector('h3').textContent = c.s1Title;
-                sCards[0].querySelector('p').textContent = c.s1Desc;
-                sCards[1].querySelector('h3').textContent = c.s2Title;
-                sCards[1].querySelector('p').textContent = c.s2Desc;
-                sCards[2].querySelector('h3').textContent = c.s3Title;
-                sCards[2].querySelector('p').textContent = c.s3Desc;
-                sCards[3].querySelector('h3').textContent = c.s4Title;
-                sCards[3].querySelector('p').textContent = c.s4Desc;
-                document.querySelectorAll('.service-card .link').forEach(el => {
-                    el.innerHTML = c.sLink +
-                        ' <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-                });
-
-                // Process
-                const pSection = document.querySelector('#services + .section-padding');
-                pSection.querySelector('.section-label').textContent = c.processLabel;
-                pSection.querySelector('.section-title').textContent = c.processTitle;
-                pSection.querySelector('.section-subtitle').textContent = c.processSub;
-                const steps = pSection.querySelectorAll('.process-step');
-                steps[0].querySelector('h4').textContent = c.p1;
-                steps[0].querySelector('p').textContent = c.p1d;
-                steps[1].querySelector('h4').textContent = c.p2;
-                steps[1].querySelector('p').textContent = c.p2d;
-                steps[2].querySelector('h4').textContent = c.p3;
-                steps[2].querySelector('p').textContent = c.p3d;
-                steps[3].querySelector('h4').textContent = c.p4;
-                steps[3].querySelector('p').textContent = c.p4d;
-
-                // Knowledge
-                document.querySelector('#knowledge .section-label').textContent = c.knowledgeLabel;
-                document.querySelector('#knowledge .section-title').innerHTML = c.knowledgeTitle;
-                document.querySelector('#knowledge .section-subtitle').textContent = c.knowledgeSub;
-                const kCards = document.querySelectorAll('.knowledge-card');
-                kCards[0].querySelector('h3').textContent = c.k1Title;
-                kCards[0].querySelector('p').textContent = c.k1Desc;
-                kCards[1].querySelector('h3').textContent = c.k2Title;
-                kCards[1].querySelector('p').textContent = c.k2Desc;
-
-                // CTA
-                const cta = document.querySelector('.cta-section');
-                cta.querySelector('h2').textContent = c.ctaTitle;
-                cta.querySelector('p').textContent = c.ctaDesc;
-                cta.querySelector('.btn-primary').innerHTML = c.ctaBtn +
-                    ' <span class="arrow-icon"><svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>';
-
-                // Footer
-                document.querySelector('.footer-brand p').innerHTML = c.footerBrand;
-                const legalLinks = document.querySelectorAll('.footer-legal a');
-                legalLinks[0].textContent = c.legal1;
-                legalLinks[1].textContent = c.legal2;
-                legalLinks[2].textContent = c.legal3;
-                document.querySelector('.footer-bottom .copy:first-child').textContent = c.footerCopy;
-                document.querySelector('.footer-bottom .copy:last-child').textContent = c.footerCopyEn;
-            }
-
-            langButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const lang = this.dataset.lang;
-                    setLanguage(lang);
-                    localStorage.setItem('preferred-lang', lang);
-                });
-            });
-
-            const savedLang = localStorage.getItem('preferred-lang') || 'ar';
-            setLanguage(savedLang);
-
-            // ===== INTERSECTION OBSERVER =====
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        })();
-    </script>
-
+    <!-- ===== EXTERNAL JS ===== -->
+    <script src="js/main.js"></script>
 </body>
 </html>
