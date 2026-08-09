@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="detailTitle">عبدالله عباس | تفاصيل</title>
-    <meta name="description" content="تفاصيل الخدمة أو المنتج المطلوب" />
+    <title id="detailTitle">Abdallah Abas | تفاصيل</title>
+    <meta name="description" content="تفاصيل الخدمة أو المنتج المطلوب من Abdallah Abas" />
     <link rel="canonical" href="https://abdallahsst.web.app/detail.html" />
     
     <!-- Open Graph -->
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="تفاصيل الخدمة | عبدالله عباس" />
-    <meta property="og:description" content="عرض تفصيلي للخدمات والمنتجات الرقمية." />
+    <meta property="og:title" content="تفاصيل الخدمة | Abdallah Abas" />
+    <meta property="og:description" content="عرض تفصيلي للخدمات والمنتجات الرقمية من Abdallah Abas." />
     <meta property="og:image" content="https://abdallahsst.web.app/assets/og-image.jpg" />
     
     <link rel="icon" href="assets/favicon.ico" />
@@ -26,45 +26,53 @@
 
     <style>
         /* تنسيقات خاصة بصفحة التفاصيل */
-        .detail-hero { background: var(--gray-100); padding: 2rem 0 4rem; border-bottom: 1px solid var(--gray-200); }
+        .detail-hero { background: var(--gray-50); padding: 2rem 0 4rem; border-bottom: 1px solid var(--gray-200); }
         .detail-content { max-width: 850px; margin: 0 auto; }
         .detail-image { width: 100%; max-height: 450px; object-fit: cover; border-radius: var(--radius); margin-bottom: 2rem; box-shadow: var(--shadow-md); }
-        .detail-price { font-size: 2.2rem; font-weight: 800; color: var(--primary); }
-        .detail-features { list-style: disc; padding-right: 1.5rem; margin: 1rem 0; }
-        .detail-features li { margin-bottom: 0.5rem; color: var(--gray-600); font-weight: 400; }
+        .detail-price { font-size: 2.4rem; font-weight: 800; color: var(--primary); }
+        .detail-features { list-style: disc; padding-right: 1.5rem; margin: 1.2rem 0; }
+        .detail-features li { margin-bottom: 0.5rem; color: var(--gray-600); }
         .order-form { background: var(--white); padding: 2.5rem; border-radius: var(--radius); box-shadow: var(--shadow-lg); margin-top: 2.5rem; border: 1px solid var(--gray-200); }
         .order-form .form-group { margin-bottom: 1.2rem; }
-        .order-form .form-group label { display: block; font-weight: 700; margin-bottom: 0.3rem; font-size: 0.95rem; }
+        .order-form .form-group label { display: block; font-weight: 700; margin-bottom: 0.3rem; font-size: 0.95rem; color: var(--gray-700); }
         .order-form .form-group input,
-        .order-form .form-group textarea { width: 100%; padding: 0.7rem 1rem; border: 2px solid var(--gray-200); border-radius: var(--radius); font-family: var(--font-ar); font-size: 1rem; transition: var(--transition); background: var(--white); }
+        .order-form .form-group textarea { width: 100%; padding: 0.8rem 1rem; border: 2px solid var(--gray-200); border-radius: var(--radius); font-family: var(--font-ar); font-size: 1rem; transition: var(--transition); background: var(--white); }
         .order-form .form-group input:focus,
-        .order-form .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1); }
-        .order-form .btn { width: 100%; justify-content: center; padding: 0.9rem; font-size: 1.05rem; }
+        .order-form .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.08); }
+        .order-form .btn { width: 100%; justify-content: center; padding: 1rem; font-size: 1.05rem; }
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
         .gallery-grid img { aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); cursor: pointer; transition: var(--transition); border: 2px solid transparent; }
-        .gallery-grid img:hover { transform: scale(1.05); border-color: var(--primary); }
+        .gallery-grid img:hover { transform: scale(1.06); border-color: var(--primary); box-shadow: var(--shadow-md); }
         .back-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: var(--gray-500); font-weight: 600; transition: var(--transition); }
         .back-link:hover { color: var(--primary); }
         body.ltr .back-link i { transform: rotate(180deg); }
         .loading-spinner { text-align: center; padding: 4rem 0; color: var(--gray-500); font-size: 1.2rem; }
-        .badge-featured { background: var(--primary); color: white; padding: 0.2rem 1rem; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 700; }
+        .badge-featured { background: var(--primary); color: white; padding: 0.2rem 1.2rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700; display: inline-block; }
         .detail-meta { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 1.5rem; }
         .detail-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-        .detail-tags span { background: var(--gray-100); padding: 0.2rem 0.8rem; border-radius: var(--radius-full); font-size: 0.8rem; color: var(--gray-600); }
+        .detail-tags span { background: var(--gray-100); padding: 0.2rem 1rem; border-radius: var(--radius-full); font-size: 0.8rem; color: var(--gray-600); }
+        #orderResponse { margin-top: 1rem; text-align: center; font-weight: 700; padding: 0.5rem; border-radius: var(--radius); }
+        #orderResponse.success { color: #15803D; background: #DCFCE7; }
+        #orderResponse.error { color: #DC2626; background: #FEE2E2; }
+        
+        @media (max-width: 480px) {
+            .detail-hero { padding: 1rem 0 2.5rem; }
+            .order-form { padding: 1.5rem; }
+        }
     </style>
 </head>
 <body>
 
     <!-- ===== HEADER مبسط ===== -->
-    <header class="header" style="position:relative; border-bottom:1px solid var(--gray-200); background:var(--white); backdrop-filter:none;">
+    <header class="header" style="position:relative; border-bottom:1px solid var(--gray-200); background:rgba(255,255,255,0.95); backdrop-filter:none;">
         <div class="container header-inner">
             <div class="logo">
                 <a href="/">
-                    <span class="logo-text" style="color:var(--black);">عبدالله <span>عباس</span></span>
+                    <span class="logo-text" style="color:var(--gray-900);">Abdallah <span>Abas</span></span>
                 </a>
             </div>
             <div class="header-actions">
-                <button class="lang-switch" id="langSwitch" style="color:var(--black);background:var(--gray-100);border-color:var(--gray-200);"><i class="fas fa-globe"></i> <span id="langLabel">EN</span></button>
+                <button class="lang-switch" id="langSwitch" style="color:var(--gray-700);background:var(--gray-100);border-color:var(--gray-200);"><i class="fas fa-globe"></i> <span id="langLabel">EN</span></button>
                 <a href="/" class="btn btn-outline-dark"><i class="fas fa-arrow-right"></i> العودة</a>
             </div>
         </div>
@@ -86,7 +94,7 @@
     <!-- ===== FOOTER مبسط ===== -->
     <footer class="footer" style="margin-top:2rem; padding:2rem 0;">
         <div class="container">
-            <div class="footer-bottom"><p>&copy; 2026 <span>عبدالله عباس</span> جميع الحقوق محفوظة</p></div>
+            <div class="footer-bottom"><p>&copy; 2026 <span>Abdallah Abas</span> جميع الحقوق محفوظة</p></div>
         </div>
     </footer>
 
@@ -138,11 +146,9 @@
                 return;
             }
 
-            // تحديد المجموعة والحقول
             let collectionName = '';
             let titleKey = 'title';
             let descKey = 'description';
-            let priceKey = 'price';
             let imageKey = 'image';
             let contentKey = 'content';
 
@@ -168,7 +174,7 @@
                 // تحديث عنوان الصفحة
                 const lang = document.documentElement.lang || 'ar';
                 const isAr = lang === 'ar';
-                document.title = (isAr ? docData.title : (docData.title_en || docData.title)) + ' | عبدالله عباس';
+                document.title = (isAr ? docData.title : (docData.title_en || docData.title)) + ' | Abdallah Abas';
             } catch (e) {
                 container.innerHTML = `<div style="text-align:center;padding:3rem;color:red;">⚠️ حدث خطأ: ${e.message}</div>`;
             }
@@ -205,7 +211,7 @@
             // المميزات
             let featuresHtml = '';
             if (features && features.length > 0) {
-                featuresHtml = `<h3 style="margin-top:1.5rem;">${isAr ? 'المميزات' : 'Features'}</h3><ul class="detail-features">${features.map(f => `<li>${f}</li>`).join('')}</ul>`;
+                featuresHtml = `<h3 style="margin-top:1.5rem;font-weight:800;">${isAr ? 'المميزات' : 'Features'}</h3><ul class="detail-features">${features.map(f => `<li>${f}</li>`).join('')}</ul>`;
             }
 
             // الوسوم
@@ -217,7 +223,7 @@
             // المحتوى (للمقالات)
             let contentHtml = '';
             if (type === 'post' && content) {
-                contentHtml = `<div style="margin-top:1.5rem;line-height:1.9;font-weight:400;color:var(--gray-700);">${content}</div>`;
+                contentHtml = `<div style="margin-top:1.5rem;line-height:2;font-weight:400;color:var(--gray-700);">${content}</div>`;
             }
 
             // زر التحميل (للمنتجات المجانية)
@@ -242,19 +248,19 @@
                             <div class="form-group"><label>تفاصيل إضافية</label><textarea name="details" rows="4" placeholder="اكتب متطلباتك أو استفساراتك..."></textarea></div>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> إرسال الطلب</button>
                         </form>
-                        <div id="orderResponse" style="margin-top:1rem;text-align:center;font-weight:700;"></div>
+                        <div id="orderResponse"></div>
                     </div>
                 `;
             }
 
             // تجميع المحتوى النهائي
             container.innerHTML = `
-                <h1 style="font-size:2.4rem;font-weight:800;margin-bottom:0.5rem;">${title}</h1>
+                <h1 style="font-size:2.6rem;font-weight:800;margin-bottom:0.5rem;">${title}</h1>
                 <div class="detail-meta">
                     ${priceHtml}
                     ${featured ? '<span class="badge-featured"><i class="fas fa-star"></i> مميز</span>' : ''}
                 </div>
-                ${image ? `<img src="${image}" alt="${title}" class="detail-image" />` : ''}
+                ${image ? `<img src="${image}" alt="${title}" class="detail-image" loading="lazy" />` : ''}
                 <p style="font-size:1.15rem;color:var(--gray-600);font-weight:400;">${desc}</p>
                 ${featuresHtml}
                 ${galleryHtml}
@@ -285,14 +291,14 @@
                     };
                     
                     try {
-                        responseDiv.style.color = 'var(--primary)';
+                        responseDiv.className = '';
                         responseDiv.textContent = '⏳ جاري الإرسال...';
                         await addDoc(collection(db, "orders"), orderData);
-                        responseDiv.style.color = '#22C55E';
+                        responseDiv.className = 'success';
                         responseDiv.textContent = '✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً.';
                         form.reset();
                     } catch (err) {
-                        responseDiv.style.color = '#EF4444';
+                        responseDiv.className = 'error';
                         responseDiv.textContent = '❌ حدث خطأ: ' + err.message;
                     }
                 });
@@ -308,7 +314,7 @@
             document.body.classList.toggle('rtl', isAr);
             document.getElementById('langLabel').textContent = isAr ? 'عربي' : 'EN';
             document.getElementById('backLabel').textContent = isAr ? 'العودة للرئيسية' : 'Back to Home';
-            loadDetail(); // إعادة تحميل المحتوى باللغة الجديدة
+            loadDetail();
         });
 
         // ===== التشغيل =====
