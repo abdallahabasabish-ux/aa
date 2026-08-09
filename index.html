@@ -25,7 +25,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- التصميم الرئيسي (النسخة الاحترافية) -->
+    <!-- التصميم الرئيسي -->
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -41,19 +41,21 @@
             </div>
             <nav class="main-nav" id="main-nav">
                 <ul class="nav-list">
-                    <li><a href="#services" data-i18n="nav.services">الخدمات</a></li>
-                    <li><a href="#templates" data-i18n="nav.templates">القوالب</a></li>
-                    <li><a href="#products" data-i18n="nav.products">المنتجات</a></li>
-                    <li><a href="#portfolio" data-i18n="nav.portfolio">الأعمال</a></li>
-                    <li><a href="#blog" data-i18n="nav.blog">المدونة</a></li>
-                    <li><a href="#contact" data-i18n="nav.contact">تواصل</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#templates">القوالب</a></li>
+                    <li><a href="#products">المنتجات</a></li>
+                    <li><a href="#portfolio">الأعمال</a></li>
+                    <li><a href="#blog">المدونة</a></li>
+                    <li><a href="contact.html">تواصل</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
                 <button class="lang-switch" id="langSwitch"><i class="fas fa-globe"></i> <span id="langLabel">EN</span></button>
                 <div class="auth-buttons" id="authButtons">
-                    <a href="#" class="btn btn-outline" id="loginBtn" data-i18n="nav.login">دخول</a>
-                    <a href="#" class="btn btn-primary" id="registerBtn" data-i18n="nav.register">حساب جديد</a>
+                    <!-- ✅ زر دخول → يفتح نافذة تسجيل الدخول -->
+                    <a href="#" class="btn btn-outline" id="loginBtn">دخول</a>
+                    <!-- ✅ زر حساب جديد → يفتح نافذة التسجيل -->
+                    <a href="#" class="btn btn-primary" id="registerBtn">حساب جديد</a>
                 </div>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
             </div>
@@ -70,8 +72,10 @@
                     <h1 class="hero-title">حلول رقمية <span class="highlight">احترافية</span> تنمو مع أعمالك</h1>
                     <p class="hero-desc">أقدم لك خدمات تصميم وتطوير مواقع، قوالب بلوجر، وتحسين محركات البحث بجودة عالية ودعم مستمر.</p>
                     <div class="hero-actions">
-                        <a href="#services" class="btn btn-primary btn-large">استكشف الخدمات</a>
-                        <a href="#portfolio" class="btn btn-outline btn-large">شاهد أعمالي</a>
+                        <!-- ✅ زر استكشف الخدمات → تمرير سلس لقسم الخدمات -->
+                        <a href="#services" class="btn btn-primary btn-large" id="exploreServicesBtn">استكشف الخدمات</a>
+                        <!-- ✅ زر شاهد أعمالي → تمرير سلس لقسم معرض الأعمال -->
+                        <a href="#portfolio" class="btn btn-outline btn-large" id="viewPortfolioBtn">شاهد أعمالي</a>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -87,7 +91,7 @@
                     <h2 class="section-title">خدماتي <span class="highlight">الاحترافية</span></h2>
                     <p class="section-subtitle">أقدم مجموعة من الخدمات الرقمية المصممة خصيصاً لنجاح مشروعك</p>
                 </div>
-                <div class="services-grid" id="servicesGrid"><!-- يتم التعبئة عبر JS --></div>
+                <div class="services-grid" id="servicesGrid"></div>
             </div>
         </section>
 
@@ -98,7 +102,7 @@
                     <h2 class="section-title">قوالب <span class="highlight">احترافية</span></h2>
                     <p class="section-subtitle">قوالب بلوجر ووردبريس مصممة بأعلى معايير الجودة والأداء</p>
                 </div>
-                <div class="templates-grid" id="templatesGrid"><!-- يتم التعبئة عبر JS --></div>
+                <div class="templates-grid" id="templatesGrid"></div>
             </div>
         </section>
 
@@ -109,7 +113,7 @@
                     <h2 class="section-title">المنتجات <span class="highlight">الرقمية</span></h2>
                     <p class="section-subtitle">إضافات وأدوات رقمية لتسريع نمو أعمالك</p>
                 </div>
-                <div class="products-grid" id="productsGrid"><!-- يتم التعبئة عبر JS --></div>
+                <div class="products-grid" id="productsGrid"></div>
             </div>
         </section>
 
@@ -120,7 +124,7 @@
                     <h2 class="section-title">معرض <span class="highlight">الأعمال</span></h2>
                     <p class="section-subtitle">نماذج من مشاريعي السابقة التي تعكس الجودة والاحترافية</p>
                 </div>
-                <div class="portfolio-grid" id="portfolioGrid"><!-- يتم التعبئة عبر JS --></div>
+                <div class="portfolio-grid" id="portfolioGrid"></div>
             </div>
         </section>
 
@@ -131,11 +135,11 @@
                     <h2 class="section-title">المدونة <span class="highlight">التقنية</span></h2>
                     <p class="section-subtitle">أحدث المقالات والنصائح في عالم التصميم والتطوير</p>
                 </div>
-                <div class="blog-grid" id="blogGrid"><!-- يتم التعبئة عبر JS --></div>
+                <div class="blog-grid" id="blogGrid"></div>
             </div>
         </section>
 
-        <!-- ===== WHY US (لماذا عبدالله عباس) ===== -->
+        <!-- ===== WHY US ===== -->
         <section class="section section-alt">
             <div class="container">
                 <div class="section-header">
@@ -171,7 +175,7 @@
                 <div class="section-header">
                     <h2 class="section-title">آراء <span class="highlight">العملاء</span></h2>
                 </div>
-                <div class="testimonials-grid" id="testimonialsGrid"><!-- يتم التعبئة عبر JS --></div>
+                <div class="testimonials-grid" id="testimonialsGrid"></div>
             </div>
         </section>
 
@@ -181,18 +185,21 @@
                 <div class="section-header">
                     <h2 class="section-title">الأسئلة <span class="highlight">الشائعة</span></h2>
                 </div>
-                <div class="faq-list" id="faqList"><!-- يتم التعبئة عبر JS --></div>
+                <div class="faq-list" id="faqList"></div>
             </div>
         </section>
 
-        <!-- ===== CTA (تم إعادة تصميمها بالكامل – خلفية سوداء فاخرة) ===== -->
+        <!-- ===== CTA ===== -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-box">
                     <div class="badge"><i class="fas fa-crown"></i> احترافية بلا حدود</div>
                     <h2>جاهز لبدء <span class="highlight">مشروعك</span>؟</h2>
                     <p>تواصل معي اليوم لتحويل فكرتك إلى واقع رقمي متميز.</p>
-                    <a href="#contact" class="btn btn-primary btn-large"><i class="fas fa-arrow-left"></i> احصل على استشارة مجانية</a>
+                    <!-- ✅ زر احصل على استشارة مجانية → يوجه إلى صفحة التواصل -->
+                    <a href="contact.html" class="btn btn-primary btn-large" id="ctaContactBtn">
+                        <i class="fas fa-arrow-left"></i> احصل على استشارة مجانية
+                    </a>
                 </div>
             </div>
         </section>
@@ -230,15 +237,27 @@
             </div>
             <form id="authForm">
                 <div id="authFields">
-                    <div class="form-group" style="margin-bottom:1rem;"><label style="display:block;margin-bottom:0.25rem;font-weight:600;">البريد الإلكتروني</label><input type="email" id="authEmail" required style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" /></div>
-                    <div id="passwordField" class="form-group" style="margin-bottom:1rem;"><label style="display:block;margin-bottom:0.25rem;font-weight:600;">كلمة المرور</label><input type="password" id="authPassword" minlength="6" style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" /></div>
-                    <div id="nameField" style="display:none;margin-bottom:1rem;" class="form-group"><label style="display:block;margin-bottom:0.25rem;font-weight:600;">الاسم</label><input type="text" id="authName" style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" /></div>
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label style="display:block;margin-bottom:0.25rem;font-weight:600;">البريد الإلكتروني</label>
+                        <input type="email" id="authEmail" required style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" />
+                    </div>
+                    <div id="passwordField" class="form-group" style="margin-bottom:1rem;">
+                        <label style="display:block;margin-bottom:0.25rem;font-weight:600;">كلمة المرور</label>
+                        <input type="password" id="authPassword" minlength="6" style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" />
+                    </div>
+                    <div id="nameField" style="display:none;margin-bottom:1rem;" class="form-group">
+                        <label style="display:block;margin-bottom:0.25rem;font-weight:600;">الاسم</label>
+                        <input type="text" id="authName" style="width:100%;padding:0.7rem 1rem;border-radius:var(--radius);border:1px solid var(--gray-300);background:var(--white);color:var(--gray-900);font-family:var(--font-ar);" />
+                    </div>
                     <div id="magicLinkSection" style="margin-top:0.5rem;">
+                        <!-- ✅ زر الرابط السحري -->
                         <button type="button" id="sendMagicLinkBtn" class="btn btn-outline" style="width:100%;border-color:var(--primary);color:var(--primary);background:transparent;">📧 أرسل لي رابط سحري</button>
                     </div>
                 </div>
+                <!-- ✅ زر إرسال النموذج (تسجيل الدخول / إنشاء حساب) -->
                 <button type="submit" id="authSubmitBtn" class="btn btn-primary" style="width:100%;margin-top:1.2rem;">تسجيل الدخول</button>
             </form>
+            <!-- ✅ زر تسجيل الدخول بـ Google -->
             <button id="googleAuthBtn" class="btn btn-outline" style="width:100%;margin-top:0.75rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;border-color:var(--gray-300);color:var(--gray-700);"><i class="fab fa-google"></i> Google</button>
             <p id="authError" style="color:#EF4444;margin-top:1rem;text-align:center;"></p>
         </div>
@@ -258,9 +277,10 @@
     </script>
 
     <script type="module">
+        // ===== Firebase Config =====
         import { initializeApp } from "firebase/app";
-        import { getAuth } from "firebase/auth";
-        import { getFirestore } from "firebase/firestore";
+        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, signOut } from "firebase/auth";
+        import { getFirestore, collection, doc, setDoc, getDoc } from "firebase/firestore";
         import { getStorage } from "firebase/storage";
         import { getAnalytics } from "firebase/analytics";
 
@@ -279,12 +299,201 @@
         const db = getFirestore(app);
         const storage = getStorage(app);
         const analytics = getAnalytics(app);
+        const provider = new GoogleAuthProvider();
+
         window.__firebase = { app, auth, db, storage, analytics };
 
-        // استيراد وحدات التطبيق الأساسية (يجب أن تكون موجودة في المسار الصحيح)
-        import('./js/i18n.js');
-        import('./js/app.js');
-        import('./js/modules/auth.js');
+        // ============================================================
+        // 1. نظام المصادقة الكامل
+        // ============================================================
+        let currentUser = null;
+
+        function updateUI(user) {
+            const authButtons = document.getElementById('authButtons');
+            if (user) {
+                const name = user.displayName || user.email?.split('@')[0] || 'مستخدم';
+                const photo = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=FF6600&color=fff&size=32`;
+                authButtons.innerHTML = `
+                    <div style="display:flex;align-items:center;gap:0.5rem;">
+                        <img src="${photo}" style="width:32px;height:32px;border-radius:50%;border:2px solid var(--primary);" />
+                        <span style="font-weight:600;font-size:0.9rem;color:var(--gray-700);">${name}</span>
+                        <button id="logoutBtn" class="btn btn-outline" style="padding:0.2rem 0.8rem;font-size:0.8rem;color:#EF4444;border-color:#EF4444;">خروج</button>
+                    </div>
+                `;
+                document.getElementById('logoutBtn')?.addEventListener('click', () => {
+                    signOut(auth);
+                    window.location.reload();
+                });
+            } else {
+                authButtons.innerHTML = `
+                    <a href="#" class="btn btn-outline" id="loginBtn">دخول</a>
+                    <a href="#" class="btn btn-primary" id="registerBtn">حساب جديد</a>
+                `;
+                document.getElementById('loginBtn')?.addEventListener('click', (e) => { e.preventDefault(); openAuthModal('login'); });
+                document.getElementById('registerBtn')?.addEventListener('click', (e) => { e.preventDefault(); openAuthModal('register'); });
+            }
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            updateUI(user);
+        });
+
+        // --- دوال النافذة المنبثقة ---
+        function openAuthModal(tab = 'login') {
+            const modal = document.getElementById('authModal');
+            modal.style.display = 'flex';
+            document.querySelectorAll('.auth-tab').forEach(t => {
+                if (t.dataset.tab === tab) t.click();
+            });
+        }
+        window.closeAuthModal = function() {
+            document.getElementById('authModal').style.display = 'none';
+        };
+
+        // --- أحداث النموذج ---
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.dataset.tab;
+                document.querySelectorAll('.auth-tab').forEach(t => {
+                    t.style.color = 'var(--gray-500)';
+                    t.style.borderBottom = '2px solid transparent';
+                });
+                this.style.color = 'var(--primary)';
+                this.style.borderBottom = '3px solid var(--primary)';
+                document.getElementById('authTitle').textContent = tabName === 'login' ? 'تسجيل الدخول' : 'حساب جديد';
+                document.getElementById('authSubmitBtn').textContent = tabName === 'login' ? 'تسجيل الدخول' : 'إنشاء حساب';
+                document.getElementById('nameField').style.display = tabName === 'login' ? 'none' : 'block';
+                document.getElementById('authError').textContent = '';
+            });
+        });
+
+        document.getElementById('authForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+            const name = document.getElementById('authName').value;
+            const isLogin = document.getElementById('nameField').style.display === 'none';
+
+            try {
+                if (isLogin) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                } else {
+                    const cred = await createUserWithEmailAndPassword(auth, email, password);
+                    if (name) {
+                        await setDoc(doc(db, "users", cred.user.uid), {
+                            uid: cred.user.uid,
+                            email: email,
+                            displayName: name,
+                            createdAt: new Date()
+                        });
+                    }
+                }
+                closeAuthModal();
+                window.location.reload();
+            } catch (err) {
+                document.getElementById('authError').textContent = err.message;
+            }
+        });
+
+        document.getElementById('googleAuthBtn')?.addEventListener('click', async () => {
+            try {
+                await signInWithPopup(auth, provider);
+                closeAuthModal();
+                window.location.reload();
+            } catch (err) {
+                document.getElementById('authError').textContent = err.message;
+            }
+        });
+
+        // --- الرابط السحري ---
+        document.getElementById('sendMagicLinkBtn')?.addEventListener('click', async () => {
+            const email = document.getElementById('authEmail').value;
+            if (!email) { document.getElementById('authError').textContent = 'أدخل بريدك الإلكتروني أولاً.'; return; }
+            const actionCodeSettings = {
+                url: window.location.origin,
+                handleCodeInApp: true,
+            };
+            try {
+                await sendSignInLinkToEmail(auth, email, actionCodeSettings);
+                window.localStorage.setItem('emailForSignIn', email);
+                document.getElementById('authError').style.color = '#22C55E';
+                document.getElementById('authError').textContent = '✅ تم الإرسال! تفقد بريدك.';
+            } catch (err) {
+                document.getElementById('authError').textContent = '❌ ' + err.message;
+            }
+        });
+
+        if (isSignInWithEmailLink(auth, window.location.href)) {
+            let email = window.localStorage.getItem('emailForSignIn');
+            if (!email) email = window.prompt('أدخل بريدك الإلكتروني لتأكيد تسجيل الدخول:');
+            if (email) {
+                signInWithEmailLink(auth, email, window.location.href).then(() => {
+                    window.localStorage.removeItem('emailForSignIn');
+                    window.location.reload();
+                }).catch(err => alert(err.message));
+            }
+        }
+
+        // ============================================================
+        // 2. زر الهامبرغر (القائمة المتنقلة)
+        // ============================================================
+        const menuToggle = document.getElementById('mobileMenuToggle');
+        const nav = document.getElementById('main-nav');
+        if (menuToggle && nav) {
+            menuToggle.addEventListener('click', () => {
+                nav.classList.toggle('open');
+                const icon = menuToggle.querySelector('i');
+                icon.className = nav.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+            });
+            // إغلاق القائمة عند النقر على أي رابط
+            document.querySelectorAll('.nav-list a').forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('open');
+                    const icon = menuToggle.querySelector('i');
+                    if (icon) icon.className = 'fas fa-bars';
+                });
+            });
+        }
+
+        // ============================================================
+        // 3. تبديل اللغة
+        // ============================================================
+        document.getElementById('langSwitch')?.addEventListener('click', () => {
+            const isAr = document.documentElement.lang === 'ar';
+            document.documentElement.lang = isAr ? 'en' : 'ar';
+            document.documentElement.dir = isAr ? 'ltr' : 'rtl';
+            document.body.classList.toggle('ltr', !isAr);
+            document.body.classList.toggle('rtl', isAr);
+            document.getElementById('langLabel').textContent = isAr ? 'عربي' : 'EN';
+            
+            // تحديث النصوص المعربة (إذا كنت تستخدم i18n)
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                // يمكنك إضافة نظام الترجمة هنا
+            });
+        });
+
+        // ============================================================
+        // 4. تمرير سلس للأقسام (لأزرار الهيرو)
+        // ============================================================
+        document.getElementById('exploreServicesBtn')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        document.getElementById('viewPortfolioBtn')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        // ============================================================
+        // 5. تحميل البيانات من Firebase (Mock أو حقيقي)
+        // ============================================================
+        // يمكنك استيراد ملف app.js هنا أو كتابة دوال جلب البيانات
+        // مثال: import('./js/app.js');
+
+        console.log('🔥 Index.html initialized successfully!');
     </script>
 </body>
 </html>
