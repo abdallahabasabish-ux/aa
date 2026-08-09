@@ -7,10 +7,10 @@
     <meta name="description" content="حلول رقمية مخصصة في تطوير الويب، ووردبريس، وتحسين محركات البحث. نبني حول هدفك، ليس حول قالب جاهز." />
     <link rel="canonical" href="https://abdallahabas.github.io/" />
 
-    <!-- Google Fonts (Cairo + Inter) -->
+    <!-- ===== GOOGLE FONTS (Almarai + Cairo + Inter) ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Cairo:wght@200..1000&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <style>
         /* ===== RESET & ROOT ===== */
@@ -37,8 +37,8 @@
             --radius-sm: 6px;
             --radius-md: 12px;
             --max-width: 1200px;
-            --font-ar: 'Cairo', sans-serif;
-            --font-en: 'Inter', sans-serif;
+            --font-ar: 'Almarai', 'Cairo', sans-serif;
+            --font-en: 'Inter', 'Cairo', sans-serif;
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -138,14 +138,16 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(255, 102, 0, 0.25);
         }
-        .btn-primary .arrow {
+        .btn-primary .arrow-icon {
             transition: var(--transition);
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
-        .btn-primary:hover .arrow {
+        .btn-primary:hover .arrow-icon {
             transform: translateX(4px);
         }
-        [dir="rtl"] .btn-primary:hover .arrow {
+        [dir="rtl"] .btn-primary:hover .arrow-icon {
             transform: translateX(-4px);
         }
 
@@ -168,6 +170,34 @@
             border-color: var(--primary);
             color: var(--primary);
             background: var(--primary-light);
+        }
+
+        /* ===== SVG ICON STYLES ===== */
+        .icon-svg {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            color: var(--primary);
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .icon-svg.filled {
+            fill: var(--primary);
+            stroke: none;
+        }
+        .arrow-svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: var(--transition);
         }
 
         /* ===== NAV ===== */
@@ -251,6 +281,7 @@
             transition: var(--transition);
             color: var(--text-light);
             font-weight: 700;
+            font-family: var(--font-en);
         }
         .lang-toggle button.active {
             background: var(--primary);
@@ -394,7 +425,7 @@
             }
         }
 
-        /* ===== TRUST / AUTHORITY ===== */
+        /* ===== TRUST ===== */
         .trust-bar {
             background: var(--bg-soft);
             border-top: 1px solid var(--border-subtle);
@@ -411,20 +442,19 @@
         .trust-bar .item {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 600;
             color: var(--text-mid);
             font-size: 0.95rem;
         }
-        .trust-bar .item .dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
+        .trust-bar .item .dot-svg {
+            width: 16px;
+            height: 16px;
             flex-shrink: 0;
+            fill: var(--primary);
         }
 
-        /* ===== SERVICES (ASYMETRIC) ===== */
+        /* ===== SERVICES ===== */
         .services-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -444,10 +474,18 @@
             box-shadow: var(--shadow-hover);
             border-color: var(--primary);
         }
-        .service-card .icon {
-            font-size: 2rem;
+        .service-card .icon-wrap {
+            display: inline-flex;
+            padding: 12px;
+            background: var(--primary-light);
+            border-radius: var(--radius-sm);
             margin-bottom: 16px;
-            display: block;
+            color: var(--primary);
+        }
+        .service-card .icon-wrap .icon-svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 1.8;
         }
         .service-card h3 {
             font-size: 1.3rem;
@@ -470,7 +508,10 @@
         .service-card .link:hover {
             gap: 12px;
         }
-        /* Asymetric layout */
+        .service-card .link .arrow-svg {
+            width: 16px;
+            height: 16px;
+        }
         .services-grid .service-card:nth-child(2) {
             transform: translateY(30px);
         }
@@ -524,7 +565,7 @@
             }
         }
 
-        /* ===== KNOWLEDGE / BLOG ===== */
+        /* ===== KNOWLEDGE ===== */
         .knowledge-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -703,9 +744,13 @@
             .logo {
                 font-size: 1.2rem;
             }
+            .service-card .icon-wrap .icon-svg {
+                width: 24px;
+                height: 24px;
+            }
         }
 
-        /* ===== ANIMATIONS (Intersection Observer) ===== */
+        /* ===== ANIMATIONS ===== */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -728,7 +773,6 @@
             transition-delay: 0.4s;
         }
 
-        /* ===== PREFERS REDUCED MOTION ===== */
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -789,7 +833,9 @@
                     <div class="hero-actions">
                         <a href="#contact" class="btn-primary">
                             استشر الآن
-                            <span class="arrow">←</span>
+                            <span class="arrow-icon">
+                                <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
                         </a>
                         <a href="#services" class="btn-outline">استكشف الخدمات</a>
                     </div>
@@ -823,10 +869,22 @@
     <!-- ===== TRUST BAR ===== -->
     <div class="trust-bar">
         <div class="container">
-            <span class="item"><span class="dot"></span> تطوير ويب مخصص</span>
-            <span class="item"><span class="dot"></span> ووردبريس احترافي</span>
-            <span class="item"><span class="dot"></span> تصميم تجربة مستخدم</span>
-            <span class="item"><span class="dot"></span> سيو واستراتيجية محتوى</span>
+            <span class="item">
+                <svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg>
+                تطوير ويب مخصص
+            </span>
+            <span class="item">
+                <svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg>
+                ووردبريس احترافي
+            </span>
+            <span class="item">
+                <svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg>
+                تصميم تجربة مستخدم
+            </span>
+            <span class="item">
+                <svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg>
+                سيو واستراتيجية محتوى
+            </span>
         </div>
     </div>
 
@@ -840,29 +898,73 @@
             </div>
 
             <div class="services-grid">
+                <!-- 1. Web Development -->
                 <div class="service-card reveal reveal-delay-1">
-                    <span class="icon">🖥️</span>
+                    <div class="icon-wrap">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <rect x="2" y="4" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M8 20h8M12 18v2M8 2v2M16 2v2"/>
+                            <path d="M6 7l2 2-2 2M18 7l-2 2 2 2"/>
+                        </svg>
+                    </div>
                     <h3>تطوير ويب</h3>
                     <p>مواقع سريعة وآمنة ومتوافقة مع معايير السيو، مبنية بأحدث التقنيات.</p>
-                    <a href="#" class="link">اعرف المزيد ←</a>
+                    <a href="#" class="link">
+                        اعرف المزيد
+                        <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
                 </div>
+
+                <!-- 2. WordPress -->
                 <div class="service-card reveal reveal-delay-2">
-                    <span class="icon">📝</span>
+                    <div class="icon-wrap">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 2a10 10 0 0 0-9.5 6.8M12 2a10 10 0 0 1 9.5 6.8M12 2v20M2 12h20M12 22a10 10 0 0 1-9.5-6.8M12 22a10 10 0 0 0 9.5-6.8"/>
+                            <path d="M4.5 8.5L19.5 15.5M19.5 8.5L4.5 15.5"/>
+                        </svg>
+                    </div>
                     <h3>ووردبريس</h3>
                     <p>تصميم وبرمجة قوالب ووردبريس احترافية، مع حلول مخصصة لإدارة المحتوى.</p>
-                    <a href="#" class="link">اعرف المزيد ←</a>
+                    <a href="#" class="link">
+                        اعرف المزيد
+                        <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
                 </div>
+
+                <!-- 3. SEO -->
                 <div class="service-card reveal reveal-delay-3">
-                    <span class="icon">🔍</span>
+                    <div class="icon-wrap">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="7"/>
+                            <path d="M16.5 16.5L21 21"/>
+                            <path d="M7 11l2 2 4-4"/>
+                            <path d="M13 6l1-2M16 8l2-1M18 11l2 1"/>
+                        </svg>
+                    </div>
                     <h3>تحسين محركات البحث (SEO)</h3>
                     <p>استراتيجيات مدروسة لتصدر نتائج البحث وجلب زوار متفاعلين لموقعك.</p>
-                    <a href="#" class="link">اعرف المزيد ←</a>
+                    <a href="#" class="link">
+                        اعرف المزيد
+                        <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
                 </div>
+
+                <!-- 4. UI/UX Design -->
                 <div class="service-card reveal reveal-delay-4">
-                    <span class="icon">🎨</span>
+                    <div class="icon-wrap">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <path d="M12 3v4M12 17v4M3 12h4M17 12h4"/>
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M7.5 7.5l2.8 2.8M13.7 13.7l2.8 2.8M7.5 16.5l2.8-2.8M13.7 10.3l2.8-2.8"/>
+                        </svg>
+                    </div>
                     <h3>تصميم واجهات (UI/UX)</h3>
                     <p>تصميم تجارب مستخدم فريدة تجمع بين الجمال البصري وسهولة الاستخدام.</p>
-                    <a href="#" class="link">اعرف المزيد ←</a>
+                    <a href="#" class="link">
+                        اعرف المزيد
+                        <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
                 </div>
             </div>
         </div>
@@ -934,7 +1036,9 @@
                 <p>دعنا نناقشه معاً. أنا هنا لأساعدك في تحويل فكرتك إلى منتج رقمي مميز.</p>
                 <a href="#" class="btn-primary">
                     احجز استشارة مجانية
-                    <span class="arrow">←</span>
+                    <span class="arrow-icon">
+                        <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
                 </a>
             </div>
         </div>
@@ -968,11 +1072,10 @@
                 });
             }
 
-            // ===== LANGUAGE TOGGLE (RTL / LTR) =====
+            // ===== LANGUAGE TOGGLE =====
             const langButtons = document.querySelectorAll('.lang-toggle button');
             const html = document.documentElement;
 
-            // Arabic content
             const contentMap = {
                 ar: {
                     logo: 'عبدالله <span>عباس</span>',
@@ -1003,7 +1106,7 @@
                     s3Desc: 'استراتيجيات مدروسة لتصدر نتائج البحث وجلب زوار متفاعلين لموقعك.',
                     s4Title: 'تصميم واجهات (UI/UX)',
                     s4Desc: 'تصميم تجارب مستخدم فريدة تجمع بين الجمال البصري وسهولة الاستخدام.',
-                    sLink: 'اعرف المزيد ←',
+                    sLink: 'اعرف المزيد',
                     processLabel: 'منهجية العمل',
                     processTitle: 'كيف نعمل معاً؟',
                     processSub: 'خطوات واضحة وشفافة من الفكرة حتى الإطلاق.',
@@ -1056,7 +1159,7 @@
                     s3Desc: 'Strategic SEO to rank higher in search results and attract engaged visitors.',
                     s4Title: 'UI/UX Design',
                     s4Desc: 'Unique user experiences that blend visual beauty with ease of use.',
-                    sLink: 'Learn More →',
+                    sLink: 'Learn More',
                     processLabel: 'Process',
                     processTitle: 'How we work together?',
                     processSub: 'Clear and transparent steps from idea to launch.',
@@ -1086,7 +1189,6 @@
                 html.dir = lang === 'ar' ? 'rtl' : 'ltr';
                 html.lang = lang;
 
-                // Update active button
                 langButtons.forEach(btn => {
                     const isActive = btn.dataset.lang === lang;
                     btn.classList.toggle('active', isActive);
@@ -1096,23 +1198,11 @@
                 const content = contentMap[lang];
                 if (!content) return;
 
-                // Update all data-i18n elements
-                document.querySelectorAll('[data-i18n]').forEach(el => {
-                    const key = el.dataset.i18n;
-                    if (content[key] !== undefined) {
-                        el.innerHTML = content[key];
-                    }
-                });
-
-                // Handle special dynamic innerHTML for hero title
-                const heroTitle = document.querySelector('.hero h1');
-                if (heroTitle) heroTitle.innerHTML = content.heroTitle;
-
-                // Update logo
+                // Logo
                 const logo = document.querySelector('.logo');
                 if (logo) logo.innerHTML = content.logo;
 
-                // Update nav links
+                // Nav
                 const navItems = document.querySelectorAll('.nav-links li');
                 if (navItems.length >= 4) {
                     navItems[0].querySelector('a').textContent = content.nav1;
@@ -1121,12 +1211,69 @@
                     navItems[3].querySelector('a').innerHTML = content.nav4;
                 }
 
-                // Update service cards links
-                document.querySelectorAll('.service-card .link').forEach((link, idx) => {
-                    link.innerHTML = content.sLink;
+                // Hero
+                const badge = document.querySelector('.hero .badge');
+                if (badge) badge.textContent = content.heroBadge;
+                const heroTitle = document.querySelector('.hero h1');
+                if (heroTitle) heroTitle.innerHTML = content.heroTitle;
+                const heroDesc = document.querySelector('.hero p');
+                if (heroDesc) heroDesc.textContent = content.heroDesc;
+                const ctaBtn = document.querySelector('.hero-actions .btn-primary');
+                if (ctaBtn) ctaBtn.innerHTML = content.heroCta + ' <span class="arrow-icon"><svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>';
+                const ctaBtn2 = document.querySelector('.hero-actions .btn-outline');
+                if (ctaBtn2) ctaBtn2.textContent = content.heroCta2;
+
+                // Stats
+                const stats = document.querySelectorAll('.hero-stats .stat');
+                if (stats.length >= 3) {
+                    stats[0].querySelector('p').textContent = content.stat1;
+                    stats[1].querySelector('p').textContent = content.stat2;
+                    stats[2].querySelector('p').textContent = content.stat3;
+                }
+
+                // Trust
+                const trustItems = document.querySelectorAll('.trust-bar .item');
+                if (trustItems.length >= 4) {
+                    trustItems[0].innerHTML =
+                        '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + content.trust1;
+                    trustItems[1].innerHTML =
+                        '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + content.trust2;
+                    trustItems[2].innerHTML =
+                        '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + content.trust3;
+                    trustItems[3].innerHTML =
+                        '<svg class="dot-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/></svg> ' + content.trust4;
+                }
+
+                // Services
+                const sLabel = document.querySelector('#services .section-label');
+                if (sLabel) sLabel.textContent = content.servicesLabel;
+                const sTitle = document.querySelector('#services .section-title');
+                if (sTitle) sTitle.innerHTML = content.servicesTitle;
+                const sSub = document.querySelector('#services .section-subtitle');
+                if (sSub) sSub.textContent = content.servicesSub;
+                const sCards = document.querySelectorAll('.service-card');
+                if (sCards.length >= 4) {
+                    sCards[0].querySelector('h3').textContent = content.s1Title;
+                    sCards[0].querySelector('p').textContent = content.s1Desc;
+                    sCards[1].querySelector('h3').textContent = content.s2Title;
+                    sCards[1].querySelector('p').textContent = content.s2Desc;
+                    sCards[2].querySelector('h3').textContent = content.s3Title;
+                    sCards[2].querySelector('p').textContent = content.s3Desc;
+                    sCards[3].querySelector('h3').textContent = content.s4Title;
+                    sCards[3].querySelector('p').textContent = content.s4Desc;
+                }
+                document.querySelectorAll('.service-card .link').forEach(el => {
+                    el.innerHTML = content.sLink +
+                        ' <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
                 });
 
-                // Update process steps
+                // Process
+                const pLabel = document.querySelector('#services + .section-padding .section-label');
+                if (pLabel) pLabel.textContent = content.processLabel;
+                const pTitle = document.querySelector('#services + .section-padding .section-title');
+                if (pTitle) pTitle.textContent = content.processTitle;
+                const pSub = document.querySelector('#services + .section-padding .section-subtitle');
+                if (pSub) pSub.textContent = content.processSub;
                 const steps = document.querySelectorAll('.process-step');
                 if (steps.length >= 4) {
                     steps[0].querySelector('h4').textContent = content.p1;
@@ -1139,7 +1286,13 @@
                     steps[3].querySelector('p').textContent = content.p4d;
                 }
 
-                // Update knowledge cards
+                // Knowledge
+                const kLabel = document.querySelector('#knowledge .section-label');
+                if (kLabel) kLabel.textContent = content.knowledgeLabel;
+                const kTitle = document.querySelector('#knowledge .section-title');
+                if (kTitle) kTitle.innerHTML = content.knowledgeTitle;
+                const kSub = document.querySelector('#knowledge .section-subtitle');
+                if (kSub) kSub.textContent = content.knowledgeSub;
                 const kCards = document.querySelectorAll('.knowledge-card');
                 if (kCards.length >= 2) {
                     kCards[0].querySelector('h3').textContent = content.k1Title;
@@ -1153,78 +1306,13 @@
                 if (cta) {
                     cta.querySelector('h2').textContent = content.ctaTitle;
                     cta.querySelector('p').textContent = content.ctaDesc;
-                    cta.querySelector('.btn-primary').innerHTML = content.ctaBtn + ' <span class="arrow">←</span>';
+                    cta.querySelector('.btn-primary').innerHTML = content.ctaBtn +
+                        ' <span class="arrow-icon"><svg class="arrow-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>';
                 }
 
                 // Footer
                 const footer = document.querySelector('footer .copy');
                 if (footer) footer.textContent = content.footer;
-
-                // Hero desc
-                const heroDesc = document.querySelector('.hero p');
-                if (heroDesc) heroDesc.textContent = content.heroDesc;
-
-                // Hero stats
-                const stats = document.querySelectorAll('.hero-stats .stat');
-                if (stats.length >= 3) {
-                    stats[0].querySelector('p').textContent = content.stat1;
-                    stats[1].querySelector('p').textContent = content.stat2;
-                    stats[2].querySelector('p').textContent = content.stat3;
-                }
-
-                // Trust bar
-                const trustItems = document.querySelectorAll('.trust-bar .item');
-                if (trustItems.length >= 4) {
-                    trustItems[0].innerHTML = '<span class="dot"></span> ' + content.trust1;
-                    trustItems[1].innerHTML = '<span class="dot"></span> ' + content.trust2;
-                    trustItems[2].innerHTML = '<span class="dot"></span> ' + content.trust3;
-                    trustItems[3].innerHTML = '<span class="dot"></span> ' + content.trust4;
-                }
-
-                // Services section labels and titles
-                const serviceLabel = document.querySelector('#services .section-label');
-                if (serviceLabel) serviceLabel.textContent = content.servicesLabel;
-                const serviceTitle = document.querySelector('#services .section-title');
-                if (serviceTitle) serviceTitle.innerHTML = content.servicesTitle;
-                const serviceSub = document.querySelector('#services .section-subtitle');
-                if (serviceSub) serviceSub.textContent = content.servicesSub;
-
-                // Service card titles and desc
-                const sCards = document.querySelectorAll('.service-card');
-                if (sCards.length >= 4) {
-                    sCards[0].querySelector('h3').textContent = content.s1Title;
-                    sCards[0].querySelector('p').textContent = content.s1Desc;
-                    sCards[1].querySelector('h3').textContent = content.s2Title;
-                    sCards[1].querySelector('p').textContent = content.s2Desc;
-                    sCards[2].querySelector('h3').textContent = content.s3Title;
-                    sCards[2].querySelector('p').textContent = content.s3Desc;
-                    sCards[3].querySelector('h3').textContent = content.s4Title;
-                    sCards[3].querySelector('p').textContent = content.s4Desc;
-                }
-
-                // Process label/title/sub
-                const pLabel = document.querySelector('#services + .section-padding .section-label');
-                if (pLabel) pLabel.textContent = content.processLabel;
-                const pTitle = document.querySelector('#services + .section-padding .section-title');
-                if (pTitle) pTitle.textContent = content.processTitle;
-                const pSub = document.querySelector('#services + .section-padding .section-subtitle');
-                if (pSub) pSub.textContent = content.processSub;
-
-                // Knowledge label/title/sub
-                const kLabel = document.querySelector('#knowledge .section-label');
-                if (kLabel) kLabel.textContent = content.knowledgeLabel;
-                const kTitle = document.querySelector('#knowledge .section-title');
-                if (kTitle) kTitle.innerHTML = content.knowledgeTitle;
-                const kSub = document.querySelector('#knowledge .section-subtitle');
-                if (kSub) kSub.textContent = content.knowledgeSub;
-
-                // Hero badge and buttons
-                const badge = document.querySelector('.hero .badge');
-                if (badge) badge.textContent = content.heroBadge;
-                const ctaBtn = document.querySelector('.hero-actions .btn-primary');
-                if (ctaBtn) ctaBtn.innerHTML = content.heroCta + ' <span class="arrow">←</span>';
-                const ctaBtn2 = document.querySelector('.hero-actions .btn-outline');
-                if (ctaBtn2) ctaBtn2.textContent = content.heroCta2;
             }
 
             langButtons.forEach(btn => {
@@ -1235,11 +1323,10 @@
                 });
             });
 
-            // Load saved language
             const savedLang = localStorage.getItem('preferred-lang') || 'ar';
             setLanguage(savedLang);
 
-            // ===== INTERSECTION OBSERVER (Reveal Animations) =====
+            // ===== INTERSECTION OBSERVER =====
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1257,22 +1344,6 @@
 
         })();
     </script>
-
-    <!--
-    ============================================================
-    FIREBASE CONFIGURATION (للإشارة فقط، سيتم تفعيله في المراحل القادمة)
-    ============================================================
-    const firebaseConfig = {
-      apiKey: "AIzaSyDg-oSbA_UdlzMS8HZGE0pHtr_zWg5rrXY",
-      authDomain: "abdallahsst.firebaseapp.com",
-      projectId: "abdallahsst",
-      storageBucket: "abdallahsst.firebasestorage.app",
-      messagingSenderId: "1011946194938",
-      appId: "1:1011946194938:web:9bee94362711431368c643",
-      measurementId: "G-ZP5BJH98CS"
-    };
-    ============================================================
-    -->
 
 </body>
 </html>
