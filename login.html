@@ -4,607 +4,232 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>تسجيل الدخول | Abdallah Abas</title>
+    
+    <!-- CSP Policy (Meta tag for basic protection, but HTTP header is recommended) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://abdallahsst.firebaseapp.com https://*.googleapis.com https://*.firebaseio.com;">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Cairo:wght@200;300;400;600;700;800;900;1000&display=swap" rel="stylesheet" />
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
+    
     <style>
-        /* ============================================
-           GLOBAL RESET & ROOT
-           ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* --- تم الحفاظ على نفس التصميم الداكن مع تعديلات بسيطة --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --orange: #FF6600;
-            --orange-hover: #FF8533;
-            --orange-glow: rgba(255, 102, 0, 0.25);
-
-            --bg-primary: #0A0A0A;
-            --bg-card: #141414;
-            --bg-elevated: #1E1E1E;
-
-            --text-primary: #FFFFFF;
-            --text-secondary: #CCCCCC;
-            --text-muted: #888888;
-
+            --orange: #FF6600; --orange-hover: #FF8533; --orange-glow: rgba(255,102,0,0.25);
+            --bg-primary: #0A0A0A; --bg-card: #141414; --bg-elevated: #1E1E1E;
+            --text-primary: #FFFFFF; --text-secondary: #CCCCCC; --text-muted: #888888;
             --border-color: #2A2A2A;
-
-            --font-body: 'Almarai', sans-serif;
-            --font-heading: 'Cairo', sans-serif;
+            --font-body: 'Almarai', sans-serif; --font-heading: 'Cairo', sans-serif;
         }
+        html, body { height: 100%; font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); overflow-x: hidden; }
+        .split-screen { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
+        
+        /* Left Side */
+        .split-left { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; position: relative; border-left: 1px solid var(--border-color); overflow: hidden; background: var(--bg-primary); }
+        html[dir="rtl"] .split-left { border-left: none; border-right: 1px solid var(--border-color); }
+        .split-left .logo-image { max-width: 80%; max-height: 200px; margin-bottom: 1.5rem; z-index: 2; filter: drop-shadow(0 0 20px rgba(255,102,0,0.1)); }
+        .split-left .brand-name { font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: var(--text-primary); text-align: center; z-index: 2; }
+        .split-left .brand-name span { color: var(--orange); }
+        .split-left .brand-sub { font-size: clamp(0.9rem, 1.3vw, 1.2rem); color: var(--text-muted); margin-top: 0.5rem; text-align: center; z-index: 2; }
+        .split-left .brand-sub i { color: var(--orange); }
+        .split-left .bg-shape { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle at 30% 40%, rgba(255,102,0,0.08), transparent 70%); top: -10%; right: -10%; z-index: 1; pointer-events: none; }
+        .split-left .bg-shape-2 { position: absolute; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle at 70% 60%, rgba(255,102,0,0.05), transparent 60%); bottom: -5%; left: -5%; z-index: 1; pointer-events: none; }
 
-        html,
-        body {
-            height: 100%;
-            font-family: var(--font-body);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            /* ✅ تم إزالة overflow:hidden من هنا لمنع مشاكل التمرير */
-            overflow-x: hidden;
-        }
+        /* Right Side (Form) */
+        .split-right { flex: 1; background: var(--bg-card); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+        .split-right .form-wrapper { max-width: 400px; width: 100%; }
+        .split-right .form-wrapper .form-title { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.3rem; }
+        .split-right .form-wrapper .form-sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
+        
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-weight: 600; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.3rem; }
+        .form-group label i { color: var(--orange); margin-left: 0.3rem; }
+        .form-group input { width: 100%; padding: 0.8rem 1rem; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); font-family: var(--font-body); font-size: 1rem; transition: border 0.3s; outline: none; }
+        .form-group input:focus { border-color: var(--orange); }
+        
+        .btn-primary { width: 100%; padding: 0.9rem; background: var(--orange); color: var(--bg-primary); border: none; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; font-family: var(--font-body); display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .btn-primary:hover { background: var(--orange-hover); box-shadow: 0 0 30px var(--orange-glow); transform: scale(1.01); }
+        .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
+        
+        .error-msg { background: rgba(255, 23, 68, 0.12); border: 1px solid #FF1744; color: #FF1744; padding: 0.6rem 1rem; margin-bottom: 1rem; font-size: 0.9rem; display: none; text-align: center; border-radius: 4px; }
+        .error-msg.show { display: block; }
+        
+        .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(0,0,0,0.1); border-top-color: var(--bg-primary); border-radius: 50%; animation: spin 0.6s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ============================================
-           SPLIT SCREEN LAYOUT
-           ============================================ */
-        .split-screen {
-            display: flex;
-            height: 100vh;      /* ✅ Full height على الشاشات الكبيرة */
-            width: 100vw;
-            overflow: hidden;   /* ✅ تم نقل الـ overflow هنا */
-        }
-
-        /* --- Left Side: Brand / Logo --- */
-        .split-left {
-            flex: 1;
-            background: var(--bg-primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            position: relative;
-            border-left: 1px solid var(--border-color);
-            overflow: hidden;
-        }
-
-        html[dir="rtl"] .split-left {
-            border-left: none;
-            border-right: 1px solid var(--border-color);
-        }
-
-        /* Logo Image */
-        .split-left .logo-image {
-            max-width: 80%;
-            max-height: 200px;
-            height: auto;
-            width: auto;
-            margin-bottom: 1.5rem;
-            z-index: 2;
-            filter: drop-shadow(0 0 20px rgba(255, 102, 0, 0.1));
-        }
-
-        .split-left .brand-name {
-            font-family: var(--font-heading);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            color: var(--text-primary);
-            line-height: 1.1;
-            text-align: center;
-            z-index: 2;
-            letter-spacing: -0.02em;
-        }
-
-        .split-left .brand-name span {
-            color: var(--orange);
-        }
-
-        .split-left .brand-sub {
-            font-size: clamp(0.9rem, 1.3vw, 1.2rem);
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-            text-align: center;
-            z-index: 2;
-        }
-
-        .split-left .brand-sub i {
-            color: var(--orange);
-            margin: 0 0.3rem;
-        }
-
-        /* Background decorative shapes */
-        .split-left .bg-shape {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 40%, rgba(255, 102, 0, 0.08), transparent 70%);
-            top: -10%;
-            right: -10%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .split-left .bg-shape-2 {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 70% 60%, rgba(255, 102, 0, 0.05), transparent 60%);
-            bottom: -5%;
-            left: -5%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* --- Right Side: Form --- */
-        .split-right {
-            flex: 1;
-            background: var(--bg-card);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .split-right .form-wrapper {
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .split-right .form-wrapper .form-title {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 0.3rem;
-        }
-
-        .split-right .form-wrapper .form-sub {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 2rem;
-        }
-
-        /* --- Form Elements --- */
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.3rem;
-        }
-
-        .form-group label i {
-            color: var(--orange);
-            margin-left: 0.3rem;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: border 0.3s ease;
-            outline: none;
-        }
-
-        .form-group input:focus {
-            border-color: var(--orange);
-        }
-
-        .btn-primary {
-            width: 100%;
-            padding: 0.9rem;
-            background: var(--orange);
-            color: var(--bg-primary);
-            border: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: var(--font-body);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary:hover {
-            background: var(--orange-hover);
-            box-shadow: 0 0 30px var(--orange-glow);
-            transform: scale(1.01);
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .toggle-text {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .toggle-text a {
-            color: var(--orange);
-            font-weight: 700;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .toggle-text a:hover {
-            color: var(--orange-hover);
-        }
-
-        .error-msg {
-            background: rgba(255, 23, 68, 0.12);
-            border: 1px solid #FF1744;
-            color: #FF1744;
-            padding: 0.6rem 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            display: none;
-            text-align: center;
-        }
-
-        .error-msg.show {
-            display: block;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(0, 0, 0, 0.1);
-            border-top-color: var(--bg-primary);
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* ============================================
-           RESPONSIVE (Mobile) - ✅ تم إصلاح التمرير
-           ============================================ */
+        /* Responsive */
         @media (max-width: 768px) {
-            .split-screen {
-                flex-direction: column;
-                height: auto;           /* ✅ يسمح بالتمدد */
-                min-height: 100vh;
-                overflow-y: auto;       /* ✅ يسمح بالتمرير العمودي */
-                overflow-x: hidden;
-            }
-
-            .split-left {
-                border: none;
-                border-bottom: 1px solid var(--border-color);
-                padding: 2rem 1rem;
-                min-height: 35vh;
-            }
-
-            .split-left .logo-image {
-                max-height: 120px;
-                margin-bottom: 1rem;
-            }
-
-            .split-left .brand-name {
-                font-size: 2.2rem;
-            }
-
-            .split-right {
-                padding: 2rem 1.5rem;
-                min-height: 65vh;
-            }
-
-            .split-right .form-wrapper {
-                max-width: 100%;
-            }
-
-            .split-left .bg-shape,
-            .split-left .bg-shape-2 {
-                display: none;
-            }
+            .split-screen { flex-direction: column; height: auto; min-height: 100vh; overflow-y: auto; }
+            .split-left { border: none; border-bottom: 1px solid var(--border-color); padding: 2rem 1rem; min-height: 35vh; }
+            .split-left .logo-image { max-height: 120px; }
+            .split-left .brand-name { font-size: 2.2rem; }
+            .split-right { padding: 2rem 1.5rem; min-height: 65vh; }
         }
-
-        @media (max-width: 480px) {
-            .split-left .brand-name {
-                font-size: 1.8rem;
-            }
-            .split-left .logo-image {
-                max-height: 80px;
-            }
-            .split-right .form-wrapper .form-title {
-                font-size: 1.5rem;
-            }
-            .btn-primary {
-                font-size: 1rem;
-                padding: 0.8rem;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
+        @media (max-width: 480px) { .split-left .brand-name { font-size: 1.8rem; } .split-left .logo-image { max-height: 80px; } }
+        @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; } }
     </style>
 </head>
 <body>
 
-    <div class="split-screen">
-
-        <!-- ==========================================
-        LEFT SIDE: Logo & Brand Identity
-        ========================================== -->
-        <div class="split-left">
-            <div class="bg-shape"></div>
-            <div class="bg-shape-2"></div>
-
-            <!-- 
-                ✅ مسار الشعار: ضع ملف الشعار في مجلد /assets/
-                ✅ تم تبسيط آلية الاحتياطي (Fallback) لتعمل بشكل مثالي
-            -->
-            <img 
-                src="/assets/logo.png" 
-                alt="Abdallah Abas Logo" 
-                class="logo-image"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-            />
-
-            <!-- النص الاحتياطي (يظهر فقط إذا فشل تحميل الصورة) -->
-            <div class="brand-name" style="display:none;">
-                Abdallah <span>Abas</span>
-            </div>
-
-            <p class="brand-sub">
-                <i class="fa-regular fa-crown"></i> Premium Digital Solutions Platform
-            </p>
-            <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-muted); z-index:2;">
-                <i class="fa-regular fa-shield-halved" style="color:var(--orange);"></i> Secure Admin Access
-            </p>
-        </div>
-
-        <!-- ==========================================
-        RIGHT SIDE: Login / Register Form
-        ========================================== -->
-        <div class="split-right">
-            <div class="form-wrapper">
-
-                <div class="form-title" id="formTitle">تسجيل الدخول</div>
-                <p class="form-sub" id="formSub">أدخل بياناتك للوصول إلى لوحة التحكم</p>
-
-                <!-- Error Message -->
-                <div id="errorMessage" class="error-msg"></div>
-
-                <!-- Form -->
-                <form id="authForm">
-                    <div class="form-group">
-                        <label for="email"><i class="fa-regular fa-envelope"></i> البريد الإلكتروني</label>
-                        <input type="email" id="email" placeholder="admin@example.com" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="password"><i class="fa-regular fa-lock"></i> كلمة المرور</label>
-                        <input type="password" id="password" placeholder="••••••••" required minlength="6" />
-                    </div>
-
-                    <button type="submit" class="btn-primary" id="submitBtn">
-                        <span id="btnText">تسجيل الدخول</span>
-                        <span id="btnSpinner" style="display:none;"><span class="spinner"></span></span>
-                    </button>
-                </form>
-
-                <div class="toggle-text">
-                    <span id="togglePrompt">ليس لديك حساب؟</span>
-                    <a id="toggleMode">إنشاء حساب جديد</a>
-                </div>
-
-            </div>
-        </div>
-
+<div class="split-screen">
+    <!-- Left: Brand -->
+    <div class="split-left">
+        <div class="bg-shape"></div>
+        <div class="bg-shape-2"></div>
+        <img src="/assets/logo.png" alt="Abdallah Abas Logo" class="logo-image" id="logoImg" />
+        <div class="brand-name" id="brandFallback" style="display:none;">Abdallah <span>Abas</span></div>
+        <p class="brand-sub"><i class="fa-regular fa-crown"></i> Premium Digital Solutions Platform</p>
+        <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-muted); z-index:2;"><i class="fa-regular fa-shield-halved" style="color:var(--orange);"></i> Secure Admin Access</p>
     </div>
 
-    <!-- ============================================
-    FIREBASE MODULE IMPORTS
-    ✅ تأكد من وجود ملف /js/firebase-init.js
-    ============================================ -->
-    <script type="importmap">
-        {
-            "imports": {
-                "firebase/": "https://www.gstatic.com/firebasejs/10.7.1/"
-            }
+    <!-- Right: Login Form Only (No Registration) -->
+    <div class="split-right">
+        <div class="form-wrapper">
+            <div class="form-title">تسجيل الدخول</div>
+            <p class="form-sub">أدخل بياناتك للوصول إلى لوحة التحكم</p>
+
+            <div id="errorMessage" class="error-msg"></div>
+
+            <form id="authForm">
+                <div class="form-group">
+                    <label for="email"><i class="fa-regular fa-envelope"></i> البريد الإلكتروني</label>
+                    <input type="email" id="email" placeholder="admin@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label for="password"><i class="fa-regular fa-lock"></i> كلمة المرور</label>
+                    <input type="password" id="password" placeholder="••••••••" required minlength="6" />
+                </div>
+                <button type="submit" class="btn-primary" id="submitBtn">
+                    <span id="btnText">تسجيل الدخول</span>
+                    <span id="btnSpinner" style="display:none;"><span class="spinner"></span></span>
+                </button>
+            </form>
+            <!-- تم إزالة خيار "إنشاء حساب" نهائياً -->
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- Firebase Modules -->
+<script type="importmap">
+    {
+        "imports": {
+            "firebase/": "https://www.gstatic.com/firebasejs/10.7.1/"
         }
-    </script>
+    }
+</script>
 
-    <script type="module">
-        // ============================================
-        // ✅ تم تبسيط الكود: إزالة معالجة الأخطاء المكررة للشعار
-        // (يعتمد الآن فقط على onerror في وسم <img>)
-        // ============================================
+<script type="module">
+    // ============================================
+    // 1. LOGIC: Logo Fallback (بدون onerror في HTML)
+    // ============================================
+    const logoImg = document.getElementById('logoImg');
+    const fallback = document.getElementById('brandFallback');
+    logoImg.addEventListener('error', () => {
+        logoImg.style.display = 'none';
+        fallback.style.display = 'block';
+    });
 
-        import {
-            auth,
-            signInWithEmailAndPassword,
-            createUserWithEmailAndPassword,
-            onAuthStateChanged,
-            db,
-            doc,
-            setDoc,
-            serverTimestamp
-        } from './js/firebase-init.js';
+    // ============================================
+    // 2. IMPORTS (Auth + Error Handler)
+    // ============================================
+    import { 
+        auth, 
+        signInWithEmailAndPassword,
+        onAuthStateChanged,
+        signOut
+    } from './js/firebase-init.js';
+    import { getSafeAuthErrorMessage } from './js/error-handler.js';
+    import { requireAdmin } from './js/auth-guard.js';
 
-        // ============================================
-        // DOM REFS
-        // ============================================
-        const form = document.getElementById('authForm');
-        const emailInput = document.getElementById('email');
-        const passInput = document.getElementById('password');
-        const submitBtn = document.getElementById('submitBtn');
-        const btnText = document.getElementById('btnText');
-        const btnSpinner = document.getElementById('btnSpinner');
-        const errorMsg = document.getElementById('errorMessage');
-        const toggleLink = document.getElementById('toggleMode');
-        const togglePrompt = document.getElementById('togglePrompt');
-        const formTitle = document.getElementById('formTitle');
-        const formSub = document.getElementById('formSub');
+    // ============================================
+    // 3. DOM REFS
+    // ============================================
+    const form = document.getElementById('authForm');
+    const emailInput = document.getElementById('email');
+    const passInput = document.getElementById('password');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+    const errorMsg = document.getElementById('errorMessage');
 
-        let isLoginMode = true;
+    // ============================================
+    // 4. HELPERS
+    // ============================================
+    function showError(message) {
+        errorMsg.textContent = message;
+        errorMsg.classList.add('show');
+    }
 
-        // ============================================
-        // TOGGLE
-        // ============================================
-        toggleLink.addEventListener('click', () => {
-            isLoginMode = !isLoginMode;
+    function setLoading(loading) {
+        if (loading) {
+            btnText.style.display = 'none';
+            btnSpinner.style.display = 'inline-block';
+            submitBtn.disabled = true;
+        } else {
+            btnText.style.display = 'inline';
+            btnSpinner.style.display = 'none';
+            submitBtn.disabled = false;
+        }
+    }
 
-            if (isLoginMode) {
-                formTitle.textContent = 'تسجيل الدخول';
-                formSub.textContent = 'أدخل بياناتك للوصول إلى لوحة التحكم';
-                btnText.textContent = 'تسجيل الدخول';
-                togglePrompt.textContent = 'ليس لديك حساب؟';
-                toggleLink.textContent = 'إنشاء حساب جديد';
+    // ============================================
+    // 5. FORM SUBMIT (مع رسائل عامة)
+    // ============================================
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorMsg.classList.remove('show');
+        errorMsg.textContent = '';
+
+        const email = emailInput.value.trim();
+        const password = passInput.value;
+
+        if (!email || !password) {
+            showError('يرجى ملء جميع الحقول.');
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const tokenResult = await userCredential.user.getIdTokenResult(true);
+
+            if (tokenResult.claims.admin === true) {
+                window.location.href = '/admin.html';
             } else {
-                formTitle.textContent = 'إنشاء حساب جديد';
-                formSub.textContent = 'سجل الآن للوصول إلى لوحة المدير';
-                btnText.textContent = 'إنشاء الحساب';
-                togglePrompt.textContent = 'لديك حساب بالفعل؟';
-                toggleLink.textContent = 'تسجيل الدخول';
-            }
-
-            errorMsg.classList.remove('show');
-            errorMsg.textContent = '';
-        });
-
-        // ============================================
-        // HELPERS
-        // ============================================
-        function showError(message) {
-            errorMsg.textContent = message;
-            errorMsg.classList.add('show');
-        }
-
-        function setLoading(loading) {
-            if (loading) {
-                btnText.style.display = 'none';
-                btnSpinner.style.display = 'inline-block';
-                submitBtn.disabled = true;
-            } else {
-                btnText.style.display = 'inline';
-                btnSpinner.style.display = 'none';
-                submitBtn.disabled = false;
-            }
-        }
-
-        // ============================================
-        // FORM SUBMIT
-        // ============================================
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            errorMsg.classList.remove('show');
-            errorMsg.textContent = '';
-
-            const email = emailInput.value.trim();
-            const password = passInput.value;
-
-            if (!email || !password) {
-                showError('يرجى ملء جميع الحقول.');
-                return;
-            }
-
-            setLoading(true);
-
-            try {
-                let userCredential;
-
-                if (isLoginMode) {
-                    userCredential = await signInWithEmailAndPassword(auth, email, password);
-                } else {
-                    userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                    await setDoc(doc(db, 'users', userCredential.user.uid), {
-                        uid: userCredential.user.uid,
-                        email: email,
-                        role: 'user',
-                        createdAt: serverTimestamp()
-                    });
-                    showError('✅ تم إنشاء الحساب! لكن يجب تعيين صلاحية المدير يدوياً عبر Firebase Console.');
-                    setLoading(false);
-                    return;
-                }
-
-                const idTokenResult = await userCredential.user.getIdTokenResult();
-
-                if (idTokenResult.claims.admin === true) {
-                    window.location.href = '/admin.html';
-                } else {
-                    showError('⚠️ هذا الحساب ليس لديه صلاحيات المدير. الرجاء التواصل مع الدعم.');
-                    await auth.signOut();
-                    setLoading(false);
-                }
-
-            } catch (error) {
-                let friendlyMsg = 'حدث خطأ غير متوقع.';
-                switch (error.code) {
-                    case 'auth/user-not-found':
-                        friendlyMsg = 'البريد الإلكتروني غير مسجل.';
-                        break;
-                    case 'auth/wrong-password':
-                        friendlyMsg = 'كلمة المرور غير صحيحة.';
-                        break;
-                    case 'auth/email-already-in-use':
-                        friendlyMsg = 'البريد الإلكتروني مستخدم بالفعل.';
-                        break;
-                    case 'auth/weak-password':
-                        friendlyMsg = 'كلمة المرور ضعيفة جداً (6 أحرف على الأقل).';
-                        break;
-                    case 'auth/too-many-requests':
-                        friendlyMsg = 'تم تعطيل الحساب مؤقتاً بسبب محاولات كثيرة. حاول لاحقاً.';
-                        break;
-                    default:
-                        friendlyMsg = error.message;
-                }
-                showError(friendlyMsg);
+                // مستخدم عادي حاول الدخول: رسالة عامة + تسجيل خروج
+                showError('بيانات الدخول غير صحيحة أو غير مصرح بها.');
+                await signOut(auth);
                 setLoading(false);
             }
-        });
+        } catch (error) {
+            // استخدام معالج الأخطاء الآمن (يمنع التعداد)
+            const safeMessage = getSafeAuthErrorMessage(error);
+            showError(safeMessage);
+            setLoading(false);
+        }
+    });
 
-        // ============================================
-        // AUTO-REDIRECT
-        // ============================================
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                try {
-                    const tokenResult = await user.getIdTokenResult();
-                    if (tokenResult.claims.admin === true) {
-                        window.location.href = '/admin.html';
-                    }
-                } catch (_) {}
-            }
-        });
+    // ============================================
+    // 6. AUTO-REDIRECT (إذا كان المستخدم مديراً بالفعل)
+    // ============================================
+    // استخدام الحارس المركزي لتوجيه المدير تلقائياً إلى admin.html
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            try {
+                const tokenResult = await user.getIdTokenResult();
+                if (tokenResult.claims.admin === true) {
+                    window.location.href = '/admin.html';
+                }
+            } catch (_) { /* تجاهل */ }
+        }
+    });
 
-        console.log('✅ Login page (Final Clean Version) loaded successfully.');
-    </script>
-
+    console.log('✅ Login Page (Secure, No Registration, No Enumeration)');
+</script>
 </body>
 </html>
