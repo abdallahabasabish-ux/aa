@@ -755,6 +755,515 @@ button { font-family: var(--admin-font); cursor: pointer; border: none; backgrou
   }
   .admin-fade-in { opacity: 1; transform: none; }
 }
+/* ============================================
+   SERVICE MANAGEMENT — FORM & MODAL
+   ============================================ */
 
+/* --- Toolbar --- */
+.admin-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.admin-search {
+  flex: 1;
+  min-width: 200px;
+  max-width: 360px;
+  position: relative;
+}
+
+.admin-search-icon {
+  position: absolute;
+  inset-inline-start: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--admin-text-muted);
+  pointer-events: none;
+}
+
+.admin-search-input {
+  width: 100%;
+  padding: 9px 14px 9px 40px;
+  font-family: var(--admin-font);
+  font-size: 0.875rem;
+  color: var(--admin-text-primary);
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  outline: none;
+  transition: border-color var(--admin-fast), box-shadow var(--admin-fast);
+}
+
+.admin-search-input::placeholder { color: var(--admin-text-dim); }
+.admin-search-input:focus {
+  border-color: var(--admin-border-focus);
+  box-shadow: 0 0 0 3px var(--admin-accent-soft);
+}
+
+/* --- Primary Button --- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  font-family: var(--admin-font);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--admin-text-inverse);
+  background: var(--admin-accent);
+  border: none;
+  border-radius: var(--admin-radius);
+  cursor: pointer;
+  transition: background var(--admin-fast), transform 100ms ease;
+  white-space: nowrap;
+}
+
+.btn-primary svg { width: 18px; height: 18px; flex-shrink: 0; }
+.btn-primary:hover { background: var(--admin-accent-hover); }
+.btn-primary:active { transform: scale(0.985); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* --- Ghost Button --- */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-family: var(--admin-font);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--admin-text-secondary);
+  background: none;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-sm);
+  cursor: pointer;
+  transition: all var(--admin-fast);
+  white-space: nowrap;
+}
+
+.btn-ghost svg { width: 16px; height: 16px; flex-shrink: 0; }
+.btn-ghost:hover { border-color: var(--admin-border-light); color: var(--admin-text-primary); background: rgba(255,255,255,0.03); }
+
+/* --- Danger Button --- */
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-family: var(--admin-font);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--admin-error);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--admin-radius-sm);
+  cursor: pointer;
+  transition: all var(--admin-fast);
+  white-space: nowrap;
+}
+
+.btn-danger svg { width: 16px; height: 16px; flex-shrink: 0; }
+.btn-danger:hover { background: var(--admin-error-soft); border-color: rgba(239,68,68,0.15); }
+
+/* --- Table Actions Cell --- */
+.table-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* --- Toggle Switch --- */
+.toggle-switch {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--admin-border);
+  border-radius: 11px;
+  transition: background var(--admin-fast);
+}
+
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  inset-inline-start: 2px;
+  width: 18px;
+  height: 18px;
+  background: var(--admin-text-muted);
+  border-radius: 50%;
+  transition: transform var(--admin-fast), background var(--admin-fast);
+}
+
+.toggle-switch input:checked + .toggle-track {
+  background: var(--admin-accent);
+}
+
+.toggle-switch input:checked + .toggle-track::after {
+  transform: translateX(18px);
+  background: var(--admin-text-inverse);
+}
+
+.toggle-switch input:focus-visible + .toggle-track {
+  outline: 2px solid var(--admin-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   MODAL / SLIDE-OVER
+   ============================================ */
+.admin-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 200;
+  opacity: 0;
+  transition: opacity var(--admin-normal);
+  backdrop-filter: blur(4px);
+}
+
+.admin-modal-overlay--visible {
+  opacity: 1;
+}
+
+.admin-modal {
+  position: fixed;
+  inset-inline-start: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 640px;
+  background: var(--admin-bg);
+  border-inline-end: 1px solid var(--admin-border);
+  z-index: 210;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--admin-normal);
+  overflow-y: auto;
+}
+
+.admin-modal--open {
+  transform: translateX(0);
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--admin-border);
+  position: sticky;
+  top: 0;
+  background: var(--admin-bg);
+  z-index: 1;
+}
+
+.modal-title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--admin-text-primary);
+}
+
+.modal-close {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--admin-radius-sm);
+  color: var(--admin-text-muted);
+  transition: background var(--admin-fast), color var(--admin-fast);
+}
+
+.modal-close svg { width: 20px; height: 20px; }
+.modal-close:hover { background: rgba(255,255,255,0.05); color: var(--admin-text-primary); }
+.modal-close:focus-visible { outline: 2px solid var(--admin-accent); outline-offset: -2px; }
+
+/* Modal Body */
+.modal-body {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--admin-border);
+  position: sticky;
+  bottom: 0;
+  background: var(--admin-bg);
+}
+
+/* --- Form Grid --- */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-grid .form-full {
+  grid-column: 1 / -1;
+}
+
+/* --- Form Group (admin) --- */
+.admin-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-form-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--admin-text-secondary);
+}
+
+.admin-form-label span {
+  font-weight: 400;
+  color: var(--admin-text-dim);
+  font-size: 0.75rem;
+}
+
+.admin-form-input,
+.admin-form-textarea,
+.admin-form-select {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: var(--admin-font);
+  font-size: 0.875rem;
+  color: var(--admin-text-primary);
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-sm);
+  outline: none;
+  transition: border-color var(--admin-fast), box-shadow var(--admin-fast);
+}
+
+.admin-form-input::placeholder,
+.admin-form-textarea::placeholder {
+  color: var(--admin-text-dim);
+}
+
+.admin-form-input:focus,
+.admin-form-textarea:focus,
+.admin-form-select:focus {
+  border-color: var(--admin-border-focus);
+  box-shadow: 0 0 0 3px var(--admin-accent-soft);
+}
+
+.admin-form-input--error,
+.admin-form-textarea--error {
+  border-color: var(--admin-border-error);
+}
+
+.admin-form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+}
+
+.admin-form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2363636E' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 12px center;
+  background-size: 18px;
+  padding-inline-end: 36px;
+  cursor: pointer;
+}
+
+.admin-form-select option {
+  background: var(--admin-surface);
+  color: var(--admin-text-primary);
+}
+
+.admin-form-hint {
+  font-size: 0.75rem;
+  color: var(--admin-text-dim);
+}
+
+.admin-form-error {
+  font-size: 0.75rem;
+  color: var(--admin-error);
+  min-height: 18px;
+}
+
+/* --- Toggle Row --- */
+.form-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.form-toggle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.form-toggle-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--admin-text-primary);
+}
+
+.form-toggle-desc {
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
+}
+
+/* --- Section Divider in Form --- */
+.form-section-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--admin-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+/* --- Confirm Dialog --- */
+.confirm-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  padding: 28px;
+  z-index: 300;
+  max-width: 400px;
+  width: calc(100% - 40px);
+  text-align: center;
+}
+
+.confirm-dialog-title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--admin-text-primary);
+  margin-bottom: 8px;
+}
+
+.confirm-dialog-desc {
+  font-size: 0.875rem;
+  color: var(--admin-text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-danger-solid {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  font-family: var(--admin-font);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--admin-text-inverse);
+  background: var(--admin-error);
+  border: none;
+  border-radius: var(--admin-radius);
+  cursor: pointer;
+  transition: all var(--admin-fast);
+}
+
+.btn-danger-solid:hover { background: #dc2626; }
+
+/* --- Responsive Modal --- */
+@media (max-width: 640px) {
+  .admin-modal {
+    max-width: 100%;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .modal-body { padding: 20px 16px; }
+  .modal-header { padding: 16px; }
+  .modal-footer { padding: 12px 16px; }
+  .admin-toolbar { flex-direction: column; align-items: stretch; }
+  .admin-search { max-width: 100%; }
+}
+
+/* --- Table: service title with featured star --- */
+.service-title-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.service-title-text {
+  font-weight: 600;
+  color: var(--admin-text-primary);
+}
+
+.featured-star {
+  color: var(--admin-warning);
+  flex-shrink: 0;
+}
+
+.featured-star svg { width: 14px; height: 14px; }
+
+/* --- Price cell --- */
+.price-text {
+  font-weight: 600;
+  color: var(--admin-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.price-currency {
+  font-weight: 400;
+  color: var(--admin-text-muted);
+  font-size: 0.75rem;
+  margin-inline-start: 4px;
+}
+
+/* --- Category badge --- */
+.category-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--admin-gray-badge-soft);
+  color: var(--admin-text-secondary);
+}
 /* --- SELECTION --- */
 ::selection { background: var(--admin-accent); color: var(--admin-text-inverse); }
