@@ -1,7 +1,6 @@
 /**
  * auth-guard.js
  * حماية الصفحات — Auth Guard مركزي.
- *
  * لا يعتمد على: localStorage, DOM, متغيرات JS, إخفاء عناصر.
  * يعتمد على: Firebase Auth State + Custom Claims + Security Rules.
  */
