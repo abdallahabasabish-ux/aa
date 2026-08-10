@@ -1,374 +1,223 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>إنشاء حساب | Abdallah Abas</title>
-    <meta name="description" content="أنشئ حساباً جديداً في منصة Abdallah Abas" />
-    <meta name="robots" content="noindex, nofollow" />
-    <link rel="canonical" href="https://abdallahsst.web.app/register.html" />
-    <link rel="icon" href="assets/favicon.ico" />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" rel="stylesheet" />
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-    <!-- التصميم الرئيسي -->
-    <link rel="stylesheet" href="css/style.css" />
-
-    <style>
-        /* نفس تنسيقات login.html */
-        .auth-page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--gray-100);
-            padding: 2rem 1.5rem;
-        }
-        .auth-container {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--gray-200);
-            padding: 3rem 2.5rem;
-            max-width: 420px;
-            width: 100%;
-        }
-        .auth-container .logo {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .auth-container .logo a {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--black);
-        }
-        .auth-container .logo a span {
-            color: var(--primary);
-        }
-        .auth-container .logo p {
-            color: var(--gray-500);
-            font-size: 0.95rem;
-            margin-top: 0.25rem;
-        }
-        .auth-container h1 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-bottom: 0.25rem;
-            text-align: center;
-        }
-        .auth-container .subtitle {
-            text-align: center;
-            color: var(--gray-500);
-            margin-bottom: 2rem;
-            font-size: 0.95rem;
-        }
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-            font-size: 0.95rem;
-            color: var(--gray-700);
-        }
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid var(--gray-200);
-            border-radius: var(--radius);
-            font-family: var(--font-ar);
-            font-size: 1rem;
-            transition: var(--transition);
-            background: var(--white);
-            color: var(--gray-900);
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.06);
-        }
-        .form-group .input-hint {
-            font-size: 0.8rem;
-            color: var(--gray-400);
-            margin-top: 0.2rem;
-        }
-        .btn-auth {
-            width: 100%;
-            padding: 0.9rem;
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: var(--radius);
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-            margin-top: 0.5rem;
-        }
-        .btn-auth-primary {
-            background: var(--primary);
-            color: var(--white);
-        }
-        .btn-auth-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(var(--primary-rgb), 0.25);
-        }
-        .btn-auth-google {
-            background: var(--white);
-            color: var(--gray-700);
-            border: 2px solid var(--gray-200);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-        }
-        .btn-auth-google:hover {
-            border-color: var(--primary);
-            background: rgba(var(--primary-rgb), 0.04);
-        }
-        .auth-divider {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 1.5rem 0;
-            color: var(--gray-400);
-            font-size: 0.85rem;
-        }
-        .auth-divider::before,
-        .auth-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--gray-200);
-        }
-        .auth-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.95rem;
-            color: var(--gray-500);
-        }
-        .auth-footer a {
-            color: var(--primary);
-            font-weight: 700;
-        }
-        .auth-footer a:hover {
-            text-decoration: underline;
-        }
-        #authError {
-            color: #EF4444;
-            text-align: center;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            min-height: 1.5rem;
-        }
-        #authSuccess {
-            color: #22C55E;
-            text-align: center;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            min-height: 1.5rem;
-        }
-        .back-home {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--gray-500);
-            font-size: 0.9rem;
-            transition: var(--transition);
-            margin-bottom: 1.5rem;
-        }
-        .back-home:hover {
-            color: var(--primary);
-        }
-
-        @media (max-width: 480px) {
-            .auth-container {
-                padding: 2rem 1.5rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>إنشاء حساب — عبدالله عباس</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/auth.css" />
 </head>
-<body>
+<body style="visibility:hidden">
 
-    <section class="auth-page">
-        <div class="auth-container">
-            <!-- رجوع للرئيسية -->
-            <a href="/" class="back-home"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+  <div class="auth-layout">
 
-            <!-- الشعار -->
-            <div class="logo">
-                <a href="/">Abdallah <span>Abas</span></a>
-                <p>منصة خدمات رقمية احترافية</p>
+    <!-- ========== BRAND PANEL ========== -->
+    <div class="auth-brand-panel" aria-hidden="true">
+      <div class="auth-brand-content">
+        <span class="auth-brand-label">حلول رقمية</span>
+        <h2 class="auth-brand-name">
+          <span>عبدالله</span>
+          <span>عباس</span>
+        </h2>
+        <div class="auth-brand-line"></div>
+        <p class="auth-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية</p>
+      </div>
+      <p class="auth-brand-copy">&copy; 2025 عبدالله عباس</p>
+    </div>
+
+    <!-- ========== FORM PANEL ========== -->
+    <main class="auth-form-panel">
+      <div class="auth-form-wrapper">
+
+        <div class="auth-mobile-brand auth-animate-in">عبدالله عباس</div>
+
+        <h1 class="auth-title auth-animate-in">إنشاء حساب</h1>
+        <p class="auth-subtitle auth-animate-in">انضم إلينا للوصول لخدماتنا ومنتجاتك</p>
+
+        <div id="authMessage" class="auth-message auth-animate-in" role="alert" aria-live="polite"></div>
+
+        <form id="registerForm" class="auth-form auth-animate-in" novalidate>
+          <!-- الاسم -->
+          <div class="form-group">
+            <label for="displayName" class="form-label">الاسم الكامل</label>
+            <input
+              type="text"
+              id="displayName"
+              name="displayName"
+              class="form-input"
+              autocomplete="name"
+              required
+              maxlength="60"
+            />
+            <div id="nameError" class="field-error" aria-live="polite"></div>
+          </div>
+
+          <!-- البريد الإلكتروني -->
+          <div class="form-group">
+            <label for="email" class="form-label">البريد الإلكتروني</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              autocomplete="email"
+              required
+              spellcheck="false"
+            />
+            <div id="emailError" class="field-error" aria-live="polite"></div>
+          </div>
+
+          <!-- كلمة المرور -->
+          <div class="form-group">
+            <label for="password" class="form-label">كلمة المرور</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-input"
+                autocomplete="new-password"
+                required
+                minlength="8"
+              />
+              <button type="button" id="passwordToggle" class="password-toggle" aria-label="إظهار كلمة المرور"></button>
             </div>
+            <div id="passwordError" class="field-error" aria-live="polite"></div>
+          </div>
 
-            <!-- العنوان -->
-            <h1>إنشاء حساب جديد</h1>
-            <p class="subtitle">انضم إلينا واستمتع بخدماتنا الرقمية</p>
-
-            <!-- النموذج -->
-            <form id="registerForm">
-                <div class="form-group">
-                    <label for="name">الاسم كاملاً</label>
-                    <input type="text" id="name" name="name" required placeholder="أدخل اسمك" />
-                </div>
-                <div class="form-group">
-                    <label for="email">البريد الإلكتروني</label>
-                    <input type="email" id="email" name="email" required placeholder="example@domain.com" />
-                </div>
-                <div class="form-group">
-                    <label for="password">كلمة المرور</label>
-                    <input type="password" id="password" name="password" required minlength="6" placeholder="••••••••" />
-                    <div class="input-hint">كلمة المرور يجب أن تكون 6 أحرف على الأقل</div>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">تأكيد كلمة المرور</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6" placeholder="••••••••" />
-                </div>
-
-                <button type="submit" class="btn-auth btn-auth-primary" id="registerSubmitBtn">
-                    <i class="fas fa-user-plus"></i> إنشاء حساب
-                </button>
-            </form>
-
-            <!-- تسجيل الدخول بـ Google -->
-            <button id="googleRegisterBtn" class="btn-auth btn-auth-google" style="margin-top:0.75rem;">
-                <i class="fab fa-google"></i> إنشاء حساب بـ Google
-            </button>
-
-            <!-- الفاصل -->
-            <div class="auth-divider">أو</div>
-
-            <!-- روابط إضافية -->
-            <div class="auth-footer">
-                لديك حساب بالفعل؟ <a href="login.html">تسجيل الدخول</a>
+          <!-- تأكيد كلمة المرور -->
+          <div class="form-group">
+            <label for="confirmPassword" class="form-label">تأكيد كلمة المرور</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                class="form-input"
+                autocomplete="new-password"
+                required
+                minlength="8"
+              />
+              <button type="button" id="confirmToggle" class="password-toggle" aria-label="إظهار كلمة المرور"></button>
             </div>
+            <div id="confirmError" class="field-error" aria-live="polite"></div>
+          </div>
 
-            <!-- رسائل الخطأ والنجاح -->
-            <div id="authError"></div>
-            <div id="authSuccess"></div>
+          <button type="submit" class="auth-btn" id="submitBtn">
+            <span class="btn-text">إنشاء الحساب</span>
+            <span class="btn-loader" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <div class="auth-link-row auth-animate-in">
+          <span>لديك حساب بالفعل؟</span>
+          <a href="/login.html">تسجيل الدخول</a>
         </div>
-    </section>
 
-    <!-- ===== SCRIPTS ===== -->
-    <script type="importmap">
-    {
-        "imports": {
-            "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
-            "firebase/auth": "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js",
-            "firebase/firestore": "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"
+      </div>
+    </main>
+
+  </div>
+
+  <script type="module">
+    import { auth } from "/js/firebase-init.js";
+    import { getIdTokenResult } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+    import { register, validateName, validateEmail, validatePassword, validateConfirmPassword } from "/js/auth.js";
+    import { showUserMessage, clearUserMessage, showFieldError, clearFieldError } from "/js/error-handler.js";
+    import { setButtonLoading, initPasswordToggle, setInputError } from "/js/ui.js";
+
+    // --- DOM ---
+    const form = document.getElementById("registerForm");
+    const nameInput = document.getElementById("displayName");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const confirmInput = document.getElementById("confirmPassword");
+    const submitBtn = document.getElementById("submitBtn");
+
+    // --- Init toggles ---
+    initPasswordToggle(document.getElementById("passwordToggle"), passwordInput);
+    initPasswordToggle(document.getElementById("confirmToggle"), confirmInput);
+
+    // --- Clear errors on input ---
+    const clearErrors = (inputId, errorId) => {
+      document.getElementById(inputId).addEventListener("input", () => {
+        clearFieldError(errorId);
+        setInputError(document.getElementById(inputId), false);
+        clearUserMessage("authMessage");
+      });
+    };
+    clearErrors("displayName", "nameError");
+    clearErrors("email", "emailError");
+    clearErrors("password", "passwordError");
+    clearErrors("confirmPassword", "confirmError");
+
+    // --- Auth redirect check ---
+    let redirectDone = false;
+    const unsub = auth.onAuthStateChanged(async (user) => {
+      unsub();
+      if (user && !redirectDone) {
+        redirectDone = true;
+        try {
+          const r = await getIdTokenResult(user);
+          window.location.replace(r.claims.admin ? "/admin/admin.html" : "/dashboard/dashboard.html");
+          return;
+        } catch { /* فشل Token */ }
+      }
+      document.body.style.visibility = "visible";
+    });
+
+    // --- Submit ---
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      clearUserMessage("authMessage");
+      ["nameError","emailError","passwordError","confirmError"].forEach(clearFieldError);
+      [nameInput, emailInput, passwordInput, confirmInput].forEach(i => setInputError(i, false));
+
+      const name = nameInput.value;
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      const confirm = confirmInput.value;
+      let hasErr = false;
+
+      const nv = validateName(name);
+      if (!nv.valid) { showFieldError("nameError", nv.message); setInputError(nameInput, true); hasErr = true; }
+
+      const ev = validateEmail(email);
+      if (!ev.valid) { showFieldError("emailError", ev.message); setInputError(emailInput, true); hasErr = true; }
+
+      const pv = validatePassword(password);
+      if (!pv.valid) { showFieldError("passwordError", pv.message); setInputError(passwordInput, true); hasErr = true; }
+
+      const cv = validateConfirmPassword(password, confirm);
+      if (!cv.valid) { showFieldError("confirmError", cv.message); setInputError(confirmInput, true); hasErr = true; }
+
+      if (hasErr) {
+        const first = form.querySelector(".form-input--error");
+        if (first) first.focus();
+        return;
+      }
+
+      setButtonLoading(submitBtn, true);
+      const result = await register(email, password, name);
+      setButtonLoading(submitBtn, false);
+
+      if (result.ok) {
+        showUserMessage("authMessage", "تم إنشاء الحساب بنجاح. جارٍ التحويل...", "success");
+        setTimeout(() => {
+          window.location.replace("/dashboard/dashboard.html");
+        }, 1200);
+      } else {
+        showUserMessage("authMessage", result.userMessage, "error");
+        if (result.userMessage.includes("مسجل")) {
+          setInputError(emailInput, true);
+          emailInput.focus();
         }
-    }
-    </script>
-
-    <script type="module">
-        import { initializeApp } from "firebase/app";
-        import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-        import { getFirestore, doc, setDoc } from "firebase/firestore";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDg-oSbA_UdlzMS8HZGE0pHtr_zWg5rrXY",
-            authDomain: "abdallahsst.firebaseapp.com",
-            projectId: "abdallahsst",
-            storageBucket: "abdallahsst.firebasestorage.app",
-            messagingSenderId: "1011946194938",
-            appId: "1:1011946194938:web:9bee94362711431368c643"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const provider = new GoogleAuthProvider();
-
-        // ===== عناصر الصفحة =====
-        const form = document.getElementById('registerForm');
-        const nameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const confirmInput = document.getElementById('confirmPassword');
-        const errorDiv = document.getElementById('authError');
-        const successDiv = document.getElementById('authSuccess');
-        const submitBtn = document.getElementById('registerSubmitBtn');
-
-        // ===== إنشاء حساب بالبريد وكلمة المرور =====
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            errorDiv.textContent = '';
-            successDiv.textContent = '';
-
-            const name = nameInput.value.trim();
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
-            const confirm = confirmInput.value;
-
-            // تحقق من تطابق كلمة المرور
-            if (password !== confirm) {
-                errorDiv.textContent = '❌ كلمة المرور وتأكيدها غير متطابقين.';
-                return;
-            }
-
-            if (password.length < 6) {
-                errorDiv.textContent = '❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل.';
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري إنشاء الحساب...';
-
-            try {
-                const cred = await createUserWithEmailAndPassword(auth, email, password);
-                // حفظ بيانات المستخدم في Firestore
-                await setDoc(doc(db, "users", cred.user.uid), {
-                    uid: cred.user.uid,
-                    email: email,
-                    displayName: name,
-                    createdAt: new Date()
-                });
-                successDiv.textContent = '✅ تم إنشاء الحساب بنجاح! جاري التحويل...';
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 1500);
-            } catch (err) {
-                let msg = err.message;
-                if (err.code === 'auth/email-already-in-use') msg = '❌ هذا البريد الإلكتروني مستخدم بالفعل.';
-                else if (err.code === 'auth/invalid-email') msg = '❌ البريد الإلكتروني غير صحيح.';
-                else if (err.code === 'auth/weak-password') msg = '❌ كلمة المرور ضعيفة جداً.';
-                errorDiv.textContent = msg;
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> إنشاء حساب';
-            }
-        });
-
-        // ===== إنشاء حساب بـ Google =====
-        document.getElementById('googleRegisterBtn').addEventListener('click', async () => {
-            errorDiv.textContent = '';
-            successDiv.textContent = '';
-            try {
-                const result = await signInWithPopup(auth, provider);
-                // حفظ بيانات المستخدم في Firestore
-                await setDoc(doc(db, "users", result.user.uid), {
-                    uid: result.user.uid,
-                    email: result.user.email,
-                    displayName: result.user.displayName || '',
-                    photoURL: result.user.photoURL || '',
-                    createdAt: new Date()
-                });
-                successDiv.textContent = '✅ تم إنشاء الحساب بنجاح! جاري التحويل...';
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 1500);
-            } catch (err) {
-                errorDiv.textContent = '❌ ' + err.message;
-            }
-        });
-    </script>
+      }
+    });
+  </script>
 </body>
 </html>
