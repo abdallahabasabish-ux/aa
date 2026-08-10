@@ -1,16 +1,6 @@
-/**
- * auth-guard.js
- * حماية الصفحات — Auth Guard مركزي.
- * لا يعتمد على: localStorage, DOM, متغيرات JS, إخفاء عناصر.
- * يعتمد على: Firebase Auth State + Custom Claims + Security Rules.
- */
-
 import { auth } from "./firebase-init.js";
 import { getIdTokenResult } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
-/**
- * يتطلب مستخدم admin — يُستدعى في كل صفحة إدارية.
- */
 export function requireAdmin({ loginUrl = "/login.html", forbiddenUrl = null } = {}) {
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
@@ -49,10 +39,6 @@ export function requireAdmin({ loginUrl = "/login.html", forbiddenUrl = null } =
     });
   });
 }
-
-/**
- * يتطلب مستخدم مسجل — يُستدعى في صفحات الـ dashboard.
- */
 export function requireAuth(loginUrl = "/login.html") {
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
