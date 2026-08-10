@@ -1,13 +1,3 @@
-/**
- * auth.js
- * منطق المصادقة الكامل.
- * قواعد صارمة:
- * 1. لا نعرض Firebase Error Codes للمستخدم أبدًا.
- * 2. كل error يمر من mapAuthError().
- * 3. لا يُسمح للعميل بتعديل أو إرسال Custom Claims.
- * 4. Audit Events تُسجّل في Firestore (يحتاج Rules تسمح بذلك).
- */
-
 import { auth, db } from "./firebase-init.js";
 import {
   signInWithEmailAndPassword,
@@ -17,10 +7,6 @@ import {
   getIdTokenResult,
   updateProfile,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-
-// -----------------------------------------------
-// Audit Logging
-// -----------------------------------------------
 async function logAuditEvent(eventType, data = {}) {
   try {
     const { collection, addDoc, serverTimestamp } = await import(
@@ -33,13 +19,8 @@ async function logAuditEvent(eventType, data = {}) {
       userAgent: navigator.userAgent.slice(0, 200),
     });
   } catch {
-    // فشل التسجيل لا يُعطّل العملية الأساسية
   }
 }
-
-// -----------------------------------------------
-// Error Mapping — منع User Enumeration
-// -----------------------------------------------
 function mapAuthError(error) {
   const code = error.code || "";
 
@@ -84,10 +65,6 @@ function mapAuthError(error) {
 
   return { ok: false, userMessage: "حدث خطأ غير متوقع. حاول مجددًا." };
 }
-
-// -----------------------------------------------
-// Client-Side Validation (UX فقط — ليس أمانًا)
-// -----------------------------------------------
 export function validateName(name) {
   if (!name || !name.trim()) return { valid: false, message: "الاسم مطلوب." };
   if (name.trim().length < 2) return { valid: false, message: "الاسم قصير جدًا." };
@@ -115,15 +92,6 @@ export function validateConfirmPassword(password, confirm) {
   if (password !== confirm) return { valid: false, message: "كلمتا المرور غير متطابقتين." };
   return { valid: true, message: "" };
 }
-
-// -----------------------------------------------
-// Authentication Functions
-// -----------------------------------------------
-
-/**
- * تسجيل الدخول.
- * @returns {Promise<{ok, user?, userMessage?, claims?}>}
- */
 export async function login(email, password) {
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
@@ -143,12 +111,6 @@ export async function login(email, password) {
     return mapAuthError(error);
   }
 }
-
-/**
- * إنشاء حساب — يُنشئ مستخدمًا عاديًا فقط.
- * لا يُعطي أي Custom Claims من العميل.
- * @returns {Promise<{ok, user?, userMessage?}>}
- */
 export async function register(email, password, displayName) {
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
@@ -171,10 +133,6 @@ export async function register(email, password, displayName) {
     return mapAuthError(error);
   }
 }
-
-/**
- * تسجيل الخروج.
- */
 export async function logout() {
   try {
     const user = auth.currentUser;
@@ -185,11 +143,6 @@ export async function logout() {
     return { ok: false, userMessage: "حدث خطأ أثناء تسجيل الخروج." };
   }
 }
-
-/**
- * إرسال رابط إعادة تعيين كلمة المرور.
- * رسالة عامة لمنع User Enumeration.
- */
 export async function resetPassword(email) {
   try {
     await sendPasswordResetEmail(auth, email);
@@ -207,8 +160,6 @@ export async function resetPassword(email) {
       emailPrefix: email ? email.split("@")[0] : "empty",
       errorCode: error.code,
     });
-
-    // رسالة عامة حتى لو البريد غير مسجل
     if (error.code === "auth/user-not-found" || error.code === "auth/invalid-email") {
       return {
         ok: true,
@@ -219,12 +170,6 @@ export async function resetPassword(email) {
     return mapAuthError(error);
   }
 }
-
-/**
- * التحقق من أن المستخدم الحالي admin.
- * @param {boolean} forceRefresh
- * @returns {Promise<boolean>}
- */
 export async function isAdmin(forceRefresh = false) {
   const user = auth.currentUser;
   if (!user) return false;
