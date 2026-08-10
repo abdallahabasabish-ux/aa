@@ -1265,5 +1265,152 @@ button { font-family: var(--admin-font); cursor: pointer; border: none; backgrou
   background: var(--admin-gray-badge-soft);
   color: var(--admin-text-secondary);
 }
+
+/* ============================================
+   PRODUCTS — SPECIFIC STYLES
+   ============================================ */
+
+/* --- Product Type Badge --- */
+.type-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.type-badge--template { background: var(--admin-info-soft); color: var(--admin-info); }
+.type-badge--tool { background: var(--admin-success-soft); color: var(--admin-success); }
+.type-badge--resource { background: var(--admin-purple-soft); color: var(--admin-purple); }
+.type-badge--digital-product { background: var(--admin-accent-soft); color: var(--admin-accent); }
+
+/* --- Product Status --- */
+.product-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.product-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.product-status--available .product-status-dot { background: var(--admin-success); }
+.product-status--available { color: var(--admin-success); }
+
+.product-status--coming-soon .product-status-dot { background: var(--admin-warning); }
+.product-status--coming-soon { color: var(--admin-warning); }
+
+.product-status--discontinued .product-status-dot { background: var(--admin-gray-badge); }
+.product-status--discontinued { color: var(--admin-gray-badge); }
+
+.product-status--draft .product-status-dot { background: var(--admin-text-dim); }
+.product-status--draft { color: var(--admin-text-dim); }
+
+/* --- Version Tag --- */
+.version-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  background: var(--admin-surface-raised);
+  color: var(--admin-text-muted);
+  direction: ltr;
+}
+
+/* --- Download Type --- */
+.download-tag {
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
+}
+
+/* --- Image Placeholder --- */
+.product-image-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-surface-raised);
+  border: 1px solid var(--admin-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--admin-text-dim);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-thumb svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* --- URL Display --- */
+.url-display {
+  font-size: 0.8125rem;
+  color: var(--admin-text-muted);
+  direction: ltr;
+  text-align: start;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Form: Image URL Input with Preview --- */
+.image-url-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.image-preview-box {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--admin-radius);
+  background: var(--admin-surface);
+  border: 1px dashed var(--admin-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--admin-text-dim);
+  overflow: hidden;
+  transition: border-color var(--admin-fast);
+}
+
+.image-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-preview-box svg {
+  width: 24px;
+  height: 24px;
+}
+
+.image-preview-box--has-image {
+  border-style: solid;
+  border-color: var(--admin-border-light);
+}
+
 /* --- SELECTION --- */
 ::selection { background: var(--admin-accent); color: var(--admin-text-inverse); }
