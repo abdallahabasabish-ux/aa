@@ -1,235 +1,182 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>تسجيل الدخول | Abdallah Abas</title>
-    
-    <!-- CSP Policy (Meta tag for basic protection, but HTTP header is recommended) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://abdallahsst.firebaseapp.com https://*.googleapis.com https://*.firebaseio.com;">
-    
-    <!-- Google Fonts & Font Awesome -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Cairo:wght@200;300;400;600;700;800;900;1000&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    
-    <style>
-        /* --- تم الحفاظ على نفس التصميم الداكن مع تعديلات بسيطة --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --orange: #FF6600; --orange-hover: #FF8533; --orange-glow: rgba(255,102,0,0.25);
-            --bg-primary: #0A0A0A; --bg-card: #141414; --bg-elevated: #1E1E1E;
-            --text-primary: #FFFFFF; --text-secondary: #CCCCCC; --text-muted: #888888;
-            --border-color: #2A2A2A;
-            --font-body: 'Almarai', sans-serif; --font-heading: 'Cairo', sans-serif;
-        }
-        html, body { height: 100%; font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); overflow-x: hidden; }
-        .split-screen { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
-        
-        /* Left Side */
-        .split-left { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; position: relative; border-left: 1px solid var(--border-color); overflow: hidden; background: var(--bg-primary); }
-        html[dir="rtl"] .split-left { border-left: none; border-right: 1px solid var(--border-color); }
-        .split-left .logo-image { max-width: 80%; max-height: 200px; margin-bottom: 1.5rem; z-index: 2; filter: drop-shadow(0 0 20px rgba(255,102,0,0.1)); }
-        .split-left .brand-name { font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: var(--text-primary); text-align: center; z-index: 2; }
-        .split-left .brand-name span { color: var(--orange); }
-        .split-left .brand-sub { font-size: clamp(0.9rem, 1.3vw, 1.2rem); color: var(--text-muted); margin-top: 0.5rem; text-align: center; z-index: 2; }
-        .split-left .brand-sub i { color: var(--orange); }
-        .split-left .bg-shape { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle at 30% 40%, rgba(255,102,0,0.08), transparent 70%); top: -10%; right: -10%; z-index: 1; pointer-events: none; }
-        .split-left .bg-shape-2 { position: absolute; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle at 70% 60%, rgba(255,102,0,0.05), transparent 60%); bottom: -5%; left: -5%; z-index: 1; pointer-events: none; }
-
-        /* Right Side (Form) */
-        .split-right { flex: 1; background: var(--bg-card); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
-        .split-right .form-wrapper { max-width: 400px; width: 100%; }
-        .split-right .form-wrapper .form-title { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.3rem; }
-        .split-right .form-wrapper .form-sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
-        
-        .form-group { margin-bottom: 1.2rem; }
-        .form-group label { display: block; font-weight: 600; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.3rem; }
-        .form-group label i { color: var(--orange); margin-left: 0.3rem; }
-        .form-group input { width: 100%; padding: 0.8rem 1rem; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); font-family: var(--font-body); font-size: 1rem; transition: border 0.3s; outline: none; }
-        .form-group input:focus { border-color: var(--orange); }
-        
-        .btn-primary { width: 100%; padding: 0.9rem; background: var(--orange); color: var(--bg-primary); border: none; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; font-family: var(--font-body); display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-        .btn-primary:hover { background: var(--orange-hover); box-shadow: 0 0 30px var(--orange-glow); transform: scale(1.01); }
-        .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
-        
-        .error-msg { background: rgba(255, 23, 68, 0.12); border: 1px solid #FF1744; color: #FF1744; padding: 0.6rem 1rem; margin-bottom: 1rem; font-size: 0.9rem; display: none; text-align: center; border-radius: 4px; }
-        .error-msg.show { display: block; }
-        
-        .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(0,0,0,0.1); border-top-color: var(--bg-primary); border-radius: 50%; animation: spin 0.6s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .split-screen { flex-direction: column; height: auto; min-height: 100vh; overflow-y: auto; }
-            .split-left { border: none; border-bottom: 1px solid var(--border-color); padding: 2rem 1rem; min-height: 35vh; }
-            .split-left .logo-image { max-height: 120px; }
-            .split-left .brand-name { font-size: 2.2rem; }
-            .split-right { padding: 2rem 1.5rem; min-height: 65vh; }
-        }
-        @media (max-width: 480px) { .split-left .brand-name { font-size: 1.8rem; } .split-left .logo-image { max-height: 80px; } }
-        @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; } }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>تسجيل الدخول — عبدالله عباس</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/auth.css" />
 </head>
-<body>
+<body style="visibility:hidden">
 
-<div class="split-screen">
-    <!-- Left: Brand -->
-    <div class="split-left">
-        <div class="bg-shape"></div>
-        <div class="bg-shape-2"></div>
-        <img src="/assets/logo.png" alt="Abdallah Abas Logo" class="logo-image" id="logoImg" />
-        <div class="brand-name" id="brandFallback" style="display:none;">Abdallah <span>Abas</span></div>
-        <p class="brand-sub"><i class="fa-regular fa-crown"></i> Premium Digital Solutions Platform</p>
-        <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-muted); z-index:2;"><i class="fa-regular fa-shield-halved" style="color:var(--orange);"></i> Secure Admin Access</p>
+  <div class="auth-layout">
+
+    <!-- ========== BRAND PANEL (right in RTL) ========== -->
+    <div class="auth-brand-panel" aria-hidden="true">
+      <div class="auth-brand-content">
+        <span class="auth-brand-label">حلول رقمية</span>
+        <h2 class="auth-brand-name">
+          <span>عبدالله</span>
+          <span>عباس</span>
+        </h2>
+        <div class="auth-brand-line"></div>
+        <p class="auth-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية</p>
+      </div>
+      <p class="auth-brand-copy">&copy; 2025 عبدالله عباس</p>
     </div>
 
-    <!-- Right: Login Form Only (No Registration) -->
-    <div class="split-right">
-        <div class="form-wrapper">
-            <div class="form-title">تسجيل الدخول</div>
-            <p class="form-sub">أدخل بياناتك للوصول إلى لوحة التحكم</p>
+    <!-- ========== FORM PANEL (left in RTL) ========== -->
+    <main class="auth-form-panel">
+      <div class="auth-form-wrapper">
 
-            <div id="errorMessage" class="error-msg"></div>
+        <!-- Mobile brand -->
+        <div class="auth-mobile-brand auth-animate-in">عبدالله عباس</div>
 
-            <form id="authForm">
-                <div class="form-group">
-                    <label for="email"><i class="fa-regular fa-envelope"></i> البريد الإلكتروني</label>
-                    <input type="email" id="email" placeholder="admin@example.com" required />
-                </div>
-                <div class="form-group">
-                    <label for="password"><i class="fa-regular fa-lock"></i> كلمة المرور</label>
-                    <input type="password" id="password" placeholder="••••••••" required minlength="6" />
-                </div>
-                <button type="submit" class="btn-primary" id="submitBtn">
-                    <span id="btnText">تسجيل الدخول</span>
-                    <span id="btnSpinner" style="display:none;"><span class="spinner"></span></span>
-                </button>
-            </form>
-            <!-- تم إزالة خيار "إنشاء حساب" نهائياً -->
-        </div>
-    </div>
-</div>
+        <h1 class="auth-title auth-animate-in">تسجيل الدخول</h1>
+        <p class="auth-subtitle auth-animate-in">لوحة إدارة المشروع</p>
 
-<!-- ============================================ -->
-<!-- Firebase Modules -->
-<script type="importmap">
-    {
-        "imports": {
-            "firebase/": "https://www.gstatic.com/firebasejs/10.7.1/"
-        }
-    }
-</script>
+        <div id="authMessage" class="auth-message auth-animate-in" role="alert" aria-live="polite"></div>
 
-<script type="module">
-    // ============================================
-    // 1. LOGIC: Logo Fallback (بدون onerror في HTML)
-    // ============================================
-    const logoImg = document.getElementById('logoImg');
-    const fallback = document.getElementById('brandFallback');
-    logoImg.addEventListener('error', () => {
-        logoImg.style.display = 'none';
-        fallback.style.display = 'block';
+        <form id="loginForm" class="auth-form auth-animate-in" novalidate>
+          <div class="form-group">
+            <label for="email" class="form-label">البريد الإلكتروني</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              autocomplete="email"
+              required
+              spellcheck="false"
+              autofocus
+            />
+            <div id="emailError" class="field-error" aria-live="polite"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">كلمة المرور</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-input"
+                autocomplete="current-password"
+                required
+                minlength="8"
+              />
+              <button type="button" id="passwordToggle" class="password-toggle" aria-label="إظهار كلمة المرور"></button>
+            </div>
+            <div id="passwordError" class="field-error" aria-live="polite"></div>
+          </div>
+
+          <button type="submit" class="auth-btn" id="submitBtn">
+            <span class="btn-text">تسجيل الدخول</span>
+            <span class="btn-loader" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <a href="/forgot-password.html" class="auth-link auth-animate-in">نسيت كلمة المرور؟</a>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script type="module">
+    import { auth } from "/js/firebase-init.js";
+    import { getIdTokenResult } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+    import { login, validateEmail, validatePassword } from "/js/auth.js";
+    import { showUserMessage, clearUserMessage, showFieldError, clearFieldError } from "/js/error-handler.js";
+    import { setButtonLoading, initPasswordToggle, setInputError } from "/js/ui.js";
+
+    // --- DOM ---
+    const form = document.getElementById("loginForm");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const passwordToggle = document.getElementById("passwordToggle");
+    const submitBtn = document.getElementById("submitBtn");
+    const msgContainer = document.getElementById("authMessage");
+
+    // --- Init password toggle ---
+    initPasswordToggle(passwordToggle, passwordInput);
+
+    // --- Clear errors on input ---
+    emailInput.addEventListener("input", () => {
+      clearFieldError("emailError");
+      setInputError(emailInput, false);
+      clearUserMessage("authMessage");
+    });
+    passwordInput.addEventListener("input", () => {
+      clearFieldError("passwordError");
+      setInputError(passwordInput, false);
+      clearUserMessage("authMessage");
     });
 
-    // ============================================
-    // 2. IMPORTS (Auth + Error Handler)
-    // ============================================
-    import { 
-        auth, 
-        signInWithEmailAndPassword,
-        onAuthStateChanged,
-        signOut
-    } from './js/firebase-init.js';
-    import { getSafeAuthErrorMessage } from './js/error-handler.js';
-    import { requireAdmin } from './js/auth-guard.js';
+    // --- Auth redirect check ---
+    let redirectDone = false;
+    const unsub = auth.onAuthStateChanged(async (user) => {
+      unsub();
+      if (user && !redirectDone) {
+        redirectDone = true;
+        try {
+          const r = await getIdTokenResult(user);
+          window.location.replace(r.claims.admin ? "/admin/admin.html" : "/dashboard/dashboard.html");
+          return;
+        } catch { /* فشل Token — اعرض النموذج */ }
+      }
+      // إظهار الصفحة
+      document.body.style.visibility = "visible";
+    });
 
-    // ============================================
-    // 3. DOM REFS
-    // ============================================
-    const form = document.getElementById('authForm');
-    const emailInput = document.getElementById('email');
-    const passInput = document.getElementById('password');
-    const submitBtn = document.getElementById('submitBtn');
-    const btnText = document.getElementById('btnText');
-    const btnSpinner = document.getElementById('btnSpinner');
-    const errorMsg = document.getElementById('errorMessage');
-
-    // ============================================
-    // 4. HELPERS
-    // ============================================
-    function showError(message) {
-        errorMsg.textContent = message;
-        errorMsg.classList.add('show');
-    }
-
-    function setLoading(loading) {
-        if (loading) {
-            btnText.style.display = 'none';
-            btnSpinner.style.display = 'inline-block';
-            submitBtn.disabled = true;
-        } else {
-            btnText.style.display = 'inline';
-            btnSpinner.style.display = 'none';
-            submitBtn.disabled = false;
-        }
-    }
-
-    // ============================================
-    // 5. FORM SUBMIT (مع رسائل عامة)
-    // ============================================
-    form.addEventListener('submit', async (e) => {
+    // --- Submit ---
+    function initForm() {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        errorMsg.classList.remove('show');
-        errorMsg.textContent = '';
+
+        clearUserMessage("authMessage");
+        clearFieldError("emailError");
+        clearFieldError("passwordError");
+        setInputError(emailInput, false);
+        setInputError(passwordInput, false);
 
         const email = emailInput.value.trim();
-        const password = passInput.value;
+        const password = passwordInput.value;
+        let hasErr = false;
 
-        if (!email || !password) {
-            showError('يرجى ملء جميع الحقول.');
-            return;
+        const ev = validateEmail(email);
+        if (!ev.valid) { showFieldError("emailError", ev.message); setInputError(emailInput, true); hasErr = true; }
+
+        const pv = validatePassword(password);
+        if (!pv.valid) { showFieldError("passwordError", pv.message); setInputError(passwordInput, true); hasErr = true; }
+
+        if (hasErr) {
+          const first = form.querySelector(".form-input--error");
+          if (first) first.focus();
+          return;
         }
 
-        setLoading(true);
+        setButtonLoading(submitBtn, true);
+        const result = await login(email, password);
+        setButtonLoading(submitBtn, false);
 
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const tokenResult = await userCredential.user.getIdTokenResult(true);
-
-            if (tokenResult.claims.admin === true) {
-                window.location.href = '/admin.html';
-            } else {
-                // مستخدم عادي حاول الدخول: رسالة عامة + تسجيل خروج
-                showError('بيانات الدخول غير صحيحة أو غير مصرح بها.');
-                await signOut(auth);
-                setLoading(false);
-            }
-        } catch (error) {
-            // استخدام معالج الأخطاء الآمن (يمنع التعداد)
-            const safeMessage = getSafeAuthErrorMessage(error);
-            showError(safeMessage);
-            setLoading(false);
+        if (result.ok) {
+          window.location.replace(result.claims?.admin ? "/admin/admin.html" : "/dashboard/dashboard.html");
+        } else {
+          showUserMessage("authMessage", result.userMessage, "error");
+          if (result.userMessage.includes("غير صحيحة")) {
+            setInputError(emailInput, true);
+            setInputError(passwordInput, true);
+          }
+          emailInput.focus();
         }
-    });
+      });
+    }
 
-    // ============================================
-    // 6. AUTO-REDIRECT (إذا كان المستخدم مديراً بالفعل)
-    // ============================================
-    // استخدام الحارس المركزي لتوجيه المدير تلقائياً إلى admin.html
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            try {
-                const tokenResult = await user.getIdTokenResult();
-                if (tokenResult.claims.admin === true) {
-                    window.location.href = '/admin.html';
-                }
-            } catch (_) { /* تجاهل */ }
-        }
-    });
-
-    console.log('✅ Login Page (Secure, No Registration, No Enumeration)');
-</script>
+    initForm();
+  </script>
 </body>
 </html>
