@@ -1,7 +1,6 @@
 /**
  * auth.js
  * منطق المصادقة الكامل.
- *
  * قواعد صارمة:
  * 1. لا نعرض Firebase Error Codes للمستخدم أبدًا.
  * 2. كل error يمر من mapAuthError().
