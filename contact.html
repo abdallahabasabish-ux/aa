@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تواصل معي — عبدالله عباس</title>
+  <meta name="description" content="تواصل مع عبدالله عباس لمناقشة مشروعك. أقدّم حلول تطوير مواقع، تصميم، تحسين محركات البحث، وقوالب بلوجر وووردبريس احترافية." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://abdallahsst.web.app/contact" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "تواصل مع عبدالله عباس",
+    "url": "https://abdallahsst.web.app/contact",
+    "description": "تواصل مع عبدالله عباس لمناقشة مشروعك الرقمي.",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "عبدالله عباس",
+      "jobTitle": "مطور ويب ومصمم رقمي"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/contact.css" />
+</head>
+<body>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">عبدالله عباس</a>
+      <div class="nav-links">
+        <a href="/services" class="nav-link">الخدمات</a>
+        <a href="/products" class="nav-link">المنتجات</a>
+        <a href="/portfolio" class="nav-link">الأعمال</a>
+        <a href="/blog" class="nav-link">المقالات</a>
+        <a href="/about" class="nav-link">عن عبدالله</a>
+      </div>
+      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-mobile-panel" id="mobilePanel">
+      <div class="nav-mobile-header">
+        <span class="nav-mobile-brand">عبدالله عباس</span>
+        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/services" class="nav-mobile-link">الخدمات</a>
+        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog" class="nav-mobile-link">المقالات</a>
+        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+      </div>
+      <div class="nav-mobile-footer">
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN ==================== -->
+  <main class="contact-page">
+    <div class="container">
+
+      <!-- Hero -->
+      <div class="contact-hero reveal">
+        <div class="contact-hero-inner">
+          <h1 class="contact-hero-title">لديك مشروع؟<br />أخبرني عنه.</h1>
+          <p class="contact-hero-desc">ليست كل رسالة تحتاج ردًا فوريًا — لكن كل رسالة تُقرأ. اكتب ما يكفي لفهم احتياجك، وسأردّ بجدية.</p>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div class="contact-grid">
+
+        <!-- Form -->
+        <div class="contact-form-card reveal">
+          <div id="formView">
+            <h2 class="contact-form-heading">أرسل رسالتك</h2>
+            <p class="contact-form-sub">الحقول المطلوبة مُعلّمة بعلامة <span style="color:var(--accent)">*</span></p>
+
+            <div id="formMessage" class="c-message" role="alert" aria-live="polite"></div>
+
+            <form id="contactForm" class="c-form" novalidate>
+
+              <div class="c-form-row">
+                <div class="c-form-group">
+                  <label class="c-form-label" for="cName">الاسم الكامل <span class="required">*</span></label>
+                  <input type="text" class="c-form-input" id="cName" name="name" required maxlength="80" autocomplete="name" />
+                  <div id="cNameErr" class="c-form-error" aria-live="polite"></div>
+                </div>
+                <div class="c-form-group">
+                  <label class="c-form-label" for="cEmail">البريد الإلكتروني <span class="required">*</span></label>
+                  <input type="email" class="c-form-input" id="cEmail" name="email" required autocomplete="email" dir="ltr" />
+                  <div id="cEmailErr" class="c-form-error" aria-live="polite"></div>
+                </div>
+              </div>
+
+              <div class="c-form-group">
+                <label class="c-form-label" for="cPhone">رقم الهاتف</label>
+                <input type="tel" class="c-form-input" id="cPhone" name="phone" maxlength="20" autocomplete="tel" dir="ltr" placeholder="+20xxxxxxxxx" />
+                <div id="cPhoneErr" class="c-form-error" aria-live="polite"></div>
+              </div>
+
+              <div class="c-form-group">
+                <label class="c-form-label" for="cService">نوع الخدمة <span class="required">*</span></label>
+                <select class="c-form-select" id="cService" name="service" required>
+                  <option value="">اختر الخدمة المطلوبة</option>
+                  <option value="web-development">تطوير موقع ويب</option>
+                  <option value="web-design">تصميم واجهة مستخدم</option>
+                  <option value="seo">تحسين محركات البحث</option>
+                  <option value="wordpress">ووردبريس</option>
+                  <option value="blogger">بلوجر</option>
+                  <option value="graphic-design">تصميم جرافيك</option>
+                  <option value="other">أخرى</option>
+                </select>
+                <div id="cServiceErr" class="c-form-error" aria-live="polite"></div>
+              </div>
+
+              <div class="c-form-group">
+                <label class="c-form-label" for="cBudget">الميزانية التقريبية</label>
+                <select class="c-form-select" id="cBudget" name="budget">
+                  <option value="">اختر إذا كنت تعرف</option>
+                  <option value="less-5000">أقل من 5,000 ج.م</option>
+                  <option value="5000-15000">5,000 - 15,000 ج.م</option>
+                  <option value="15000-50000">15,000 - 50,000 ج.م</option>
+                  <option value="50000+">أكثر من 50,000 ج.م</option>
+                  <option value="not-sure">غير متأكد بعد</option>
+                </select>
+              </div>
+
+              <div class="c-form-group">
+                <label class="c-form-label" for="cUrl">رابط الموقع الحالي (إن وُجد)</label>
+                <input type="url" class="c-form-input" id="cUrl" name="websiteUrl" placeholder="https://example.com" dir="ltr" />
+                <div class="c-form-hint">اختياري — يساعد في فهم مشروعك أسرع</div>
+                <div id="cUrlErr" class="c-form-error" aria-live="polite"></div>
+              </div>
+
+              <div class="c-form-group">
+                <label class="c-form-label" for="cMessage">تفاصيل المشروع <span class="required">*</span></label>
+                <textarea class="c-form-textarea" id="cMessageInput" name="message" required maxlength="3000" rows="5" placeholder="اكتب باختصار: ماذا تحتاج، وما المشكلة التي تريد حلّها، وأي معلومات تساعد في فهم مشروعك..."></textarea>
+                <div id="cMessageErr" class="c-form-error" aria-live="polite"></div>
+              </div>
+
+              <button type="submit" class="c-form-submit" id="submitBtn">
+                <span class="c-btn-text">إرسال الرسالة</span>
+                <svg class="c-btn-text" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.27 3.27a4 4 0 0 1 5.66 5.66h11.14a4 4 0 0 1 0 5.66 5.66H8.93a4 4 0 0 1-5.66-5.66l-3.27-3.27a4 4 0 0 1 0-5.66 5.66 4 0 0 1 5.66 0Zm0 0 5.66 5.66"/></svg>
+                <span class="c-form-loader"></span>
+              </button>
+
+            </form>
+          </div>
+
+          <!-- Success State -->
+          <div id="successView" class="c-success">
+            <div class="c-success-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>
+            </div>
+            <div class="c-success-title">تم إرسال رسالتك بنجاح</div>
+            <p class="c-success-desc">سأراجع رسالتك وأردّ في أقرب وقت. إذا كان مشروعك يحتاج تفاصيل أكثر، سأتواصل معك.</p>
+            <a href="/" class="c-success-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955a1.126 1.126 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+              العودة للرئيسية
+            </a>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="contact-sidebar">
+
+          <!-- Info -->
+          <div class="contact-info-card reveal">
+            <h3 class="contact-info-title">طرق التواصل الأخرى</h3>
+            <div class="contact-info-list">
+              <div class="contact-info-item">
+                <div class="contact-info-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.375c0 .621-.504 1.125-1.125 1.125h-15a1.125 1.125 0 0 1-1.125-1.125V6.75m19.5 0v3.75m-19.5 0h19.5"/></svg>
+                </div>
+                <div class="contact-info-text">
+                  <span class="contact-info-label">البريد الإلكتروني</span>
+                  <span class="contact-info-value">contact@abdallahsst.com</span>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-info-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902-.055-1.173.17-.507.361-.976.852-1.2 1.41a47.93 47.93 0 0 0-5.322 2.12 47.945 47.945 0 0 0-5.322-2.12c-.224-.558-.693-1.049-1.2-1.41-.271-.225-.733-.28-1.173-.17l-4.423 1.106c-.501.125-.852.575-.852 1.091v1.372a2.25 2.25 0 0 0 2.25 2.25h2.25Z"/></svg>
+                </div>
+                <div class="contact-info-text">
+                  <span class="contact-info-label">وقت الرد</span>
+                  <span class="contact-info-value">24-48 ساعة عمل</span>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-info-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>
+                </div>
+                <div class="contact-info-text">
+                  <span class="contact-info-label">الموقع</span>
+                  <span class="contact-info-value">مصر</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Expectations -->
+          <div class="contact-expect-card reveal">
+            <h3 class="contact-expect-title">ما يحدث بعد الإرسال؟</h3>
+            <div class="contact-expect-list">
+              <div class="contact-expect-item">
+                <span class="contact-expect-num">1</span>
+                <span class="contact-expect-text">أراجع رسالتك وأفهم احتياجك الفعلي</span>
+              </div>
+              <div class="contact-expect-item">
+                <span class="contact-expect-num">2</span>
+                <span class="contact-expect-text">أردّ بأسئلة توضيحية إذا لزم الأمر</span>
+              </div>
+              <div class="contact-expect-item">
+                <span class="contact-expect-num">3</span>
+                <span class="contact-expect-text">أرسل لك عرضًا أو تقديرًا مبدئيًا</span>
+              </div>
+              <div class="contact-expect-item">
+                <span class="contact-expect-num">4</span>
+                <span class="contact-expect-text">نبدأ العمل بعد الاتفاق والدفعة المبدئية</span>
+              </div>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">عبدالله عباس</div>
+          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+        </div>
+        <div>
+          <div class="footer-heading">الخدمات</div>
+          <div class="footer-links">
+            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger" class="footer-link">بلوجر</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">المحتوى</div>
+          <div class="footer-links">
+            <a href="/products" class="footer-link">المنتجات</a>
+            <a href="/portfolio" class="footer-link">الأعمال</a>
+            <a href="/blog" class="footer-link">المقالات</a>
+            <a href="/about" class="footer-link">عن عبدالله</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">تواصل</div>
+          <div class="footer-links">
+            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
+        <span class="footer-copy">جميع الحقوق محفوظة</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script type="module">
+    import { db } from "/js/firebase-init.js";
+    import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { isSafeUrl } from "/js/security.js";
+
+    // --- Nav ---
+    const nav = document.getElementById('siteNav');
+    function handleNavScroll() {
+      nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
+    }
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    handleNavScroll();
+
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileClose = document.getElementById('mobileClose');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobilePanel = document.getElementById('mobilePanel');
+
+    function openMobile() {
+      mobileMenu.classList.add('nav-mobile-menu--open');
+      mobilePanel.classList.add('nav-mobile-panel--open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobile() {
+      mobileMenu.classList.remove('nav-mobile-menu--open');
+      mobilePanel.classList.remove('nav-mobile-panel--open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    mobileToggle.addEventListener('click', openMobile);
+    mobileClose.addEventListener('click', closeMobile);
+    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
+    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
+
+    // --- Scroll Reveal ---
+    const reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('reveal--visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+      reveals.forEach((el, i) => { el.style.transitionDelay = `${i * 50}ms`; obs.observe(el); });
+    } else {
+      reveals.forEach(el => el.classList.add('reveal--visible'));
+    }
+
+    // --- Form ---
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formView = document.getElementById('formView');
+    const successView = document.getElementById('successView');
+    const msgContainer = document.getElementById('formMessage');
+
+    // Clear errors on input
+    const clearError = (inputId, errId) => {
+      document.getElementById(inputId).addEventListener('input', () => {
+        const errEl = document.getElementById(errId);
+        errEl.textContent = '';
+        errEl.classList.remove('c-form-error--visible');
+        document.getElementById(inputId).classList.remove('c-form-input--error', 'c-form-textarea--error');
+        clearMessage();
+      });
+    };
+    clearError('cName', 'cNameErr');
+    clearError('cEmail', 'cEmailErr');
+    clearError('cPhone', 'cPhoneErr');
+    clearError('cService', 'cServiceErr');
+    clearError('cUrl', 'cUrlErr');
+    clearError('cMessageInput', 'cMessageErr');
+
+    // Helpers
+    function showError(inputId, errId, msg) {
+      document.getElementById(errId).textContent = msg;
+      document.getElementById(errId).classList.add('c-form-error--visible');
+      document.getElementById(inputId).classList.add('c-form-input--error', 'c-form-textarea--error');
+    }
+
+    function clearErrors() {
+      ['cNameErr','cEmailErr','cPhoneErr','cServiceErr','cUrlErr','cMessageErr'].forEach(id => {
+        const el = document.getElementById(id);
+        el.textContent = '';
+        el.classList.remove('c-form-error--visible');
+      });
+      ['cName','cEmail','cPhone','cService','cUrl','cMessageInput'].forEach(id => {
+        const el = document.getElementById(id);
+        el.classList.remove('c-form-input--error', 'c-form-textarea--error');
+      });
+    }
+
+    function showMessage(text, type) {
+      msgContainer.textContent = text;
+      msgContainer.className = `c-message c-message--visible c-message--${type}`;
+    }
+
+    function clearMessage() {
+      msgContainer.textContent = '';
+      msgContainer.className = 'c-message';
+    }
+
+    function setLoading(on) {
+      submitBtn.disabled = on;
+      submitBtn.classList.toggle('c-form-submit--loading', on);
+    }
+
+    // Validate
+    function validate() {
+      clearErrors();
+      let hasErr = false;
+      let firstErr = null;
+
+      const name = document.getElementById('cName').value.trim();
+      if (!name) { showError('cName', 'cNameErr', 'الاسم مطلوب.'); hasErr = true; if (!firstErr) firstErr = 'cName'; }
+
+      const email = document.getElementById('cEmail').value.trim();
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email) { showError('cEmail', 'cEmailErr', 'البريد الإلكتروني مطلوب.'); hasErr = true; if (!firstErr) firstErr = 'cEmail'; }
+      else if (!emailRe.test(email)) { showError('cEmail', 'cEmailErr', 'صيغة البريد الإلكتروني غير صحيحة.'); hasErr = true; if (!firstErr) firstErr = 'cEmail'; }
+
+      const phone = document.getElementById('cPhone').value.trim();
+      if (phone && phone.length < 10) { showError('cPhone', 'cPhoneErr', 'رقم الهاتف قصير جدًا.'); hasErr = true; if (!firstErr) firstErr = 'cPhone'; }
+
+      const service = document.getElementById('cService').value;
+      if (!service) { showError('cService', 'cServiceErr', 'اختر الخدمة المطلوبة.'); hasErr = true; if (!firstErr) firstErr = 'cService'; }
+
+      const url = document.getElementById('cUrl').value.trim();
+      if (url && !isSafeUrl(url)) { showError('cUrl', 'cUrlErr', 'رابط غير صالح.'); hasErr = true; if (!firstErr) firstErr = 'cUrl'; }
+
+      const message = document.getElementById('cMessageInput').value.trim();
+      if (!message) { showError('cMessageInput', 'cMessageErr', 'تفاصيل المشروع مطلوبة.'); hasErr = true; if (!firstErr) firstErr = 'cMessageInput'; }
+      else if (message.length < 15) { showError('cMessageInput', 'cMessageErr', 'اكتب تفاصيل أكثر عن مشروعك (15 حرفًا على الأقل).'); hasErr = true; if (!firstErr) firstErr = 'cMessageInput'; }
+
+      if (hasErr && firstErr) document.getElementById(firstErr).focus();
+      return !hasErr;
+    }
+
+    // Submit
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearMessage();
+
+      if (!validate()) return;
+
+      const data = {
+        name: document.getElementById('cName').value.trim(),
+        email: document.getElementById('cEmail').value.trim(),
+        phone: document.getElementById('cPhone').value.trim(),
+        service: document.getElementById('cService').value,
+        budget: document.getElementById('cBudget').value,
+        websiteUrl: isSafeUrl(document.getElementById('cUrl').value.trim()) ? document.getElementById('cUrl').value.trim() : '',
+        message: document.getElementById('cMessageInput').value.trim(),
+        type: 'contact',
+        status: 'new',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      };
+
+      setLoading(true);
+
+      try {
+        await addDoc(collection(db, 'orders'), data);
+
+        formView.style.display = 'none';
+        successView.classList.add('c-success--visible');
+        form.reset();
+      } catch (err) {
+        showMessage('حدث خطأ أثناء الإرسال. حاول مجددًا.', 'error');
+        console.error('Contact form error:', err);
+      }
+
+      setLoading(false);
+    });
+  </script>
+</body>
+</html>
