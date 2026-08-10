@@ -1,1169 +1,452 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>عبدالله عباس | حلول رقمية مخصصة</title>
-
-    <!-- SEO Meta -->
-    <meta name="description" content="حلول رقمية تُبنى حول هدفك، لا حول قالب جاهز. استشارات وتطوير مواقع وتصميم جرافيك بأيدي خبيرة." />
-    <link rel="canonical" href="https://abdallahsst.github.io/" />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="عبدالله عباس - حلول رقمية مخصصة" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://abdallahsst.github.io/" />
-    <meta property="og:image" content="https://abdallahsst.github.io/og-image.jpg" />
-
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "عبدالله عباس",
-            "url": "https://abdallahsst.github.io",
-            "jobTitle": "خبير حلول رقمية",
-            "knowsAbout": ["Web Development", "SEO", "Blogger", "WordPress", "Graphic Design"]
-        }
-    </script>
-
-    <style>
-        /* ============================================
-           1. CSS VARIABLES & RESET (Dark Theme / High Contrast)
-           ============================================ */
-        :root {
-            --orange: #FF6600;
-            --orange-hover: #FF8533;
-            --orange-glow: rgba(255, 102, 0, 0.25);
-
-            --bg-primary: #0A0A0A;
-            --bg-secondary: #141414;
-            --bg-card: #1A1A1A;
-            --bg-elevated: #222222;
-
-            --text-primary: #FFFFFF;
-            --text-secondary: #CCCCCC;
-            --text-muted: #888888;
-
-            --border-color: #2A2A2A;
-            --border-light: #3A3A3A;
-
-            --font-ar: 'Segoe UI', 'Tahoma', system-ui, sans-serif;
-            --font-en: 'Inter', 'Segoe UI', system-ui, sans-serif;
-            --max-width: 1200px;
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 2rem;
-            --spacing-lg: 4rem;
-            --spacing-xl: 6rem;
-        }
-
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            font-family: var(--font-ar);
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        html:not([dir="rtl"]) body {
-            font-family: var(--font-en);
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        ul {
-            list-style: none;
-        }
-
-        /* ============================================
-           2. UTILITY & TYPOGRAPHY
-           ============================================ */
-        .container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 var(--spacing-sm);
-        }
-
-        .section-padding {
-            padding: var(--spacing-lg) 0;
-        }
-        .section-padding-lg {
-            padding: var(--spacing-xl) 0;
-        }
-
-        .text-orange {
-            color: var(--orange);
-        }
-        .text-muted {
-            color: var(--text-muted);
-        }
-
-        .display-large {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-        }
-
-        .heading-xl {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            line-height: 1.15;
-        }
-
-        .heading-lg {
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .body-lg {
-            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-            line-height: 1.7;
-            color: var(--text-secondary);
-        }
-
-        .body-sm {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        /* Buttons - High Contrast / Orange */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.9rem 2.2rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 0;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            background: transparent;
-            color: var(--text-primary);
-            position: relative;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: var(--orange);
-            color: var(--bg-primary);
-        }
-
-        .btn-primary:hover {
-            background: var(--orange-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px var(--orange-glow);
-            color: var(--bg-primary);
-        }
-
-        .btn-primary .icon-arrow {
-            display: inline-block;
-            transition: transform 0.25s ease;
-        }
-
-        .btn-primary:hover .icon-arrow {
-            transform: translateX(4px);
-        }
-
-        html[dir="rtl"] .btn-primary:hover .icon-arrow {
-            transform: translateX(-4px);
-        }
-
-        .btn-outline {
-            border: 2px solid var(--orange);
-            color: var(--text-primary);
-            background: transparent;
-        }
-
-        .btn-outline:hover {
-            background: var(--orange);
-            color: var(--bg-primary);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px var(--orange-glow);
-        }
-
-        /* ============================================
-           3. HEADER / NAVIGATION
-           ============================================ */
-        .header {
-            padding: var(--spacing-sm) 0;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 10, 0.92);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-        }
-
-        .header .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
-        }
-        .logo span {
-            color: var(--orange);
-        }
-
-        .nav-desktop {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-        }
-
-        .nav-desktop a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: color 0.2s;
-            position: relative;
-            padding: 0.3rem 0;
-        }
-
-        .nav-desktop a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--orange);
-            transition: width 0.3s ease;
-        }
-
-        .nav-desktop a:hover::after,
-        .nav-desktop a.active::after {
-            width: 100%;
-        }
-
-        .nav-desktop a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-desktop .btn {
-            padding: 0.6rem 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .menu-toggle span {
-            display: block;
-            width: 28px;
-            height: 2px;
-            background: var(--text-primary);
-            transition: all 0.3s ease;
-        }
-
-        /* ============================================
-           4. HERO SECTION
-           ============================================ */
-        .hero {
-            padding: var(--spacing-lg) 0 var(--spacing-md);
-            position: relative;
-            background: var(--bg-primary);
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-lg);
-            align-items: center;
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-md);
-        }
-
-        .hero-tag {
-            display: inline-block;
-            background: var(--bg-elevated);
-            padding: 0.3rem 1rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            width: fit-content;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .hero-content .display-large .highlight {
-            color: var(--orange);
-            position: relative;
-        }
-
-        .hero-content .display-large .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: var(--orange-glow);
-            z-index: -1;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: var(--spacing-sm);
-            flex-wrap: wrap;
-            margin-top: var(--spacing-xs);
-        }
-
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            min-height: 300px;
-        }
-
-        .hero-shape {
-            width: 100%;
-            max-width: 400px;
-            aspect-ratio: 1/1;
-            background: var(--bg-elevated);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .hero-shape .number-big {
-            font-size: 12rem;
-            font-weight: 900;
-            color: var(--bg-primary);
-            text-shadow: 0 0 0 1px var(--border-light);
-            opacity: 0.9;
-            letter-spacing: -0.05em;
-        }
-
-        .hero-shape .accent-line {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60%;
-            height: 6px;
-            background: var(--orange);
-        }
-
-        .hero-shape .accent-dot {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--orange);
-            border-radius: 50%;
-        }
-
-        /* ============================================
-           5. TRUST BAR
-           ============================================ */
-        .trust-bar {
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            padding: var(--spacing-sm) 0;
-            background: var(--bg-secondary);
-        }
-
-        .trust-bar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--spacing-md);
-        }
-
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-
-        .trust-item .tech-icon {
-            font-size: 1.5rem;
-            font-weight: 300;
-            opacity: 0.6;
-            letter-spacing: 0.1em;
-            color: var(--orange);
-        }
-
-        /* ============================================
-           6. SERVICES (Timeline)
-           ============================================ */
-        .services-section {
-            background: var(--bg-primary);
-        }
-
-        .services-header {
-            margin-bottom: var(--spacing-lg);
-            max-width: 600px;
-        }
-
-        .services-list {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-md);
-        }
-
-        .service-item {
-            display: grid;
-            grid-template-columns: 80px 1fr auto;
-            gap: var(--spacing-md);
-            padding: var(--spacing-md) 0;
-            border-bottom: 1px solid var(--border-color);
-            align-items: center;
-            transition: border-color 0.3s;
-            cursor: default;
-        }
-
-        .service-item:hover {
-            border-color: var(--orange);
-        }
-
-        .service-item .step-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--border-light);
-            transition: color 0.3s;
-        }
-
-        .service-item:hover .step-number {
-            color: var(--orange);
-        }
-
-        .service-item .service-info h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-        }
-
-        .service-item .service-info p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .service-item .service-link {
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .service-item:hover .service-link {
-            color: var(--orange);
-        }
-
-        /* ============================================
-           7. PORTFOLIO
-           ============================================ */
-        .portfolio-section {
-            background: var(--bg-secondary);
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-md);
-        }
-
-        .portfolio-card {
-            background: var(--bg-card);
-            padding: var(--spacing-md);
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--orange);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-        }
-
-        .portfolio-card .category-tag {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--orange);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .portfolio-card h3 {
-            font-size: 1.4rem;
-            margin: 0.5rem 0 0.25rem;
-        }
-
-        .portfolio-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .portfolio-card .case-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            margin-top: var(--spacing-sm);
-            font-weight: 600;
-            border-bottom: 2px solid var(--orange);
-            padding-bottom: 0.15rem;
-            color: var(--text-secondary);
-            transition: color 0.3s;
-        }
-
-        .portfolio-card:hover .case-link {
-            color: var(--text-primary);
-        }
-
-        /* ============================================
-           8. PROCESS
-           ============================================ */
-        .process-section {
-            background: var(--bg-primary);
-        }
-
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-md);
-        }
-
-        .process-step {
-            padding: var(--spacing-md) var(--spacing-sm);
-            border-right: 1px solid var(--border-color);
-        }
-
-        html[dir="rtl"] .process-step {
-            border-right: none;
-            border-left: 1px solid var(--border-color);
-        }
-
-        .process-step:last-child {
-            border: none;
-        }
-
-        .process-step .step-num {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--border-light);
-            line-height: 1;
-        }
-
-        .process-step h4 {
-            font-size: 1.1rem;
-            margin: 0.5rem 0 0.25rem;
-        }
-        .process-step p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        /* ============================================
-           9. BLOG
-           ============================================ */
-        .blog-section {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-md);
-        }
-
-        .blog-card {
-            padding: var(--spacing-md) 0;
-            border-bottom: 1px solid var(--border-color);
-            transition: border-color 0.3s;
-        }
-
-        .blog-card:hover {
-            border-color: var(--orange);
-        }
-
-        .blog-card .date {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .blog-card h3 {
-            font-size: 1.25rem;
-            margin: 0.3rem 0;
-        }
-
-        .blog-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .blog-card .read-link {
-            display: inline-block;
-            margin-top: 0.5rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: color 0.3s;
-        }
-        .blog-card:hover .read-link {
-            color: var(--orange);
-        }
-
-        /* ============================================
-           10. FINAL CTA
-           ============================================ */
-        .cta-section {
-            background: var(--bg-primary);
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            padding: var(--spacing-xl) 0;
-        }
-
-        .cta-section h2 {
-            max-width: 700px;
-            margin: 0 auto var(--spacing-sm);
-        }
-
-        .cta-section p {
-            color: var(--text-muted);
-            max-width: 500px;
-            margin: 0 auto var(--spacing-md);
-        }
-
-        .cta-section .btn-primary {
-            background: var(--orange);
-            color: var(--bg-primary);
-        }
-
-        .cta-section .btn-primary:hover {
-            background: var(--orange-hover);
-            color: var(--bg-primary);
-            box-shadow: 0 8px 35px var(--orange-glow);
-        }
-
-        /* ============================================
-           11. FOOTER
-           ============================================ */
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: var(--spacing-md) 0;
-        }
-
-        .footer .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--spacing-sm);
-        }
-
-        .footer .socials {
-            display: flex;
-            gap: var(--spacing-sm);
-        }
-
-        .footer .socials a {
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            transition: color 0.3s;
-        }
-
-        .footer .socials a:hover {
-            color: var(--orange);
-        }
-
-        /* ============================================
-           12. RESPONSIVE
-           ============================================ */
-        @media (max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-md);
-            }
-
-            .hero-visual {
-                order: -1;
-                min-height: 200px;
-            }
-
-            .hero-shape {
-                max-width: 300px;
-            }
-
-            .hero-shape .number-big {
-                font-size: 8rem;
-            }
-
-            .process-steps {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .process-step {
-                border: none;
-                padding: var(--spacing-sm);
-                border-bottom: 1px solid var(--border-color);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-desktop {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--bg-primary);
-                padding: var(--spacing-md);
-                border-bottom: 1px solid var(--border-color);
-                gap: var(--spacing-sm);
-                align-items: stretch;
-            }
-
-            .nav-desktop.open {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .service-item {
-                grid-template-columns: 1fr;
-                gap: 0.25rem;
-                padding: var(--spacing-sm) 0;
-            }
-
-            .service-item .step-number {
-                font-size: 1.5rem;
-            }
-
-            .portfolio-grid,
-            .blog-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .process-steps {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .btn {
-                text-align: center;
-                justify-content: center;
-            }
-
-            .trust-bar .container {
-                justify-content: center;
-            }
-
-            .footer .container {
-                flex-direction: column;
-                text-align: center;
-                gap: var(--spacing-sm);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-shape {
-                max-width: 200px;
-            }
-            .hero-shape .number-big {
-                font-size: 5rem;
-            }
-            .hero-shape .accent-dot {
-                width: 20px;
-                height: 20px;
-                top: 1rem;
-                right: 1rem;
-            }
-            .section-padding-lg {
-                padding: var(--spacing-lg) 0;
-            }
-        }
-
-        /* ============================================
-           13. PREFERS-REDUCED-MOTION
-           ============================================ */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عبدالله عباس — حلول رقمية احترافية</title>
+  <meta name="description" content="عبدالله عباس — بناء حلول رقمية متكاملة: تطوير مواقع، تصميم واجهات، تحسين محركات البحث، قوالب بلوجر وووردبريس احترافية." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://abdallahsst.web.app/" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Favicon placeholder -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/main.css" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "عبدالله عباس",
+    "alternateName": "Abdallah Abbas",
+    "url": "https://abdallahsst.web.app",
+    "jobTitle": "مطور ويب ومصمم رقمي",
+    "knowsAbout": ["تطوير المواقع", "تصميم الويب", "تحسين محركات البحث", "بلوجر", "ووردبريس"],
+    "sameAs": []
+  }
+  </script>
 </head>
 <body>
 
-    <!-- ============================================
-    HEADER
-    ============================================ -->
-    <header class="header">
-        <div class="container">
-            <a href="/" class="logo" aria-label="عبدالله عباس الرئيسية">
-                عبدالله <span>عباس</span>
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">عبدالله عباس</a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="/services" class="nav-link">الخدمات</a>
+        <a href="/products" class="nav-link">المنتجات</a>
+        <a href="/portfolio" class="nav-link">الأعمال</a>
+        <a href="/blog" class="nav-link">المقالات</a>
+        <a href="/about" class="nav-link">عن عبدالله</a>
+      </div>
+
+      <a href="/contact" class="nav-cta">تواصل معي</a>
+
+      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-mobile-panel" id="mobilePanel">
+      <div class="nav-mobile-header">
+        <span class="nav-mobile-brand">عبدالله عباس</span>
+        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/services" class="nav-mobile-link">الخدمات</a>
+        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog" class="nav-mobile-link">المقالات</a>
+        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+      </div>
+      <div class="nav-mobile-footer">
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
+    <div class="container container--wide">
+      <div class="hero-inner">
+        <div class="hero-content reveal">
+          <div class="hero-eyebrow">
+            <span class="hero-eyebrow-line"></span>
+            <span>حلول رقمية</span>
+          </div>
+
+          <h1 class="hero-title">
+            أحلّل هدفك أولًا،<br />
+            ثم<span class="hero-title-accent">أبني الحل</span><br />
+            المناسب له.
+          </h1>
+
+          <p class="hero-desc">
+            موقع ويب لا يعمل وحده — يحتاج استراتيجية. أقدّم حلولًا رقمية تُبنى حول هدفك الحقيقي، لا حول قالب جاهز يُلصق على مشروعك.
+          </p>
+
+          <div class="hero-actions">
+            <a href="/contact" class="btn btn--primary">
+              ابدأ مشروعك
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
             </a>
-
-            <nav class="nav-desktop" id="mainNav" role="navigation" aria-label="القائمة الرئيسية">
-                <a href="/services">الخدمات</a>
-                <a href="/products">المنتجات</a>
-                <a href="/portfolio">الأعمال</a>
-                <a href="/blog">المدونة</a>
-                <a href="/about">من أنا</a>
-                <a href="/contact" class="btn btn-primary">تواصل معي</a>
-            </nav>
-
-            <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <a href="/portfolio" class="btn btn--outline">شاهد أعمالي</a>
+          </div>
         </div>
-    </header>
 
-    <main>
-        <!-- ============================================
-        HERO
-        ============================================ -->
-        <section class="hero section-padding-lg">
-            <div class="container">
-                <div class="hero-grid">
-                    <div class="hero-content">
-                        <span class="hero-tag">خبير حلول رقمية</span>
-                        <h1 class="display-large">
-                            حلول رقمية <br>
-                            تُبنى حول <span class="highlight">هدفك</span>،<br>
-                            لا حول قالب جاهز.
-                        </h1>
-                        <p class="body-lg">
-                            أنا عبدالله عباس، أساعدك في بناء هوية رقمية احترافية، من التصميم إلى
-                            الظهور في محركات البحث، بخبرة تمتد لسنوات في تطوير الويب والتحسين.
-                        </p>
-                        <div class="hero-actions">
-                            <a href="/services" class="btn btn-primary">
-                                استكشف الخدمات
-                                <span class="icon-arrow">←</span>
-                            </a>
-                            <a href="/portfolio" class="btn btn-outline">
-                                شاهد أعمالي
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="hero-visual">
-                        <div class="hero-shape">
-                            <span class="number-big">AA</span>
-                            <span class="accent-line"></span>
-                            <span class="accent-dot"></span>
-                        </div>
-                    </div>
-                </div>
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="hero-visual-box">
+            <div class="hero-visual-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
             </div>
-        </section>
-
-        <!-- ============================================
-        TRUST BAR
-        ============================================ -->
-        <section class="trust-bar" aria-label="التقنيات والخبرات">
-            <div class="container">
-                <span class="trust-item">
-                    <span class="tech-icon">⚡</span> Blogger Expert
-                </span>
-                <span class="trust-item">
-                    <span class="tech-icon">◆</span> WordPress Developer
-                </span>
-                <span class="trust-item">
-                    <span class="tech-icon">◈</span> SEO Architect
-                </span>
-                <span class="trust-item">
-                    <span class="tech-icon">▣</span> Firebase Engineer
-                </span>
-                <span class="trust-item">
-                    <span class="tech-icon">◉</span> UI/UX Designer
-                </span>
-            </div>
-        </section>
-
-        <!-- ============================================
-        SERVICES
-        ============================================ -->
-        <section class="services-section section-padding-lg" aria-labelledby="services-heading">
-            <div class="container">
-                <div class="services-header">
-                    <span class="text-orange" style="font-weight:600; letter-spacing:0.05em;">الخدمات</span>
-                    <h2 class="heading-xl" id="services-heading">ماذا أقدم لك؟</h2>
-                    <p class="body-sm" style="margin-top:0.5rem;">خدمات رقمية متكاملة مصممة خصيصاً لتحقيق أهدافك.</p>
-                </div>
-
-                <div class="services-list">
-                    <div class="service-item">
-                        <span class="step-number">01</span>
-                        <div class="service-info">
-                            <h3>تصميم وتطوير مواقع الويب</h3>
-                            <p>من الصفحات التعريفية إلى المتاجر الإلكترونية، بناءً على معايير الجودة والأداء.</p>
-                        </div>
-                        <a href="/services/web-development" class="service-link">اكتشف ←</a>
-                    </div>
-                    <div class="service-item">
-                        <span class="step-number">02</span>
-                        <div class="service-info">
-                            <h3>تحسين محركات البحث (SEO)</h3>
-                            <p>استراتيجيات عضوية تضع موقعك في مقدمة النتائج وتجذب الزوار المستهدفين.</p>
-                        </div>
-                        <a href="/services/seo" class="service-link">اكتشف ←</a>
-                    </div>
-                    <div class="service-item">
-                        <span class="step-number">03</span>
-                        <div class="service-info">
-                            <h3>تصميم جرافيك وهوية بصرية</h3>
-                            <p>شعارات، هويات، ومواد تسويقية تعكس شخصية علامتك التجارية باحترافية.</p>
-                        </div>
-                        <a href="/services/graphic-design" class="service-link">اكتشف ←</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================
-        PORTFOLIO
-        ============================================ -->
-        <section class="portfolio-section section-padding-lg" aria-labelledby="portfolio-heading">
-            <div class="container">
-                <span class="text-orange" style="font-weight:600; letter-spacing:0.05em;">أعمال سابقة</span>
-                <h2 class="heading-xl" id="portfolio-heading">دراسات حالة</h2>
-                <p class="body-sm" style="max-width:600px; margin-top:0.5rem;">نماذج حقيقية لمشاريع قمت بتنفيذها، من الفكرة إلى الإطلاق.</p>
-
-                <div class="portfolio-grid">
-                    <article class="portfolio-card">
-                        <span class="category-tag">تطوير مواقع</span>
-                        <h3>منصة تعليمية تفاعلية</h3>
-                        <p>تصميم وتطوير منصة تعليمية متكاملة تدعم المحتوى المرئي والتفاعلي مع لوحة تحكم متقدمة.</p>
-                        <a href="/portfolio/edu-platform" class="case-link">قراءة الدراسة ←</a>
-                    </article>
-                    <article class="portfolio-card">
-                        <span class="category-tag">SEO</span>
-                        <h3>زيادة الزيارات العضوية بنسبة 240%</h3>
-                        <p>استراتيجية تحسين شاملة لمدونة تقنية، رفعت التصنيف للكلمات المفتاحية الرئيسية.</p>
-                        <a href="/portfolio/seo-case" class="case-link">قراءة الدراسة ←</a>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================
-        PROCESS
-        ============================================ -->
-        <section class="process-section section-padding-lg" aria-labelledby="process-heading">
-            <div class="container">
-                <span class="text-orange" style="font-weight:600; letter-spacing:0.05em;">منهجية العمل</span>
-                <h2 class="heading-xl" id="process-heading">كيف نعمل معاً؟</h2>
-
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-num">1</div>
-                        <h4>فهم الهدف</h4>
-                        <p>نبدأ بجلسة استماع دقيقة لفهم رؤيتك وأهدافك وتحدياتك.</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-num">2</div>
-                        <h4>التخطيط</h4>
-                        <p>نضع خريطة طريق واضحة المعالم، مع جداول زمنية ونتائج متوقعة.</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-num">3</div>
-                        <h4>التنفيذ</h4>
-                        <p>نعمل على بناء الحل بجودة عالية، مع تحديثات مستمرة وشفافية كاملة.</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-num">4</div>
-                        <h4>التسليم والدعم</h4>
-                        <p>نسلم المشروع ونقدم تدريباً ودعماً مستمراً لضمان نجاحك المستدام.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================
-        BLOG
-        ============================================ -->
-        <section class="blog-section section-padding-lg" aria-labelledby="blog-heading">
-            <div class="container">
-                <span class="text-orange" style="font-weight:600; letter-spacing:0.05em;">المعرفة</span>
-                <h2 class="heading-xl" id="blog-heading">أحدث المقالات</h2>
-                <p class="body-sm" style="max-width:600px; margin-top:0.5rem;">خبرات ومقالات تقنية لمساعدتك في فهم عالم الرقمنة بشكل أعمق.</p>
-
-                <div class="blog-grid">
-                    <article class="blog-card">
-                        <span class="date">١٢ مايو ٢٠٢٦</span>
-                        <h3>كيف تختار منصة بناء المواقع المناسبة لمشروعك؟</h3>
-                        <p>مقارنة موضوعية بين Blogger و WordPress و المواقع الثابتة، مع نصائح عملية للاختيار.</p>
-                        <a href="/blog/choose-platform" class="read-link">اقرأ المقال ←</a>
-                    </article>
-                    <article class="blog-card">
-                        <span class="date">٢٨ أبريل ٢٠٢٦</span>
-                        <h3>أساسيات تحسين محركات البحث للمبتدئين</h3>
-                        <p>دليل شامل يشرح مفاهيم السيو الأساسية وكيفية تطبيقها على موقعك بنفسك.</p>
-                        <a href="/blog/seo-basics" class="read-link">اقرأ المقال ←</a>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================
-        FINAL CTA
-        ============================================ -->
-        <section class="cta-section" aria-labelledby="cta-heading">
-            <div class="container">
-                <h2 class="heading-xl" id="cta-heading">جاهز لبناء حضورك الرقمي؟</h2>
-                <p class="body-lg">دعنا نعمل معاً لتحويل أفكارك إلى واقع رقمي مؤثر ومربح.</p>
-                <a href="/contact" class="btn btn-primary">
-                    احجز استشارتك المجانية
-                    <span class="icon-arrow">←</span>
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <!-- ============================================
-    FOOTER
-    ============================================ -->
-    <footer class="footer">
-        <div class="container">
-            <span style="font-weight:600; font-size:1.1rem; color:var(--text-primary);">
-                عبدالله <span style="color:var(--orange);">عباس</span>
-            </span>
-            <span class="body-sm" id="footerYear">© ٢٠٢٦ جميع الحقوق محفوظة</span>
-            <div class="socials">
-                <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                <a href="#" aria-label="X">X</a>
-                <a href="#" aria-label="YouTube">YouTube</a>
-                <a href="#" aria-label="GitHub">GitHub</a>
-            </div>
+            <span class="hero-visual-label">تطوير · تصميم · تحسين</span>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================
-    JAVASCRIPT
-    ============================================ -->
-    <script>
-        (function() {
-            'use strict';
+  <!-- ==================== SERVICES ==================== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">
+          <span class="section-label-line"></span>
+          <span>ما أقدّمه</span>
+        </div>
+        <h2 class="section-title">خدمات مصممة لحل مشاكل حقيقية</h2>
+        <p class="section-desc">كل خدمة تبدأ بفهم المشروع، لا بتقديم قائمة مميزات جاهزة.</p>
+      </div>
 
-            // --- 1. Mobile Menu ---
-            const toggle = document.getElementById('menuToggle');
-            const nav = document.getElementById('mainNav');
+      <div class="services-list">
+        <a href="/services/web-development" class="service-item reveal">
+          <span class="service-number">01</span>
+          <div class="service-info">
+            <h3 class="service-name">تطوير مواقع الويب</h3>
+            <p class="service-brief">مواقع سريعة، متجاوبة، ومُحسّنة لمحركات البحث — مبنية بالتقنيات المناسبة لمشروعك، لا الأكثر شعبية.</p>
+          </div>
+          <span class="service-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+          </span>
+        </a>
 
-            if (toggle && nav) {
-                toggle.addEventListener('click', function() {
-                    const isOpen = nav.classList.toggle('open');
-                    this.setAttribute('aria-expanded', isOpen);
-                });
+        <a href="/services/web-design" class="service-item reveal">
+          <span class="service-number">02</span>
+          <div class="service-info">
+            <h3 class="service-name">تصميم واجهات المستخدم</h3>
+            <p class="service-brief">تصميم يُحقق أهداف التحويل، لا يكتفي بأن يكون "جميلًا". كل قرار تصميمي مبرر بمنطق واستخدام حقيقي.</p>
+          </div>
+          <span class="service-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+          </span>
+        </a>
 
-                nav.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', function() {
-                        nav.classList.remove('open');
-                        toggle.setAttribute('aria-expanded', 'false');
-                    });
-                });
-            }
+        <a href="/services/seo" class="service-item reveal">
+          <span class="service-number">03</span>
+          <div class="service-info">
+            <h3 class="service-name">تحسين محركات البحث</h3>
+            <p class="service-brief">استراتيجية SEO مبنية على تحليل المنافسين والكلمات المفتاحية الفعلية — لا على قوائم مراجعة آلية.</p>
+          </div>
+          <span class="service-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+          </span>
+        </a>
 
-            // --- 2. Intersection Observer (subtle fade-in) ---
-            const sections = document.querySelectorAll('section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
+        <a href="/services/wordpress" class="service-item reveal">
+          <span class="service-number">04</span>
+          <div class="service-info">
+            <h3 class="service-name">ووردبريس</h3>
+            <p class="service-brief">مواقع ووردبريس مُحسّنة الأداء، بدون إضافات غير ضرورية تُبطئ الموقع وتُسبب مشاكل أمنية.</p>
+          </div>
+          <span class="service-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+          </span>
+        </a>
 
-            sections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(20px)';
-                section.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-                observer.observe(section);
-            });
+        <a href="/services/blogger" class="service-item reveal">
+          <span class="service-number">05</span>
+          <div class="service-info">
+            <h3 class="service-name">بلوجر</h3>
+            <p class="service-brief">قوالب بلوجر مخصصة بالكامل — تصميم فريد، كود نظيف، وسرعة تحميل فعلية لا مزيفة.</p>
+          </div>
+          <span class="service-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-            // --- 3. Dynamic Year ---
-            const footerYear = document.getElementById('footerYear');
-            if (footerYear) {
-                const year = new Date().getFullYear();
-                footerYear.textContent = `© ${year} جميع الحقوق محفوظة`;
-            }
+  <!-- ==================== PRODUCTS ==================== -->
+  <section class="section section--sm" id="products" style="background:var(--bg-white)">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center;max-width:100%">
+        <div class="section-label" style="justify-content:center">
+          <span class="section-label-line"></span>
+          <span>منتجات جاهزة</span>
+        </div>
+        <h2 class="section-title section-title--center">أدوات وقوالب جاهزة للاستخدام الفوري</h2>
+        <p class="section-desc section-desc--center">منتجات مُختبرة فعليًا، ليست مجرد قوالب مُعادة بيع.</p>
+      </div>
 
-            // --- 4. Respect prefers-reduced-motion ---
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-            if (prefersReducedMotion.matches) {
-                sections.forEach(section => {
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                    section.style.transition = 'none';
-                });
-                observer.disconnect();
-            }
+      <div class="products-grid" id="productsGrid">
+        <!-- يُملأ من Firestore أو يبقى كمحتوى ثابت -->
+        <a href="/products" class="product-card reveal">
+          <div class="product-card-thumb">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>
+          </div>
+          <div class="product-card-body">
+            <h3 class="product-card-name">قوالب بلوجر</h3>
+            <p class="product-card-desc">قوالب مخصصة بالكامل بتصميم فريد وأداء عالي</p>
+            <div class="product-card-footer">
+              <span class="product-card-price">ابتداءً من 150 ج.م</span>
+              <span class="product-card-link">
+                تصفح
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
 
-        })();
-    </script>
+        <a href="/products" class="product-card reveal">
+          <div class="product-card-thumb">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"/></svg>
+          </div>
+          <div class="product-card-body">
+            <h3 class="product-card-name">قوالب ووردبريس</h3>
+            <p class="product-card-desc">ثيمات ووردبريس نظيفة وسريعة بدون إضافات ثقيلة</p>
+            <div class="product-card-footer">
+              <span class="product-card-price">ابتداءً من 300 ج.م</span>
+              <span class="product-card-link">
+                تصفح
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
 
+        <a href="/products" class="product-card reveal">
+          <div class="product-card-thumb">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75 9 3-3 2.148 2.148A12.061 12.061 0 0 1 2.25 12c0-3.182 1.25-6.08 3.286-8.214"/></svg>
+          </div>
+          <div class="product-card-body">
+            <h3 class="product-card-name">أدوات تحسين SEO</h3>
+            <p class="product-card-desc">أدوات وأكواد جاهزة لتحسين ظهور موقعك في محركات البحث</p>
+            <div class="product-card-footer">
+              <span class="product-card-price product-card-price--free">مجاني</span>
+              <span class="product-card-link">
+                تصفح
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div style="text-align:center;margin-top:40px" class="reveal">
+        <a href="/products" class="btn btn--outline btn--sm">جميع المنتجات</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PORTFOLIO ==================== -->
+  <section class="section" id="portfolio">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">
+          <span class="section-label-line"></span>
+          <span>أعمال مختارة</span>
+        </div>
+        <h2 class="section-title">نتائج حقيقية، لا وعود</h2>
+      </div>
+
+      <div class="portfolio-grid">
+        <a href="/portfolio" class="portfolio-card portfolio-card--large reveal">
+          <div class="portfolio-card-thumb">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>
+          </div>
+          <div class="portfolio-card-body">
+            <h3 class="portfolio-card-title">مشروع موقع تجاري متكامل</h3>
+            <span class="portfolio-card-cat">تطوير + تصميم + SEO</span>
+          </div>
+        </a>
+
+        <a href="/portfolio" class="portfolio-card reveal">
+          <div class="portfolio-card-thumb">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+          </div>
+          <div class="portfolio-card-body">
+            <h3 class="portfolio-card-title">قالب بلوجر احترافي</h3>
+            <span class="portfolio-card-cat">تصميم + تطوير</span>
+          </div>
+        </a>
+
+        <a href="/portfolio" class="portfolio-card reveal">
+          <div class="portfolio-card-thumb">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75 9 3-3 2.148 2.148A12.061 12.061 0 0 1 2.25 12c0-3.182 1.25-6.08 3.286-8.214"/></svg>
+          </div>
+          <div class="portfolio-card-body">
+            <h3 class="portfolio-card-title">استراتيجية SEO لموقع تجاري</h3>
+            <span class="portfolio-card-cat">تحسين محركات البحث</span>
+          </div>
+        </a>
+      </div>
+
+      <div style="margin-top:40px" class="reveal">
+        <a href="/portfolio" class="btn btn--outline btn--sm">جميع الأعمال</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="section section--sm">
+    <div class="container">
+      <div class="cta-section reveal">
+        <h2 class="cta-title">عندك مشروع أو فكرة تحتاج تنفيذها؟</h2>
+        <p class="cta-desc">أقدّر مساعدتك في تحديد الحل الأنسب — حتى لو لم تقرر بعد.</p>
+        <div class="cta-actions">
+          <a href="/contact" class="btn btn--white">تواصل معي الآن</a>
+          <a href="/services" class="btn btn--ghost-light">تصفح الخدمات</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">عبدالله عباس</div>
+          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+        </div>
+        <div>
+          <div class="footer-heading">الخدمات</div>
+          <div class="footer-links">
+            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger" class="footer-link">بلوجر</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">المحتوى</div>
+          <div class="footer-links">
+            <a href="/products" class="footer-link">المنتجات</a>
+            <a href="/portfolio" class="footer-link">الأعمال</a>
+            <a href="/blog" class="footer-link">المقالات</a>
+            <a href="/about" class="footer-link">عن عبدالله</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">تواصل</div>
+          <div class="footer-links">
+            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+            <a href="/dashboard/dashboard.html" class="footer-link">لوحتي</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
+        <span class="footer-copy">جميع الحقوق محفوظة</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+    // --- Nav scroll effect ---
+    const nav = document.getElementById('siteNav');
+    let lastScroll = 0;
+    function handleNavScroll() {
+      const y = window.scrollY;
+      if (y > 40) {
+        nav.classList.add('site-nav--scrolled');
+      } else {
+        nav.classList.remove('site-nav--scrolled');
+      }
+      lastScroll = y;
+    }
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    handleNavScroll();
+
+    // --- Mobile menu ---
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileClose = document.getElementById('mobileClose');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobilePanel = document.getElementById('mobilePanel');
+
+    function openMobile() {
+      mobileMenu.classList.add('nav-mobile-menu--open');
+      mobilePanel.classList.add('nav-mobile-panel--open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobile() {
+      mobileMenu.classList.remove('nav-mobile-menu--open');
+      mobilePanel.classList.remove('nav-mobile-panel--open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    mobileToggle.addEventListener('click', openMobile);
+    mobileClose.addEventListener('click', closeMobile);
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) closeMobile();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobilePanel.classList.contains('nav-mobile-panel--open')) closeMobile();
+    });
+
+    // إغلاق القائمة عند النقر على رابط
+    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(link => {
+      link.addEventListener('click', closeMobile);
+    });
+
+    // --- Scroll reveal (IntersectionObserver) ---
+    const revealElements = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal--visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      revealElements.forEach((el, i) => {
+        el.style.transitionDelay = `${i * 60}ms`;
+        observer.observe(el);
+      });
+    } else {
+      // fallback: إظهار كل شيء مباشرة
+      revealElements.forEach(el => el.classList.add('reveal--visible'));
+    }
+
+    // --- Load featured products from Firestore (اختياري) ---
+    // إذا أردت تحميل المنتجات المميزة ديناميكيًا، أضف الكود هنا
+    // مثال: استدعاء Cloud Function تعيد HTML أو JSON للمنتجات المميزة
+  </script>
 </body>
 </html>
