@@ -332,7 +332,7 @@
     <div class="container">
       <div class="footer-inner">
         <div>
-          <div class="footer-brand-name">عبدالله عباس</div>
+          <div class="footer-brand-name">Abdallah Abas</div>
           <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
         </div>
         <div>
@@ -418,7 +418,6 @@
       if (e.key === 'Escape' && mobilePanel.classList.contains('nav-mobile-panel--open')) closeMobile();
     });
 
-    // إغلاق القائمة عند النقر على رابط
     mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(link => {
       link.addEventListener('click', closeMobile);
     });
@@ -440,13 +439,9 @@
         observer.observe(el);
       });
     } else {
-      // fallback: إظهار كل شيء مباشرة
       revealElements.forEach(el => el.classList.add('reveal--visible'));
     }
 
-    // --- Load featured products from Firestore (اختياري) ---
-    // إذا أردت تحميل المنتجات المميزة ديناميكيًا، أضف الكود هنا
-    // مثال: استدعاء Cloud Function تعيد HTML أو JSON للمنتجات المميزة
   </script>
 </body>
 </html>
