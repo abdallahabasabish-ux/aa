@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>لوحتي — عبدالله عباس</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body style="visibility:hidden">
+
+  <div class="dash-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar" id="dashSidebar">
+      <div class="dash-sidebar-brand">
+        <div class="dash-sidebar-brand-name">عبدالله عباس</div>
+        <div class="dash-sidebar-brand-sub">حسابي</div>
+      </div>
+      <nav class="dash-sidebar-nav" aria-label="قائمة الحساب">
+        <a href="/dashboard/dashboard.html" class="dash-nav-item dash-nav-item--active">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+          <span>نظرة عامة</span>
+        </a>
+        <a href="/dashboard/orders.html" class="dash-nav-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+          <span>طلباتي</span>
+        </a>
+        <a href="/dashboard/profile.html" class="dash-nav-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+          <span>الملف الشخصي</span>
+        </a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="/" class="dash-nav-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955a1.126 1.126 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+          <span>الموقع</span>
+        </a>
+        <div class="dash-nav-divider"></div>
+        <button class="dash-sidebar-logout" id="logoutBtn" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
+          <span>تسجيل الخروج</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="dash-overlay" id="dashOverlay"></div>
+
+    <!-- MAIN -->
+    <div class="dash-main">
+      <header class="dash-header">
+        <div style="display:flex;align-items:center;gap:14px">
+          <button class="dash-hamburger" id="hamburgerBtn" type="button" aria-label="فتح القائمة">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+          </button>
+          <h1 class="dash-header-title">نظرة عامة</h1>
+        </div>
+        <div class="dash-header-left">
+          <div class="dash-header-user">
+            <div class="dash-header-avatar" id="headerAvatar">ع</div>
+            <span class="dash-header-name" id="headerName">—</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="dash-content" id="dashContent">
+        <div class="dash-loading" id="pageLoader"><div class="dash-loading-spinner"></div></div>
+        <div id="mainContent" style="display:none">
+
+          <!-- Welcome -->
+          <div class="dash-welcome dash-fade-in">
+            <h2 class="dash-welcome-title" id="welcomeTitle">مرحبًا</h2>
+            <p class="dash-welcome-desc">إدارة منتجاتك وطلباتك ومتابعة حالة كل شيء من مكان واحد.</p>
+          </div>
+
+          <!-- Stats -->
+          <div class="dash-stats dash-fade-in">
+            <div class="dash-stat-card">
+              <div class="dash-stat-top">
+                <div class="dash-stat-icon dash-stat-icon--products">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/></svg>
+                </div>
+                <span class="dash-stat-label">منتجاتي</span>
+              </div>
+              <div class="dash-stat-value" id="statProducts"><div class="dash-stat-skeleton"></div></div>
+            </div>
+            <div class="dash-stat-card">
+              <div class="dash-stat-top">
+                <div class="dash-stat-icon dash-stat-icon--orders">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+                </div>
+                <span class="dash-stat-label">طلباتي</span>
+              </div>
+              <div class="dash-stat-value" id="statOrders"><div class="dash-stat-skeleton"></div></div>
+            </div>
+            <div class="dash-stat-card">
+              <div class="dash-stat-top">
+                <div class="dash-stat-icon dash-stat-icon--favorites">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>
+                </div>
+                <span class="dash-stat-label">المفضلة</span>
+              </div>
+              <div class="dash-stat-value" id="statFavorites"><div class="dash-stat-skeleton"></div></div>
+            </div>
+          </div>
+
+          <!-- Recent Products -->
+          <div class="dash-fade-in">
+            <div class="dash-section-header">
+              <h2 class="dash-section-title">منتجاتي الأخيرة</h2>
+              <a href="/products" class="dash-section-link">تصفح المنتجات</a>
+            </div>
+            <div id="productsArea"></div>
+          </div>
+
+          <!-- Recent Orders -->
+          <div class="dash-fade-in">
+            <div class="dash-section-header">
+              <h2 class="dash-section-title">آخر الطلبات</h2>
+              <a href="/dashboard/orders.html" class="dash-section-link">عرض الكل</a>
+            </div>
+            <div id="ordersArea"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/dashboard/dashboard.js"></script>
+</body>
+</html>
