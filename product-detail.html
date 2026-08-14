@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جارٍ التحميل… — عبدالله عباس</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  
+  <!-- أنماط النظام الأساسية + أنماط هذه الصفحة فقط -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/product-detail.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION (نسخة مطابقة لهيكل main.css)
+       ============================================================ -->
+  <nav class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">عبدالله عباس</a>
+      
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" data-nav>الرئيسية</a>
+        <a href="services.html" class="nav-link" data-nav>الخدمات</a>
+        <a href="products.html" class="nav-link" data-nav>المنتجات</a>
+        <a href="contact.html" class="nav-link" data-nav>تواصل</a>
+      </div>
+      
+      <a href="login.html" class="nav-cta" data-nav>دخول</a>
+      
+      <button class="nav-mobile-toggle" id="navToggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="navMobileMenu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="nav-mobile-menu" id="navMobileMenu">
+      <div class="nav-mobile-panel" id="navMobilePanel">
+        <div class="nav-mobile-header">
+          <span class="nav-mobile-brand">عبدالله عباس</span>
+          <button class="nav-mobile-close" id="navMobileClose" aria-label="إغلاق القائمة">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="nav-mobile-links">
+          <a href="index.html" class="nav-mobile-link" data-nav>الرئيسية</a>
+          <a href="services.html" class="nav-mobile-link" data-nav>الخدمات</a>
+          <a href="products.html" class="nav-mobile-link" data-nav>المنتجات</a>
+          <a href="contact.html" class="nav-mobile-link" data-nav>تواصل</a>
+        </div>
+        <div class="nav-mobile-footer">
+          <a href="login.html" class="nav-mobile-cta" data-nav>دخول</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       المحتوى الرئيسي
+       ============================================================ -->
+  <main id="mainContent" class="pd-main">
+    <!-- سيتم حقن المحتوى هنا -->
+  </main>
+
+  <!-- ============================================================
+       FOOTER (هيكل مطابق لـ main.css)
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p class="footer-copy">&copy; <span id="footerYear"></span> عبدالله عباس. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       السكربتات
+       ============================================================ -->
+  <script src="js/firebase-init.js"></script>
+  <script src="js/security.js"></script>
+  <script src="js/error-handler.js"></script>
+  <script src="js/ui.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    const BASE_URL = 'https://www.abdallahabas.com';
+    const CURRENCY_SYM = { SAR: 'ر.س', USD: '$', EUR: '€', AED: 'د.إ', EGP: 'ج.م' };
+
+    /* ───────── أمان (Fallback لـ security.js) ───────── */
+    const esc = window.escapeHtml || function (s) {
+      if (typeof s !== 'string') return '';
+      return s.replace(/[&<>"'/]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','/':'&#x2F;' })[c]);
+    };
+    const safeUrl = window.isSafeUrl || function (u) {
+      if (typeof u !== 'string') return false;
+      const t = u.trim().toLowerCase();
+      if (t.startsWith('javascript:') || t.startsWith('vbscript:')) return false;
+      if (t.startsWith('data:') && !t.startsWith('data:image/')) return false;
+      try { const p = new URL(t, location.origin); return ['http:','https:'].includes(p.protocol); } catch(_) { return false; }
+    };
+
+    /* ───────── استخراج الـ slug ───────── */
+    function getSlug() {
+      let s = new URLSearchParams(location.search).get('slug');
+      if (s && !/[<>"'&\/\\]/.test(s)) return s;
+      s = location.hash.replace(/^#\/?/, '');
+      if (s && !/[<>"'&\/\\]/.test(s)) return s;
+      return null;
+    }
+
+    /* ───────── Firestore ───────── */
+    function db() {
+      return window.db || (window.firebaseApp?.firestore?.()) || (window.firebase?.firestore?.()) || null;
+    }
+
+    async function fetchProduct(slug) {
+      const d = db();
+      if (!d) throw new Error('Firestore غير متاح');
+      try {
+        const snap = await d.collection('products').where('slug', '==', slug).where('active', '==', true).limit(1).get();
+        if (!snap.empty) return { _id: snap.docs[0].id, ...snap.docs[0].data() };
+        return null;
+      } catch (e) {
+        if (e?.code === 'FAILED_PRECONDITION') {
+          const snap = await d.collection('products').where('slug', '==', slug).limit(1).get();
+          if (!snap.empty) { const doc = { _id: snap.docs[0].id, ...snap.docs[0].data() }; return doc.active !== false ? doc : null; }
+          return null;
+        }
+        throw e;
+      }
+    }
+
+    async function fetchRelated(currentId, category, limit = 3) {
+      const d = db();
+      if (!d || !category) return [];
+      try {
+        const snap = await d.collection('products').where('active', '==', true).where('category', '==', category).orderBy('sortOrder', 'asc').limit(limit + 1).get();
+        const out = [];
+        snap.forEach(doc => { if (doc.id !== currentId && out.length < limit) out.push({ _id: doc.id, ...doc.data() }); });
+        return out;
+      } catch (_) { return []; }
+    }
+
+    /* ───────── SEO ───────── */
+    const meta = (a, v, c) => { if(!c) return; let e=document.querySelector(`meta[${a}="${v}"]`); if(!e){e=document.createElement('meta');e.setAttribute(a,v);document.head.appendChild(e);} e.setAttribute('content',c); };
+    const link = (r, h) => { if(!h) return; let e=document.querySelector(`link[rel="${r}"]`); if(!e){e=document.createElement('link');e.setAttribute('rel',r);document.head.appendChild(e);} e.setAttribute('href',h); };
+    const rmMeta = (a, v) => { document.querySelector(`meta[${a}="${v}"]`)?.remove(); };
+
+    function applySEO(p) {
+      const url = BASE_URL + '/products/' + p.slug;
+      const title = p.title ? `${p.title} — عبدالله عباس` : 'تفاصيل المنتج — عبدالله عباس';
+      document.title = title;
+      document.querySelector('meta[name="robots"]')?.setAttribute('content', 'index, follow');
+      meta('name', 'description', p.shortDescription || '');
+      link('canonical', url);
+      meta('property', 'og:title', title); meta('property', 'og:description', p.shortDescription || '');
+      meta('property', 'og:url', url); meta('property', 'og:type', 'product');
+      if (p.image && safeUrl(p.image)) meta('property', 'og:image', p.image);
+      meta('property', 'twitter:card', 'summary_large_image');
+      meta('property', 'twitter:title', title); meta('property', 'twitter:description', p.shortDescription || '');
+      if (p.image && safeUrl(p.image)) meta('property', 'twitter:image', p.image);
+    }
+
+    function clearSEO() {
+      document.title = 'عبدالله عباس';
+      document.querySelector('meta[name="robots"]')?.setAttribute('content', 'noindex');
+      document.querySelector('link[rel="canonical"]')?.remove();
+      ['og:title','og:description','og:url','og:image','og:type','twitter:card','twitter:title','twitter:description','twitter:image'].forEach(p => rmMeta('property', p));
+      document.querySelectorAll('script[data-pd-ld]').forEach(el => el.remove());
+    }
+
+    /* ───────── Structured Data ───────── */
+    function ld(id, data) {
+      document.getElementById(id)?.remove();
+      const s = document.createElement('script'); s.id = id; s.type = 'application/ld+json'; s.setAttribute('data-pd-ld', ''); s.textContent = JSON.stringify(data); document.head.appendChild(s);
+    }
+
+    function applyLD(p) {
+      const url = BASE_URL + '/products/' + p.slug;
+      ld('ld-bread', { '@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[
+        {'@type':'ListItem','position':1,'name':'الرئيسية','item':BASE_URL},
+        {'@type':'ListItem','position':2,'name':'المنتجات','item':BASE_URL+'/products'},
+        {'@type':'ListItem','position':3,'name':p.title||''}
+      ]});
+      
+      const prod = { '@context':'https://schema.org','@type':'Product','name':p.title||'','description':p.shortDescription||'','url':url };
+      if (p.image && safeUrl(p.image)) prod.image = p.image;
+      if (p._id) prod.sku = p._id;
+      if (typeof p.price === 'number' && p.price > 0) {
+        prod.offers = { '@type':'Offer','price':p.price,'priceCurrency':p.currency||'SAR','url':url,'availability':p.status==='active'?'https://schema.org/InStock':'https://schema.org/Discontinued' };
+      }
+      ld('ld-prod', prod);
+      ld('ld-page', { '@context':'https://schema.org','@type':'WebPage','name':p.title||'','description':p.shortDescription||'','url':url,'isPartOf':{'@type':'WebSite','name':'عبدالله عباس','url':BASE_URL},'about':{'@type':'Product','name':p.title||''} });
+      
+      if (Array.isArray(p.faq) && p.faq.length) {
+        const entities = p.faq.map(f => {
+          const q=f.question||f.q||'', a=(f.answer||f.a||'').replace(/<[^>]*>/g,'');
+          return q ? {'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a}} : null;
+        }).filter(Boolean);
+        if (entities.length) ld('ld-faq', {'@context':'https://schema.org','@type':'FAQPage','mainEntity':entities});
+      }
+    }
+
+    /* ───────── Rich Text ───────── */
+    function rich(raw) {
+      if (typeof raw !== 'string' || !raw.trim()) return '';
+      const allowed = ['strong','em','b','i','br','p','ul','ol','li','h3','h4','h5','h6'];
+      if (/<(strong|em|b|i|br|p|ul|ol|li|h[3-6])[\s>]/i.test(raw)) {
+        return raw.replace(/<script[\s\S]*?<\/script\s*>/gi,'').replace(/\bon\w+\s*=\s*["'][^"']*["']/gi,'').replace(/\bon\w+\s*=\s*\S+/gi,'')
+          .replace(/<(\/?)([^>\s]+)[^>]*>/g, (m, _, tag) => allowed.includes(tag.toLowerCase()) ? m : '');
+      }
+      return raw.split(/\n\n+/).filter(b => b.trim()).map(b => `<p>${b.trim().split('\n').map(esc).join('<br>')}</p>`).join('');
+    }
+
+    /* ───────── بناء الأقسام (باستخدام كلاسات main.css) ───────── */
+    
+    // أيقونة بديلة للصور
+    const placeholderSvg = `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>`;
+    const arrowSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+
+    // قسم عام يتبع معايير main.css تماماً
+    function sec(id, label, title, body, alt = false) {
+      return `<section class="section ${alt ? 'pd-section-alt' : ''} reveal" aria-labelledby="${id}">
+        <div class="container container--narrow">
+          <div class="section-header">
+            ${label ? `<div class="section-label"><span class="section-label-line"></span>${label}</div>` : ''}
+            <h2 id="${id}" class="section-title">${title}</h2>
+          </div>
+          ${body}
+        </div>
+      </section>`;
+    }
+
+    function htmlBread(title) {
+      return `<nav class="pd-breadcrumb" aria-label="مسار التنقل">
+        <div class="container container--narrow">
+          <ol class="pd-breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="index.html" itemprop="item" data-nav><span itemprop="name">الرئيسية</span></a><meta itemprop="position" content="1"></li>
+            <li aria-hidden="true">‹</li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="products.html" itemprop="item" data-nav><span itemprop="name">المنتجات</span></a><meta itemprop="position" content="2"></li>
+            <li aria-hidden="true">‹</li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">${esc(title)}</span><meta itemprop="position" content="3"></li>
+          </ol>
+        </div>
+      </nav>`;
+    }
+
+    function htmlHero(p) {
+      const hasImg = p.image && safeUrl(p.image);
+      const hasDemo = p.demoUrl && safeUrl(p.demoUrl);
+      const hasBuy = p.purchaseUrl && safeUrl(p.purchaseUrl);
+      const hasPrice = typeof p.price === 'number' && p.price > 0;
+      const hasOld = typeof p.oldPrice === 'number' && p.oldPrice > 0;
+      const sym = CURRENCY_SYM[p.currency || 'SAR'] || 'ر.س';
+      const disc = (hasPrice && hasOld && p.price < p.oldPrice) ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+
+      return `<section class="pd-hero reveal">
+        <div class="container container--narrow">
+          <div class="pd-hero-grid">
+            <div class="pd-hero-content">
+              ${p.category ? `<div class="section-label"><span class="section-label-line"></span>${esc(p.category)}</div>` : ''}
+              <h1 class="pd-hero-title">${esc(p.title || '')}</h1>
+              <p class="pd-hero-desc">${esc(p.shortDescription || '')}</p>
+              <div class="pd-hero-meta">
+                ${p.duration ? `<span class="pd-meta-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${esc(p.duration)}</span>` : ''}
+                ${hasPrice ? `<span class="pd-meta-tag pd-meta-tag--price">${hasOld ? `<s>${p.oldPrice} ${sym}</s> ` : ''}${p.price} ${sym}</span>` : ''}
+                ${disc ? `<span class="pd-meta-tag pd-meta-tag--disc">وفر ${disc}%</span>` : ''}
+              </div>
+              <div class="hero-actions">
+                ${hasBuy ? `<a href="${esc(p.purchaseUrl)}" class="btn btn--primary" target="_blank" rel="noopener noreferrer">احصل على المنتج</a>` : ''}
+                ${hasDemo ? `<a href="${esc(p.demoUrl)}" class="btn btn--outline" target="_blank" rel="noopener noreferrer">معاينة حية</a>` : ''}
+              </div>
+            </div>
+            ${hasImg ? `<div class="pd-hero-image"><img src="${esc(p.image)}" alt="${esc(p.title)}" loading="eager" width="640" height="420"></div>` : ''}
+          </div>
+        </div>
+      </section>`;
+    }
+
+    function htmlFeatures(list) {
+      if (!Array.isArray(list) || !list.length) return '';
+      const items = list.map(f => {
+        const t = esc(f.title || f.name || ''), d = esc(f.description || f.desc || ''), icon = esc(f.icon || '');
+        return `<div class="pd-feature-card reveal">
+          ${icon ? `<div class="pd-feature-icon" aria-hidden="true">${icon}</div>` : `<div class="pd-feature-num">${String(list.indexOf(f) + 1).padStart(2, '0')}</div>`}
+          <div><h3 class="pd-feature-title">${t}</h3>${d ? `<p class="pd-feature-desc">${d}</p>` : ''}</div>
+        </div>`;
+      }).join('');
+      return sec('pd-feats', 'المميزات', `<div class="pd-features-grid">${items}</div>`, true);
+    }
+
+    function htmlBenefits(list) {
+      if (!Array.isArray(list) || !list.length) return '';
+      const items = list.map(b => {
+        const txt = esc(typeof b === 'string' ? b : (b.text || b.title || ''));
+        return `<li class="pd-benefit-item reveal">${txt}</li>`;
+      }).join('');
+      return sec('pd-bens', 'الفوائد', `<ul class="pd-benefits-list">${items}</ul>`);
+    }
+
+    function htmlProcess(list) {
+      if (!Array.isArray(list) || !list.length) return '';
+      const items = list.map((s, i) => {
+        const t = esc(s.title || s.name || `الخطوة ${i + 1}`), d = esc(s.description || s.desc || '');
+        return `<div class="pd-step reveal">
+          <div class="pd-step-num">${String(i + 1).padStart(2, '0')}</div>
+          <div><h3 class="pd-step-title">${t}</h3>${d ? `<p class="pd-step-desc">${d}</p>` : ''}</div>
+        </div>`;
+      }).join('');
+      return sec('pd-proc', 'كيف يعمل', `<div class="pd-steps-list">${items}</div>`, true);
+    }
+
+    function htmlScreens(images, title) {
+      const safe = (images || []).filter(i => typeof i === 'string' && safeUrl(i));
+      if (!safe.length) return '';
+      const items = safe.map(img => `<div class="pd-screenshot reveal"><img src="${esc(img)}" alt="${esc(title)}" loading="lazy" width="820" height="520"></div>`).join('');
+      return sec('pd-screens', 'معاينة المنتج', `<div class="pd-screens-grid">${items}</div>`);
+    }
+
+    function htmlPricing(p) {
+      if (typeof p.price !== 'number' || p.price <= 0) return '';
+      const sym = CURRENCY_SYM[p.currency || 'SAR'] || 'ر.س';
+      const hasOld = typeof p.oldPrice === 'number' && p.oldPrice > 0;
+      const disc = (hasOld && p.price < p.oldPrice) ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+      const hasBuy = p.purchaseUrl && safeUrl(p.purchaseUrl);
+      let card = `<div class="pd-pricing-card">
+        <div class="pd-pricing-vals">
+          ${hasOld ? `<s class="pd-price-old">${p.oldPrice} ${sym}</s>` : ''}
+          <span class="pd-price-now">${p.price} ${sym}</span>
+          ${disc ? `<span class="pd-price-badge">وفر ${disc}%</span>` : ''}
+        </div>
+        ${hasBuy ? `<a href="${esc(p.purchaseUrl)}" class="btn btn--primary" target="_blank" rel="noopener noreferrer" style="width:100%; margin-top: 24px;">احصل عليه الآن</a>` : ''}
+        ${p.duration ? `<p class="pd-price-note">مدة الوصول: ${esc(p.duration)}</p>` : ''}
+      </div>`;
+      return sec('pd-price', 'السعر', card);
+    }
+
+    function htmlFaq(list) {
+      if (!Array.isArray(list) || !list.length) return '';
+      const items = list.map(f => {
+        const q = esc(f.question || f.q || ''), a = f.answer || f.a || '';
+        if (!q) return '';
+        return `<details class="pd-faq-item reveal">
+          <summary class="pd-faq-q">${q}</summary>
+          <div class="pd-faq-a" role="region">${rich(a)}</div>
+        </details>`;
+      }).filter(Boolean).join('');
+      return sec('pd-faq-h', 'الأسئلة الشائعة', `<div class="pd-faq-list">${items}</div>`, true);
+    }
+
+    function htmlRelated(list) {
+      if (!Array.isArray(list) || !list.length) return '';
+      const items = list.map(r => {
+        const slug = esc(r.slug || ''); if (!slug) return '';
+        const t = esc(r.title || ''), d = esc(r.shortDescription || '');
+        const img = r.image && safeUrl(r.image) ? esc(r.image) : '';
+        const pr = typeof r.price === 'number' && r.price > 0 ? r.price : null;
+        return `<a href="product-detail.html?slug=${slug}" class="product-card reveal" data-nav>
+          <div class="product-card-thumb">${img ? `<img src="${img}" alt="${t}" loading="lazy">` : placeholderSvg}</div>
+          <div class="product-card-body">
+            <h3 class="product-card-name">${t}</h3>
+            <p class="product-card-desc">${d}</p>
+            <div class="product-card-footer">
+              ${pr !== null ? `<span class="product-card-price">${pr} ر.س</span>` : `<span class="product-card-price product-card-price--free">مجاني</span>`}
+              <span class="product-card-link">التفاصيل ${arrowSvg}</span>
+            </div>
+          </div>
+        </a>`;
+      }).filter(Boolean).join('');
+      return sec('pd-rel-h', 'منتجات ذات صلة', `<div class="products-grid">${items}</div>`);
+    }
+
+    function htmlCTA(title) {
+      return `<section class="section reveal" style="padding-top: 40px; padding-bottom: 100px;">
+        <div class="container container--narrow">
+          <div class="cta-section">
+            <h2 class="cta-title">جاهز للبدء؟</h2>
+            <p class="cta-desc">احصل على ${esc(title)} الآن وابدأ رحلتك.</p>
+            <div class="cta-actions">
+              <a href="contact.html" class="btn btn--white" data-nav>تواصل معي</a>
+              <a href="products.html" class="btn btn--ghost-light" data-nav>تصفح المنتجات</a>
+            </div>
+          </div>
+        </div>
+      </section>`;
+    }
+
+    function buildPage(p, related) {
+      let html = htmlBread(p.title);
+      html += htmlHero(p);
+      if (p.description) html += sec('pd-overview', 'نظرة عامة', `<div class="pd-prose">${rich(p.description)}</div>`);
+      if (p.problem) html += sec('pd-problem', 'لماذا تحتاج هذا المنتج؟', `<div class="pd-prose">${rich(p.problem)}</div>`, true);
+      if (p.whatYouGet) html += sec('pd-wyg', 'ما ستحصل عليه', `<div class="pd-prose">${rich(p.whatYouGet)}</div>`);
+      html += htmlFeatures(p.features);
+      html += htmlBenefits(p.benefits);
+      html += htmlProcess(p.process);
+      html += htmlScreens(p.images, p.title);
+      if (p.technicalInfo) html += sec('pd-tech', 'المعلومات التقنية', `<div class="pd-prose">${rich(p.technicalInfo)}</div>`, true);
+      html += htmlPricing(p);
+      html += htmlFaq(p.faq);
+      html += htmlRelated(related);
+      html += htmlCTA(p.title);
+      return `<article class="pd-page" itemscope itemtype="https://schema.org/Product" itemprop="mainEntity">${html}</article>`;
+    }
+
+    /* ───────── Loading & 404 ───────── */
+    function renderLoading() {
+      const m = document.getElementById('mainContent'); if (!m) return;
+      m.innerHTML = `<div class="pd-loading" aria-live="polite" aria-label="جارٍ التحميل">
+        <div class="container container--narrow" style="padding-top: 120px;">
+          <div style="height: 14px; width: 55%; background: var(--border-light); border-radius: 4px; margin-bottom: 12px; animation: pulse 1.5s infinite;"></div>
+          <div style="height: 40px; width: 80%; background: var(--border-light); border-radius: 4px; margin-bottom: 16px; animation: pulse 1.5s infinite 0.2s;"></div>
+          <div style="height: 14px; width: 100%; background: var(--border-light); border-radius: 4px; margin-bottom: 8px; animation: pulse 1.5s infinite 0.4s;"></div>
+          <div style="height: 14px; width: 60%; background: var(--border-light); border-radius: 4px; animation: pulse 1.5s infinite 0.5s;"></div>
+        </div>
+      </div>
+      <style>@keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }</style>`;
+    }
+
+    function render404() {
+      const m = document.getElementById('mainContent'); if (!m) return;
+      document.title = 'المنتج غير موجود — عبدالله عباس';
+      document.querySelector('meta[name="robots"]')?.setAttribute('content', 'noindex');
+      m.innerHTML = `<section class="section" style="padding-top: 160px; padding-bottom: 120px;">
+        <div class="container container--narrow" style="text-align: center;">
+          <h1 style="font-size: 6rem; font-weight: 800; color: var(--border-dark); line-height: 1; margin-bottom: 16px;">404</h1>
+          <h2 class="section-title section-title--center" style="margin-bottom: 12px;">المنتج غير موجود</h2>
+          <p class="section-desc section-desc--center" style="margin-bottom: 32px;">المنتج الذي تبحث عنه غير متاح أو تمت إزالته.</p>
+          <a href="products.html" class="btn btn--primary" data-nav>تصفح جميع المنتجات</a>
+        </div>
+      </section>`;
+      bindNav();
+    }
+
+    /* ───────── تكامل واجهة المستخدم ───────── */
+    function initReveal() {
+      // يستخدم نظام .reveal الموجود في main.css
+      const els = document.querySelectorAll('.reveal:not(.reveal--visible)');
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(el => el.classList.add('reveal--visible'));
+        return;
+      }
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('reveal--visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(el => obs.observe(el));
+    }
+
+    function bindNav() { if (typeof window.bindNavigation === 'function') window.bindNavigation(); }
+
+    function initMobileMenu() {
+      const btn = document.getElementById('navToggle');
+      const closeBtn = document.getElementById('navMobileClose');
+      const menu = document.getElementById('navMobileMenu');
+      if (!btn || !menu) return;
+      const open = () => { btn.setAttribute('aria-expanded', 'true'); menu.classList.add('nav-mobile-menu--open'); document.getElementById('navMobilePanel')?.classList.add('nav-mobile-panel--open'); };
+      const close = () => { btn.setAttribute('aria-expanded', 'false'); menu.classList.remove('nav-mobile-menu--open'); document.getElementById('navMobilePanel')?.classList.remove('nav-mobile-panel--open'); };
+      btn.addEventListener('click', open);
+      closeBtn?.addEventListener('click', close);
+      menu.addEventListener('click', e => { if (e.target === menu) close(); });
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    }
+
+    function initNavScroll() {
+      const nav = document.getElementById('siteNav');
+      if (!nav) return;
+      const onScroll = () => nav.classList.toggle('site-nav--scrolled', window.scrollY > 10);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    /* ───────── نقطة الدخول ───────── */
+    async function init() {
+      initMobileMenu();
+      initNavScroll();
+      document.getElementById('footerYear') && (document.getElementById('footerYear').textContent = new Date().getFullYear());
+
+      const slug = getSlug();
+      if (!slug) { render404(); return; }
+
+      renderLoading();
+
+      try {
+        const product = await fetchProduct(slug);
+        if (!product) { render404(); return; }
+
+        const related = await fetchRelated(product._id, product.category, 3);
+        const main = document.getElementById('mainContent');
+        if (!main) return;
+
+        main.innerHTML = buildPage(product, related);
+        applySEO(product);
+        applyLD(product);
+        bindNav();
+        initReveal();
+      } catch (err) {
+        console.error('خطأ في تحميل صفحة المنتج:', err);
+        render404();
+      }
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+  </script>
+</body>
+</html>
