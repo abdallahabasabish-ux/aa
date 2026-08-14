@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المنتجات — عبدالله عباس</title>
+  <meta name="description" content="منتجات رقمية احترافية مصممة لتسريع عملك. قوالب، أدوات، وموارد جاهزة للاستخدام.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.abdallahabas.com/products">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+  <meta property="og:title" content="المنتجات — عبدالله عباس">
+  <meta property="og:description" content="منتجات رقمية احترافية مصممة لتسريع عملك.">
+  <meta property="og:url" content="https://www.abdallahabas.com/products">
+  <meta property="og:type" content="website">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="المنتجات — عبدالله عباس">
+  <meta property="twitter:description" content="منتجات رقمية احترافية مصممة لتسريع عملك.">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/products.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">عبدالله عباس</a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" data-nav>الرئيسية</a>
+        <a href="services.html" class="nav-link" data-nav>الخدمات</a>
+        <a href="products.html" class="nav-link nav-link--active" data-nav>المنتجات</a>
+        <a href="contact.html" class="nav-link" data-nav>تواصل</a>
+      </div>
+      <a href="login.html" class="nav-cta" data-nav>دخول</a>
+      <button class="nav-mobile-toggle" id="navToggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="navMobileMenu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="nav-mobile-menu" id="navMobileMenu">
+      <div class="nav-mobile-panel" id="navMobilePanel">
+        <div class="nav-mobile-header">
+          <span class="nav-mobile-brand">عبدالله عباس</span>
+          <button class="nav-mobile-close" id="navMobileClose" aria-label="إغلاق القائمة">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="nav-mobile-links">
+          <a href="index.html" class="nav-mobile-link" data-nav>الرئيسية</a>
+          <a href="services.html" class="nav-mobile-link" data-nav>الخدمات</a>
+          <a href="products.html" class="nav-mobile-link" data-nav>المنتجات</a>
+          <a href="contact.html" class="nav-mobile-link" data-nav>تواصل</a>
+        </div>
+        <div class="nav-mobile-footer">
+          <a href="login.html" class="nav-mobile-cta" data-nav>دخول</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- المحتوى -->
+  <main id="mainContent" class="pl-main">
+    <div class="pl-loading" aria-live="polite" aria-label="جارٍ التحميل" id="plLoading">
+      <div class="container">
+        <div class="pl-skel-title"></div>
+        <div class="pl-skel-sub"></div>
+        <div class="pl-skel-grid">
+          <div class="pl-skel-card"></div>
+          <div class="pl-skel-card"></div>
+          <div class="pl-skel-card"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p class="footer-copy">&copy; <span id="footerYear"></span> عبدالله عباس. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/firebase-init.js"></script>
+  <script src="js/security.js"></script>
+  <script src="js/error-handler.js"></script>
+  <script src="js/ui.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    const CURRENCY_SYM = { SAR: 'ر.س', USD: '$', EUR: '€', AED: 'د.إ', EGP: 'ج.م' };
+
+    /* ───────── أمان ───────── */
+    const esc = window.escapeHtml || function (s) {
+      if (typeof s !== 'string') return '';
+      return s.replace(/[&<>"'/]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','/':'&#x2F;' })[c]);
+    };
+    const safeUrl = window.isSafeUrl || function (u) {
+      if (typeof u !== 'string') return false;
+      const t = u.trim().toLowerCase();
+      if (t.startsWith('javascript:') || t.startsWith('vbscript:')) return false;
+      if (t.startsWith('data:') && !t.startsWith('data:image/')) return false;
+      try { const p = new URL(t, location.origin); return ['http:','https:'].includes(p.protocol); } catch (_) { return false; }
+    };
+
+    /* ───────── Firestore ───────── */
+    function db() {
+      return window.db || (window.firebaseApp?.firestore?.()) || (window.firebase?.firestore?.()) || null;
+    }
+
+    async function fetchAllProducts() {
+      const d = db();
+      if (!d) throw new Error('Firestore غير متاح');
+      const snap = await d.collection('products')
+        .where('active', '==', true)
+        .orderBy('sortOrder', 'asc')
+        .get();
+      const out = [];
+      snap.forEach(doc => out.push({ _id: doc.id, ...doc.data() }));
+      return out;
+    }
+
+    /* ───────── استخراج التصنيفات الفريدة ───────── */
+    function extractCategories(products) {
+      const set = new Set();
+      products.forEach(p => { if (p.category && typeof p.category === 'string' && p.category.trim()) set.add(p.category.trim()); });
+      return Array.from(set).sort();
+    }
+
+    /* ───────── فلترة ───────── */
+    let allProducts = [];
+    let currentCategory = 'all';
+
+    function filterByCategory(cat) {
+      currentCategory = cat;
+      const grid = document.getElementById('plGrid');
+      if (!grid) return;
+
+      // تحديث حالة الأزرار
+      document.querySelectorAll('.pl-filter-btn').forEach(btn => {
+        const isActive = btn.dataset.cat === cat;
+        btn.classList.toggle('pl-filter-btn--active', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
+      });
+
+      const filtered = cat === 'all' ? allProducts : allProducts.filter(p => p.category === cat);
+
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="pl-empty" colspan="100%">
+          <div class="pl-empty-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <p class="pl-empty-title">لا توجد منتجات في هذا التصنيف</p>
+          <p class="pl-empty-desc">جرّب تصفح تصنيف آخر أو راجع لاحقًا.</p>
+        </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((p, i) => buildCard(p, i)).join('');
+      initReveal();
+    }
+
+    /* ───────── بناء بطاقة المنتج (تتبع كلاسات main.css) ───────── */
+    const placeholderSvg = '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
+    const arrowSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+
+    function buildCard(p, index) {
+      const slug = esc(p.slug || '');
+      if (!slug) return '';
+      const title = esc(p.title || 'بدون عنوان');
+      const desc = esc(p.shortDescription || '');
+      const img = p.image && safeUrl(p.image) ? esc(p.image) : '';
+      const price = typeof p.price === 'number' && p.price > 0 ? p.price : null;
+      const oldPrice = typeof p.oldPrice === 'number' && p.oldPrice > 0 ? p.oldPrice : null;
+      const sym = CURRENCY_SYM[p.currency || 'SAR'] || 'ر.س';
+      const disc = (price !== null && oldPrice !== null && price < oldPrice) ? Math.round((1 - price / oldPrice) * 100) : 0;
+
+      return `<a href="product-detail.html?slug=${slug}" class="product-card reveal" data-nav style="transition-delay: ${index * 0.06}s">
+        <div class="product-card-thumb">
+          ${img ? `<img src="${img}" alt="${title}" loading="lazy">` : placeholderSvg}
+          ${disc ? `<span class="pl-disc-badge">-${disc}%</span>` : ''}
+        </div>
+        <div class="product-card-body">
+          <h3 class="product-card-name">${title}</h3>
+          <p class="product-card-desc">${desc}</p>
+          <div class="product-card-footer">
+            ${price !== null
+              ? `<span class="product-card-price">${oldPrice !== null ? `<s style="font-size:0.8em;color:var(--text-muted);font-weight:400;margin-left:6px;">${oldPrice} ${sym}</s>` : ''}${price} ${sym}</span>`
+              : `<span class="product-card-price product-card-price--free">مجاني</span>`}
+            <span class="product-card-link">التفاصيل ${arrowSvg}</span>
+          </div>
+        </div>
+      </a>`;
+    }
+
+    /* ───────── بناء أزرار الفلترة ───────── */
+    function buildFilters(categories) {
+      if (!categories.length) return '';
+      let html = `<button class="pl-filter-btn pl-filter-btn--active" data-cat="all" aria-pressed="true">الكل</button>`;
+      categories.forEach(cat => {
+        html += `<button class="pl-filter-btn" data-cat="${esc(cat)}" aria-pressed="false">${esc(cat)}</button>`;
+      });
+      return html;
+    }
+
+    /* ───────── بناء الصفحة الكاملة ───────── */
+    function renderPage(products) {
+      const categories = extractCategories(products);
+      const main = document.getElementById('mainContent');
+      if (!main) return;
+
+      main.innerHTML = `
+        <section class="section pl-hero-section">
+          <div class="container">
+            <div class="section-header reveal">
+              <div class="section-label"><span class="section-label-line"></span>المنتجات</div>
+              <h1 class="section-title">منتجات مصممة لتسريع عملك</h1>
+              <p class="section-desc">أدوات وقوالب وموارد رقمية جاهزة، مبنية بأعلى معايير الجودة وعلى أساس تجربة حقيقية.</p>
+            </div>
+          </div>
+        </section>
+
+        ${categories.length > 1 ? `
+        <section class="section pl-filters-section" style="padding-top: 0;">
+          <div class="container">
+            <div class="pl-filters reveal" role="tablist" aria-label="فلترة حسب التصنيف">
+              ${buildFilters(categories)}
+            </div>
+          </div>
+        </section>` : ''}
+
+        <section class="section" style="padding-top: ${categories.length > 1 ? '16px' : '0'}; padding-bottom: 100px;">
+          <div class="container">
+            <div class="products-grid" id="plGrid" role="tabpanel">
+              ${products.map((p, i) => buildCard(p, i)).join('')}
+            </div>
+          </div>
+        </section>
+
+        <section class="section reveal" style="padding-top: 0; padding-bottom: 100px;">
+          <div class="container container--narrow">
+            <div class="cta-section">
+              <h2 class="cta-title">لا تجد ما تبحث عنه؟</h2>
+              <p class="cta-desc">أخبرني بما تحتاجه وسأعمل على توفيره لك.</p>
+              <div class="cta-actions">
+                <a href="contact.html" class="btn btn--white" data-nav>تواصل معي</a>
+                <a href="services.html" class="btn btn--ghost-light" data-nav>تصفح الخدمات</a>
+              </div>
+            </div>
+          </div>
+        </section>`;
+
+      // ربط أحداث الفلترة
+      document.querySelectorAll('.pl-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => filterByCategory(btn.dataset.cat));
+      });
+
+      initReveal();
+    }
+
+    /* ───────── Empty State (لا توجد منتجات أصلاً) ───────── */
+    function renderEmpty() {
+      const main = document.getElementById('mainContent');
+      if (!main) return;
+      main.innerHTML = `
+        <section class="section" style="padding-top: 120px; padding-bottom: 120px;">
+          <div class="container container--narrow" style="text-align: center;">
+            <div class="pl-empty-icon" style="margin: 0 auto 20px;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <h2 class="section-title section-title--center" style="margin-bottom: 12px;">لا توجد منتجات بعد</h2>
+            <p class="section-desc section-desc--center" style="margin-bottom: 32px;">يتم إضافة منتجات جديدة بشكل مستمر. تراجع قريبًا.</p>
+            <a href="index.html" class="btn btn--primary" data-nav>العودة للرئيسية</a>
+          </div>
+        </section>`;
+    }
+
+    /* ───────── Error State ───────── */
+    function renderError() {
+      const main = document.getElementById('mainContent');
+      if (!main) return;
+      main.innerHTML = `
+        <section class="section" style="padding-top: 120px; padding-bottom: 120px;">
+          <div class="container container--narrow" style="text-align: center;">
+            <h2 class="section-title section-title--center" style="margin-bottom: 12px;">حدث خطأ</h2>
+            <p class="section-desc section-desc--center" style="margin-bottom: 32px;">تعذر تحميل المنتجات حاليًا. حاول مرة أخرى.</p>
+            <button class="btn btn--primary" id="plRetryBtn">إعادة المحاولة</button>
+          </div>
+        </section>`;
+      document.getElementById('plRetryBtn')?.addEventListener('click', init);
+    }
+
+    /* ───────── Reveal ───────── */
+    function initReveal() {
+      const els = document.querySelectorAll('.reveal:not(.reveal--visible)');
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(el => el.classList.add('reveal--visible'));
+        return;
+      }
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('reveal--visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+      els.forEach(el => obs.observe(el));
+    }
+
+    /* ───────── Nav ───────── */
+    function bindNav() { if (typeof window.bindNavigation === 'function') window.bindNavigation(); }
+
+    function initMobileMenu() {
+      const btn = document.getElementById('navToggle');
+      const closeBtn = document.getElementById('navMobileClose');
+      const menu = document.getElementById('navMobileMenu');
+      if (!btn || !menu) return;
+      const open = () => { btn.setAttribute('aria-expanded', 'true'); menu.classList.add('nav-mobile-menu--open'); document.getElementById('navMobilePanel')?.classList.add('nav-mobile-panel--open'); };
+      const close = () => { btn.setAttribute('aria-expanded', 'false'); menu.classList.remove('nav-mobile-menu--open'); document.getElementById('navMobilePanel')?.classList.remove('nav-mobile-panel--open'); };
+      btn.addEventListener('click', open);
+      closeBtn?.addEventListener('click', close);
+      menu.addEventListener('click', e => { if (e.target === menu) close(); });
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    }
+
+    function initNavScroll() {
+      const nav = document.getElementById('siteNav');
+      if (!nav) return;
+      const onScroll = () => nav.classList.toggle('site-nav--scrolled', window.scrollY > 10);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    /* ───────── نقطة الدخول ───────── */
+    async function init() {
+      initMobileMenu();
+      initNavScroll();
+      document.getElementById('footerYear') && (document.getElementById('footerYear').textContent = new Date().getFullYear());
+
+      try {
+        const products = await fetchAllProducts();
+        allProducts = products;
+
+        if (!products.length) { renderEmpty(); bindNav(); return; }
+
+        renderPage(products);
+        bindNav();
+      } catch (err) {
+        console.error('خطأ في تحميل المنتجات:', err);
+        renderError();
+        bindNav();
+      }
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+  </script>
+</body>
+</html>
