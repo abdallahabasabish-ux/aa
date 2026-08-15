@@ -976,3 +976,10 @@ button:focus-visible,
   .product-card:hover .product-card-thumb img,
   .portfolio-card:hover .portfolio-card-thumb img { transform: none; }
 }
+/* حل مشكلة النقر على الأزرار في الهاتف */
+.hero-actions .btn,
+.hero-actions a {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto !important;
+}
