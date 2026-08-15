@@ -1,8 +1,9 @@
 /* ============================================
-   ABOUT PAGE — PREMIUM EDITORIAL
+   ABOUT PAGE — PORTFOLIO STYLE
    Light Theme · RTL · Premium
    ============================================ */
 
+/* --- Hero --- */
 .about-hero {
   padding-top: calc(var(--header-h) + 72px);
   padding-bottom: 80px;
@@ -52,7 +53,7 @@
   margin: 0 auto;
 }
 
-/* --- Story Section (Image + Text) --- */
+/* --- Story Section (Image + Text) — شبيه بالأعمال --- */
 .about-story {
   padding: 80px 0;
 }
@@ -74,6 +75,11 @@
   align-items: center;
   justify-content: center;
   color: var(--text-dim);
+  transition: transform var(--slow);
+}
+
+.about-story-image:hover {
+  transform: scale(1.01);
 }
 
 .about-story-image img {
@@ -85,7 +91,7 @@
 }
 
 .about-story-image:hover img {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 .about-story-image svg {
@@ -129,7 +135,7 @@
 .about-story-text {
   font-size: 1rem;
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.9;
 }
 
 .about-story-text p {
@@ -139,7 +145,7 @@
   margin-bottom: 0;
 }
 
-/* --- Stats --- */
+/* --- Stats — شبيه بالأعمال --- */
 .about-stats {
   background: var(--bg-white);
   border-top: 1px solid var(--border-light);
@@ -174,7 +180,7 @@
   font-weight: 500;
 }
 
-/* --- Values / Vision --- */
+/* --- Values (Vision / Mission / Approach) — شبيه بالأعمال --- */
 .about-values {
   padding: 80px 0;
 }
@@ -182,7 +188,7 @@
 .about-values-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 28px;
 }
 
 .about-value-card {
@@ -195,7 +201,7 @@
 
 .about-value-card:hover {
   border-color: var(--border-dark);
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 
 .about-value-icon {
@@ -228,7 +234,7 @@
   line-height: 1.7;
 }
 
-/* --- CTA --- */
+/* --- CTA (مطابق للأعمال) --- */
 .about-cta {
   padding: 0 0 100px;
 }
@@ -282,7 +288,7 @@
 }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE (مطابق للأعمال)
    ============================================ */
 @media (max-width: 1023px) {
   .about-story-grid {
@@ -344,5 +350,8 @@
   }
   .about-stats-grid {
     gap: 48px;
+  }
+  .about-values-grid {
+    gap: 36px;
   }
 }
