@@ -7,19 +7,25 @@ import {
   getIdTokenResult,
   updateProfile,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import {
+  doc,
+  setDoc,
+  serverTimestamp,
+  collection,
+  addDoc,
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 async function logAuditEvent(eventType, data = {}) {
   try {
-    const { collection, addDoc, serverTimestamp } = await import(
-      "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js"
-    );
     await addDoc(collection(db, "audit_logs"), {
       eventType,
       ...data,
       timestamp: serverTimestamp(),
       userAgent: navigator.userAgent.slice(0, 200),
     });
-  } catch {}
+  } catch (error) {
+    console.error("⚠️ فشل حفظ سجل التدقيق:", error);
+  }
 }
 
 function mapAuthError(error) {
@@ -76,19 +82,13 @@ export async function login(email, password) {
 
 export async function register(email, password, displayName) {
   try {
-    // 1. إنشاء الحساب في Authentication
     const cred = await createUserWithEmailAndPassword(auth, email, password);
 
-    // 2. تحديث الاسم (displayName)
     if (displayName && displayName.trim()) {
       await updateProfile(cred.user, { displayName: displayName.trim() });
     }
 
-    // 3. ✅ إضافة المستخدم إلى Firestore في مجموعة "users"
     try {
-      const { doc, setDoc, serverTimestamp } = await import(
-        "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js"
-      );
       await setDoc(doc(db, "users", cred.user.uid), {
         uid: cred.user.uid,
         email: cred.user.email,
@@ -101,10 +101,9 @@ export async function register(email, password, displayName) {
       });
       console.log("✅ تم حفظ المستخدم في Firestore بنجاح!");
     } catch (firestoreError) {
-      console.warn("⚠️ فشل إضافة المستخدم إلى Firestore:", firestoreError);
+      console.error("❌ فشل حفظ المستخدم في Firestore:", firestoreError);
     }
 
-    // 4. تسجيل حدث نجاح
     await logAuditEvent("register_success", {
       uid: cred.user.uid,
       emailPrefix: email.split("@")[0],
