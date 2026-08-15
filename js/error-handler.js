@@ -1,7 +1,3 @@
-/**
- * error-handler.js
- * عرض رسائل للمستخدم بأمان (textContent فقط).
- */
 export function showUserMessage(containerId, message, type = "error") {
   const el = document.getElementById(containerId);
   if (!el) return;
