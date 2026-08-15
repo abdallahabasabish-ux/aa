@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الأعمال — عبدالله عباس</title>
+  <meta name="description" content="أعمال سابقة في تطوير المواقع، تصميم الواجهات، تحسين محركات البحث، وقوالب بلوجر وووردبريس." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://abdallahsst.web.app/portfolio" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "الأعمال — عبدالله عباس",
+    "description": "أعمال سابقة في تطوير الويب والتصميم.",
+    "url": "https://abdallahsst.web.app/portfolio"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/portfolio.css" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION (مطابق) ===== -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">عبدالله عباس</a>
+      <div class="nav-links">
+        <a href="/services" class="nav-link">الخدمات</a>
+        <a href="/products" class="nav-link">المنتجات</a>
+        <a href="/portfolio" class="nav-link" style="color:var(--accent)">الأعمال</a>
+        <a href="/blog" class="nav-link">المقالات</a>
+        <a href="/about" class="nav-link">عن عبدالله</a>
+      </div>
+      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-mobile-panel" id="mobilePanel">
+      <div class="nav-mobile-header">
+        <span class="nav-mobile-brand">عبدالله عباس</span>
+        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/services" class="nav-mobile-link">الخدمات</a>
+        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio" class="nav-mobile-link" style="color:var(--accent)">الأعمال</a>
+        <a href="/blog" class="nav-mobile-link">المقالات</a>
+        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+      </div>
+      <div class="nav-mobile-footer">
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <section class="portfolio-hero">
+      <div class="container">
+        <div class="portfolio-hero-inner reveal">
+          <div class="portfolio-hero-label">
+            <span class="portfolio-hero-label-line"></span>
+            <span>أعمال سابقة</span>
+          </div>
+          <h1 class="portfolio-hero-title">مشاريع حقيقية، نتائج ملموسة</h1>
+          <p class="portfolio-hero-desc">مجموعة من المشاريع التي نفذتها لعملائي — كل مشروع يحكي قصة حل لمشكلة حقيقية.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio-section">
+      <div class="container">
+        <div class="portfolio-loading" id="pageLoader" style="display:flex;align-items:center;justify-content:center;min-height:200px">
+          <div style="width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:pf-spin .7s linear infinite"></div>
+        </div>
+
+        <div class="portfolio-empty" id="emptyState" style="display:none;flex-direction:column;align-items:center;padding:60px 20px;text-align:center">
+          <div style="width:64px;height:64px;border-radius:50%;background:var(--bg-raised);display:flex;align-items:center;justify-content:center;color:var(--text-dim);margin-bottom:20px">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>
+          </div>
+          <div style="font-size:1rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px">لا توجد أعمال بعد</div>
+          <div style="font-size:0.875rem;color:var(--text-muted)">سيتم إضافتها قريبًا</div>
+        </div>
+
+        <div class="portfolio-grid" id="portfolioGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">عبدالله عباس</div>
+          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+        </div>
+        <div>
+          <div class="footer-heading">الخدمات</div>
+          <div class="footer-links">
+            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger" class="footer-link">بلوجر</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">المحتوى</div>
+          <div class="footer-links">
+            <a href="/products" class="footer-link">المنتجات</a>
+            <a href="/portfolio" class="footer-link">الأعمال</a>
+            <a href="/blog" class="footer-link">المقالات</a>
+            <a href="/about" class="footer-link">عن عبدالله</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">تواصل</div>
+          <div class="footer-links">
+            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
+        <span class="footer-copy">جميع الحقوق محفوظة</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { db } from "/js/firebase-init.js";
+    import { collection, query, where, orderBy, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { isSafeUrl, escapeHtml } from "/js/security.js";
+
+    // ===== NAV (مطابق) =====
+    const nav = document.getElementById("siteNav");
+    function handleNavScroll() { nav.classList.toggle("site-nav--scrolled", window.scrollY > 40); }
+    window.addEventListener("scroll", handleNavScroll, { passive: true });
+    handleNavScroll();
+
+    const mobileToggle = document.getElementById("mobileToggle");
+    const mobileClose = document.getElementById("mobileClose");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobilePanel = document.getElementById("mobilePanel");
+    function openMobile() { mobileMenu.classList.add("nav-mobile-menu--open"); mobilePanel.classList.add("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "false"); mobileToggle.setAttribute("aria-expanded", "true"); document.body.style.overflow = "hidden"; }
+    function closeMobile() { mobileMenu.classList.remove("nav-mobile-menu--open"); mobilePanel.classList.remove("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "true"); mobileToggle.setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; }
+    mobileToggle.addEventListener("click", openMobile);
+    mobileClose.addEventListener("click", closeMobile);
+    mobileMenu.addEventListener("click", (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMobile(); });
+    mobilePanel.querySelectorAll(".nav-mobile-link, .nav-mobile-cta").forEach((l) => l.addEventListener("click", closeMobile));
+
+    // ===== SCROLL REVEAL =====
+    const reveals = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("reveal--visible"); obs.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+      reveals.forEach((el, i) => { el.style.transitionDelay = `${i * 50}ms`; obs.observe(el); });
+    } else {
+      reveals.forEach((el) => el.classList.add("reveal--visible"));
+    }
+
+    // ===== RENDER =====
+    function createProjectItem(project) {
+      const item = document.createElement("div");
+      item.className = "portfolio-item reveal";
+
+      const thumb = document.createElement("div");
+      thumb.className = "portfolio-item-thumb";
+      if (project.image && isSafeUrl(project.image)) {
+        const img = document.createElement("img");
+        img.src = project.image;
+        img.alt = "";
+        img.loading = "lazy";
+        thumb.appendChild(img);
+      } else {
+        thumb.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
+      }
+
+      const body = document.createElement("div");
+      body.className = "portfolio-item-body";
+
+      const tags = document.createElement("div");
+      tags.className = "portfolio-item-tags";
+      if (project.tags && Array.isArray(project.tags)) {
+        project.tags.slice(0, 3).forEach(t => {
+          const tag = document.createElement("span");
+          tag.className = "portfolio-item-tag";
+          tag.textContent = t;
+          tags.appendChild(tag);
+        });
+      }
+
+      const title = document.createElement("h3");
+      title.className = "portfolio-item-title";
+      const link = document.createElement("a");
+      link.href = `/portfolio-detail.html?slug=${project.slug}`;
+      link.textContent = project.title || "—";
+      title.appendChild(link);
+
+      const desc = document.createElement("p");
+      desc.className = "portfolio-item-desc";
+      desc.textContent = project.shortDescription || "";
+
+      const footer = document.createElement("div");
+      footer.className = "portfolio-item-footer";
+
+      const readmore = document.createElement("a");
+      readmore.href = `/portfolio-detail.html?slug=${project.slug}`;
+      readmore.className = "portfolio-item-link";
+      readmore.innerHTML = `عرض التفاصيل <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>`;
+      footer.appendChild(readmore);
+
+      if (project.liveUrl && isSafeUrl(project.liveUrl)) {
+        const live = document.createElement("a");
+        live.href = project.liveUrl;
+        live.target = "_blank";
+        live.rel = "noopener noreferrer";
+        live.className = "portfolio-item-live";
+        live.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>معاينة`;
+        footer.appendChild(live);
+      }
+
+      body.appendChild(tags);
+      body.appendChild(title);
+      body.appendChild(desc);
+      body.appendChild(footer);
+
+      item.appendChild(thumb);
+      item.appendChild(body);
+
+      return item;
+    }
+
+    async function loadProjects() {
+      const loader = document.getElementById("pageLoader");
+      const grid = document.getElementById("portfolioGrid");
+      const empty = document.getElementById("emptyState");
+
+      try {
+        const q = query(collection(db, "portfolio"), where("active", "==", true), orderBy("sortOrder", "asc"), orderBy("createdAt", "desc"));
+        const snap = await getDocs(q);
+        const projects = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+
+        loader.style.display = "none";
+
+        if (projects.length === 0) {
+          empty.style.display = "flex";
+          return;
+        }
+
+        projects.forEach((p) => {
+          grid.appendChild(createProjectItem(p));
+        });
+      } catch {
+        loader.style.display = "none";
+        empty.style.display = "flex";
+        empty.querySelector("div:last-child").textContent = "حدث خطأ في تحميل الأعمال";
+      }
+    }
+
+    loadProjects();
+  </script>
+</body>
+</html>
