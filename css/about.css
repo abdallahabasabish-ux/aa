@@ -1,0 +1,236 @@
+/* ============================================
+   ABOUT PAGE — EDITORIAL PREMIUM
+   يعتمد كلياً على Tokens الخاصة بـ main.css
+   ============================================ */
+
+/* --- Active Nav --- */
+.nav-link--active { color: var(--text-primary) !important; font-weight: 600; }
+
+/* --- Hero --- */
+.ab-hero {
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--border-light);
+  padding: 80px 0 72px;
+}
+.ab-hero-inner {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.ab-hero-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 28px;
+}
+.ab-hero-avatar svg { width: 32px; height: 32px; }
+.ab-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+.ab-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+.ab-hero-desc {
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: 36px;
+}
+.ab-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* --- Prose (Story Section) --- */
+.ab-prose {
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
+  line-height: 2;
+}
+.ab-prose p {
+  margin-bottom: 1.5em;
+}
+.ab-prose p:last-child {
+  margin-bottom: 0;
+}
+.ab-prose strong,
+.ab-prose b {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* --- Alternate Section --- */
+.ab-section-alt {
+  background: var(--bg-subtle);
+}
+
+/* --- Expertise Grid --- */
+.ab-expertise-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.ab-expertise-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px;
+  transition: border-color var(--normal), transform 150ms ease;
+}
+.ab-expertise-card:hover {
+  border-color: var(--border-dark);
+  transform: translateY(-2px);
+}
+.ab-expertise-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-sm);
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.ab-expertise-icon svg { width: 22px; height: 22px; }
+.ab-expertise-title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.ab-expertise-desc {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .ab-expertise-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- Approach (Timeline) --- */
+.ab-approach {
+  position: relative;
+  padding-right: 0;
+}
+.ab-approach::before {
+  content: '';
+  position: absolute;
+  right: 19px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border-light);
+}
+.ab-approach-item {
+  display: flex;
+  gap: 24px;
+  position: relative;
+  padding-bottom: 40px;
+}
+.ab-approach-item:last-child { padding-bottom: 0; }
+.ab-approach-num {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--bg-white);
+  border: 2px solid var(--accent-border);
+  border-radius: 50%;
+  z-index: 1;
+  font-variant-numeric: tabular-nums;
+}
+.ab-approach-title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.ab-approach-desc {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* --- Values Grid --- */
+.ab-values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.ab-value-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--r);
+  padding: 28px;
+}
+.ab-value-title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--accent-soft);
+  display: inline-block;
+}
+.ab-value-desc {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .ab-values-grid { grid-template-columns: repeat(3, 1fr); }
+  .ab-value-title { display: block; }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 639px) {
+  .ab-hero { padding: 56px 0 48px; }
+  .ab-hero-actions { flex-direction: column; align-items: stretch; }
+  .ab-hero-actions .btn { justify-content: center; }
+  .ab-expertise-card { padding: 20px; }
+  .ab-approach-item { gap: 16px; padding-bottom: 28px; }
+  .ab-value-card { padding: 20px; }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .ab-expertise-card:hover,
+  .ab-expertise-card { transform: none !important; }
+}
