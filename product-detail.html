@@ -155,7 +155,7 @@
       return date.toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
     }
 
-    // ===== BUILD PAGE =====
+    // ===== BUILD PAGE (مطابق للأعمال) =====
     function buildBreadcrumb(product) {
       const navEl = document.createElement("nav");
       navEl.className = "prdt-breadcrumb";
@@ -166,237 +166,113 @@
 
     function buildHero(product) {
       const section = document.createElement("section");
-      section.className = "prdt-hero";
+      section.className = "prdt-detail-hero";
 
       const inner = document.createElement("div");
-      inner.className = "prdt-hero-inner";
+      inner.className = "prdt-detail-hero-inner";
 
-      const left = document.createElement("div");
-      left.className = "prdt-hero-left";
-      const imageBox = document.createElement("div");
-      imageBox.className = "prdt-hero-image";
+      const title = document.createElement("h1");
+      title.className = "prdt-detail-hero-title";
+      title.textContent = product.title || "—";
+      inner.appendChild(title);
+
+      const tags = document.createElement("div");
+      tags.className = "prdt-detail-hero-tags";
+
+      const typeTag = document.createElement("span");
+      typeTag.className = "prdt-detail-hero-tag";
+      typeTag.textContent = TYPE_MAP[product.type] || product.type || "منتج";
+      tags.appendChild(typeTag);
+
+      if (product.version) {
+        const verTag = document.createElement("span");
+        verTag.className = "prdt-detail-hero-tag";
+        verTag.textContent = `الإصدار v${product.version}`;
+        tags.appendChild(verTag);
+      }
+
+      if (product.price > 0) {
+        const priceTag = document.createElement("span");
+        priceTag.className = "prdt-detail-hero-tag";
+        priceTag.textContent = `${Number(product.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[product.currency] || product.currency || ""}`;
+        tags.appendChild(priceTag);
+      } else {
+        const freeTag = document.createElement("span");
+        freeTag.className = "prdt-detail-hero-tag";
+        freeTag.textContent = "مجاني";
+        tags.appendChild(freeTag);
+      }
+
+      inner.appendChild(tags);
+
       if (product.image && isSafeUrl(product.image)) {
+        const imageDiv = document.createElement("div");
+        imageDiv.className = "prdt-detail-hero-image";
         const img = document.createElement("img");
         img.src = product.image;
         img.alt = product.title || "";
-        imageBox.appendChild(img);
-      } else {
-        imageBox.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
-      }
-      left.appendChild(imageBox);
-
-      const right = document.createElement("div");
-      right.className = "prdt-hero-right";
-
-      const top = document.createElement("div");
-      top.className = "prdt-hero-top";
-      const typeBadge = document.createElement("span");
-      typeBadge.className = "prdt-hero-type";
-      typeBadge.textContent = TYPE_MAP[product.type] || product.type || "منتج";
-      top.appendChild(typeBadge);
-
-      if (product.version) {
-        const ver = document.createElement("span");
-        ver.className = "prdt-hero-version-tag";
-        ver.textContent = `الإصدار v${product.version}`;
-        top.appendChild(ver);
+        imageDiv.appendChild(img);
+        inner.appendChild(imageDiv);
       }
 
-      const title = document.createElement("h1");
-      title.className = "prdt-hero-title";
-      title.textContent = product.title || "—";
+      section.appendChild(inner);
+      return section;
+    }
 
-      const short = document.createElement("p");
-      short.className = "prdt-hero-short";
-      short.textContent = product.shortDescription || "";
+    function buildBody(product) {
+      if (!product.description) return null;
+      const div = document.createElement("div");
+      div.className = "prdt-detail-body";
+      const paragraphs = product.description.split("\n").filter(p => p.trim());
+      paragraphs.forEach(p => {
+        const para = document.createElement("p");
+        para.textContent = p;
+        div.appendChild(para);
+      });
+      return div;
+    }
 
-      const priceBlock = document.createElement("div");
-      priceBlock.className = "prdt-hero-price-block";
+    function buildFeatures(product) {
+      const features = product.features || [];
+      if (features.length === 0) return null;
+      const div = document.createElement("div");
+      div.className = "prdt-detail-body";
 
-      const priceEl = document.createElement("span");
-      if (product.price > 0) {
-        priceEl.className = "prdt-hero-price";
-        priceEl.textContent = Number(product.price).toLocaleString("ar-EG");
-        const curr = document.createElement("span");
-        curr.className = "prdt-hero-currency";
-        curr.textContent = CURRENCY_MAP[product.currency] || product.currency || "";
-        priceEl.appendChild(curr);
-      } else {
-        priceEl.className = "prdt-hero-price prdt-hero-price-free";
-        priceEl.textContent = "مجاني";
-      }
-      priceBlock.appendChild(priceEl);
+      const title = document.createElement("h2");
+      title.textContent = "المميزات";
+      div.appendChild(title);
 
-      const downloadTag = document.createElement("span");
-      downloadTag.className = "prdt-hero-download-tag";
-      downloadTag.textContent = DOWNLOAD_MAP[product.downloadType] || product.downloadType || "تحميل";
-      priceBlock.appendChild(downloadTag);
+      const list = document.createElement("ul");
+      features.forEach(f => {
+        const li = document.createElement("li");
+        li.textContent = f;
+        list.appendChild(li);
+      });
+      div.appendChild(list);
+      return div;
+    }
 
-      const cta = document.createElement("div");
-      cta.className = "prdt-hero-cta";
+    function buildActions(product) {
+      const div = document.createElement("div");
+      div.className = "prdt-detail-actions";
+
       const orderBtn = document.createElement("a");
       orderBtn.href = "/contact";
-      orderBtn.className = "prdt-cta-btn";
-      orderBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.27 3.27a4 4 0 0 1 5.66 5.66h11.14a4 4 0 0 1 0 5.66 5.66H8.93a4 4 0 0 1-5.66-5.66l-3.27-3.27a4 4 0 0 1 0-5.66 5.66 4 0 0 1 5.66 0Z"/></svg>طلب المنتج`;
-      cta.appendChild(orderBtn);
+      orderBtn.className = "btn btn--primary";
+      orderBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.27 3.27a4 4 0 0 1 5.66 5.66h11.14a4 4 0 0 1 0 5.66 5.66H8.93a4 4 0 0 1-5.66-5.66l-3.27-3.27a4 4 0 0 1 0-5.66 5.66 4 0 0 1 5.66 0Z"/></svg>طلب المنتج`;
+      div.appendChild(orderBtn);
 
       if (product.demoUrl && isSafeUrl(product.demoUrl)) {
         const demo = document.createElement("a");
         demo.href = product.demoUrl;
         demo.target = "_blank";
         demo.rel = "noopener noreferrer";
-        demo.className = "prdt-hero-demo";
-        demo.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>معاينة حية`;
-        cta.appendChild(demo);
+        demo.className = "btn btn--outline";
+        demo.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>معاينة حية`;
+        div.appendChild(demo);
       }
 
-      right.appendChild(top);
-      right.appendChild(title);
-      right.appendChild(short);
-      right.appendChild(priceBlock);
-      right.appendChild(cta);
-
-      inner.appendChild(left);
-      inner.appendChild(right);
-      section.appendChild(inner);
-
-      return section;
-    }
-
-    function buildDescription(product) {
-      if (!product.description) return null;
-      const section = document.createElement("section");
-      section.className = "prdt-section";
-
-      const label = document.createElement("div");
-      label.className = "prdt-section-label";
-      label.innerHTML = `<span class="prdt-section-label-line"></span><span>الوصف</span>`;
-
-      const title = document.createElement("h2");
-      title.className = "prdt-section-title";
-      title.textContent = "عن المنتج";
-
-      const text = document.createElement("div");
-      text.className = "prdt-section-text";
-      product.description.split("\n").filter(p => p.trim()).forEach(p => {
-        const para = document.createElement("p");
-        para.textContent = p;
-        text.appendChild(para);
-      });
-
-      section.appendChild(label);
-      section.appendChild(title);
-      section.appendChild(text);
-      return section;
-    }
-
-    function buildFeatures(product) {
-      const features = product.features || [];
-      if (features.length === 0) return null;
-
-      const section = document.createElement("section");
-      section.className = "prdt-section";
-
-      const label = document.createElement("div");
-      label.className = "prdt-section-label";
-      label.innerHTML = `<span class="prdt-section-label-line"></span><span>المميزات</span>`;
-
-      const title = document.createElement("h2");
-      title.className = "prdt-section-title";
-      title.textContent = "ما يميّز هذا المنتج";
-
-      const grid = document.createElement("div");
-      grid.className = "prdt-features-grid";
-
-      features.forEach(f => {
-        const item = document.createElement("div");
-        item.className = "prdt-feature-item";
-        const icon = document.createElement("span");
-        icon.className = "prdt-feature-icon";
-        icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>`;
-        const text = document.createElement("span");
-        text.className = "prdt-feature-text";
-        text.textContent = f;
-        item.appendChild(icon);
-        item.appendChild(text);
-        grid.appendChild(item);
-      });
-
-      section.appendChild(label);
-      section.appendChild(title);
-      section.appendChild(grid);
-      return section;
-    }
-
-    function buildSidebar(product) {
-      const aside = document.createElement("aside");
-      aside.className = "prdt-sidebar";
-
-      const card = document.createElement("div");
-      card.className = "prdt-sidebar-card";
-
-      const title = document.createElement("h3");
-      title.className = "prdt-sidebar-title";
-      title.textContent = product.title || "المنتج";
-
-      const desc = document.createElement("p");
-      desc.className = "prdt-sidebar-desc";
-      desc.textContent = product.shortDescription || "";
-
-      const price = document.createElement("div");
-      price.className = "prdt-sidebar-price";
-      if (product.price > 0) {
-        price.textContent = Number(product.price).toLocaleString("ar-EG");
-        const curr = document.createElement("span");
-        curr.className = "prdt-sidebar-currency";
-        curr.textContent = CURRENCY_MAP[product.currency] || product.currency || "";
-        price.appendChild(curr);
-      } else {
-        price.className = "prdt-sidebar-price prdt-sidebar-price-free";
-        price.textContent = "مجاني";
-      }
-
-      const btn = document.createElement("a");
-      btn.href = "/contact";
-      btn.className = "prdt-sidebar-btn";
-      btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.27 3.27a4 4 0 0 1 5.66 5.66h11.14a4 4 0 0 1 0 5.66 5.66H8.93a4 4 0 0 1-5.66-5.66l-3.27-3.27a4 4 0 0 1 0-5.66 5.66 4 0 0 1 5.66 0Z"/></svg>اطلب الآن`;
-
-      card.appendChild(title);
-      card.appendChild(desc);
-      card.appendChild(price);
-      card.appendChild(btn);
-      aside.appendChild(card);
-
-      const infoCard = document.createElement("div");
-      infoCard.className = "prdt-sidebar-info";
-
-      const infoTitle = document.createElement("h4");
-      infoTitle.className = "prdt-sidebar-info-title";
-      infoTitle.textContent = "معلومات سريعة";
-
-      const rows = [
-        { label: "النوع", value: TYPE_MAP[product.type] || product.type || "—" },
-        { label: "الإصدار", value: product.version ? `v${product.version}` : "—" },
-        { label: "التحميل", value: DOWNLOAD_MAP[product.downloadType] || product.downloadType || "—" },
-        { label: "أُضيف في", value: formatDate(product.createdAt) },
-      ];
-
-      rows.forEach(r => {
-        const row = document.createElement("div");
-        row.className = "prdt-info-row";
-        const lbl = document.createElement("span");
-        lbl.className = "prdt-info-label";
-        lbl.textContent = r.label;
-        const val = document.createElement("span");
-        val.className = "prdt-info-value";
-        val.textContent = r.value;
-        row.appendChild(lbl);
-        row.appendChild(val);
-        infoCard.appendChild(row);
-      });
-
-      aside.appendChild(infoCard);
-      return aside;
+      return div;
     }
 
     function buildPage(product) {
@@ -404,20 +280,15 @@
       root.appendChild(buildBreadcrumb(product));
       root.appendChild(buildHero(product));
 
-      const grid = document.createElement("div");
-      grid.className = "prdt-content";
-
-      const main = document.createElement("div");
-      main.className = "prdt-main";
-      const desc = buildDescription(product);
+      const contentDiv = document.createElement("div");
+      contentDiv.className = "prdt-detail-content";
+      const body = buildBody(product);
+      if (body) contentDiv.appendChild(body);
       const features = buildFeatures(product);
-      if (desc) main.appendChild(desc);
-      if (features) main.appendChild(features);
+      if (features) contentDiv.appendChild(features);
+      contentDiv.appendChild(buildActions(product));
 
-      grid.appendChild(main);
-      grid.appendChild(buildSidebar(product));
-
-      root.appendChild(grid);
+      root.appendChild(contentDiv);
       root.style.display = "block";
     }
 
