@@ -902,7 +902,30 @@ button:focus-visible,
   outline-offset: 2px;
   border-radius: 4px;
 }
+/* ============================================
+   FIX: Mobile Click Issues
+   ============================================ */
+button,
+a,
+.btn,
+.nav-link,
+.nav-cta,
+.nav-mobile-toggle,
+.nav-mobile-close,
+.nav-mobile-link,
+.nav-mobile-cta {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
 
+/* تأكد من أن القائمة المتنقلة لا تمنع النقر */
+.nav-mobile-menu {
+  pointer-events: none;
+}
+.nav-mobile-menu--open {
+  pointer-events: auto;
+}
 /* ============================================
    SELECTION
    ============================================ */
@@ -976,10 +999,4 @@ button:focus-visible,
   .product-card:hover .product-card-thumb img,
   .portfolio-card:hover .portfolio-card-thumb img { transform: none; }
 }
-/* حل مشكلة النقر على الأزرار في الهاتف */
-.hero-actions .btn,
-.hero-actions a {
-  position: relative;
-  z-index: 10;
-  pointer-events: auto !important;
-}
+
