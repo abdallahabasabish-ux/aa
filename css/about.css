@@ -1,3 +1,8 @@
+/* ============================================
+   ABOUT PAGE — PREMIUM EDITORIAL
+   Light Theme · RTL · Premium
+   ============================================ */
+
 .about-hero {
   padding-top: calc(var(--header-h) + 72px);
   padding-bottom: 80px;
@@ -35,6 +40,7 @@
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.2;
+  letter-spacing: -0.02em;
   margin-bottom: 20px;
 }
 
@@ -46,7 +52,7 @@
   margin: 0 auto;
 }
 
-/* --- القصة + الصورة --- */
+/* --- Story Section (Image + Text) --- */
 .about-story {
   padding: 80px 0;
 }
@@ -67,6 +73,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--text-dim);
 }
 
 .about-story-image img {
@@ -79,6 +86,11 @@
 
 .about-story-image:hover img {
   transform: scale(1.02);
+}
+
+.about-story-image svg {
+  width: 56px;
+  height: 56px;
 }
 
 .about-story-content {
@@ -127,7 +139,7 @@
   margin-bottom: 0;
 }
 
-/* --- الإحصائيات --- */
+/* --- Stats --- */
 .about-stats {
   background: var(--bg-white);
   border-top: 1px solid var(--border-light);
@@ -149,6 +161,7 @@
   color: var(--text-primary);
   line-height: 1.1;
   margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
 }
 
 .about-stat-number .accent {
@@ -161,7 +174,7 @@
   font-weight: 500;
 }
 
-/* --- الرؤية والرسالة والنهج --- */
+/* --- Values / Vision --- */
 .about-values {
   padding: 80px 0;
 }
@@ -215,7 +228,7 @@
   line-height: 1.7;
 }
 
-/* --- قسم الدعوة للتواصل (CTA) --- */
+/* --- CTA --- */
 .about-cta {
   padding: 0 0 100px;
 }
@@ -269,7 +282,7 @@
 }
 
 /* ============================================
-   RESPONSIVE (استجابة للشاشات)
+   RESPONSIVE
    ============================================ */
 @media (max-width: 1023px) {
   .about-story-grid {
@@ -322,5 +335,14 @@
   .about-cta-actions .btn {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (min-width: 1280px) {
+  .about-story-grid {
+    gap: 80px;
+  }
+  .about-stats-grid {
+    gap: 48px;
   }
 }
