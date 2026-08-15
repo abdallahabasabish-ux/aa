@@ -1,375 +1,348 @@
 /* ============================================
-   ABOUT PAGE — PROFESSIONAL STYLES
-   Matches Contact Page design system
+   ABOUT PAGE — PROFESSIONAL FULL-SCREEN LAYOUT
    ============================================ */
 
-.about-page {
-  padding-top: calc(var(--header-h) + 60px);
-  padding-bottom: 100px;
-  min-height: 100dvh;
-}
-
-/* --- Hero --- */
+/* --- Hero Section (Full Viewport Height) --- */
 .about-hero {
-  margin-bottom: 64px;
+  min-height: calc(100dvh - var(--header-h));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 40px 0 60px;
 }
 
-.about-hero-inner {
-  max-width: 640px;
-  margin: 0 auto;
-  text-align: center;
+/* --- Image Side (Left side visually in RTL) --- */
+.about-hero-image-wrap {
+  position: relative;
+  height: 100%;
+  min-height: 400px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
+  transition: box-shadow var(--normal), transform var(--normal);
+}
+
+.about-hero-image-wrap:hover {
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08);
+  transform: scale(1.01);
+}
+
+.about-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--slow);
+}
+
+.about-hero-image-wrap:hover .about-hero-image {
+  transform: scale(1.03);
+}
+
+/* --- Text Side (Right side visually in RTL) --- */
+.about-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 20px 0;
+}
+
+.about-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.about-eyebrow-line {
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
 }
 
 .about-hero-title {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.15;
   color: var(--text-primary);
-  line-height: 1.2;
   letter-spacing: -0.02em;
-  margin-bottom: 16px;
+}
+
+.about-hero-title span {
+  color: var(--accent);
 }
 
 .about-hero-desc {
   font-size: 1.0625rem;
   color: var(--text-secondary);
   line-height: 1.8;
+  max-width: 520px;
 }
 
-/* --- Main Grid --- */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 48px;
-  align-items: start;
-}
-
-/* --- Content --- */
-.about-content {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-/* --- IMAGE (Professional Styling) --- */
-.about-image-wrap {
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  background: var(--bg-raised);
-  border: 1px solid var(--border);
-  transition: box-shadow var(--normal), transform var(--normal);
-}
-
-.about-image-wrap:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
-  transform: translateY(-2px);
-}
-
-.about-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  aspect-ratio: 16/9;
-  transition: transform var(--slow);
-}
-
-.about-image-wrap:hover .about-image {
-  transform: scale(1.02);
-}
-
-/* --- Text --- */
-.about-text {
+/* --- Feature Points with SVG Icons --- */
+.about-features {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin: 8px 0 4px;
 }
 
-.about-heading {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.about-paragraph {
-  font-size: 0.9375rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
-}
-
-/* --- VALUES (with Professional SVG Icons) --- */
-.about-values {
+.about-feature {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 28px;
-  background: var(--bg-white);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  transition: border-color var(--normal), box-shadow var(--normal);
+  align-items: center;
+  gap: 14px;
 }
 
-.about-values:hover {
-  border-color: var(--border-dark);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
-}
-
-.about-value {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
-
-/* --- The Icon Container (Matches Contact Page exactly) --- */
-.about-value-icon {
+.about-feature-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
   border-radius: var(--r-sm);
   background: var(--accent-soft);
   color: var(--accent);
   transition: background var(--fast), color var(--fast), transform var(--fast);
 }
 
-.about-value:hover .about-value-icon {
+.about-feature:hover .about-feature-icon {
   background: var(--accent);
   color: var(--text-inverse);
-  transform: scale(1.05) rotate(-4deg);
+  transform: scale(1.05) rotate(-3deg);
 }
 
-.about-value-icon svg {
-  width: 22px;
-  height: 22px;
+.about-feature-icon svg {
+  width: 18px;
+  height: 18px;
   stroke: currentColor;
-  stroke-width: 1.75;
+  stroke-width: 2;
   fill: none;
 }
 
-.about-value-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 4px;
+.about-feature-text {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
-.about-value-desc {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-/* --- CTA Buttons --- */
-.about-cta {
+/* --- Hero Actions --- */
+.about-hero-actions {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
   margin-top: 8px;
 }
 
-/* --- Sidebar --- */
-.about-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+/* ============================================
+   STATS / CARDS SECTION (Professional Shopping Cards)
+   ============================================ */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 80px 0 100px;
+  border-top: 1px solid var(--border-light);
 }
 
-/* Info Card */
-.about-info-card {
+.about-stat-card {
   background: var(--bg-white);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 28px;
-  transition: border-color var(--normal), box-shadow var(--normal);
+  padding: 32px 24px;
+  text-align: center;
+  transition: all var(--normal);
+  position: relative;
+  overflow: hidden;
 }
 
-.about-info-card:hover {
+/* Decorative accent line */
+.about-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity var(--normal);
+}
+
+.about-stat-card:hover::before {
+  opacity: 1;
+}
+
+.about-stat-card:hover {
   border-color: var(--border-dark);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px);
 }
 
-.about-info-title {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 20px;
-}
-
-.about-info-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.about-info-item {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.875rem;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-light);
-}
-
-.about-info-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.about-info-label {
-  color: var(--text-muted);
-}
-
-.about-info-value {
-  color: var(--text-primary);
-  font-weight: 500;
-}
-
-/* Quote */
-.about-quote-card {
-  background: var(--bg-white);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 28px;
-  transition: border-color var(--normal);
-}
-
-.about-quote-card:hover {
-  border-color: var(--border-dark);
-}
-
-.about-quote {
-  font-size: 1.0625rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  line-height: 1.8;
-  margin-bottom: 12px;
-  padding-inline-start: 16px;
-  border-inline-start: 3px solid var(--accent);
-}
-
-.about-quote-author {
-  display: block;
-  font-size: 0.8125rem;
-  color: var(--text-dim);
-  font-style: normal;
-}
-
-/* Services */
-.about-services-card {
-  background: var(--bg-white);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 28px;
-  transition: border-color var(--normal);
-}
-
-.about-services-card:hover {
-  border-color: var(--border-dark);
-}
-
-.about-services-title {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text-primary);
+.about-stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
   margin-bottom: 16px;
+  transition: background var(--normal), color var(--normal);
 }
 
-.about-services-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.about-stat-card:hover .about-stat-icon {
+  background: var(--accent);
+  color: var(--text-inverse);
 }
 
-.about-services-list li a {
-  display: block;
-  padding: 8px 12px;
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  border-radius: var(--r-sm);
-  transition: background var(--fast), color var(--fast), padding-inline-start var(--fast);
+.about-stat-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
 }
 
-.about-services-list li a:hover {
-  background: var(--bg-raised);
+.about-stat-number {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 800;
   color: var(--text-primary);
-  padding-inline-start: 20px;
+  line-height: 1.1;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.about-stat-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 /* ============================================
    RESPONSIVE
    ============================================ */
+
+/* Tablet */
 @media (max-width: 1023px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-  .about-sidebar {
-    order: -1;
-  }
-  .about-info-item {
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-}
-
-@media (max-width: 639px) {
-  .about-page {
-    padding-top: calc(var(--header-h) + 32px);
-    padding-bottom: 64px;
-  }
   .about-hero {
-    margin-bottom: 40px;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    min-height: auto;
+    padding: 40px 0;
   }
-  .about-values {
-    padding: 20px;
+
+  .about-hero-image-wrap {
+    min-height: 280px;
+    order: -1; /* Image on top for mobile/tablet */
+  }
+
+  .about-hero-content {
+    padding: 0;
+  }
+
+  .about-hero-desc {
+    max-width: 100%;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 60px 0 80px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 639px) {
+  .about-hero {
+    gap: 28px;
+    padding: 20px 0;
+  }
+
+  .about-hero-image-wrap {
+    min-height: 200px;
     border-radius: var(--r);
   }
-  .about-info-card,
-  .about-quote-card,
-  .about-services-card {
-    padding: 20px;
-    border-radius: var(--r);
+
+  .about-hero-title {
+    font-size: 1.75rem;
   }
-  .about-cta {
+
+  .about-hero-desc {
+    font-size: 0.9375rem;
+  }
+
+  .about-features {
+    gap: 12px;
+  }
+
+  .about-feature-text {
+    font-size: 0.875rem;
+  }
+
+  .about-hero-actions {
     flex-direction: column;
+    width: 100%;
   }
-  .about-cta .btn {
+
+  .about-hero-actions .btn {
     justify-content: center;
+    width: 100%;
   }
-  .about-image-wrap {
+
+  .about-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 40px 0 60px;
+  }
+
+  .about-stat-card {
+    padding: 24px 16px;
     border-radius: var(--r);
   }
-  .about-value-icon {
-    width: 38px;
-    height: 38px;
-    min-width: 38px;
+
+  .about-stat-number {
+    font-size: 1.75rem;
   }
-  .about-value-icon svg {
-    width: 18px;
-    height: 18px;
+
+  .about-stat-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .about-stat-icon svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
+/* Large Screens */
 @media (min-width: 1280px) {
-  .about-grid {
-    gap: 64px;
+  .about-hero {
+    gap: 80px;
   }
 }
 
-/* ============================================
-   REDUCED MOTION
-   ============================================ */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .about-image-wrap:hover,
-  .about-image-wrap:hover .about-image,
-  .about-value:hover .about-value-icon {
+  .about-hero-image-wrap:hover,
+  .about-hero-image-wrap:hover .about-hero-image,
+  .about-stat-card:hover {
     transform: none !important;
   }
 }
