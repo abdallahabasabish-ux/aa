@@ -1,7 +1,3 @@
-/**
- * ui.js
- * أدوات واجهة المستخدم — Loading, Password Toggle.
- */
 export function setButtonLoading(btn, loading) {
   if (!btn) return;
   if (loading) {
