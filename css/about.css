@@ -1,18 +1,24 @@
 /* ============================================
-   ABOUT PAGE — PROFESSIONAL FULL-SCREEN LAYOUT
+   ABOUT PAGE — PROFESSIONAL (Matches Main Site)
    ============================================ */
 
-/* --- Hero Section (Full Viewport Height) --- */
+.about-page {
+  padding-top: calc(var(--header-h) + 60px);
+  padding-bottom: 100px;
+  min-height: 100dvh;
+}
+
+/* --- Hero (Full Screen Layout) --- */
 .about-hero {
-  min-height: calc(100dvh - var(--header-h));
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
-  padding: 40px 0 60px;
+  min-height: calc(100dvh - var(--header-h) - 80px);
+  padding: 20px 0;
 }
 
-/* --- Image Side (Left side visually in RTL) --- */
+/* --- Image Side --- */
 .about-hero-image-wrap {
   position: relative;
   height: 100%;
@@ -21,12 +27,11 @@
   overflow: hidden;
   background: var(--bg-raised);
   border: 1px solid var(--border);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
   transition: box-shadow var(--normal), transform var(--normal);
 }
 
 .about-hero-image-wrap:hover {
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
   transform: scale(1.01);
 }
 
@@ -41,7 +46,7 @@
   transform: scale(1.03);
 }
 
-/* --- Text Side (Right side visually in RTL) --- */
+/* --- Content Side --- */
 .about-hero-content {
   display: flex;
   flex-direction: column;
@@ -86,7 +91,7 @@
   max-width: 520px;
 }
 
-/* --- Feature Points with SVG Icons --- */
+/* --- Features with SVG Icons --- */
 .about-features {
   display: flex;
   flex-direction: column;
@@ -142,7 +147,7 @@
 }
 
 /* ============================================
-   STATS / CARDS SECTION (Professional Shopping Cards)
+   STATS / CARDS (Professional Shopping Cards)
    ============================================ */
 .about-stats {
   display: grid;
@@ -163,7 +168,6 @@
   overflow: hidden;
 }
 
-/* Decorative accent line */
 .about-stat-card::before {
   content: '';
   position: absolute;
@@ -231,8 +235,6 @@
 /* ============================================
    RESPONSIVE
    ============================================ */
-
-/* Tablet */
 @media (max-width: 1023px) {
   .about-hero {
     grid-template-columns: 1fr;
@@ -243,7 +245,7 @@
 
   .about-hero-image-wrap {
     min-height: 280px;
-    order: -1; /* Image on top for mobile/tablet */
+    order: -1;
   }
 
   .about-hero-content {
@@ -260,8 +262,12 @@
   }
 }
 
-/* Mobile */
 @media (max-width: 639px) {
+  .about-page {
+    padding-top: calc(var(--header-h) + 32px);
+    padding-bottom: 64px;
+  }
+
   .about-hero {
     gap: 28px;
     padding: 20px 0;
@@ -324,14 +330,12 @@
   }
 }
 
-/* Large Screens */
 @media (min-width: 1280px) {
   .about-hero {
     gap: 80px;
   }
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
