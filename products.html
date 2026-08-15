@@ -4,11 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>المنتجات — عبدالله عباس</title>
-  <meta name="description" content="منتجات رقمية احترافية مصممة لتسريع عملك. قوالب، أدوات، وموارد جاهزة للاستخدام الفوري." />
+  <meta name="description" content="منتجات رقمية جاهزة: قوالب بلوجر، ثيمات ووردبريس، أدوات تحسين SEO، ومجموعات واجهات احترافية." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://abdallahsst.web.app/products" />
 
-  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <!-- Structured Data: CollectionPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "المنتجات — عبدالله عباس",
+    "description": "منتجات رقمية جاهزة للاستخدام الفوري.",
+    "url": "https://abdallahsst.web.app/products"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/main.css" />
   <link rel="stylesheet" href="/css/products.css" />
 </head>
@@ -17,25 +30,21 @@
   <!-- ==================== NAVIGATION ==================== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
-      <a href="/" class="nav-brand">Abdallah Abas</a>
-
-      <div class="nav-links" id="navLinks">
+      <a href="/" class="nav-brand">عبدالله عباس</a>
+      <div class="nav-links">
         <a href="/services" class="nav-link">الخدمات</a>
-        <a href="/products" class="nav-link nav-link--active">المنتجات</a>
+        <a href="/products" class="nav-link" style="color:var(--accent)">المنتجات</a>
         <a href="/portfolio" class="nav-link">الأعمال</a>
         <a href="/blog" class="nav-link">المقالات</a>
         <a href="/about" class="nav-link">عن عبدالله</a>
       </div>
-
       <a href="/contact" class="nav-cta">تواصل معي</a>
-
       <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
       </button>
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
   <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-mobile-panel" id="mobilePanel">
       <div class="nav-mobile-header">
@@ -46,12 +55,11 @@
       </div>
       <div class="nav-mobile-links">
         <a href="/services" class="nav-mobile-link">الخدمات</a>
-        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/products" class="nav-mobile-link" style="color:var(--accent)">المنتجات</a>
         <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
         <a href="/blog" class="nav-mobile-link">المقالات</a>
         <a href="/about" class="nav-mobile-link">عن عبدالله</a>
         <a href="/contact" class="nav-mobile-link">تواصل معي</a>
-        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
       </div>
       <div class="nav-mobile-footer">
         <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
@@ -59,19 +67,59 @@
     </div>
   </div>
 
-  <!-- ==================== MAIN CONTENT ==================== -->
-  <main id="mainContent" class="pl-main">
-    <div class="pl-loading" aria-live="polite" aria-label="جارٍ التحميل" id="plLoading">
+  <!-- ==================== MAIN ==================== -->
+  <main>
+    <!-- Hero -->
+    <section class="products-hero">
       <div class="container">
-        <div class="pl-skel-title"></div>
-        <div class="pl-skel-sub"></div>
-        <div class="pl-skel-grid">
-          <div class="pl-skel-card"></div>
-          <div class="pl-skel-card"></div>
-          <div class="pl-skel-card"></div>
+        <div class="products-hero-inner reveal">
+          <div class="products-hero-label">
+            <span class="products-hero-label-line"></span>
+            <span>المنتجات</span>
+          </div>
+          <h1 class="products-hero-title">أدوات جاهزة لتُنفّذ فكرتك فوراً</h1>
+          <p class="products-hero-desc">قوالب، أدوات، ومصادر رقمية صُممت بعناية لتوفير الوقت والجهد، مع جودة لا تُنافس.</p>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+      <div class="container">
+        <!-- Loading -->
+        <div class="products-loading" id="pageLoader">
+          <div class="products-loading-spinner"></div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="products-empty" id="emptyState">
+          <div class="products-empty-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+          </div>
+          <div class="products-empty-title">لا توجد منتجات حالياً</div>
+          <div class="products-empty-desc">سيتم إضافة منتجات جديدة قريباً</div>
+        </div>
+
+        <!-- Dynamic Grid -->
+        <div class="products-grid" id="productsGrid"></div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="products-cta">
+      <div class="container">
+        <div class="products-cta-inner reveal">
+          <div class="products-cta-text">
+            <h2>لا تجد ما تبحث عنه؟</h2>
+            <p>قد تحتاج منتجاً مخصصاً أو نسخة مطوّرة. تواصل معي لبناء ما يناسبك تماماً.</p>
+          </div>
+          <div class="products-cta-actions">
+            <a href="/contact" class="btn btn--primary">اطلب منتجاً مخصصاً</a>
+            <a href="/services" class="btn btn--outline btn--sm">تصفح الخدمات</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ==================== FOOTER ==================== -->
@@ -79,7 +127,7 @@
     <div class="container">
       <div class="footer-inner">
         <div>
-          <div class="footer-brand-name">Abdallah Abas</div>
+          <div class="footer-brand-name">عبدالله عباس</div>
           <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
         </div>
         <div>
@@ -106,7 +154,6 @@
           <div class="footer-links">
             <a href="/contact" class="footer-link">أرسل رسالة</a>
             <a href="/login.html" class="footer-link">تسجيل الدخول</a>
-            <a href="/dashboard/dashboard.html" class="footer-link">لوحتي</a>
           </div>
         </div>
       </div>
@@ -118,265 +165,211 @@
   </footer>
 
   <!-- ==================== SCRIPTS ==================== -->
-  <script src="/js/firebase-init.js"></script>
-  <script src="/js/security.js"></script>
+  <script type="module">
+    import { db } from "/js/firebase-init.js";
+    import {
+      collection,
+      query,
+      where,
+      orderBy,
+      getDocs,
+    } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { isSafeUrl } from "/js/security.js";
 
-  <script>
-    // --- Nav scroll effect ---
-    const nav = document.getElementById('siteNav');
-    let lastScroll = 0;
+    // --- Nav ---
+    const nav = document.getElementById("siteNav");
     function handleNavScroll() {
-      const y = window.scrollY;
-      if (y > 40) { nav.classList.add('site-nav--scrolled'); } 
-      else { nav.classList.remove('site-nav--scrolled'); }
-      lastScroll = y;
+      nav.classList.toggle("site-nav--scrolled", window.scrollY > 40);
     }
-    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    window.addEventListener("scroll", handleNavScroll, { passive: true });
     handleNavScroll();
 
-    // --- Mobile menu ---
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mobileClose = document.getElementById('mobileClose');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobilePanel = document.getElementById('mobilePanel');
+    // Mobile
+    const mobileToggle = document.getElementById("mobileToggle");
+    const mobileClose = document.getElementById("mobileClose");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobilePanel = document.getElementById("mobilePanel");
 
     function openMobile() {
-      mobileMenu.classList.add('nav-mobile-menu--open');
-      mobilePanel.classList.add('nav-mobile-panel--open');
-      mobileMenu.setAttribute('aria-hidden', 'false');
-      mobileToggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
+      mobileMenu.classList.add("nav-mobile-menu--open");
+      mobilePanel.classList.add("nav-mobile-panel--open");
+      mobileMenu.setAttribute("aria-hidden", "false");
+      mobileToggle.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
     }
     function closeMobile() {
-      mobileMenu.classList.remove('nav-mobile-menu--open');
-      mobilePanel.classList.remove('nav-mobile-panel--open');
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      mobileToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      mobileMenu.classList.remove("nav-mobile-menu--open");
+      mobilePanel.classList.remove("nav-mobile-panel--open");
+      mobileMenu.setAttribute("aria-hidden", "true");
+      mobileToggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
     }
+    mobileToggle.addEventListener("click", openMobile);
+    mobileClose.addEventListener("click", closeMobile);
+    mobileMenu.addEventListener("click", (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMobile(); });
+    mobilePanel.querySelectorAll(".nav-mobile-link, .nav-mobile-cta").forEach((l) => l.addEventListener("click", closeMobile));
 
-    mobileToggle.addEventListener('click', openMobile);
-    mobileClose.addEventListener('click', closeMobile);
-    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobilePanel.classList.contains('nav-mobile-panel--open')) closeMobile();
-    });
-    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(link => {
-      link.addEventListener('click', closeMobile);
-    });
-
-    // --- Utilities ---
-    const esc = window.escapeHtml || function (s) {
-      if (typeof s !== 'string') return '';
-      return s.replace(/[&<>"'/]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','/':'&#x2F;' })[c]);
-    };
-    const safeUrl = window.isSafeUrl || function (u) {
-      if (typeof u !== 'string') return false;
-      const t = u.trim().toLowerCase();
-      if (t.startsWith('javascript:') || t.startsWith('vbscript:')) return false;
-      if (t.startsWith('data:') && !t.startsWith('data:image/')) return false;
-      try { const p = new URL(t, location.origin); return ['http:','https:'].includes(p.protocol); } catch (_) { return false; }
-    };
-    
-    const CURRENCY_SYM = { SAR: 'ر.س', USD: '$', EUR: '€', AED: 'د.إ', EGP: 'ج.م' };
-
-    // --- Firestore ---
-    function db() { return window.db || (window.firebaseApp?.firestore?.()) || (window.firebase?.firestore?.()) || null; }
-
-    async function fetchAllProducts() {
-      const d = db(); if (!d) throw new Error('Firestore غير متاح');
-      const snap = await d.collection('products').where('active', '==', true).orderBy('sortOrder', 'asc').get();
-      const out = [];
-      snap.forEach(doc => out.push({ _id: doc.id, ...doc.data() }));
-      return out;
-    }
-
-    function extractCategories(products) {
-      const set = new Set();
-      products.forEach(p => { if (p.category && typeof p.category === 'string' && p.category.trim()) set.add(p.category.trim()); });
-      return Array.from(set).sort();
-    }
-
-    // --- State ---
-    let allProducts = [];
-    let currentCategory = 'all';
-
-    function filterByCategory(cat) {
-      currentCategory = cat;
-      const grid = document.getElementById('plGrid'); if (!grid) return;
-      document.querySelectorAll('.pl-filter-btn').forEach(btn => {
-        const isActive = btn.dataset.cat === cat;
-        btn.classList.toggle('pl-filter-btn--active', isActive);
-        btn.setAttribute('aria-pressed', String(isActive));
-      });
-      const filtered = cat === 'all' ? allProducts : allProducts.filter(p => p.category === cat);
-      if (!filtered.length) {
-        grid.innerHTML = `<div class="pl-empty">
-          <div class="pl-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg></div>
-          <p class="pl-empty-title">لا توجد منتجات في هذا التصنيف</p>
-          <p class="pl-empty-desc">جرّب تصفح تصنيف آخر أو راجع لاحقًا.</p>
-        </div>`;
-        return;
-      }
-      grid.innerHTML = filtered.map((p, i) => buildCard(p, i)).join('');
-      initReveal();
-    }
-
-    // --- Card Builder ---
-    const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>';
-
-    function buildCard(p, index) {
-      const slug = esc(p.slug || ''); if (!slug) return '';
-      const title = esc(p.title || 'بدون عنوان');
-      const desc = esc(p.shortDescription || '');
-      const img = p.image && safeUrl(p.image) ? esc(p.image) : '';
-      const price = typeof p.price === 'number' && p.price > 0 ? p.price : null;
-      const oldPrice = typeof p.oldPrice === 'number' && p.oldPrice > 0 ? p.oldPrice : null;
-      const sym = CURRENCY_SYM[p.currency || 'SAR'] || 'ر.س';
-      const disc = (price !== null && oldPrice !== null && price < oldPrice) ? Math.round((1 - price / oldPrice) * 100) : 0;
-
-      return `<a href="/products/${slug}" class="product-card reveal" style="transition-delay: ${index * 60}ms">
-        <div class="product-card-thumb">
-          ${img ? `<img src="${img}" alt="${title}" loading="lazy">` : '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>'}
-          ${disc ? `<span class="pl-disc-badge">-${disc}%</span>` : ''}
-        </div>
-        <div class="product-card-body">
-          <h3 class="product-card-name">${title}</h3>
-          <p class="product-card-desc">${desc}</p>
-          <div class="product-card-footer">
-            ${price !== null
-              ? `<span class="product-card-price">${oldPrice !== null ? `<s style="font-size:0.8em;color:var(--text-muted);font-weight:400;margin-left:6px;">${oldPrice} ${sym}</s>` : ''}${price} ${sym}</span>`
-              : `<span class="product-card-price product-card-price--free">مجاني</span>`}
-            <span class="product-card-link">التفاصيل ${arrowSvg}</span>
-          </div>
-        </div>
-      </a>`;
-    }
-
-    function buildFilters(categories) {
-      if (!categories.length) return '';
-      let html = `<button class="pl-filter-btn pl-filter-btn--active" data-cat="all" aria-pressed="true">الكل</button>`;
-      categories.forEach(cat => { html += `<button class="pl-filter-btn" data-cat="${esc(cat)}" aria-pressed="false">${esc(cat)}</button>`; });
-      return html;
-    }
-
-    // --- Render ---
-    function renderPage(products) {
-      const categories = extractCategories(products);
-      const main = document.getElementById('mainContent'); if (!main) return;
-      
-      main.innerHTML = `
-        <section class="section pl-hero-section">
-          <div class="container">
-            <div class="section-header reveal">
-              <div class="section-label"><span class="section-label-line"></span><span>المنتجات</span></div>
-              <h2 class="section-title">أدوات وقوالب جاهزة للاستخدام الفوري</h2>
-              <p class="section-desc">منتجات مُختبرة فعليًا، ليست مجرد قوالب مُعادة بيع.</p>
-            </div>
-          </div>
-        </section>
-
-        ${categories.length > 1 ? `
-        <section class="section pl-filters-section" style="padding-top: 0;">
-          <div class="container">
-            <div class="pl-filters reveal" role="tablist" aria-label="فلترة حسب التصنيف">
-              ${buildFilters(categories)}
-            </div>
-          </div>
-        </section>` : ''}
-
-        <section class="section" style="padding-top: ${categories.length > 1 ? '16px' : '0'}; padding-bottom: 100px;">
-          <div class="container">
-            <div class="products-grid" id="plGrid" role="tabpanel">
-              ${products.map((p, i) => buildCard(p, i)).join('')}
-            </div>
-          </div>
-        </section>
-
-        <section class="section section--sm" style="padding-bottom: 100px;">
-          <div class="container">
-            <div class="cta-section reveal">
-              <h2 class="cta-title">لا تجد ما تبحث عنه؟</h2>
-              <p class="cta-desc">أخبرني بما تحتاجه وسأعمل على توفيره لك.</p>
-              <div class="cta-actions">
-                <a href="/contact" class="btn btn--white">تواصل معي</a>
-                <a href="/services" class="btn btn--ghost-light">تصفح الخدمات</a>
-              </div>
-            </div>
-          </div>
-        </section>`;
-
-      document.querySelectorAll('.pl-filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => filterByCategory(btn.dataset.cat));
-      });
-
-      initReveal();
-    }
-
-    function renderEmpty() {
-      const main = document.getElementById('mainContent'); if (!main) return;
-      main.innerHTML = `
-        <section class="section" style="padding-top: 120px; padding-bottom: 120px;">
-          <div class="container" style="text-align: center;">
-            <div class="pl-empty-icon" style="margin: 0 auto 20px;">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            </div>
-            <h2 class="section-title section-title--center" style="margin-bottom: 12px;">لا توجد منتجات بعد</h2>
-            <p class="section-desc section-desc--center" style="margin-bottom: 32px;">يتم إضافة منتجات جديدة بشكل مستمر. تراجع قريبًا.</p>
-            <a href="/" class="btn btn--primary">العودة للرئيسية</a>
-          </div>
-        </section>`;
-    }
-
-    function renderError() {
-      const main = document.getElementById('mainContent'); if (!main) return;
-      main.innerHTML = `
-        <section class="section" style="padding-top: 120px; padding-bottom: 120px;">
-          <div class="container" style="text-align: center;">
-            <h2 class="section-title section-title--center" style="margin-bottom: 12px;">حدث خطأ</h2>
-            <p class="section-desc section-desc--center" style="margin-bottom: 32px;">تعذر تحميل المنتجات حاليًا. حاول مرة أخرى.</p>
-            <button class="btn btn--primary" id="plRetryBtn">إعادة المحاولة</button>
-          </div>
-        </section>`;
-      document.getElementById('plRetryBtn')?.addEventListener('click', init);
-    }
-
-    // --- Reveal (Exact Match from index.html) ---
-    function initReveal() {
-      const revealElements = document.querySelectorAll('.reveal:not(.reveal--visible)');
-      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('reveal--visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        revealElements.forEach((el, i) => {
-          el.style.transitionDelay = `${i * 60}ms`;
-          observer.observe(el);
+    // --- Scroll Reveal ---
+    const reveals = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("reveal--visible");
+            obs.unobserve(e.target);
+          }
         });
+      }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+      reveals.forEach((el, i) => {
+        el.style.transitionDelay = `${i * 50}ms`;
+        obs.observe(el);
+      });
+    } else {
+      reveals.forEach((el) => el.classList.add("reveal--visible"));
+    }
+
+    // --- Helpers ---
+    const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
+    const TYPE_MAP = {
+      template: "قالب",
+      tool: "أداة",
+      resource: "مصدر",
+      "digital-product": "منتج رقمي",
+    };
+
+    function escapeHtml(str) {
+      if (typeof str !== "string") return "";
+      const map = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#x27;" };
+      return str.replace(/[&<>"']/g, (ch) => map[ch] || ch);
+    }
+
+    // --- Render Product Card ---
+    function createProductCard(product) {
+      const card = document.createElement("div");
+      card.className = "product-card reveal";
+
+      // Thumbnail
+      const thumb = document.createElement("div");
+      thumb.className = "product-card-thumb";
+      if (product.image && isSafeUrl(product.image)) {
+        const img = document.createElement("img");
+        img.src = product.image;
+        img.alt = product.title || "منتج";
+        img.loading = "lazy";
+        thumb.appendChild(img);
       } else {
-        revealElements.forEach(el => el.classList.add('reveal--visible'));
+        thumb.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
       }
+      card.appendChild(thumb);
+
+      // Body
+      const body = document.createElement("div");
+      body.className = "product-card-body";
+
+      // Type Badge
+      if (product.type) {
+        const badge = document.createElement("span");
+        badge.className = "product-type-badge";
+        badge.textContent = TYPE_MAP[product.type] || product.type;
+        body.appendChild(badge);
+      }
+
+      // Title
+      const title = document.createElement("h3");
+      title.className = "product-card-name";
+      title.textContent = product.title || "—";
+      body.appendChild(title);
+
+      // Description
+      const desc = document.createElement("p");
+      desc.className = "product-card-desc";
+      desc.textContent = product.shortDescription || "";
+      body.appendChild(desc);
+
+      // Footer (price + link)
+      const footer = document.createElement("div");
+      footer.className = "product-card-footer";
+
+      const price = document.createElement("span");
+      if (product.price && product.price > 0) {
+        price.className = "product-card-price";
+        price.textContent = `${Number(product.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[product.currency] || product.currency || ""}`;
+      } else {
+        price.className = "product-card-price product-card-price--free";
+        price.textContent = "مجاني";
+      }
+      footer.appendChild(price);
+
+      const link = document.createElement("a");
+      link.href = `/products/${product.slug || product.id}`;
+      link.className = "product-card-link";
+      link.textContent = "عرض التفاصيل";
+      link.setAttribute("aria-label", `عرض تفاصيل ${escapeHtml(product.title)}`);
+      footer.appendChild(link);
+
+      body.appendChild(footer);
+      card.appendChild(body);
+
+      return card;
     }
 
-    // --- Init ---
-    async function init() {
+    // --- Fetch & Render ---
+    async function loadProducts() {
+      const loader = document.getElementById("pageLoader");
+      const grid = document.getElementById("productsGrid");
+      const empty = document.getElementById("emptyState");
+
       try {
-        const products = await fetchAllProducts();
-        allProducts = products;
-        if (!products.length) { renderEmpty(); initReveal(); return; }
-        renderPage(products);
-      } catch (err) {
-        console.error('خطأ في تحميل المنتجات:', err);
-        renderError();
+        const q = query(
+          collection(db, "products"),
+          where("active", "==", true),
+          orderBy("sortOrder", "asc"),
+          orderBy("createdAt", "desc")
+        );
+        const snapshot = await getDocs(q);
+        const products = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+
+        loader.style.display = "none";
+
+        if (products.length === 0) {
+          empty.style.display = "flex";
+          return;
+        }
+
+        products.forEach((product) => {
+          grid.appendChild(createProductCard(product));
+        });
+
+        // Re-trigger reveal for new items
+        const newReveals = grid.querySelectorAll(".reveal");
+        if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("reveal--visible");
+                obs.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+          newReveals.forEach((el, i) => {
+            el.style.transitionDelay = `${i * 60}ms`;
+            obs.observe(el);
+          });
+        } else {
+          newReveals.forEach((el) => el.classList.add("reveal--visible"));
+        }
+
+      } catch (error) {
+        console.error("Error loading products:", error);
+        loader.style.display = "none";
+        empty.style.display = "flex";
+        empty.querySelector(".products-empty-title").textContent = "حدث خطأ في تحميل المنتجات";
+        empty.querySelector(".products-empty-desc").textContent = "جرب تحديث الصفحة";
       }
     }
 
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-    else init();
+    loadProducts();
   </script>
 </body>
 </html>
