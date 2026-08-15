@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المدونة — عبدالله عباس</title>
+  <meta name="description" content="مقالات وأفكار في تطوير الويب، التصميم، تحسين محركات البحث، والتجارب الرقمية." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://abdallahsst.web.app/blog" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "المدونة — عبدالله عباس",
+    "description": "مقالات وأفكار في تطوير الويب والتصميم.",
+    "url": "https://abdallahsst.web.app/blog"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/blog.css" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION (مطابق) ===== -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">عبدالله عباس</a>
+      <div class="nav-links">
+        <a href="/services" class="nav-link">الخدمات</a>
+        <a href="/products" class="nav-link">المنتجات</a>
+        <a href="/portfolio" class="nav-link">الأعمال</a>
+        <a href="/blog" class="nav-link" style="color:var(--accent)">المقالات</a>
+        <a href="/about" class="nav-link">عن عبدالله</a>
+      </div>
+      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-mobile-panel" id="mobilePanel">
+      <div class="nav-mobile-header">
+        <span class="nav-mobile-brand">عبدالله عباس</span>
+        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/services" class="nav-mobile-link">الخدمات</a>
+        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog" class="nav-mobile-link" style="color:var(--accent)">المقالات</a>
+        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+      </div>
+      <div class="nav-mobile-footer">
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <section class="blog-hero">
+      <div class="container">
+        <div class="blog-hero-inner reveal">
+          <div class="blog-hero-label">
+            <span class="blog-hero-label-line"></span>
+            <span>المدونة</span>
+          </div>
+          <h1 class="blog-hero-title">مقالات وأفكار رقمية</h1>
+          <p class="blog-hero-desc">أكتب عن تجاربي في تطوير الويب، التصميم، تحسين محركات البحث، وأدوات تساعدك في رحلتك الرقمية.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog-section">
+      <div class="container">
+        <div class="blog-loading" id="pageLoader" style="display:flex;align-items:center;justify-content:center;min-height:200px">
+          <div style="width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:post-spin .7s linear infinite"></div>
+        </div>
+
+        <div class="blog-empty" id="emptyState" style="display:none;flex-direction:column;align-items:center;padding:60px 20px;text-align:center">
+          <div style="width:64px;height:64px;border-radius:50%;background:var(--bg-raised);display:flex;align-items:center;justify-content:center;color:var(--text-dim);margin-bottom:20px">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z"/></svg>
+          </div>
+          <div style="font-size:1rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px">لا توجد مقالات بعد</div>
+          <div style="font-size:0.875rem;color:var(--text-muted)">سيتم إضافتها قريبًا</div>
+        </div>
+
+        <div class="blog-grid" id="blogGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">عبدالله عباس</div>
+          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+        </div>
+        <div>
+          <div class="footer-heading">الخدمات</div>
+          <div class="footer-links">
+            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger" class="footer-link">بلوجر</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">المحتوى</div>
+          <div class="footer-links">
+            <a href="/products" class="footer-link">المنتجات</a>
+            <a href="/portfolio" class="footer-link">الأعمال</a>
+            <a href="/blog" class="footer-link">المقالات</a>
+            <a href="/about" class="footer-link">عن عبدالله</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">تواصل</div>
+          <div class="footer-links">
+            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
+        <span class="footer-copy">جميع الحقوق محفوظة</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { db } from "/js/firebase-init.js";
+    import { collection, query, where, orderBy, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { isSafeUrl, escapeHtml } from "/js/security.js";
+
+    // ===== NAV (مطابق) =====
+    const nav = document.getElementById("siteNav");
+    function handleNavScroll() { nav.classList.toggle("site-nav--scrolled", window.scrollY > 40); }
+    window.addEventListener("scroll", handleNavScroll, { passive: true });
+    handleNavScroll();
+
+    const mobileToggle = document.getElementById("mobileToggle");
+    const mobileClose = document.getElementById("mobileClose");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobilePanel = document.getElementById("mobilePanel");
+    function openMobile() { mobileMenu.classList.add("nav-mobile-menu--open"); mobilePanel.classList.add("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "false"); mobileToggle.setAttribute("aria-expanded", "true"); document.body.style.overflow = "hidden"; }
+    function closeMobile() { mobileMenu.classList.remove("nav-mobile-menu--open"); mobilePanel.classList.remove("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "true"); mobileToggle.setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; }
+    mobileToggle.addEventListener("click", openMobile);
+    mobileClose.addEventListener("click", closeMobile);
+    mobileMenu.addEventListener("click", (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMobile(); });
+    mobilePanel.querySelectorAll(".nav-mobile-link, .nav-mobile-cta").forEach((l) => l.addEventListener("click", closeMobile));
+
+    // ===== SCROLL REVEAL =====
+    const reveals = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("reveal--visible"); obs.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+      reveals.forEach((el, i) => { el.style.transitionDelay = `${i * 50}ms`; obs.observe(el); });
+    } else {
+      reveals.forEach((el) => el.classList.add("reveal--visible"));
+    }
+
+    // ===== RENDER =====
+    function formatDate(d) {
+      if (!d) return "";
+      const date = d instanceof Timestamp ? d.toDate() : new Date(d);
+      return date.toLocaleDateString("ar-EG", { year: "numeric", month: "short", day: "numeric" });
+    }
+
+    function createBlogCard(post) {
+      const card = document.createElement("div");
+      card.className = "blog-card reveal";
+
+      const thumb = document.createElement("div");
+      thumb.className = "blog-card-thumb";
+      if (post.image && isSafeUrl(post.image)) {
+        const img = document.createElement("img");
+        img.src = post.image;
+        img.alt = "";
+        img.loading = "lazy";
+        thumb.appendChild(img);
+      } else {
+        thumb.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z"/></svg>`;
+      }
+
+      const body = document.createElement("div");
+      body.className = "blog-card-body";
+
+      const top = document.createElement("div");
+      top.className = "blog-card-top";
+
+      if (post.category) {
+        const cat = document.createElement("span");
+        cat.className = "blog-card-category";
+        cat.textContent = post.category;
+        top.appendChild(cat);
+      }
+
+      const date = document.createElement("span");
+      date.className = "blog-card-date";
+      date.textContent = formatDate(post.createdAt);
+      top.appendChild(date);
+
+      const title = document.createElement("h3");
+      title.className = "blog-card-title";
+      const link = document.createElement("a");
+      link.href = `/post.html?slug=${post.slug}`;
+      link.textContent = post.title || "—";
+      title.appendChild(link);
+
+      const excerpt = document.createElement("p");
+      excerpt.className = "blog-card-excerpt";
+      excerpt.textContent = post.excerpt || "";
+
+      const footer = document.createElement("div");
+      footer.className = "blog-card-footer";
+      const readmore = document.createElement("a");
+      readmore.href = `/post.html?slug=${post.slug}`;
+      readmore.className = "blog-card-readmore";
+      readmore.innerHTML = `اقرأ المقال <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>`;
+      footer.appendChild(readmore);
+
+      body.appendChild(top);
+      body.appendChild(title);
+      body.appendChild(excerpt);
+      body.appendChild(footer);
+
+      card.appendChild(thumb);
+      card.appendChild(body);
+
+      return card;
+    }
+
+    async function loadPosts() {
+      const loader = document.getElementById("pageLoader");
+      const grid = document.getElementById("blogGrid");
+      const empty = document.getElementById("emptyState");
+
+      try {
+        const q = query(collection(db, "blog"), where("active", "==", true), orderBy("createdAt", "desc"));
+        const snap = await getDocs(q);
+        const posts = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+
+        loader.style.display = "none";
+
+        if (posts.length === 0) {
+          empty.style.display = "flex";
+          return;
+        }
+
+        posts.forEach((p) => {
+          grid.appendChild(createBlogCard(p));
+        });
+      } catch {
+        loader.style.display = "none";
+        empty.style.display = "flex";
+        empty.querySelector("div:last-child").textContent = "حدث خطأ في تحميل المقالات";
+      }
+    }
+
+    loadPosts();
+  </script>
+</body>
+</html>
