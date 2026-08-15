@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>جارٍ التحميل... — عبدالله عباس</title>
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="" id="metaDesc" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/blog.css" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION (مطابق) ===== -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">عبدالله عباس</a>
+      <div class="nav-links">
+        <a href="/services" class="nav-link">الخدمات</a>
+        <a href="/products" class="nav-link">المنتجات</a>
+        <a href="/portfolio" class="nav-link">الأعمال</a>
+        <a href="/blog" class="nav-link" style="color:var(--accent)">المقالات</a>
+        <a href="/about" class="nav-link">عن عبدالله</a>
+      </div>
+      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-mobile-panel" id="mobilePanel">
+      <div class="nav-mobile-header">
+        <span class="nav-mobile-brand">عبدالله عباس</span>
+        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/services" class="nav-mobile-link">الخدمات</a>
+        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog" class="nav-mobile-link" style="color:var(--accent)">المقالات</a>
+        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+      </div>
+      <div class="nav-mobile-footer">
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN ===== -->
+  <main id="pageRoot">
+    <div class="post-loading" id="loadingState">
+      <div class="post-loading-spinner"></div>
+    </div>
+
+    <div class="post-404" id="notFoundState" style="display:none">
+      <div class="post-404-code">404</div>
+      <h1 class="post-404-title">المقال غير موجود</h1>
+      <p class="post-404-desc">المقال الذي تبحث عنه غير موجود أو تم حذفه.</p>
+      <a href="/blog" class="btn btn--primary btn--sm">عودة إلى المدونة</a>
+    </div>
+
+    <div id="contentRoot" style="display:none"></div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" id="siteFooter" style="display:none">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">عبدالله عباس</div>
+          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+        </div>
+        <div>
+          <div class="footer-heading">الخدمات</div>
+          <div class="footer-links">
+            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger" class="footer-link">بلوجر</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">المحتوى</div>
+          <div class="footer-links">
+            <a href="/products" class="footer-link">المنتجات</a>
+            <a href="/portfolio" class="footer-link">الأعمال</a>
+            <a href="/blog" class="footer-link">المقالات</a>
+            <a href="/about" class="footer-link">عن عبدالله</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">تواصل</div>
+          <div class="footer-links">
+            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
+        <span class="footer-copy">جميع الحقوق محفوظة</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { db } from "/js/firebase-init.js";
+    import { doc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { isSafeUrl, escapeHtml } from "/js/security.js";
+
+    // ===== NAV (مطابق) =====
+    const nav = document.getElementById("siteNav");
+    function handleNavScroll() { nav.classList.toggle("site-nav--scrolled", window.scrollY > 40); }
+    window.addEventListener("scroll", handleNavScroll, { passive: true });
+    handleNavScroll();
+
+    const mobileToggle = document.getElementById("mobileToggle");
+    const mobileClose = document.getElementById("mobileClose");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobilePanel = document.getElementById("mobilePanel");
+    function openMobile() { mobileMenu.classList.add("nav-mobile-menu--open"); mobilePanel.classList.add("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "false"); mobileToggle.setAttribute("aria-expanded", "true"); document.body.style.overflow = "hidden"; }
+    function closeMobile() { mobileMenu.classList.remove("nav-mobile-menu--open"); mobilePanel.classList.remove("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "true"); mobileToggle.setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; }
+    mobileToggle.addEventListener("click", openMobile);
+    mobileClose.addEventListener("click", closeMobile);
+    mobileMenu.addEventListener("click", (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMobile(); });
+    mobilePanel.querySelectorAll(".nav-mobile-link, .nav-mobile-cta").forEach((l) => l.addEventListener("click", closeMobile));
+
+    // ===== HELPERS =====
+    function getSlug() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("slug");
+    }
+
+    function formatDate(d) {
+      if (!d) return "";
+      const date = d instanceof Timestamp ? d.toDate() : new Date(d);
+      return date.toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
+    }
+
+    // ===== BUILD PAGE =====
+    function buildBreadcrumb(post) {
+      const navEl = document.createElement("nav");
+      navEl.className = "post-breadcrumb";
+      navEl.setAttribute("aria-label", "مسار التنقل");
+      navEl.innerHTML = `<a href="/">الرئيسية</a><span class="sep">/</span><a href="/blog">المدونة</a><span class="sep">/</span><span class="current">${escapeHtml(post.title)}</span>`;
+      return navEl;
+    }
+
+    function buildHero(post) {
+      const section = document.createElement("section");
+      section.className = "post-hero";
+
+      const inner = document.createElement("div");
+      inner.className = "post-hero-inner";
+
+      if (post.category) {
+        const cat = document.createElement("span");
+        cat.className = "post-hero-category";
+        cat.textContent = post.category;
+        inner.appendChild(cat);
+      }
+
+      const title = document.createElement("h1");
+      title.className = "post-hero-title";
+      title.textContent = post.title || "—";
+      inner.appendChild(title);
+
+      const meta = document.createElement("div");
+      meta.className = "post-hero-meta";
+      const dateSpan = document.createElement("span");
+      dateSpan.textContent = formatDate(post.createdAt);
+      meta.appendChild(dateSpan);
+      if (post.author) {
+        const authorSpan = document.createElement("span");
+        authorSpan.textContent = `بواسطة ${post.author}`;
+        meta.appendChild(authorSpan);
+      }
+      inner.appendChild(meta);
+
+      if (post.image && isSafeUrl(post.image)) {
+        const imageDiv = document.createElement("div");
+        imageDiv.className = "post-hero-image";
+        const img = document.createElement("img");
+        img.src = post.image;
+        img.alt = post.title || "";
+        imageDiv.appendChild(img);
+        inner.appendChild(imageDiv);
+      }
+
+      section.appendChild(inner);
+      return section;
+    }
+
+    function buildBody(post) {
+      if (!post.body) return null;
+      const div = document.createElement("div");
+      div.className = "post-body";
+      // تقسيم النص إلى فقرات
+      const paragraphs = post.body.split("\n").filter(p => p.trim());
+      paragraphs.forEach(p => {
+        const para = document.createElement("p");
+        para.textContent = p;
+        div.appendChild(para);
+      });
+      return div;
+    }
+
+    function buildPage(post) {
+      const root = document.getElementById("contentRoot");
+      root.appendChild(buildBreadcrumb(post));
+      root.appendChild(buildHero(post));
+
+      const contentDiv = document.createElement("div");
+      contentDiv.className = "post-content";
+      const body = buildBody(post);
+      if (body) contentDiv.appendChild(body);
+      root.appendChild(contentDiv);
+
+      root.style.display = "block";
+    }
+
+    function updateSEO(post) {
+      const title = post.seoTitle || post.title || "المقال";
+      const desc = post.metaDescription || post.excerpt || "";
+      document.title = `${title} — عبدالله عباس`;
+      document.getElementById("metaDesc").setAttribute("content", desc);
+
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+      canonical.href = `https://abdallahsst.web.app/post?slug=${post.slug}`;
+
+      // Structured Data
+      const old = document.getElementById("postStructuredData");
+      if (old) old.remove();
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = "postStructuredData";
+      const sd = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": post.seoTitle || post.title,
+        "description": post.metaDescription || post.excerpt,
+        "url": `https://abdallahsst.web.app/post?slug=${post.slug}`,
+        "datePublished": post.createdAt ? formatDate(post.createdAt) : "",
+        "author": {
+          "@type": "Person",
+          "name": post.author || "عبدالله عباس"
+        }
+      };
+      script.textContent = JSON.stringify(sd);
+      document.head.appendChild(script);
+    }
+
+    function show404() {
+      document.getElementById("loadingState").style.display = "none";
+      document.getElementById("notFoundState").style.display = "block";
+      document.title = "المقال غير موجود — عبدالله عباس";
+    }
+
+    async function loadPost() {
+      const slug = getSlug();
+      if (!slug) { show404(); return; }
+
+      try {
+        const docRef = doc(db, "blog", slug);
+        const snap = await getDoc(docRef);
+        if (!snap.exists()) { show404(); return; }
+
+        const post = { id: snap.id, ...snap.data() };
+        if (post.active === false) { show404(); return; }
+
+        updateSEO(post);
+        buildPage(post);
+        document.getElementById("siteFooter").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch {
+        show404();
+      }
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>
