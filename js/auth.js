@@ -76,10 +76,15 @@ export async function login(email, password) {
 
 export async function register(email, password, displayName) {
   try {
+    // 1. إنشاء الحساب في Authentication
     const cred = await createUserWithEmailAndPassword(auth, email, password);
+
+    // 2. تحديث الاسم (displayName)
     if (displayName && displayName.trim()) {
       await updateProfile(cred.user, { displayName: displayName.trim() });
     }
+
+    // 3. ✅ إضافة المستخدم إلى Firestore في مجموعة "users"
     try {
       const { doc, setDoc, serverTimestamp } = await import(
         "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js"
@@ -94,13 +99,17 @@ export async function register(email, password, displayName) {
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
+      console.log("✅ تم حفظ المستخدم في Firestore بنجاح!");
     } catch (firestoreError) {
       console.warn("⚠️ فشل إضافة المستخدم إلى Firestore:", firestoreError);
     }
+
+    // 4. تسجيل حدث نجاح
     await logAuditEvent("register_success", {
       uid: cred.user.uid,
       emailPrefix: email.split("@")[0],
     });
+
     return { ok: true, user: cred.user };
   } catch (error) {
     await logAuditEvent("register_failure", {
