@@ -337,8 +337,6 @@
       card.appendChild(body);
       return card;
     }
-
-    // --- Fetch & Render ---
     async function loadProducts() {
       const loader = document.getElementById("pageLoader");
       const grid = document.getElementById("productsGrid");
@@ -392,7 +390,6 @@
         empty.querySelector(".products-empty-desc").textContent = "جرب تحديث الصفحة";
       }
     }
-
     loadProducts();
   </script>
 </body>
