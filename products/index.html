@@ -26,7 +26,7 @@
 </head>
 <body>
 
-  <!-- ===== NAVIGATION (مطابق لـ contact.html) ===== -->
+  <!-- ===== NAVIGATION ===== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
       <a href="/" class="nav-brand">عبدالله عباس</a>
@@ -101,7 +101,7 @@
     </section>
   </main>
 
-  <!-- ===== FOOTER (مطابق) ===== -->
+  <!-- ===== FOOTER (محدث) ===== -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
@@ -133,6 +133,8 @@
           <div class="footer-links">
             <a href="/contact" class="footer-link">أرسل رسالة</a>
             <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+            <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
+            <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
           </div>
         </div>
       </div>
@@ -148,7 +150,7 @@
     import { collection, query, where, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { isSafeUrl } from "/js/security.js";
 
-    // ===== NAV (مطابق لـ service-detail) =====
+    // ===== NAV (مطابق) =====
     const nav = document.getElementById("siteNav");
     function handleNavScroll() { nav.classList.toggle("site-nav--scrolled", window.scrollY > 40); }
     window.addEventListener("scroll", handleNavScroll, { passive: true });
@@ -179,7 +181,6 @@
 
     // ===== RENDER =====
     const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
-    const TYPE_MAP = { template: "قالب", tool: "أداة", resource: "مصدر", "digital-product": "منتج رقمي" };
 
     function escapeHtml(str) {
       if (typeof str !== "string") return "";
