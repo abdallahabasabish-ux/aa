@@ -1,3 +1,9 @@
+/* ============================================
+   PRODUCTS — LISTING & DETAIL
+   Light Theme · RTL · Premium
+   ============================================ */
+
+/* --- Products Hero --- */
 .products-hero {
   padding-top: calc(var(--header-h) + 72px);
   padding-bottom: 64px;
@@ -361,6 +367,7 @@
   background: var(--bg-raised);
   padding: 4px 14px;
   border-radius: 20px;
+  margin-inline-start: 12px;
 }
 
 .prdt-hero-cta {
@@ -631,7 +638,7 @@
   direction: ltr;
 }
 
-/* Loading & 404 (مستعار من service-detail) */
+/* Loading & 404 */
 .prdt-loading {
   display: flex;
   align-items: center;
