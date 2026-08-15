@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>من نحن — عبدالله عباس</title>
-  <meta name="description" content="عبدالله عباس — مطور ويب ومصمم رقمي، أقدّم حلولاً رقمية متكاملة." />
+  <meta name="description" content="عبدالله عباس — مطور ويب ومصمم رقمي، أقدّم حلولاً رقمية متكاملة تجمع بين التصميم الاحترافي والأداء العالي والنتائج الملموسة." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://abdallahsst.web.app/about" />
 
@@ -13,29 +13,36 @@
     "@context": "https://schema.org",
     "@type": "AboutPage",
     "name": "من نحن — عبدالله عباس",
-    "url": "https://abdallahsst.web.app/about"
+    "url": "https://abdallahsst.web.app/about",
+    "description": "عبدالله عباس — مطور ويب ومصمم رقمي.",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "عبدالله عباس",
+      "jobTitle": "مطور ويب ومصمم رقمي"
+    }
   }
   </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="css/about.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/about.css" />
 </head>
 <body>
 
+  <!-- ===== NAVIGATION (مطابق لـ contact.html) ===== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
       <a href="/" class="nav-brand">عبدالله عباس</a>
       <div class="nav-links">
-        <a href="services" class="nav-link">الخدمات</a>
-        <a href="products" class="nav-link">المنتجات</a>
-        <a href="portfolio" class="nav-link">الأعمال</a>
-        <a href="blog" class="nav-link">المقالات</a>
-        <a href="about" class="nav-link" style="color:var(--accent)">من نحن</a>
+        <a href="/services" class="nav-link">الخدمات</a>
+        <a href="/products" class="nav-link">المنتجات</a>
+        <a href="/portfolio" class="nav-link">الأعمال</a>
+        <a href="/blog" class="nav-link">المقالات</a>
+        <a href="/about" class="nav-link" style="color:var(--accent)">من نحن</a>
       </div>
-      <a href="contact" class="nav-cta">تواصل معي</a>
+      <a href="/contact" class="nav-cta">تواصل معي</a>
       <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
       </button>
@@ -51,26 +58,24 @@
         </button>
       </div>
       <div class="nav-mobile-links">
-        <a href="services" class="nav-mobile-link">الخدمات</a>
-        <a href="products" class="nav-mobile-link">المنتجات</a>
-        <a href="portfolio" class="nav-mobile-link">الأعمال</a>
-        <a href="blog" class="nav-mobile-link">المقالات</a>
-        <a href="about" class="nav-mobile-link" style="color:var(--accent)">من نحن</a>
-        <a href="contact" class="nav-mobile-link">تواصل معي</a>
-        <a href="login.html" class="nav-mobile-link">تسجيل الدخول</a>
+        <a href="/services" class="nav-mobile-link">الخدمات</a>
+        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog" class="nav-mobile-link">المقالات</a>
+        <a href="/about" class="nav-mobile-link" style="color:var(--accent)">من نحن</a>
+        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
       </div>
       <div class="nav-mobile-footer">
-        <a href="contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
       </div>
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- المحتوى الرئيسي -->
-  <!-- ========================================== -->
+  <!-- ===== MAIN ===== -->
   <main>
 
-    <!-- القسم الأول: الهيرو (العنوان الرئيسي) -->
+    <!-- Hero -->
     <section class="about-hero">
       <div class="container">
         <div class="about-hero-inner reveal">
@@ -84,7 +89,7 @@
       </div>
     </section>
 
-    <!-- القسم الثاني: القصة + الصورة -->
+    <!-- Story (Image + Text) -->
     <section class="about-story">
       <div class="container">
         <div class="about-story-grid">
@@ -122,7 +127,7 @@
       </div>
     </section>
 
-    <!-- القسم الثالث: الإحصائيات -->
+    <!-- Stats -->
     <section class="about-stats">
       <div class="container">
         <div class="about-stats-grid reveal">
@@ -146,7 +151,7 @@
       </div>
     </section>
 
-    <!-- القسم الرابع: الرؤية والرسالة والنهج -->
+    <!-- Values (Vision / Mission / Approach) -->
     <section class="about-values">
       <div class="container">
         <div class="about-values-grid">
@@ -179,15 +184,15 @@
       </div>
     </section>
 
-    <!-- القسم الخامس: دعوة للتواصل (CTA) -->
+    <!-- CTA -->
     <section class="about-cta">
       <div class="container">
         <div class="about-cta-inner reveal">
           <h2 class="about-cta-title">لديك فكرة أو مشروع؟</h2>
           <p class="about-cta-desc">سأكون سعيداً بمساعدتك في تحويلها إلى واقع رقمي ملموس.</p>
           <div class="about-cta-actions">
-            <a href="contact" class="btn btn--white">تواصل معي الآن</a>
-            <a href="services" class="btn btn--ghost-light">استكشف خدماتي</a>
+            <a href="/contact" class="btn btn--white">تواصل معي الآن</a>
+            <a href="/services" class="btn btn--ghost-light">استكشف خدماتي</a>
           </div>
         </div>
       </div>
@@ -195,9 +200,7 @@
 
   </main>
 
-  <!-- ========================================== -->
-  <!-- الفوتر (FOOTER) -->
-  <!-- ========================================== -->
+  <!-- ===== FOOTER (مطابق) ===== -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
@@ -208,27 +211,27 @@
         <div>
           <div class="footer-heading">الخدمات</div>
           <div class="footer-links">
-            <a href="services/web-development" class="footer-link">تطوير مواقع</a>
-            <a href="services/web-design" class="footer-link">تصميم واجهات</a>
-            <a href="services/seo" class="footer-link">تحسين محركات البحث</a>
-            <a href="services/wordpress" class="footer-link">ووردبريس</a>
-            <a href="services/blogger" class="footer-link">بلوجر</a>
+            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger" class="footer-link">بلوجر</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">المحتوى</div>
           <div class="footer-links">
-            <a href="products" class="footer-link">المنتجات</a>
-            <a href="portfolio" class="footer-link">الأعمال</a>
-            <a href="blog" class="footer-link">المقالات</a>
-            <a href="about" class="footer-link">من نحن</a>
+            <a href="/products" class="footer-link">المنتجات</a>
+            <a href="/portfolio" class="footer-link">الأعمال</a>
+            <a href="/blog" class="footer-link">المقالات</a>
+            <a href="/about" class="footer-link">من نحن</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">تواصل</div>
           <div class="footer-links">
-            <a href="contact" class="footer-link">أرسل رسالة</a>
-            <a href="login.html" class="footer-link">تسجيل الدخول</a>
+            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
           </div>
         </div>
       </div>
@@ -239,11 +242,9 @@
     </div>
   </footer>
 
-  <!-- ========================================== -->
-  <!-- السكريبتات (JAVASCRIPT) -->
-  <!-- ========================================== -->
+  <!-- ===== SCRIPTS ===== -->
   <script>
-    // تأثير التمرير على الهيدر
+    // ===== تأثير التمرير على الهيدر =====
     const nav = document.getElementById('siteNav');
     function handleNavScroll() {
       nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
@@ -251,7 +252,7 @@
     window.addEventListener('scroll', handleNavScroll, { passive: true });
     handleNavScroll();
 
-    // القائمة الجانبية للجوال
+    // ===== القائمة الجانبية للجوال =====
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileClose = document.getElementById('mobileClose');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -273,15 +274,11 @@
     }
     mobileToggle.addEventListener('click', openMobile);
     mobileClose.addEventListener('click', closeMobile);
-    mobileMenu.addEventListener('click', (e) => {
-      if (e.target === mobileMenu) closeMobile();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMobile();
-    });
+    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
     mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
 
-    // تأثير الظهور عند التمرير (Scroll Reveal)
+    // ===== تأثير الظهور عند التمرير (Scroll Reveal) =====
     const reveals = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const obs = new IntersectionObserver((entries) => {
