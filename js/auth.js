@@ -42,17 +42,20 @@ export function validateName(name) {
   if (name.trim().length > 60) return { valid: false, message: "الاسم طويل جدًا." };
   return { valid: true, message: "" };
 }
+
 export function validateEmail(email) {
   if (!email || !email.trim()) return { valid: false, message: "البريد الإلكتروني مطلوب." };
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return { valid: false, message: "صيغة البريد الإلكتروني غير صحيحة." };
   return { valid: true, message: "" };
 }
+
 export function validatePassword(password) {
   if (!password) return { valid: false, message: "كلمة المرور مطلوبة." };
   if (password.length < 8) return { valid: false, message: "كلمة المرور يجب أن تكون 8 أحرف على الأقل." };
   if (password.length > 128) return { valid: false, message: "كلمة المرور طويلة جدًا." };
   return { valid: true, message: "" };
 }
+
 export function validateConfirmPassword(password, confirm) {
   if (!confirm) return { valid: false, message: "تأكيد كلمة المرور مطلوب." };
   if (password !== confirm) return { valid: false, message: "كلمتا المرور غير متطابقتين." };
@@ -74,11 +77,36 @@ export async function login(email, password) {
 export async function register(email, password, displayName) {
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
-    if (displayName && displayName.trim()) await updateProfile(cred.user, { displayName: displayName.trim() });
-    await logAuditEvent("register_success", { uid: cred.user.uid, emailPrefix: email.split("@")[0] });
+    if (displayName && displayName.trim()) {
+      await updateProfile(cred.user, { displayName: displayName.trim() });
+    }
+    try {
+      const { doc, setDoc, serverTimestamp } = await import(
+        "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js"
+      );
+      await setDoc(doc(db, "users", cred.user.uid), {
+        uid: cred.user.uid,
+        email: cred.user.email,
+        displayName: displayName?.trim() || "",
+        phone: "",
+        photoURL: "",
+        role: "user",
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+    } catch (firestoreError) {
+      console.warn("⚠️ فشل إضافة المستخدم إلى Firestore:", firestoreError);
+    }
+    await logAuditEvent("register_success", {
+      uid: cred.user.uid,
+      emailPrefix: email.split("@")[0],
+    });
     return { ok: true, user: cred.user };
   } catch (error) {
-    await logAuditEvent("register_failure", { emailPrefix: email ? email.split("@")[0] : "empty", errorCode: error.code });
+    await logAuditEvent("register_failure", {
+      emailPrefix: email ? email.split("@")[0] : "empty",
+      errorCode: error.code,
+    });
     return mapAuthError(error);
   }
 }
@@ -89,7 +117,9 @@ export async function logout() {
     if (user) await logAuditEvent("logout", { uid: user.uid });
     await signOut(auth);
     return { ok: true };
-  } catch { return { ok: false, userMessage: "حدث خطأ أثناء تسجيل الخروج." }; }
+  } catch {
+    return { ok: false, userMessage: "حدث خطأ أثناء تسجيل الخروج." };
+  }
 }
 
 export async function resetPassword(email) {
@@ -112,5 +142,7 @@ export async function isAdmin(forceRefresh = false) {
   try {
     const r = await getIdTokenResult(user, forceRefresh);
     return r.claims.admin === true;
-  } catch { return false; }
+  } catch {
+    return false;
+  }
 }
