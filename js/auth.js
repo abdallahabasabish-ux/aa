@@ -1,7 +1,3 @@
-/**
- * auth.js
- * منطق المصادقة الكامل (تسجيل دخول، إنشاء حساب، استعادة كلمة المرور).
- */
 import { auth, db } from "./firebase-init.js";
 import {
   signInWithEmailAndPassword,
