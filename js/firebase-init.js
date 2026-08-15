@@ -1,12 +1,3 @@
-/**
- * firebase-init.js
- * تهيئة Firebase — الملف الوحيد الذي يحتوي على إعدادات المشروع.
- *
- * ⚠️ Firebase Web API Key ليست secret بحد ذاتها.
- * الأمان الحقيقي يتحقق عبر: Security Rules + App Check + Custom Claims.
- * لا تضع هنا: Service Account, Private Keys, Admin SDK secrets.
- */
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import { getAuth, connectAuthEmulator } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 import { getFirestore, connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
