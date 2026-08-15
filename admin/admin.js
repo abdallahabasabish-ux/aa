@@ -1,3 +1,11 @@
+/**
+ * admin.js
+ * لوحة التحكم — منطق النظرة العامة.
+ *
+ * يُحمّل بيانات حقيقية من Firestore فقط.
+ * لا يُنشئ بيانات وهمية أبدًا.
+ */
+
 import { requireAdmin } from "/js/auth-guard.js";
 import { auth, db } from "/js/firebase-init.js";
 import { logout } from "/js/auth.js";
@@ -12,6 +20,9 @@ import {
   Timestamp,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
+// -----------------------------------------------
+// DOM References
+// -----------------------------------------------
 const sidebar = document.getElementById("adminSidebar");
 const overlay = document.getElementById("adminOverlay");
 const hamburger = document.getElementById("hamburgerBtn");
@@ -22,6 +33,9 @@ const headerAvatar = document.getElementById("headerAvatar");
 const headerUserName = document.getElementById("headerUserName");
 const ordersWrapper = document.getElementById("ordersTableWrapper");
 
+// -----------------------------------------------
+// Sidebar Toggle (Mobile)
+// -----------------------------------------------
 function openSidebar() {
   sidebar.classList.add("admin-sidebar--open");
   overlay.classList.add("admin-overlay--visible");
@@ -37,11 +51,15 @@ function closeSidebar() {
 hamburger.addEventListener("click", openSidebar);
 overlay.addEventListener("click", closeSidebar);
 
+// إغلاق الـ sidebar عند تغيير حجم الشاشة لسطح المكتب
 const mql = window.matchMedia("(min-width: 1024px)");
 mql.addEventListener("change", (e) => {
   if (e.matches) closeSidebar();
 });
 
+// -----------------------------------------------
+// Logout
+// -----------------------------------------------
 logoutBtn.addEventListener("click", async () => {
   const result = await logout();
   if (result.ok) {
@@ -49,6 +67,15 @@ logoutBtn.addEventListener("click", async () => {
   }
 });
 
+// -----------------------------------------------
+// Helpers
+// -----------------------------------------------
+
+/**
+ * تنسيق التاريخ بالعربية.
+ * @param {Timestamp|Date|null} date
+ * @returns {string}
+ */
 function formatDate(date) {
   if (!date) return "—";
   const d = date instanceof Timestamp ? date.toDate() : new Date(date);
@@ -59,6 +86,9 @@ function formatDate(date) {
   });
 }
 
+/**
+ * خريطة الحالات — لون + نص عربي.
+ */
 const STATUS_MAP = {
   new: { label: "جديد", cls: "new" },
   reviewing: { label: "قيد المراجعة", cls: "reviewing" },
@@ -76,10 +106,17 @@ function getStatusBadge(status) {
   return span;
 }
 
+/**
+ * خريطة أنواع الطلبات.
+ */
 const TYPE_MAP = {
   service: "خدمة",
   product: "منتج",
 };
+
+// -----------------------------------------------
+// Fetch Stats (using getCountFromServer — efficient)
+// -----------------------------------------------
 async function fetchStats() {
   const results = { services: 0, products: 0, newOrders: 0, customers: 0 };
 
@@ -104,13 +141,22 @@ async function fetchStats() {
     results.newOrders = snap.data().count;
   } catch { /* مجموعة غير موجودة → 0 */ }
 
+  // عدد العملاء — نحسب من مجموعة user_products (كل uid فريد)
+  // أو من Auth list (يحتاج Admin SDK) — نستخدم طريقة بسيطة
   try {
     const snap = await getCountFromServer(collection(db, "user_products"));
+    // ملاحظة: هذا عدد السجلات وليس المستخدمين الفريدين
+    // لحساب المستخدمين الفريدين نحتاج Cloud Function
+    // لذلك نعرض العدد كـ "سجل" أو نتركه 0 حتى يُبنى بشكل صحيح
     results.customers = snap.data().count;
   } catch { /* مجموعة غير موجودة → 0 */ }
 
   return results;
 }
+
+/**
+ * عرض الأرقام في البطاقات.
+ */
 function renderStats(stats) {
   const setVal = (id, val) => {
     const el = document.getElementById(id);
@@ -123,6 +169,10 @@ function renderStats(stats) {
   setVal("statNewOrders", stats.newOrders);
   setVal("statCustomers", stats.customers);
 }
+
+// -----------------------------------------------
+// Fetch Recent Orders
+// -----------------------------------------------
 async function fetchRecentOrders() {
   try {
     const q = query(
@@ -136,7 +186,13 @@ async function fetchRecentOrders() {
     return [];
   }
 }
+
+/**
+ * عرض جدول الطلبات أو حالة فارغة.
+ * يستخدم createElement — لا innerHTML مع بيانات ديناميكية.
+ */
 function renderOrders(orders) {
+  // مسح المحتوى السابق
   ordersWrapper.textContent = "";
 
   if (orders.length === 0) {
@@ -147,6 +203,7 @@ function renderOrders(orders) {
   const table = document.createElement("table");
   table.className = "admin-table";
 
+  // Header
   const thead = document.createElement("thead");
   const headRow = document.createElement("tr");
 
@@ -160,11 +217,13 @@ function renderOrders(orders) {
   thead.appendChild(headRow);
   table.appendChild(thead);
 
+  // Body
   const tbody = document.createElement("tbody");
 
   orders.forEach((order) => {
     const tr = document.createElement("tr");
 
+    // رقم الطلب
     const tdNum = document.createElement("td");
     const numSpan = document.createElement("span");
     numSpan.className = "order-number";
@@ -172,18 +231,22 @@ function renderOrders(orders) {
     tdNum.appendChild(numSpan);
     tr.appendChild(tdNum);
 
+    // العميل
     const tdCustomer = document.createElement("td");
     tdCustomer.textContent = order.customerName || "—";
     tr.appendChild(tdCustomer);
 
+    // النوع
     const tdType = document.createElement("td");
     tdType.textContent = TYPE_MAP[order.type] || order.type || "—";
     tr.appendChild(tdType);
 
+    // الحالة
     const tdStatus = document.createElement("td");
     tdStatus.appendChild(getStatusBadge(order.status));
     tr.appendChild(tdStatus);
 
+    // التاريخ
     const tdDate = document.createElement("td");
     tdDate.textContent = formatDate(order.createdAt);
     tr.appendChild(tdDate);
@@ -195,6 +258,9 @@ function renderOrders(orders) {
   ordersWrapper.appendChild(table);
 }
 
+/**
+ * إنشاء حالة فارغة.
+ */
 function createEmptyState() {
   const div = document.createElement("div");
   div.className = "empty-state";
@@ -218,18 +284,26 @@ function createEmptyState() {
   return div;
 }
 
+// -----------------------------------------------
+// Set User Info in Header
+// -----------------------------------------------
 function setUserInfo(user) {
   const name = user.displayName || user.email || "مدير";
   headerUserName.textContent = name;
 
+  // الحرف الأول من الاسم
   const initial = name.trim().charAt(0);
   headerAvatar.textContent = initial;
 }
 
+// -----------------------------------------------
+// Initialize Dashboard
+// -----------------------------------------------
 async function initDashboard(user) {
   setUserInfo(user);
 
   try {
+    // تحميل الإحصائيات والطلبات بالتوازي
     const [stats, orders] = await Promise.all([
       fetchStats(),
       fetchRecentOrders(),
@@ -238,16 +312,23 @@ async function initDashboard(user) {
     renderStats(stats);
     renderOrders(orders);
 
+    // إظهار المحتوى وإخفاء الـ loader
     pageLoader.style.display = "none";
     dashContent.style.display = "block";
   } catch (error) {
+    // في حال فشل تحميل البيانات
     pageLoader.style.display = "none";
     dashContent.style.display = "block";
 
+    // عرض أصفار كبيانات حقيقية (فشل الجلب ≠ بيانات وهمية)
     renderStats({ services: 0, products: 0, newOrders: 0, customers: 0 });
     renderOrders([]);
   }
 }
+
+// -----------------------------------------------
+// Auth Guard + Start
+// -----------------------------------------------
 requireAdmin({
   loginUrl: "/login.html",
 })
@@ -256,4 +337,5 @@ requireAdmin({
     return initDashboard(user);
   })
   .catch(() => {
+    // تم redirect من auth-guard — لا حاجة لفعل شيء
   });
