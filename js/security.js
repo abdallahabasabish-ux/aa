@@ -1,7 +1,3 @@
-/**
- * security.js
- * أدوات أمنية — منع XSS و Sanitization.
- */
 export function escapeHtml(str) {
   if (typeof str !== "string") return "";
   const map = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#x27;" };
