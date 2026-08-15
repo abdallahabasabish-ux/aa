@@ -4,17 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>من نحن — عبدالله عباس</title>
-  <meta name="description" content="تعرف على عبدالله عباس، مطور ويب ومصمم رقمي محترف يقدم حلولاً رقمية متكاملة." />
+  <meta name="description" content="عبدالله عباس — مطور ويب ومصمم رقمي، أقدّم حلولاً رقمية متكاملة تجمع بين التصميم الاحترافي والأداء العالي والنتائج الملموسة." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://abdallahsst.web.app/about" />
 
-  <!-- Structured Data -->
+  <!-- Schema.org للـ SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     "name": "من نحن — عبدالله عباس",
     "url": "https://abdallahsst.web.app/about",
+    "description": "عبدالله عباس — مطور ويب ومصمم رقمي.",
     "mainEntity": {
       "@type": "Person",
       "name": "عبدالله عباس",
@@ -23,17 +24,13 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Styles -->
+  <!-- ===== ملفات التنسيق (الهوية + تنسيق الصفحة) ===== -->
   <link rel="stylesheet" href="/css/main.css" />
   <link rel="stylesheet" href="/css/about.css" />
 </head>
 <body>
 
-  <!-- ==================== NAVIGATION ==================== -->
+  <!-- ===== شريط التنقل (مستقى من main.css) ===== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
       <a href="/" class="nav-brand">عبدالله عباس</a>
@@ -42,7 +39,7 @@
         <a href="/products" class="nav-link">المنتجات</a>
         <a href="/portfolio" class="nav-link">الأعمال</a>
         <a href="/blog" class="nav-link">المقالات</a>
-        <a href="/about" class="nav-link">عن عبدالله</a>
+        <a href="/about" class="nav-link" style="color:var(--accent)">من نحن</a>
       </div>
       <a href="/contact" class="nav-cta">تواصل معي</a>
       <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
@@ -51,7 +48,7 @@
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
+  <!-- القائمة الجانبية للجوال -->
   <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-mobile-panel" id="mobilePanel">
       <div class="nav-mobile-header">
@@ -65,7 +62,7 @@
         <a href="/products" class="nav-mobile-link">المنتجات</a>
         <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
         <a href="/blog" class="nav-mobile-link">المقالات</a>
-        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/about" class="nav-mobile-link" style="color:var(--accent)">من نحن</a>
         <a href="/contact" class="nav-mobile-link">تواصل معي</a>
         <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
       </div>
@@ -75,107 +72,121 @@
     </div>
   </div>
 
-  <!-- ==================== MAIN ==================== -->
-  <main class="about-page">
-    <div class="container">
+  <!-- ===== المحتوى الرئيسي ===== -->
+  <main>
 
-      <!-- === HERO SECTION (Full Screen Layout) === -->
-      <section class="about-hero reveal">
-
-        <!-- Left Side: Image (Visually on the left in RTL) -->
-        <div class="about-hero-image-wrap">
-          <img src="/Image/1" alt="عبدالله عباس — مؤسس الشركة" class="about-hero-image" loading="lazy" />
-        </div>
-
-        <!-- Right Side: Content (Visually on the right in RTL) -->
-        <div class="about-hero-content">
-          <div class="about-eyebrow">
-            <span class="about-eyebrow-line"></span>
+    <!-- القسم الرئيسي (Hero) -->
+    <section class="about-hero">
+      <div class="container">
+        <div class="about-hero-inner reveal">
+          <div class="about-hero-label">
+            <span class="about-hero-label-line"></span>
             <span>من نحن</span>
           </div>
-
-          <h1 class="about-hero-title">
-            نبني <span>حلولًا رقمية</span><br />
-            تخدم هدفك أولًا.
-          </h1>
-
-          <p class="about-hero-desc">
-            أنا عبدالله عباس، مطور ويب ومصمم رقمي مصري. أؤمن بأن الموقع الناجح لا يُبنى على قالب جاهز، بل على فهم عميق للهدف الحقيقي لمشروعك. نبدأ بتحليل احتياجك، ثم نصمم مسارًا رقميًا يحقق لك نتائج ملموسة.
-          </p>
-
-          <!-- Features with Professional SVG Icons -->
-          <div class="about-features">
-            <div class="about-feature">
-              <span class="about-feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
-              </span>
-              <span class="about-feature-text">رؤية واضحة وهدف محدد</span>
-            </div>
-            <div class="about-feature">
-              <span class="about-feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/></svg>
-              </span>
-              <span class="about-feature-text">أداء حقيقي وسرعة فائقة</span>
-            </div>
-            <div class="about-feature">
-              <span class="about-feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
-              </span>
-              <span class="about-feature-text">نتائج قابلة للقياس والتحليل</span>
-            </div>
-          </div>
-
-          <div class="about-hero-actions">
-            <a href="/contact" class="btn btn--primary">تحدث عن مشروعك</a>
-            <a href="/portfolio" class="btn btn--outline">شاهد أعمالي</a>
-          </div>
+          <h1 class="about-hero-title">نبني حلولاً <span>رقمية</span> بمنظور مختلف</h1>
+          <p class="about-hero-desc">لا نبيع قوالب أو أكواداً فقط — نقدم حلولاً مفهومة، مصممة خصيصاً لتحقيق أهدافك الحقيقية.</p>
+          <a href="/contact" class="btn btn--primary">تواصل معي</a>
         </div>
-
-      </section>
-
-    </div>
-
-    <!-- === STATS / CARDS SECTION (Professional Shopping Cards Style) === -->
-    <div class="container">
-      <div class="about-stats">
-
-        <div class="about-stat-card reveal">
-          <div class="about-stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 9m18 0V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v3"/></svg>
-          </div>
-          <div class="about-stat-number">30+</div>
-          <div class="about-stat-label">مشروع مكتمل</div>
-        </div>
-
-        <div class="about-stat-card reveal">
-          <div class="about-stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
-          </div>
-          <div class="about-stat-number">5+</div>
-          <div class="about-stat-label">سنوات من الخبرة</div>
-        </div>
-
-        <div class="about-stat-card reveal">
-          <div class="about-stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>
-          </div>
-          <div class="about-stat-number">50+</div>
-          <div class="about-stat-label">عميل سعيد</div>
-        </div>
-
-        <div class="about-stat-card reveal">
-          <div class="about-stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
-          </div>
-          <div class="about-stat-number">24/7</div>
-          <div class="about-stat-label">دعم متواصل</div>
-        </div>
-
       </div>
-    </div>
+    </section>
+
+    <!-- القصة (الصورة + النص) -->
+    <section class="about-story">
+      <div class="container">
+        <div class="about-story-grid">
+          <div class="about-story-image reveal">
+            <!-- ضع رابط صورتك الشخصية هنا -->
+            <img src="/assets/abdallah-about.webp" alt="عبدالله عباس - مطور ويب ومصمم رقمي" loading="lazy" />
+          </div>
+          <div class="about-story-content reveal">
+            <div class="about-story-label">
+              <span class="about-story-label-line"></span>
+              <span>قصتي</span>
+            </div>
+            <h2 class="about-story-title">أنا عبدالله عباس — مطور ومصمم حلول رقمية</h2>
+            <div class="about-story-text">
+              <p>
+                أؤمن بأن التكنولوجيا يجب أن تخدم البشر، وليس العكس. كل مشروع أبدأه يبدأ بفهم عميق للمشكلة الحقيقية التي يحاول العميل حلها، ثم أصمم الحل المناسب لها — وليس الحل الأكثر تعقيداً أو الأكثر رواجاً.
+              </p>
+              <p>
+                عملت مع شركات ناشئة وأفراد وعلامات تجارية، وساعدتهم على بناء هويات رقمية قوية، ومواقع سريعة، واستراتيجيات تسويق فعّالة. لا أكتفي بتنفيذ المطلوب، بل أشارك في صياغة الرؤية أيضاً.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- الإحصائيات -->
+    <section class="about-stats">
+      <div class="container">
+        <div class="about-stats-grid reveal">
+          <div>
+            <div class="about-stat-number"><span class="accent">+</span>50</div>
+            <div class="about-stat-label">مشروعاً منفذاً</div>
+          </div>
+          <div>
+            <div class="about-stat-number"><span class="accent">+</span>30</div>
+            <div class="about-stat-label">عميلاً سعيداً</div>
+          </div>
+          <div>
+            <div class="about-stat-number"><span class="accent">5</span>+</div>
+            <div class="about-stat-label">سنوات من الخبرة</div>
+          </div>
+          <div>
+            <div class="about-stat-number"><span class="accent">100</span>%</div>
+            <div class="about-stat-label">التزام بالجودة</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- القيم (الرؤية، الرسالة، النهج) -->
+    <section class="about-values">
+      <div class="container">
+        <div class="about-values-grid">
+          <div class="about-value-card reveal">
+            <div class="about-value-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3 class="about-value-title">الرؤية</h3>
+            <p class="about-value-desc">أن تكون التقنية أداة فعّالة تحقق أهدافاً حقيقية، لا مجرد واجهات جميلة بلا مضمون.</p>
+          </div>
+          <div class="about-value-card reveal">
+            <div class="about-value-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3 class="about-value-title">الرسالة</h3>
+            <p class="about-value-desc">تقديم حلول رقمية تتميز بالجودة والوضوح، وبناء علاقات ثقة مع العملاء تتجاوز مجرد مشروع.</p>
+          </div>
+          <div class="about-value-card reveal">
+            <div class="about-value-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3 class="about-value-title">النهج</h3>
+            <p class="about-value-desc">أبدأ بفهم المشكلة، ثم أصمم الحل. لا أستخدم قوالب جاهزة، بل أبني كل شيء حسب احتياج المشروع الفعلي.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم الدعوة للتواصل (CTA) -->
+    <section class="about-cta">
+      <div class="container">
+        <div class="about-cta-inner reveal">
+          <h2 class="about-cta-title">لديك فكرة أو مشروع؟</h2>
+          <p class="about-cta-desc">سأكون سعيداً بمساعدتك في تحويلها إلى واقع رقمي ملموس.</p>
+          <div class="about-cta-actions">
+            <a href="/contact" class="btn btn--white">تواصل معي الآن</a>
+            <a href="/services" class="btn btn--ghost-light">استكشف خدماتي</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- ===== التذييل (Footer) ===== -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
@@ -199,7 +210,7 @@
             <a href="/products" class="footer-link">المنتجات</a>
             <a href="/portfolio" class="footer-link">الأعمال</a>
             <a href="/blog" class="footer-link">المقالات</a>
-            <a href="/about" class="footer-link">عن عبدالله</a>
+            <a href="/about" class="footer-link">من نحن</a>
           </div>
         </div>
         <div>
@@ -217,51 +228,63 @@
     </div>
   </footer>
 
-  <!-- ==================== SCRIPTS ==================== -->
+  <!-- ===== السكربتات التفاعلية ===== -->
   <script>
-    // --- Nav ---
-    const nav = document.getElementById('siteNav');
-    function handleNavScroll() {
-      nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
-    }
-    window.addEventListener('scroll', handleNavScroll, { passive: true });
-    handleNavScroll();
+    (function() {
+      // 1. تأثير التمرير على شريط التنقل
+      const nav = document.getElementById('siteNav');
+      function handleNavScroll() {
+        nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
+      }
+      window.addEventListener('scroll', handleNavScroll, { passive: true });
+      handleNavScroll();
 
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mobileClose = document.getElementById('mobileClose');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobilePanel = document.getElementById('mobilePanel');
+      // 2. التحكم في القائمة الجانبية للجوال
+      const mobileToggle = document.getElementById('mobileToggle');
+      const mobileClose = document.getElementById('mobileClose');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobilePanel = document.getElementById('mobilePanel');
 
-    function openMobile() {
-      mobileMenu.classList.add('nav-mobile-menu--open');
-      mobilePanel.classList.add('nav-mobile-panel--open');
-      mobileMenu.setAttribute('aria-hidden', 'false');
-      mobileToggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeMobile() {
-      mobileMenu.classList.remove('nav-mobile-menu--open');
-      mobilePanel.classList.remove('nav-mobile-panel--open');
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      mobileToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-    mobileToggle.addEventListener('click', openMobile);
-    mobileClose.addEventListener('click', closeMobile);
-    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
-    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
+      function openMobile() {
+        mobileMenu.classList.add('nav-mobile-menu--open');
+        mobilePanel.classList.add('nav-mobile-panel--open');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        mobileToggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMobile() {
+        mobileMenu.classList.remove('nav-mobile-menu--open');
+        mobilePanel.classList.remove('nav-mobile-panel--open');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+      mobileToggle.addEventListener('click', openMobile);
+      mobileClose.addEventListener('click', closeMobile);
+      mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
+      mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
 
-    // --- Scroll Reveal ---
-    const reveals = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('reveal--visible'); obs.unobserve(e.target); } });
-      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-      reveals.forEach((el, i) => { el.style.transitionDelay = `${i * 60}ms`; obs.observe(el); });
-    } else {
-      reveals.forEach(el => el.classList.add('reveal--visible'));
-    }
+      // 3. تأثير الظهور التدريجي (Reveal) عند التمرير
+      const reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add('reveal--visible');
+              obs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        reveals.forEach((el, i) => {
+          el.style.transitionDelay = (i * 60) + 'ms';
+          obs.observe(el);
+        });
+      } else {
+        reveals.forEach(el => el.classList.add('reveal--visible'));
+      }
+    })();
   </script>
+
 </body>
 </html>
