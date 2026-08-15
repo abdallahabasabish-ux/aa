@@ -1,81 +1,64 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>من نحن — عبدالله عباس</title>
-  <meta name="description" content="عبدالله عباس — مطور ويب ومصمم رقمي، أقدّم حلولاً رقمية متكاملة تجمع بين التصميم الاحترافي والأداء العالي والنتائج الملموسة." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.abdallahabas.com/about" />
+  <meta name="description" content="تعرف على عبدالله عباس، مطور ويب ومصمم حلول رقمية يقدم مواقع وحلولاً رقمية مخصصة تركز على الجودة والأداء والنتائج.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://www.abdallahabas.com/about">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    "name": "من نحن — عبدالله عباس",
-    "url": "https://www.abdallahabas.com/about",
-    "description": "عبدالله عباس — مطور ويب ومصمم رقمي.",
-    "mainEntity": {
-      "@type": "Person",
-      "name": "عبدالله عباس",
-      "jobTitle": "مطور ويب ومصمم رقمي"
-    }
-  }
-  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/about.css" />
-  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/about.css">
 </head>
+
 <body>
+  <header class="site-header">
+    <nav class="site-nav" id="siteNav" aria-label="التنقل الرئيسي">
+      <div class="container nav-inner">
+        <a href="/" class="nav-brand">عبدالله عباس</a>
 
-  <!-- ===== NAVIGATION (مطابق لـ contact.html) ===== -->
-  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
-    <div class="nav-inner">
-      <a href="/" class="nav-brand">عبدالله عباس</a>
-      <div class="nav-links">
-        <a href="/services" class="nav-link">الخدمات</a>
-        <a href="/products" class="nav-link">المنتجات</a>
-        <a href="/portfolio" class="nav-link">الأعمال</a>
-        <a href="/blog" class="nav-link">المقالات</a>
-        <a href="/about" class="nav-link" style="color:var(--accent)">من نحن</a>
-      </div>
-      <a href="/contact" class="nav-cta">تواصل معي</a>
-      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-      </button>
-    </div>
-  </nav>
+        <div class="nav-links">
+          <a href="/services">الخدمات</a>
+          <a href="/products">المنتجات</a>
+          <a href="/portfolio">الأعمال</a>
+          <a href="/blog">المقالات</a>
+          <a href="/about" class="active">عن عبدالله</a>
+        </div>
 
-  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
-    <div class="nav-mobile-panel" id="mobilePanel">
-      <div class="nav-mobile-header">
-        <span class="nav-mobile-brand">عبدالله عباس</span>
-        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        <a href="/contact" class="nav-cta">ابدأ مشروعك الآن</a>
+
+        <button class="nav-mobile-toggle" id="mobileToggle" type="button"
+                aria-label="فتح القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
         </button>
       </div>
-      <div class="nav-mobile-links">
-        <a href="/services" class="nav-mobile-link">الخدمات</a>
-        <a href="/products" class="nav-mobile-link">المنتجات</a>
-        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
-        <a href="/blog" class="nav-mobile-link">المقالات</a>
-        <a href="/about" class="nav-mobile-link" style="color:var(--accent)">من نحن</a>
-        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
-        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
-      </div>
-      <div class="nav-mobile-footer">
-        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-panel">
+        <div class="mobile-head">
+          <span class="nav-brand">عبدالله عباس</span>
+          <button class="mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">×</button>
+        </div>
+        <div class="mobile-links">
+          <a href="/services">الخدمات</a>
+          <a href="/products">المنتجات</a>
+          <a href="/portfolio">الأعمال</a>
+          <a href="/blog">المقالات</a>
+          <a href="/about" class="active">عن عبدالله</a>
+          <a href="/contact">تواصل معي</a>
+          <a href="/login.html">تسجيل الدخول</a>
+        </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- ===== MAIN ===== -->
   <main>
-
-    <!-- Hero -->
     <section class="about-hero">
       <div class="container">
         <div class="about-hero-inner reveal">
@@ -83,200 +66,303 @@
             <span class="about-hero-label-line"></span>
             <span>من نحن</span>
           </div>
+
           <h1 class="about-hero-title">نبني حلولاً رقمية بمنظور مختلف</h1>
-          <p class="about-hero-desc">لا نبيع قوالب أو أكواداً فقط — نقدم حلولاً مفهومة، مصممة خصيصاً لتحقيق أهدافك الحقيقية.</p>
+
+          <p class="about-hero-desc">
+            كل مشروع يبدأ بفهم المشكلة الحقيقية، ثم تحديد الحل المناسب وتنفيذه بجودة واضحة ونتيجة ملموسة.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Story (Image + Text) -->
     <section class="about-story">
       <div class="container">
-        <div class="about-story-grid">
+        <div class="about-section-head reveal">
+          <span class="section-index">01</span>
+          <div>
+            <div class="about-label">قصتي</div>
+            <h2>من الفكرة إلى حل رقمي قابل للاستخدام</h2>
+          </div>
+        </div>
 
-          <!-- الصورة (تُظهر شخصية أو رمزاً) -->
+        <div class="about-story-layout">
           <div class="about-story-image reveal">
-            <img src="/assets/abdallah-about.webp" alt="عبدالله عباس - مطور ويب ومصمم رقمي" loading="lazy" />
+            <img src="/assets/abdallah-about.webp"
+                 alt="عبدالله عباس - مطور ويب ومصمم رقمي"
+                 loading="lazy"
+                 decoding="async">
           </div>
 
-          <!-- النص -->
           <div class="about-story-content reveal">
-            <div class="about-story-label">
-              <span class="about-story-label-line"></span>
-              <span>قصتنا</span>
-            </div>
-            <h2 class="about-story-title">أنا عبدالله عباس — مطور ومصمم حلول رقمية</h2>
-            <div class="about-story-text">
-              <p>
-                أؤمن بأن التكنولوجيا يجب أن تخدم البشر، وليس العكس. كل مشروع أبدأه يبدأ بفهم عميق للمشكلة الحقيقية التي يحاول العميل حلها، ثم أصمم الحل المناسب لها — وليس الحل الأكثر تعقيداً أو الأكثر رواجاً.
-              </p>
-              <p>
-                عملت مع شركات ناشئة وأفراد وعلامات تجارية، وساعدتهم على بناء هويات رقمية قوية، ومواقع سريعة، واستراتيجيات تسويق فعّالة. لا أكتفي بتنفيذ المطلوب، بل أشارك في صياغة الرؤية أيضاً.
-              </p>
-            </div>
+            <p>
+              أنا عبدالله عباس، مطور ويب ومصمم حلول رقمية. أعمل على بناء تجارب رقمية تجمع بين التصميم الواضح، الأداء الجيد، وسهولة الاستخدام.
+            </p>
+            <p>
+              أتعامل مع المشروع باعتباره مشكلة تحتاج إلى حل، وليس مجرد صفحة تحتاج إلى كود. لذلك أبدأ بفهم الهدف والجمهور والاحتياج، ثم أحدد المنهجية المناسبة للتنفيذ.
+            </p>
+            <p>
+              النتيجة التي أستهدفها هي منتج رقمي واضح، سريع، قابل للتطوير، ويخدم الغرض الذي بُني من أجله.
+            </p>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- Stats -->
     <section class="about-stats">
       <div class="container">
-        <div class="about-stats-grid reveal">
+        <div class="about-section-head reveal">
+          <span class="section-index">02</span>
           <div>
-            <div class="about-stat-number"><span class="accent">+</span>50</div>
-            <div class="about-stat-label">مشروعاً منفذاً</div>
+            <div class="about-label">أرقام مختصرة</div>
+            <h2>خبرة تُقاس بما تم إنجازه</h2>
           </div>
-          <div>
-            <div class="about-stat-number"><span class="accent">+</span>30</div>
-            <div class="about-stat-label">عميلاً سعيداً</div>
+        </div>
+
+        <div class="stats-list reveal">
+          <div class="stat-row">
+            <strong><span>+</span>50</strong>
+            <div>
+              <h3>مشروعاً منفذاً</h3>
+              <p>مشاريع رقمية متنوعة تم تنفيذها وتطويرها وفق احتياجات مختلفة.</p>
+            </div>
           </div>
-          <div>
-            <div class="about-stat-number"><span class="accent">5</span>+</div>
-            <div class="about-stat-label">سنوات من الخبرة</div>
+
+          <div class="stat-row">
+            <strong><span>+</span>30</strong>
+            <div>
+              <h3>عميلاً</h3>
+              <p>تعاون مع أفراد ومشروعات وعلامات تجارية لبناء حضور رقمي أفضل.</p>
+            </div>
           </div>
-          <div>
-            <div class="about-stat-number"><span class="accent">100</span>%</div>
-            <div class="about-stat-label">التزام بالجودة</div>
+
+          <div class="stat-row">
+            <strong>5<span>+</span></strong>
+            <div>
+              <h3>سنوات من الخبرة</h3>
+              <p>خبرة عملية في تطوير المواقع والتصميم والسيو والحلول الرقمية.</p>
+            </div>
+          </div>
+
+          <div class="stat-row">
+            <strong>100<span>%</span></strong>
+            <div>
+              <h3>تركيز على الجودة</h3>
+              <p>الهدف هو تقديم حل مناسب للمشروع، وليس زيادة التعقيد دون فائدة.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Values (Vision / Mission / Approach) -->
     <section class="about-values">
       <div class="container">
-        <div class="about-values-grid">
-
-          <div class="about-value-card reveal">
-            <div class="about-value-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"/></svg>
-            </div>
-            <h3 class="about-value-title">الرؤية</h3>
-            <p class="about-value-desc">أن تكون التقنية أداة فعّالة تحقق أهدافاً حقيقية، لا مجرد واجهات جميلة بلا مضمون.</p>
+        <div class="about-section-head reveal">
+          <span class="section-index">03</span>
+          <div>
+            <div class="about-label">منهج العمل</div>
+            <h2>ثلاثة مبادئ تحكم كل مشروع</h2>
           </div>
+        </div>
 
-          <div class="about-value-card reveal">
-            <div class="about-value-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 21h18M3 18.75h18M3 15.75h18M3 12.75h18M3 9.75h18M3 6.75h18M3 3.75h18"/></svg>
+        <div class="values-list">
+          <article class="value-row reveal">
+            <span class="value-number">01</span>
+            <div class="value-main">
+              <h3>الرؤية</h3>
+              <p>أن تكون التقنية أداة فعّالة تحقق أهدافاً حقيقية، لا مجرد واجهات جميلة بلا مضمون.</p>
             </div>
-            <h3 class="about-value-title">الرسالة</h3>
-            <p class="about-value-desc">تقديم حلول رقمية تتميز بالجودة والوضوح، وبناء علاقات ثقة مع العملاء تتجاوز مجرد مشروع.</p>
-          </div>
+            <span class="value-arrow">↗</span>
+          </article>
 
-          <div class="about-value-card reveal">
-            <div class="about-value-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 0 1 9 9v.375M10.125 2.25A3.375 3.375 0 0 1 13.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 0 1 3.375 3.375M9 15l2.25 2.25L15 12"/></svg>
+          <article class="value-row reveal">
+            <span class="value-number">02</span>
+            <div class="value-main">
+              <h3>الرسالة</h3>
+              <p>تقديم حلول رقمية تتميز بالجودة والوضوح، وبناء علاقات ثقة تتجاوز مجرد تسليم المشروع.</p>
             </div>
-            <h3 class="about-value-title">النهج</h3>
-            <p class="about-value-desc">أبدأ بفهم المشكلة، ثم أصمم الحل. لا أستخدم قوالب جاهزة، بل أبني كل شيء حسب احتياج المشروع الفعلي.</p>
-          </div>
+            <span class="value-arrow">↗</span>
+          </article>
 
+          <article class="value-row reveal">
+            <span class="value-number">03</span>
+            <div class="value-main">
+              <h3>النهج</h3>
+              <p>فهم المشكلة أولاً، ثم تصميم الحل المناسب، ثم التنفيذ مع الاهتمام بالأداء والتجربة وقابلية التطوير.</p>
+            </div>
+            <span class="value-arrow">↗</span>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
+    <section class="about-process">
+      <div class="container">
+        <div class="about-section-head reveal">
+          <span class="section-index">04</span>
+          <div>
+            <div class="about-label">طريقة العمل</div>
+            <h2>منهجية بسيطة وواضحة</h2>
+          </div>
+        </div>
+
+        <div class="process-list reveal">
+          <div class="process-item">
+            <span>01</span>
+            <div>
+              <h3>فهم المشروع</h3>
+              <p>تحديد الهدف، المشكلة، الجمهور، والمتطلبات الفعلية.</p>
+            </div>
+          </div>
+
+          <div class="process-item">
+            <span>02</span>
+            <div>
+              <h3>تحديد الحل</h3>
+              <p>اختيار البنية والتقنيات والأسلوب المناسب بعيداً عن التعقيد غير الضروري.</p>
+            </div>
+          </div>
+
+          <div class="process-item">
+            <span>03</span>
+            <div>
+              <h3>التنفيذ</h3>
+              <p>تحويل الخطة إلى تجربة رقمية منظمة وسريعة وقابلة للاستخدام.</p>
+            </div>
+          </div>
+
+          <div class="process-item">
+            <span>04</span>
+            <div>
+              <h3>المراجعة والتطوير</h3>
+              <p>اختبار التفاصيل وتحسين التجربة وتجهيز المشروع للنمو والتطوير.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="about-cta">
       <div class="container">
         <div class="about-cta-inner reveal">
-          <h2 class="about-cta-title">لديك فكرة أو مشروع؟</h2>
-          <p class="about-cta-desc">سأكون سعيداً بمساعدتك في تحويلها إلى واقع رقمي ملموس.</p>
+          <div class="about-cta-text">
+            <h2>لديك فكرة أو مشروع؟</h2>
+            <p>إذا كان لديك هدف واضح، يمكننا تحويله إلى حل رقمي مناسب.</p>
+          </div>
+
           <div class="about-cta-actions">
-            <a href="/contact" class="btn btn--white">تواصل معي الآن</a>
-            <a href="/services" class="btn btn--ghost-light">استكشف خدماتي</a>
+            <a href="/contact" class="btn btn--primary">تواصل معي</a>
+            <a href="/services" class="btn btn--secondary">استكشف الخدمات</a>
           </div>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- ===== FOOTER (مطابق) ===== -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <div>
+        <div class="footer-brand">
           <div class="footer-brand-name">عبدالله عباس</div>
-          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+          <p>بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
         </div>
+
         <div>
           <div class="footer-heading">الخدمات</div>
           <div class="footer-links">
-            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
-            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
-            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
-            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
-            <a href="/services/blogger" class="footer-link">بلوجر</a>
+            <a href="/services/web-development">تطوير مواقع</a>
+            <a href="/services/web-design">تصميم واجهات</a>
+            <a href="/services/seo">تحسين محركات البحث</a>
+            <a href="/services/wordpress">ووردبريس</a>
+            <a href="/services/blogger">بلوجر</a>
           </div>
         </div>
+
         <div>
           <div class="footer-heading">المحتوى</div>
           <div class="footer-links">
-            <a href="/products" class="footer-link">المنتجات</a>
-            <a href="/portfolio" class="footer-link">الأعمال</a>
-            <a href="/blog" class="footer-link">المقالات</a>
-            <a href="/about" class="footer-link">من نحن</a>
+            <a href="/products">المنتجات</a>
+            <a href="/portfolio">الأعمال</a>
+            <a href="/blog">المقالات</a>
+            <a href="/about">عن عبدالله</a>
           </div>
         </div>
+
         <div>
           <div class="footer-heading">تواصل</div>
           <div class="footer-links">
-            <a href="/contact" class="footer-link">أرسل رسالة</a>
-            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+            <a href="/contact">أرسل رسالة</a>
+            <a href="/login.html">تسجيل الدخول</a>
           </div>
         </div>
       </div>
+
       <div class="footer-bottom">
-        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
-        <span class="footer-copy">جميع الحقوق محفوظة</span>
+        <span>© 2026 عبدالله عباس</span>
+        <span>جميع الحقوق محفوظة</span>
       </div>
     </div>
   </footer>
 
-  <!-- ===== SCRIPTS ===== -->
-  <script type="module">
-    // ===== NAV (مطابق لـ contact.html) =====
+  <script>
     const nav = document.getElementById('siteNav');
-    function handleNavScroll() {
+    const toggle = document.getElementById('mobileToggle');
+    const close = document.getElementById('mobileClose');
+    const menu = document.getElementById('mobileMenu');
+
+    function updateNav() {
       nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
     }
-    window.addEventListener('scroll', handleNavScroll, { passive: true });
-    handleNavScroll();
 
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mobileClose = document.getElementById('mobileClose');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobilePanel = document.getElementById('mobilePanel');
-
-    function openMobile() {
-      mobileMenu.classList.add('nav-mobile-menu--open');
-      mobilePanel.classList.add('nav-mobile-panel--open');
-      mobileMenu.setAttribute('aria-hidden', 'false');
-      mobileToggle.setAttribute('aria-expanded', 'true');
+    function openMenu() {
+      menu.classList.add('mobile-menu--open');
+      menu.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
     }
-    function closeMobile() {
-      mobileMenu.classList.remove('nav-mobile-menu--open');
-      mobilePanel.classList.remove('nav-mobile-panel--open');
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      mobileToggle.setAttribute('aria-expanded', 'false');
+
+    function closeMenu() {
+      menu.classList.remove('mobile-menu--open');
+      menu.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
-    mobileToggle.addEventListener('click', openMobile);
-    mobileClose.addEventListener('click', closeMobile);
-    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
-    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
 
-    // ===== SCROLL REVEAL =====
+    window.addEventListener('scroll', updateNav, { passive: true });
+    toggle.addEventListener('click', openMenu);
+    close.addEventListener('click', closeMenu);
+
+    menu.addEventListener('click', (e) => {
+      if (e.target === menu) closeMenu();
+    });
+
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    updateNav();
+
     const reveals = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('reveal--visible'); obs.unobserve(e.target); } });
+
+    if ('IntersectionObserver' in window &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal--visible');
+            obs.unobserve(entry.target);
+          }
+        });
       }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-      reveals.forEach((el, i) => { el.style.transitionDelay = `${i * 50}ms`; obs.observe(el); });
+
+      reveals.forEach((el, i) => {
+        el.style.transitionDelay = `${Math.min(i * 45, 250)}ms`;
+        observer.observe(el);
+      });
     } else {
       reveals.forEach(el => el.classList.add('reveal--visible'));
     }
