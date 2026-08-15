@@ -179,7 +179,7 @@
       reveals.forEach((el) => el.classList.add("reveal--visible"));
     }
 
-    // ===== RENDER =====
+    // ===== RENDER (بتنسيق شبيه بالأعمال) =====
     const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
 
     function escapeHtml(str) {
@@ -192,6 +192,7 @@
       const card = document.createElement("div");
       card.className = "product-card reveal";
 
+      // الصورة (نسبة 4:3)
       const thumb = document.createElement("div");
       thumb.className = "product-card-thumb";
       if (product.image && isSafeUrl(product.image)) {
@@ -207,41 +208,60 @@
       const body = document.createElement("div");
       body.className = "product-card-body";
 
-      const top = document.createElement("div");
-      top.className = "product-card-top";
+      // الوسوم (Tags) — تشبه الأعمال
+      const tags = document.createElement("div");
+      tags.className = "product-card-tags";
 
-      const name = document.createElement("h3");
-      name.className = "product-card-name";
+      // وسم الإصدار
+      if (product.version) {
+        const versionTag = document.createElement("span");
+        versionTag.className = "product-card-tag product-card-tag--version";
+        versionTag.textContent = `الإصدار v${product.version}`;
+        tags.appendChild(versionTag);
+      }
+
+      // وسم نوع التحميل / السعر
+      if (product.price > 0) {
+        const priceTag = document.createElement("span");
+        priceTag.className = "product-card-tag";
+        priceTag.textContent = `${Number(product.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[product.currency] || product.currency || ""}`;
+        tags.appendChild(priceTag);
+      } else {
+        const freeTag = document.createElement("span");
+        freeTag.className = "product-card-tag product-card-tag--free";
+        freeTag.textContent = "مجاني";
+        tags.appendChild(freeTag);
+      }
+
+      // العنوان
+      const title = document.createElement("h3");
+      title.className = "product-card-title";
       const link = document.createElement("a");
       link.href = `/product-detail.html?slug=${product.slug}`;
       link.textContent = product.title || "—";
-      name.appendChild(link);
+      title.appendChild(link);
 
-      const version = document.createElement("span");
-      version.className = "product-card-version";
-      version.textContent = product.version ? `v${product.version}` : "";
-
-      top.appendChild(name);
-      if (version.textContent) top.appendChild(version);
-
+      // الوصف
       const desc = document.createElement("p");
       desc.className = "product-card-desc";
       desc.textContent = product.shortDescription || "";
 
+      // الفوتر (السعر + زر التفاصيل) — مشابه للأعمال
       const footer = document.createElement("div");
       footer.className = "product-card-footer";
 
-      const price = document.createElement("span");
-      price.className = "product-card-price";
+      // السعر (مرة أخرى في الفوتر لتأكيد القيمة)
+      const priceFooter = document.createElement("span");
+      priceFooter.className = "product-card-price";
       if (product.price > 0) {
-        price.textContent = Number(product.price).toLocaleString("ar-EG");
+        priceFooter.textContent = Number(product.price).toLocaleString("ar-EG");
         const curr = document.createElement("span");
         curr.className = "product-card-currency";
         curr.textContent = CURRENCY_MAP[product.currency] || product.currency || "";
-        price.appendChild(curr);
+        priceFooter.appendChild(curr);
       } else {
-        price.className = "product-card-price product-card-price-free";
-        price.textContent = "مجاني";
+        priceFooter.className = "product-card-price product-card-price-free";
+        priceFooter.textContent = "مجاني";
       }
 
       const action = document.createElement("a");
@@ -249,10 +269,12 @@
       action.className = "product-card-link";
       action.innerHTML = `عرض التفاصيل <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>`;
 
-      footer.appendChild(price);
+      footer.appendChild(priceFooter);
       footer.appendChild(action);
 
-      body.appendChild(top);
+      // تجميع البطاقة
+      body.appendChild(tags);
+      body.appendChild(title);
       body.appendChild(desc);
       body.appendChild(footer);
 
