@@ -124,7 +124,7 @@
   margin-top: 4px;
 }
 
-/* --- Image Side (مع الصورة) --- */
+/* --- Image Side --- */
 .about-side-image {
   display: flex;
   align-items: center;
@@ -139,22 +139,14 @@
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 16px;
   position: relative;
   overflow: hidden;
 }
 
-/* الصورة الفعلية */
-.about-image-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: relative;
-  z-index: 1;
-}
-
-/* الشبكة الخلفية (تبقى خلف الصورة) */
 .about-image-box::before {
   content: '';
   position: absolute;
@@ -163,9 +155,30 @@
     linear-gradient(var(--border-light) 1px, transparent 1px),
     linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
   background-size: 40px 40px;
-  opacity: 0.3;
-  z-index: 0;
-  pointer-events: none;
+  opacity: 0.4;
+}
+
+.about-image-box .avatar-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+.about-image-box .avatar-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 1;
 }
 
 /* --- Values --- */
@@ -277,6 +290,7 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
