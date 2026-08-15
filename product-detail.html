@@ -3,21 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>جارٍ التحميل… — عبدالله عباس</title>
-  <meta name="robots" content="noindex" />
-  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <title>جارٍ التحميل... — عبدالله عباس</title>
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="" id="metaDesc" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="/css/product-detail.css" />
+  <link rel="stylesheet" href="/css/products.css" />
 </head>
 <body>
 
-  <!-- ==================== NAVIGATION ==================== -->
+  <!-- ===== NAVIGATION (مطابق) ===== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
-      <a href="/" class="nav-brand">Abdallah Abas</a>
-      <div class="nav-links" id="navLinks">
+      <a href="/" class="nav-brand">عبدالله عباس</a>
+      <div class="nav-links">
         <a href="/services" class="nav-link">الخدمات</a>
-        <a href="/products" class="nav-link nav-link--active">المنتجات</a>
+        <a href="/products" class="nav-link" style="color:var(--accent)">المنتجات</a>
         <a href="/portfolio" class="nav-link">الأعمال</a>
         <a href="/blog" class="nav-link">المقالات</a>
         <a href="/about" class="nav-link">عن عبدالله</a>
@@ -39,7 +43,7 @@
       </div>
       <div class="nav-mobile-links">
         <a href="/services" class="nav-mobile-link">الخدمات</a>
-        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/products" class="nav-mobile-link" style="color:var(--accent)">المنتجات</a>
         <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
         <a href="/blog" class="nav-mobile-link">المقالات</a>
         <a href="/about" class="nav-mobile-link">عن عبدالله</a>
@@ -52,15 +56,28 @@
     </div>
   </div>
 
-  <!-- ==================== MAIN CONTENT ==================== -->
-  <main id="mainContent" class="pd-main"></main>
+  <!-- ===== MAIN ===== -->
+  <main id="pageRoot">
+    <div class="prdt-loading" id="loadingState">
+      <div class="prdt-loading-spinner"></div>
+    </div>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="site-footer">
+    <div class="prdt-404" id="notFoundState" style="display:none">
+      <div class="prdt-404-code">404</div>
+      <h1 class="prdt-404-title">المنتج غير موجود</h1>
+      <p class="prdt-404-desc">المنتج الذي تبحث عنه غير موجود أو تم حذفه.</p>
+      <a href="/products" class="btn btn--primary btn--sm">عرض جميع المنتجات</a>
+    </div>
+
+    <div id="contentRoot" style="display:none"></div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" id="siteFooter" style="display:none">
     <div class="container">
       <div class="footer-inner">
         <div>
-          <div class="footer-brand-name">Abdallah Abas</div>
+          <div class="footer-brand-name">عبدالله عباس</div>
           <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
         </div>
         <div>
@@ -87,7 +104,6 @@
           <div class="footer-links">
             <a href="/contact" class="footer-link">أرسل رسالة</a>
             <a href="/login.html" class="footer-link">تسجيل الدخول</a>
-            <a href="/dashboard/dashboard.html" class="footer-link">لوحتي</a>
           </div>
         </div>
       </div>
@@ -98,214 +114,371 @@
     </div>
   </footer>
 
-  <!-- ==================== SCRIPTS ==================== -->
-  <script src="/js/firebase-init.js"></script>
-  <script src="/js/security.js"></script>
+  <script type="module">
+    import { db } from "/js/firebase-init.js";
+    import { doc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { isSafeUrl, escapeHtml } from "/js/security.js";
 
-  <script>
-    // --- Nav & Mobile (نسخة مطابقة من index.html) ---
-    const nav = document.getElementById('siteNav');
-    function handleNavScroll() {
-      window.scrollY > 40 ? nav.classList.add('site-nav--scrolled') : nav.classList.remove('site-nav--scrolled');
-    }
-    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    // ===== NAV (مطابق) =====
+    const nav = document.getElementById("siteNav");
+    function handleNavScroll() { nav.classList.toggle("site-nav--scrolled", window.scrollY > 40); }
+    window.addEventListener("scroll", handleNavScroll, { passive: true });
     handleNavScroll();
 
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mobileClose = document.getElementById('mobileClose');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobilePanel = document.getElementById('mobilePanel');
+    const mobileToggle = document.getElementById("mobileToggle");
+    const mobileClose = document.getElementById("mobileClose");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobilePanel = document.getElementById("mobilePanel");
+    function openMobile() { mobileMenu.classList.add("nav-mobile-menu--open"); mobilePanel.classList.add("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "false"); mobileToggle.setAttribute("aria-expanded", "true"); document.body.style.overflow = "hidden"; }
+    function closeMobile() { mobileMenu.classList.remove("nav-mobile-menu--open"); mobilePanel.classList.remove("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "true"); mobileToggle.setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; }
+    mobileToggle.addEventListener("click", openMobile);
+    mobileClose.addEventListener("click", closeMobile);
+    mobileMenu.addEventListener("click", (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMobile(); });
+    mobilePanel.querySelectorAll(".nav-mobile-link, .nav-mobile-cta").forEach((l) => l.addEventListener("click", closeMobile));
 
-    function openMobile() {
-      mobileMenu.classList.add('nav-mobile-menu--open'); mobilePanel.classList.add('nav-mobile-panel--open');
-      mobileMenu.setAttribute('aria-hidden', 'false'); mobileToggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeMobile() {
-      mobileMenu.classList.remove('nav-mobile-menu--open'); mobilePanel.classList.remove('nav-mobile-panel--open');
-      mobileMenu.setAttribute('aria-hidden', 'true'); mobileToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-    mobileToggle.addEventListener('click', openMobile);
-    mobileClose.addEventListener('click', closeMobile);
-    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobilePanel.classList.contains('nav-mobile-panel--open')) closeMobile(); });
-    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(link => link.addEventListener('click', closeMobile));
+    // ===== HELPERS =====
+    const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
+    const TYPE_MAP = { template: "قالب", tool: "أداة", resource: "مصدر", "digital-product": "منتج رقمي" };
+    const DOWNLOAD_MAP = { free: "تحميل مجاني", paid: "مدفوع (طلب)", contact: "تواصل للحصول عليه" };
 
-    // --- Utilities ---
-    const BASE_URL = 'https://abdallahsst.web.app';
-    const CURRENCY_SYM = { SAR: 'ر.س', USD: '$', EUR: '€', AED: 'د.إ', EGP: 'ج.م' };
-    const esc = window.escapeHtml || function (s) { if(typeof s!=='string') return ''; return s.replace(/[&<>"'/]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','/':'&#x2F;'})[c]); };
-    const safeUrl = window.isSafeUrl || function (u) { if(typeof u!=='string') return false; const t=u.trim().toLowerCase(); if(t.startsWith('javascript:')||t.startsWith('vbscript:')) return false; if(t.startsWith('data:')&&!t.startsWith('data:image/')) return false; try{const p=new URL(t,location.origin);return['http:','https:'].includes(p.protocol);}catch(_){return false;} };
-
-    // --- Slug Extraction (يدعم /products/slug و ?slug=slug) ---
     function getSlug() {
-      const m = location.pathname.match(/\/products\/([a-zA-Z0-9_\-]+)\/?$/);
-      if (m && !/[<>"'&\/\\]/.test(m[1])) return m[1];
-      let s = new URLSearchParams(location.search).get('slug');
-      if (s && !/[<>"'&\/\\]/.test(s)) return s;
-      return null;
+      const params = new URLSearchParams(window.location.search);
+      return params.get("slug");
     }
 
-    // --- Firestore ---
-    function db() { return window.db || (window.firebaseApp?.firestore?.()) || (window.firebase?.firestore?.()) || null; }
-    async function fetchProduct(slug) {
-      const d = db(); if (!d) throw new Error('Firestore غير متاح');
+    function formatDate(d) {
+      if (!d) return "";
+      const date = d instanceof Timestamp ? d.toDate() : new Date(d);
+      return date.toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
+    }
+
+    // ===== BUILD PAGE =====
+    function buildBreadcrumb(product) {
+      const navEl = document.createElement("nav");
+      navEl.className = "prdt-breadcrumb";
+      navEl.setAttribute("aria-label", "مسار التنقل");
+      navEl.innerHTML = `<a href="/">الرئيسية</a><span class="sep">/</span><a href="/products">المنتجات</a><span class="sep">/</span><span class="current">${escapeHtml(product.title)}</span>`;
+      return navEl;
+    }
+
+    function buildHero(product) {
+      const section = document.createElement("section");
+      section.className = "prdt-hero";
+
+      const inner = document.createElement("div");
+      inner.className = "prdt-hero-inner";
+
+      const left = document.createElement("div");
+      left.className = "prdt-hero-left";
+      const imageBox = document.createElement("div");
+      imageBox.className = "prdt-hero-image";
+      if (product.image && isSafeUrl(product.image)) {
+        const img = document.createElement("img");
+        img.src = product.image;
+        img.alt = product.title || "";
+        imageBox.appendChild(img);
+      } else {
+        imageBox.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
+      }
+      left.appendChild(imageBox);
+
+      const right = document.createElement("div");
+      right.className = "prdt-hero-right";
+
+      const top = document.createElement("div");
+      top.className = "prdt-hero-top";
+      const typeBadge = document.createElement("span");
+      typeBadge.className = "prdt-hero-type";
+      typeBadge.textContent = TYPE_MAP[product.type] || product.type || "منتج";
+      top.appendChild(typeBadge);
+
+      if (product.version) {
+        const ver = document.createElement("span");
+        ver.className = "prdt-hero-version-tag";
+        ver.textContent = `الإصدار v${product.version}`;
+        top.appendChild(ver);
+      }
+
+      const title = document.createElement("h1");
+      title.className = "prdt-hero-title";
+      title.textContent = product.title || "—";
+
+      const short = document.createElement("p");
+      short.className = "prdt-hero-short";
+      short.textContent = product.shortDescription || "";
+
+      const priceBlock = document.createElement("div");
+      priceBlock.className = "prdt-hero-price-block";
+
+      const priceEl = document.createElement("span");
+      if (product.price > 0) {
+        priceEl.className = "prdt-hero-price";
+        priceEl.textContent = Number(product.price).toLocaleString("ar-EG");
+        const curr = document.createElement("span");
+        curr.className = "prdt-hero-currency";
+        curr.textContent = CURRENCY_MAP[product.currency] || product.currency || "";
+        priceEl.appendChild(curr);
+      } else {
+        priceEl.className = "prdt-hero-price prdt-hero-price-free";
+        priceEl.textContent = "مجاني";
+      }
+      priceBlock.appendChild(priceEl);
+
+      const downloadTag = document.createElement("span");
+      downloadTag.className = "prdt-hero-download-tag";
+      downloadTag.textContent = DOWNLOAD_MAP[product.downloadType] || product.downloadType || "تحميل";
+      priceBlock.appendChild(downloadTag);
+
+      const cta = document.createElement("div");
+      cta.className = "prdt-hero-cta";
+      const orderBtn = document.createElement("a");
+      orderBtn.href = "/contact";
+      orderBtn.className = "prdt-cta-btn";
+      orderBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.27 3.27a4 4 0 0 1 5.66 5.66h11.14a4 4 0 0 1 0 5.66 5.66H8.93a4 4 0 0 1-5.66-5.66l-3.27-3.27a4 4 0 0 1 0-5.66 5.66 4 0 0 1 5.66 0Z"/></svg>طلب المنتج`;
+      cta.appendChild(orderBtn);
+
+      if (product.demoUrl && isSafeUrl(product.demoUrl)) {
+        const demo = document.createElement("a");
+        demo.href = product.demoUrl;
+        demo.target = "_blank";
+        demo.rel = "noopener noreferrer";
+        demo.className = "prdt-hero-demo";
+        demo.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>معاينة حية`;
+        cta.appendChild(demo);
+      }
+
+      right.appendChild(top);
+      right.appendChild(title);
+      right.appendChild(short);
+      right.appendChild(priceBlock);
+      right.appendChild(cta);
+
+      inner.appendChild(left);
+      inner.appendChild(right);
+      section.appendChild(inner);
+
+      return section;
+    }
+
+    function buildDescription(product) {
+      if (!product.description) return null;
+      const section = document.createElement("section");
+      section.className = "prdt-section";
+
+      const label = document.createElement("div");
+      label.className = "prdt-section-label";
+      label.innerHTML = `<span class="prdt-section-label-line"></span><span>الوصف</span>`;
+
+      const title = document.createElement("h2");
+      title.className = "prdt-section-title";
+      title.textContent = "عن المنتج";
+
+      const text = document.createElement("div");
+      text.className = "prdt-section-text";
+      product.description.split("\n").filter(p => p.trim()).forEach(p => {
+        const para = document.createElement("p");
+        para.textContent = p;
+        text.appendChild(para);
+      });
+
+      section.appendChild(label);
+      section.appendChild(title);
+      section.appendChild(text);
+      return section;
+    }
+
+    function buildFeatures(product) {
+      const features = product.features || [];
+      if (features.length === 0) return null;
+
+      const section = document.createElement("section");
+      section.className = "prdt-section";
+
+      const label = document.createElement("div");
+      label.className = "prdt-section-label";
+      label.innerHTML = `<span class="prdt-section-label-line"></span><span>المميزات</span>`;
+
+      const title = document.createElement("h2");
+      title.className = "prdt-section-title";
+      title.textContent = "ما يميّز هذا المنتج";
+
+      const grid = document.createElement("div");
+      grid.className = "prdt-features-grid";
+
+      features.forEach(f => {
+        const item = document.createElement("div");
+        item.className = "prdt-feature-item";
+        const icon = document.createElement("span");
+        icon.className = "prdt-feature-icon";
+        icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>`;
+        const text = document.createElement("span");
+        text.className = "prdt-feature-text";
+        text.textContent = f;
+        item.appendChild(icon);
+        item.appendChild(text);
+        grid.appendChild(item);
+      });
+
+      section.appendChild(label);
+      section.appendChild(title);
+      section.appendChild(grid);
+      return section;
+    }
+
+    function buildSidebar(product) {
+      const aside = document.createElement("aside");
+      aside.className = "prdt-sidebar";
+
+      const card = document.createElement("div");
+      card.className = "prdt-sidebar-card";
+
+      const title = document.createElement("h3");
+      title.className = "prdt-sidebar-title";
+      title.textContent = product.title || "المنتج";
+
+      const desc = document.createElement("p");
+      desc.className = "prdt-sidebar-desc";
+      desc.textContent = product.shortDescription || "";
+
+      const price = document.createElement("div");
+      price.className = "prdt-sidebar-price";
+      if (product.price > 0) {
+        price.textContent = Number(product.price).toLocaleString("ar-EG");
+        const curr = document.createElement("span");
+        curr.className = "prdt-sidebar-currency";
+        curr.textContent = CURRENCY_MAP[product.currency] || product.currency || "";
+        price.appendChild(curr);
+      } else {
+        price.className = "prdt-sidebar-price prdt-sidebar-price-free";
+        price.textContent = "مجاني";
+      }
+
+      const btn = document.createElement("a");
+      btn.href = "/contact";
+      btn.className = "prdt-sidebar-btn";
+      btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.27 3.27a4 4 0 0 1 5.66 5.66h11.14a4 4 0 0 1 0 5.66 5.66H8.93a4 4 0 0 1-5.66-5.66l-3.27-3.27a4 4 0 0 1 0-5.66 5.66 4 0 0 1 5.66 0Z"/></svg>اطلب الآن`;
+
+      card.appendChild(title);
+      card.appendChild(desc);
+      card.appendChild(price);
+      card.appendChild(btn);
+      aside.appendChild(card);
+
+      const infoCard = document.createElement("div");
+      infoCard.className = "prdt-sidebar-info";
+
+      const infoTitle = document.createElement("h4");
+      infoTitle.className = "prdt-sidebar-info-title";
+      infoTitle.textContent = "معلومات سريعة";
+
+      const rows = [
+        { label: "النوع", value: TYPE_MAP[product.type] || product.type || "—" },
+        { label: "الإصدار", value: product.version ? `v${product.version}` : "—" },
+        { label: "التحميل", value: DOWNLOAD_MAP[product.downloadType] || product.downloadType || "—" },
+        { label: "أُضيف في", value: formatDate(product.createdAt) },
+      ];
+
+      rows.forEach(r => {
+        const row = document.createElement("div");
+        row.className = "prdt-info-row";
+        const lbl = document.createElement("span");
+        lbl.className = "prdt-info-label";
+        lbl.textContent = r.label;
+        const val = document.createElement("span");
+        val.className = "prdt-info-value";
+        val.textContent = r.value;
+        row.appendChild(lbl);
+        row.appendChild(val);
+        infoCard.appendChild(row);
+      });
+
+      aside.appendChild(infoCard);
+      return aside;
+    }
+
+    function buildPage(product) {
+      const root = document.getElementById("contentRoot");
+      root.appendChild(buildBreadcrumb(product));
+      root.appendChild(buildHero(product));
+
+      const grid = document.createElement("div");
+      grid.className = "prdt-content";
+
+      const main = document.createElement("div");
+      main.className = "prdt-main";
+      const desc = buildDescription(product);
+      const features = buildFeatures(product);
+      if (desc) main.appendChild(desc);
+      if (features) main.appendChild(features);
+
+      grid.appendChild(main);
+      grid.appendChild(buildSidebar(product));
+
+      root.appendChild(grid);
+      root.style.display = "block";
+    }
+
+    function updateSEO(product) {
+      const title = product.seoTitle || product.title || "المنتج";
+      const desc = product.metaDescription || product.shortDescription || "";
+      document.title = `${title} — عبدالله عباس`;
+      document.getElementById("metaDesc").setAttribute("content", desc);
+
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+      canonical.href = `https://abdallahsst.web.app/product-detail?slug=${product.slug}`;
+
+      const old = document.getElementById("productStructuredData");
+      if (old) old.remove();
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = "productStructuredData";
+      const sd = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": product.seoTitle || product.title,
+        "description": product.metaDescription || product.shortDescription,
+        "url": `https://abdallahsst.web.app/product-detail?slug=${product.slug}`,
+        "offers": product.price > 0 ? {
+          "@type": "Offer",
+          "price": product.price,
+          "priceCurrency": product.currency || "EGP",
+        } : undefined,
+        "brand": { "@type": "Brand", "name": "عبدالله عباس" },
+      };
+      script.textContent = JSON.stringify(sd);
+      document.head.appendChild(script);
+    }
+
+    function show404() {
+      document.getElementById("loadingState").style.display = "none";
+      document.getElementById("notFoundState").style.display = "block";
+      document.title = "المنتج غير موجود — عبدالله عباس";
+    }
+
+    async function loadProduct() {
+      const slug = getSlug();
+      if (!slug) { show404(); return; }
+
       try {
-        const snap = await d.collection('products').where('slug', '==', slug).where('active', '==', true).limit(1).get();
-        if (!snap.empty) return { _id: snap.docs[0].id, ...snap.docs[0].data() }; return null;
-      } catch (e) {
-        if (e?.code === 'FAILED_PRECONDITION') {
-          const snap = await d.collection('products').where('slug', '==', slug).limit(1).get();
-          if (!snap.empty) { const doc = { _id: snap.docs[0].id, ...snap.docs[0].data() }; return doc.active !== false ? doc : null; } return null;
-        } throw e;
+        const docRef = doc(db, "products", slug);
+        const snap = await getDoc(docRef);
+        if (!snap.exists()) { show404(); return; }
+
+        const product = { id: snap.id, ...snap.data() };
+        if (product.active === false) { show404(); return; }
+
+        updateSEO(product);
+        buildPage(product);
+        document.getElementById("siteFooter").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch {
+        show404();
       }
     }
-    async function fetchRelated(id, cat, lim = 3) {
-      const d = db(); if (!d || !cat) return [];
-      try {
-        const snap = await d.collection('products').where('active', '==', true).where('category', '==', cat).orderBy('sortOrder', 'asc').limit(lim + 1).get();
-        const out = []; snap.forEach(doc => { if (doc.id !== id && out.length < lim) out.push({ _id: doc.id, ...doc.data() }); }); return out;
-      } catch (_) { return []; }
-    }
 
-    // --- SEO ---
-    const meta = (a,v,c) => { if(!c) return; let e=document.querySelector(`meta[${a}="${v}"]`); if(!e){e=document.createElement('meta');e.setAttribute(a,v);document.head.appendChild(e);} e.setAttribute('content',c); };
-    const link = (r,h) => { if(!h) return; let e=document.querySelector(`link[rel="${r}"]`); if(!e){e=document.createElement('link');e.setAttribute('rel',r);document.head.appendChild(e);} e.setAttribute('href',h); };
-    const rmMeta = (a,v) => { document.querySelector(`meta[${a}="${v}"]`)?.remove(); };
-
-    function applySEO(p) {
-      const url = BASE_URL + '/products/' + p.slug;
-      document.title = `${p.title} — عبدالله عباس`;
-      document.querySelector('meta[name="robots"]')?.setAttribute('content', 'index, follow');
-      meta('name', 'description', p.shortDescription || ''); link('canonical', url);
-      meta('property', 'og:title', document.title); meta('property', 'og:description', p.shortDescription || '');
-      meta('property', 'og:url', url); meta('property', 'og:type', 'product');
-      if (p.image && safeUrl(p.image)) meta('property', 'og:image', p.image);
-    }
-    function clearSEO() {
-      document.title = 'عبدالله عباس';
-      document.querySelector('meta[name="robots"]')?.setAttribute('content', 'noindex');
-      document.querySelector('link[rel="canonical"]')?.remove();
-      ['og:title','og:description','og:url','og:image','og:type'].forEach(p => rmMeta('property', p));
-      document.querySelectorAll('script[data-pd-ld]').forEach(el => el.remove());
-    }
-
-    // --- Structured Data ---
-    function ld(id, data) { document.getElementById(id)?.remove(); const s=document.createElement('script'); s.id=id; s.type='application/ld+json'; s.setAttribute('data-pd-ld',''); s.textContent=JSON.stringify(data); document.head.appendChild(s); }
-    function applyLD(p) {
-      const url = BASE_URL + '/products/' + p.slug;
-      ld('ld-bread', {'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'الرئيسية','item':BASE_URL},{'@type':'ListItem','position':2,'name':'المنتجات','item':BASE_URL+'/products'},{'@type':'ListItem','position':3,'name':p.title||''}]});
-      const prod = {'@context':'https://schema.org','@type':'Product','name':p.title||'','description':p.shortDescription||'','url':url};
-      if(p.image&&safeUrl(p.image)) prod.image=p.image; if(p._id) prod.sku=p._id;
-      if(typeof p.price==='number'&&p.price>0) prod.offers={'@type':'Offer','price':p.price,'priceCurrency':p.currency||'SAR','url':url,'availability':p.status==='active'?'https://schema.org/InStock':'https://schema.org/Discontinued'};
-      ld('ld-prod', prod);
-      if(Array.isArray(p.faq)&&p.faq.length){const en=p.faq.map(f=>{const q=f.question||f.q||'',a=(f.answer||f.a||'').replace(/<[^>]*>/g,'');return q?{'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a}}:null;}).filter(Boolean);if(en.length) ld('ld-faq',{'@context':'https://schema.org','@type':'FAQPage','mainEntity':en});}
-    }
-
-    // --- Rich Text ---
-    function rich(raw) {
-      if (typeof raw !== 'string' || !raw.trim()) return '';
-      const al = ['strong','em','b','i','br','p','ul','ol','li','h3','h4','h5','h6'];
-      if (/<(strong|em|b|i|br|p|ul|ol|li|h[3-6])[\s>]/i.test(raw)) return raw.replace(/<script[\s\S]*?<\/script\s*>/gi,'').replace(/\bon\w+\s*=\s*["'][^"']*["']/gi,'').replace(/\bon\w+\s*=\s*\S+/gi,'').replace(/<(\/?)([^>\s]+)[^>]*>/g, (m, _, t) => al.includes(t.toLowerCase()) ? m : '');
-      return raw.split(/\n\n+/).filter(b => b.trim()).map(b => `<p>${b.trim().split('\n').map(esc).join('<br>')}</p>`).join('');
-    }
-
-    // --- HTML Builders (تعتمد على main.css) ---
-    const arrowSvg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>';
-    function sec(id, label, title, body, alt = false) {
-      return `<section class="section ${alt ? 'pd-section-alt' : ''} reveal" aria-labelledby="${id}"><div class="container container--narrow"><div class="section-header">${label?`<div class="section-label"><span class="section-label-line"></span>${label}</div>`:''}<h2 id="${id}" class="section-title">${title}</h2></div>${body}</div></section>`;
-    }
-
-    function htmlBread(t) { return `<nav class="pd-breadcrumb" aria-label="مسار التنقل"><div class="container container--narrow"><ol class="pd-breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/" itemprop="item"><span itemprop="name">الرئيسية</span></a><meta itemprop="position" content="1"></li><li aria-hidden="true">‹</li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/products" itemprop="item"><span itemprop="name">المنتجات</span></a><meta itemprop="position" content="2"></li><li aria-hidden="true">‹</li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">${esc(t)}</span><meta itemprop="position" content="3"></li></ol></div></nav>`; }
-
-    function htmlHero(p) {
-      const hasImg=p.image&&safeUrl(p.image), hasDemo=p.demoUrl&&safeUrl(p.demoUrl), hasBuy=p.purchaseUrl&&safeUrl(p.purchaseUrl);
-      const hasPrice=typeof p.price==='number'&&p.price>0, hasOld=typeof p.oldPrice==='number'&&p.oldPrice>0;
-      const sym=CURRENCY_SYM[p.currency||'SAR']||'ر.س', disc=(hasPrice&&hasOld&&p.price<p.oldPrice)?Math.round((1-p.price/p.oldPrice)*100):0;
-      return `<section class="pd-hero reveal"><div class="container container--narrow"><div class="pd-hero-grid"><div class="pd-hero-content">${p.category?`<div class="section-label"><span class="section-label-line"></span>${esc(p.category)}</div>`:''}<h1 class="pd-hero-title">${esc(p.title||'')}</h1><p class="pd-hero-desc">${esc(p.shortDescription||'')}</p><div class="pd-hero-meta">${p.duration?`<span class="pd-meta-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${esc(p.duration)}</span>`:''}${hasPrice?`<span class="pd-meta-tag pd-meta-tag--price">${hasOld?`<s>${p.oldPrice} ${sym}</s> `:''}${p.price} ${sym}</span>`:''}${disc?`<span class="pd-meta-tag pd-meta-tag--disc">وفر ${disc}%</span>`:''}</div><div class="hero-actions">${hasBuy?`<a href="${esc(p.purchaseUrl)}" class="btn btn--primary" target="_blank" rel="noopener noreferrer">احصل على المنتج</a>`:''}${hasDemo?`<a href="${esc(p.demoUrl)}" class="btn btn--outline" target="_blank" rel="noopener noreferrer">معاينة حية</a>`:''}</div></div>${hasImg?`<div class="pd-hero-image"><img src="${esc(p.image)}" alt="${esc(p.title)}" loading="eager" width="640" height="420"></div>`:''}</div></div></section>`;
-    }
-
-    function htmlFeatures(list) {
-      if(!Array.isArray(list)||!list.length) return '';
-      const items=list.map((f,i)=>{const t=esc(f.title||f.name||''),d=esc(f.description||f.desc||''),ic=esc(f.icon||'');return `<div class="pd-feature-card reveal" style="transition-delay:${i*60}ms">${ic?`<div class="pd-feature-icon" aria-hidden="true">${ic}</div>`:`<div class="pd-feature-num">${String(i+1).padStart(2,'0')}</div>`}<div><h3 class="pd-feature-title">${t}</h3>${d?`<p class="pd-feature-desc">${d}</p>`:''}</div></div>`;}).join('');
-      return sec('pd-feats','المميزات',`<div class="pd-features-grid">${items}</div>`,true);
-    }
-    function htmlBenefits(list) {
-      if(!Array.isArray(list)||!list.length) return '';
-      return sec('pd-bens','الفوائد',`<ul class="pd-benefits-list">${list.map(b=>`<li class="pd-benefit-item reveal">${esc(typeof b==='string'?b:(b.text||b.title||''))}</li>`).join('')}</ul>`);
-    }
-    function htmlProcess(list) {
-      if(!Array.isArray(list)||!list.length) return '';
-      const items=list.map((s,i)=>`<div class="pd-step reveal" style="transition-delay:${i*80}ms"><div class="pd-step-num">${String(i+1).padStart(2,'0')}</div><div><h3 class="pd-step-title">${esc(s.title||s.name||`الخطوة ${i+1}`)}</h3>${(s.description||s.desc)?`<p class="pd-step-desc">${esc(s.description||s.desc)}</p>`:''}</div></div>`).join('');
-      return sec('pd-proc','كيف يعمل',`<div class="pd-steps-list">${items}</div>`,true);
-    }
-    function htmlScreens(imgs,t) {
-      const safe=(imgs||[]).filter(i=>typeof i==='string'&&safeUrl(i)); if(!safe.length) return '';
-      return sec('pd-screens','معاينة المنتج',`<div class="pd-screens-grid">${safe.map(img=>`<div class="pd-screenshot reveal"><img src="${esc(img)}" alt="${esc(t)}" loading="lazy" width="820" height="520"></div>`).join('')}</div>`);
-    }
-    function htmlPricing(p) {
-      if(typeof p.price!=='number'||p.price<=0) return '';
-      const sym=CURRENCY_SYM[p.currency||'SAR']||'ر.س',hasOld=typeof p.oldPrice==='number'&&p.oldPrice>0,disc=(hasOld&&p.price<p.oldPrice)?Math.round((1-p.price/p.oldPrice)*100):0,hasBuy=p.purchaseUrl&&safeUrl(p.purchaseUrl);
-      return sec('pd-price','السعر',`<div class="pd-pricing-card"><div class="pd-pricing-vals">${hasOld?`<s class="pd-price-old">${p.oldPrice} ${sym}</s>`:''}<span class="pd-price-now">${p.price} ${sym}</span>${disc?`<span class="pd-price-badge">وفر ${disc}%</span>`:''}</div>${hasBuy?`<a href="${esc(p.purchaseUrl)}" class="btn btn--primary" target="_blank" rel="noopener noreferrer" style="width:100%;margin-top:24px;">احصل عليه الآن</a>`:''}${p.duration?`<p class="pd-price-note">مدة الوصول: ${esc(p.duration)}</p>`:''}</div>`);
-    }
-    function htmlFaq(list) {
-      if(!Array.isArray(list)||!list.length) return '';
-      const items=list.map(f=>{const q=esc(f.question||f.q||''),a=f.answer||f.a||'';if(!q) return '';return `<details class="pd-faq-item reveal"><summary class="pd-faq-q">${q}</summary><div class="pd-faq-a" role="region">${rich(a)}</div></details>`;}).filter(Boolean).join('');
-      return sec('pd-faq-h','الأسئلة الشائعة',`<div class="pd-faq-list">${items}</div>`,true);
-    }
-    function htmlRelated(list) {
-      if(!Array.isArray(list)||!list.length) return '';
-      const items=list.map((r,i)=>{const slug=esc(r.slug||'');if(!slug) return '';const t=esc(r.title||''),d=esc(r.shortDescription||''),img=r.image&&safeUrl(r.image)?esc(r.image):'',pr=typeof r.price==='number'&&r.price>0?r.price:null;
-      return `<a href="/products/${slug}" class="product-card reveal" style="transition-delay:${i*60}ms"><div class="product-card-thumb">${img?`<img src="${img}" alt="${t}" loading="lazy">`:'<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>'}</div><div class="product-card-body"><h3 class="product-card-name">${t}</h3><p class="product-card-desc">${d}</p><div class="product-card-footer">${pr!==null?`<span class="product-card-price">${pr} ر.س</span>`:`<span class="product-card-price product-card-price--free">مجاني</span>`}<span class="product-card-link">التفاصيل ${arrowSvg}</span></div></div></a>`;}).filter(Boolean).join('');
-      return sec('pd-rel-h','منتجات ذات صلة',`<div class="products-grid">${items}</div>`);
-    }
-
-    function buildPage(p, related) {
-      let h = htmlBread(p.title) + htmlHero(p);
-      if(p.description) h += sec('pd-overview','نظرة عامة',`<div class="pd-prose">${rich(p.description)}</div>`);
-      if(p.problem) h += sec('pd-problem','لماذا تحتاج هذا المنتج؟',`<div class="pd-prose">${rich(p.problem)}</div>`,true);
-      if(p.whatYouGet) h += sec('pd-wyg','ما ستحصل عليه',`<div class="pd-prose">${rich(p.whatYouGet)}</div>`);
-      h += htmlFeatures(p.features) + htmlBenefits(p.benefits) + htmlProcess(p.process) + htmlScreens(p.images, p.title);
-      if(p.technicalInfo) h += sec('pd-tech','المعلومات التقنية',`<div class="pd-prose">${rich(p.technicalInfo)}</div>`,true);
-      h += htmlPricing(p) + htmlFaq(p.faq) + htmlRelated(related);
-      h += `<section class="section section--sm reveal" style="padding-bottom: 100px;"><div class="container container--narrow"><div class="cta-section"><h2 class="cta-title">جاهز للبدء؟</h2><p class="cta-desc">احصل على ${esc(p.title)} الآن وابدأ رحلتك.</p><div class="cta-actions"><a href="/contact" class="btn btn--white">تواصل معي</a><a href="/products" class="btn btn--ghost-light">تصفح المنتجات</a></div></div></div></section>`;
-      return `<article class="pd-page" itemscope itemtype="https://schema.org/Product" itemprop="mainEntity">${h}</article>`;
-    }
-
-    // --- Loading / 404 ---
-    function renderLoading() { document.getElementById('mainContent').innerHTML = `<div class="pl-loading" aria-live="polite" style="padding-top:calc(var(--header-h) + 80px)"><div class="container"><div class="pl-skel-title"></div><div class="pl-skel-sub"></div><div class="pl-skel-grid" style="max-width:820px"><div class="pl-skel-card" style="aspect-ratio:3/2"></div></div></div></div>`; }
-    function render404() {
-      clearSEO(); document.title = 'المنتج غير موجود — عبدالله عباس';
-      document.getElementById('mainContent').innerHTML = `<section class="section" style="padding-top:120px;padding-bottom:120px"><div class="container" style="text-align:center"><h1 style="font-size:6rem;font-weight:800;color:var(--border-dark);line-height:1;margin-bottom:16px">404</h1><h2 class="section-title section-title--center" style="margin-bottom:12px">المنتج غير موجود</h2><p class="section-desc section-desc--center" style="margin-bottom:32px">المنتج الذي تبحث عنه غير متاح أو تمت إزالته.</p><a href="/products" class="btn btn--primary">تصفح جميع المنتجات</a></div></section>`;
-      initReveal();
-    }
-
-    // --- Reveal (نسخة مطابقة من index.html) ---
-    function initReveal() {
-      const els = document.querySelectorAll('.reveal:not(.reveal--visible)');
-      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const obs = new IntersectionObserver(e => e.forEach(en => { if(en.isIntersecting) { en.target.classList.add('reveal--visible'); obs.unobserve(en.target); } }), { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        els.forEach((el, i) => { el.style.transitionDelay = `${i * 60}ms`; obs.observe(el); });
-      } else { els.forEach(el => el.classList.add('reveal--visible')); }
-    }
-
-    // --- Init ---
-    async function init() {
-      const slug = getSlug();
-      if (!slug) { render404(); return; }
-      renderLoading();
-      try {
-        const product = await fetchProduct(slug);
-        if (!product) { render404(); return; }
-        const related = await fetchRelated(product._id, product.category, 3);
-        document.getElementById('mainContent').innerHTML = buildPage(product, related);
-        applySEO(product); applyLD(product); initReveal();
-      } catch (err) { console.error('خطأ:', err); render404(); }
-    }
-
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-    else init();
+    loadProduct();
   </script>
 </body>
 </html>
