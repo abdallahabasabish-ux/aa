@@ -27,7 +27,7 @@ async function logAuditEvent(eventType, data = {}) {
     const { collection, addDoc, serverTimestamp } = await import(
       "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js"
     );
-    await addDoc(collection(db, "users"), {
+    await addDoc(collection(db, "audit_logs"), {
       eventType,
       ...data,
       timestamp: serverTimestamp(),
@@ -121,10 +121,6 @@ export function validateConfirmPassword(password, confirm) {
 // Authentication Functions
 // -----------------------------------------------
 
-/**
- * تسجيل الدخول.
- * @returns {Promise<{ok, user?, userMessage?, claims?}>}
- */
 export async function login(email, password) {
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
@@ -145,31 +141,13 @@ export async function login(email, password) {
   }
 }
 
-/**
- * إنشاء حساب — يُنشئ مستخدمًا بصلاحية client.
- * @returns {Promise<{ok, user?, userMessage?}>}
- */
 export async function register(email, password, displayName) {
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
 
     if (displayName && displayName.trim()) {
-      await updateProfile(cred.user, {
-        displayName: displayName.trim()
-      });
+      await updateProfile(cred.user, { displayName: displayName.trim() });
     }
-
-    const { doc, setDoc, serverTimestamp } = await import(
-      "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js"
-    );
-
-    await setDoc(doc(db, "users", cred.user.uid), {
-      uid: cred.user.uid,
-      email: cred.user.email || email,
-      displayName: cred.user.displayName  displayName?.trim()  "",
-      role: "client",
-      createdAt: serverTimestamp()
-    });
 
     await logAuditEvent("register_success", {
       uid: cred.user.uid,
@@ -177,20 +155,15 @@ export async function register(email, password, displayName) {
     });
 
     return { ok: true, user: cred.user };
-
   } catch (error) {
     await logAuditEvent("register_failure", {
       emailPrefix: email ? email.split("@")[0] : "empty",
       errorCode: error.code,
     });
-
     return mapAuthError(error);
   }
 }
 
-/**
- * تسجيل الخروج.
- */
 export async function logout() {
   try {
     const user = auth.currentUser;
@@ -202,10 +175,6 @@ export async function logout() {
   }
 }
 
-/**
- * إرسال رابط إعادة تعيين كلمة المرور.
- * رسالة عامة لمنع User Enumeration.
- */
 export async function resetPassword(email) {
   try {
     await sendPasswordResetEmail(auth, email);
@@ -224,7 +193,6 @@ export async function resetPassword(email) {
       errorCode: error.code,
     });
 
-    // رسالة عامة حتى لو البريد غير مسجل
     if (error.code === "auth/user-not-found" || error.code === "auth/invalid-email") {
       return {
         ok: true,
@@ -236,20 +204,13 @@ export async function resetPassword(email) {
   }
 }
 
-/**
- * التحقق من أن المستخدم الحالي admin.
- * @param {boolean} forceRefresh
- * @returns {Promise<boolean>}
- */
 export async function isAdmin(forceRefresh = false) {
   const user = auth.currentUser;
   if (!user) return false;
   try {
     const r = await getIdTokenResult(user, forceRefresh);
-    return users/{uid}.role === true;
+    return r.claims.admin === true;
   } catch {
     return false;
   }
-  
 }
-
