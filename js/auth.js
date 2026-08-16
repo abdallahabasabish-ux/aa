@@ -27,7 +27,7 @@ async function logAuditEvent(eventType, data = {}) {
     const { collection, addDoc, serverTimestamp } = await import(
       "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js"
     );
-    await addDoc(collection(db, "audit_logs"), {
+    await addDoc(collection(db, "users"), {
       eventType,
       ...data,
       timestamp: serverTimestamp(),
@@ -235,9 +235,10 @@ export async function isAdmin(forceRefresh = false) {
   } catch {
     return false;
   }
-}
+  
 const ADMIN_UID = "TDtEyjvwHgZmjxDQYOLPmcIRFHw1";
-
 if (user.uid === ADMIN_UID) {
     resolve(user);
 }
+}
+
