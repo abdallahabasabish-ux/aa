@@ -146,8 +146,7 @@ export async function login(email, password) {
 }
 
 /**
- * إنشاء حساب — يُنشئ مستخدمًا عاديًا فقط.
- * لا يُعطي أي Custom Claims من العميل.
+ * إنشاء حساب — يُنشئ مستخدمًا بصلاحية client.
  * @returns {Promise<{ok, user?, userMessage?}>}
  */
 export async function register(email, password, displayName) {
@@ -155,8 +154,22 @@ export async function register(email, password, displayName) {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
 
     if (displayName && displayName.trim()) {
-      await updateProfile(cred.user, { displayName: displayName.trim() });
+      await updateProfile(cred.user, {
+        displayName: displayName.trim()
+      });
     }
+
+    const { doc, setDoc, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js"
+    );
+
+    await setDoc(doc(db, "users", cred.user.uid), {
+      uid: cred.user.uid,
+      email: cred.user.email || email,
+      displayName: cred.user.displayName  displayName?.trim()  "",
+      role: "client",
+      createdAt: serverTimestamp()
+    });
 
     await logAuditEvent("register_success", {
       uid: cred.user.uid,
@@ -164,11 +177,13 @@ export async function register(email, password, displayName) {
     });
 
     return { ok: true, user: cred.user };
+
   } catch (error) {
     await logAuditEvent("register_failure", {
       emailPrefix: email ? email.split("@")[0] : "empty",
       errorCode: error.code,
     });
+
     return mapAuthError(error);
   }
 }
