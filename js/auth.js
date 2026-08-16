@@ -231,14 +231,10 @@ export async function isAdmin(forceRefresh = false) {
   if (!user) return false;
   try {
     const r = await getIdTokenResult(user, forceRefresh);
-    return r.claims.admin === true;
+    return users/{uid}.role === true;
   } catch {
     return false;
   }
   
-const ADMIN_UID = "TDtEyjvwHgZmjxDQYOLPmcIRFHw1";
-if (user.uid === ADMIN_UID) {
-    resolve(user);
-}
 }
 
