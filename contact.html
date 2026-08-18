@@ -297,7 +297,7 @@
 
   <!-- ==================== SCRIPTS ==================== -->
   <script type="module">
-    import { db } from "/js/firebase-init.js";
+    import { auth, db } from "/js/firebase-init.js";
     import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { isSafeUrl } from "/js/security.js";
 
@@ -442,6 +442,7 @@
       if (!validate()) return;
 
       const data = {
+        userId: auth.currentUser?.uid || null,
         name: document.getElementById('cName').value.trim(),
         email: document.getElementById('cEmail').value.trim(),
         phone: document.getElementById('cPhone').value.trim(),
@@ -449,6 +450,8 @@
         budget: document.getElementById('cBudget').value,
         websiteUrl: isSafeUrl(document.getElementById('cUrl').value.trim()) ? document.getElementById('cUrl').value.trim() : '',
         message: document.getElementById('cMessageInput').value.trim(),
+        subject: document.getElementById('cService').value || 'استفسار عام',
+        title: document.getElementById('cService').value || 'استفسار عام',
         type: 'contact',
         status: 'new',
         createdAt: serverTimestamp(),
