@@ -1,0 +1,11 @@
+{
+  "name": "abdallah-admin-setup",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "set-admin": "node make-admin.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.7.0"
+  }
+}

@@ -89,6 +89,16 @@ body {
   margin-bottom: 28px;
 }
 
+.auth-brand-logo {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 22px;
+  display: block;
+  border-radius: 50%;
+  object-fit: contain;
+  background: rgba(255,255,255,0.04);
+}
+
 .auth-brand-name {
   margin: 0;
   line-height: 1.12;

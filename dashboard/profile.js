@@ -142,4 +142,4 @@ async function init(user) {
   profileContent.style.display = "block";
 }
 
-requireAuth("/login.html").then((user) => { document.body.style.visibility = "visible"; return init(user); }).catch(() => {});
+requireAuth("/login.html").then((user) => { document.body.style.visibility = "visible"; return init(user); }).catch(() => { document.body.style.visibility = "visible"; });

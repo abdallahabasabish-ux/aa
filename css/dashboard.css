@@ -87,6 +87,21 @@ button { font-family: var(--dash-font); cursor: pointer; border: none; backgroun
   border-bottom: 1px solid var(--dash-border);
 }
 
+.dash-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--dash-border);
+}
+
+.dash-sidebar-brand-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
 .dash-sidebar-brand-name {
   font-size: 1rem;
   font-weight: 700;

@@ -711,4 +711,6 @@ requireAdmin({ loginUrl: "/login.html" })
     document.body.style.visibility = "visible";
     return init(user);
   })
-  .catch(() => {});
+  .catch(() => {
+    document.body.style.visibility = "visible";
+  });

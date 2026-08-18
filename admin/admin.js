@@ -337,5 +337,5 @@ requireAdmin({
     return initDashboard(user);
   })
   .catch(() => {
-    // تم redirect من auth-guard — لا حاجة لفعل شيء
+    document.body.style.visibility = "visible";
   });
