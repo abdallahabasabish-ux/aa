@@ -260,9 +260,12 @@
       const empty = document.getElementById("emptyState");
 
       try {
-        const q = query(collection(db, "blog"), where("active", "==", true), orderBy("createdAt", "desc"));
+        const q = query(collection(db, "blog"), orderBy("createdAt", "desc"));
         const snap = await getDocs(q);
-        const posts = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        // تصفية المقالات النشطة (التي active !== false)
+        const posts = snap.docs
+          .map((d) => ({ id: d.id, ...d.data() }))
+          .filter((p) => p.active !== false);
 
         loader.style.display = "none";
 

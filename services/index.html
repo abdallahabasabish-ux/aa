@@ -373,11 +373,13 @@
       try {
         const q = query(
           collection(db, "services"),
+          orderBy("sortOrder", "asc"),
           orderBy("createdAt", "desc")
         );
 
         const snapshot = await getDocs(q);
         let services = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+        // تصفية الخدمات النشطة (التي active !== false)
         services = services.filter((s) => s.active !== false);
 
         loader.style.display = "none";

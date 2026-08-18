@@ -261,9 +261,12 @@
       const empty = document.getElementById("emptyState");
 
       try {
-        const q = query(collection(db, "portfolio"), where("active", "==", true), orderBy("sortOrder", "asc"), orderBy("createdAt", "desc"));
+        const q = query(collection(db, "portfolio"), orderBy("sortOrder", "asc"), orderBy("createdAt", "desc"));
         const snap = await getDocs(q);
-        const projects = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        // تصفية الأعمال النشطة (التي active !== false)
+        const projects = snap.docs
+          .map((d) => ({ id: d.id, ...d.data() }))
+          .filter((p) => p.active !== false);
 
         loader.style.display = "none";
 

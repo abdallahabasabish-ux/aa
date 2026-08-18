@@ -296,9 +296,13 @@
       const empty = document.getElementById("emptyState");
 
       try {
-        const q = query(collection(db, "products"), where("active", "==", true), orderBy("sortOrder", "asc"), orderBy("createdAt", "desc"));
+        // جلب جميع المنتجات ثم تصفيتها محلياً
+        const q = query(collection(db, "products"), orderBy("sortOrder", "asc"), orderBy("createdAt", "desc"));
         const snap = await getDocs(q);
-        const products = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        // المنتجات النشطة هي تلك التي active !== false
+        const products = snap.docs
+          .map((d) => ({ id: d.id, ...d.data() }))
+          .filter((p) => p.active !== false);
 
         loader.style.display = "none";
 
