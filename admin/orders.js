@@ -58,9 +58,45 @@ const STATUS_MAP = {
 const TYPE_MAP = {
   service: "خدمة",
   product: "منتج",
+  contact: "استفسار",
 };
 
 const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
+
+function normalizeOrder(order = {}) {
+  const type = order.type || (order.service ? "service" : order.product ? "product" : "contact");
+  const customerName = order.customerName || order.name || order.customer?.name || "";
+  const customerEmail = order.customerEmail || order.email || order.customer?.email || "";
+  const customerPhone = order.customerPhone || order.phone || order.customer?.phone || "";
+  const subjectTitle = order.title || order.subject || order.service || order.productTitle || order.message || "";
+  const budgetValue = order.budget ?? order.amount ?? order.price ?? "";
+  const budgetNumber = Number(budgetValue);
+
+  return {
+    ...order,
+    type,
+    customerName,
+    customerEmail,
+    customerPhone,
+    title: subjectTitle,
+    budget: Number.isFinite(budgetNumber) && String(budgetValue).trim() !== "" ? budgetNumber : budgetValue || "",
+    currency: order.currency || "EGP",
+    status: order.status || "new",
+  };
+}
+
+function getOrderDisplayValues(order) {
+  const normalized = normalizeOrder(order);
+  return {
+    name: normalized.customerName || "—",
+    email: normalized.customerEmail || "—",
+    phone: normalized.customerPhone || "—",
+    type: TYPE_MAP[normalized.type] || normalized.type || "—",
+    title: normalized.title || "—",
+    budget: normalized.budget && String(normalized.budget).trim() !== "" ? String(normalized.budget) : "—",
+    currency: normalized.currency || "EGP",
+  };
+}
 
 // -----------------------------------------------
 // Sidebar
@@ -183,13 +219,15 @@ function getFilteredOrders() {
   // فلتر البحث
   const q = searchInput.value.trim().toLowerCase();
   if (q) {
-    filtered = filtered.filter(
-      (o) =>
-        (o.customerName || "").toLowerCase().includes(q) ||
-        (o.customerEmail || "").toLowerCase().includes(q) ||
-        getOrderNumber(o).toLowerCase().includes(q) ||
-        (o.title || "").toLowerCase().includes(q)
-    );
+    filtered = filtered.filter((o) => {
+      const normalized = normalizeOrder(o);
+      return (
+        (normalized.customerName || "").toLowerCase().includes(q) ||
+        (normalized.customerEmail || "").toLowerCase().includes(q) ||
+        getOrderNumber(normalized).toLowerCase().includes(q) ||
+        (normalized.title || "").toLowerCase().includes(q)
+      );
+    });
   }
 
   return filtered;
@@ -239,52 +277,48 @@ function renderTable() {
   const tbody = document.createElement("tbody");
 
   orders.forEach((order) => {
+    const normalizedOrder = normalizeOrder(order);
     const tr = document.createElement("tr");
     tr.style.cursor = "pointer";
     tr.addEventListener("click", (e) => {
-      // لا تفتح التفاصيل عند الضغط على أزرار الإجراءات
       if (e.target.closest(".table-actions")) return;
-      openDetail(order.id);
+      openDetail(normalizedOrder.id);
     });
 
-    // رقم الطلب
     const tdNum = document.createElement("td");
     const numSpan = document.createElement("span");
     numSpan.className = "order-number";
-    numSpan.textContent = getOrderNumber(order);
+    numSpan.textContent = getOrderNumber(normalizedOrder);
     tdNum.appendChild(numSpan);
     tr.appendChild(tdNum);
 
-    // العميل
     const tdCustomer = document.createElement("td");
-    tdCustomer.textContent = order.customerName || "—";
+    tdCustomer.textContent = normalizedOrder.customerName || "—";
     tr.appendChild(tdCustomer);
 
-    // النوع
     const tdType = document.createElement("td");
     const typeBadge = document.createElement("span");
-    typeBadge.className = `order-type-badge order-type-badge--${order.type || "service"}`;
-    typeBadge.textContent = TYPE_MAP[order.type] || order.type || "—";
+    typeBadge.className = `order-type-badge order-type-badge--${normalizedOrder.type || "service"}`;
+    typeBadge.textContent = TYPE_MAP[normalizedOrder.type] || normalizedOrder.type || "—";
     tdType.appendChild(typeBadge);
     tr.appendChild(tdType);
 
-    // الموضوع
     const tdTitle = document.createElement("td");
-    tdTitle.textContent = order.title || "—";
+    tdTitle.textContent = normalizedOrder.title || "—";
     tdTitle.style.maxWidth = "200px";
     tdTitle.style.overflow = "hidden";
     tdTitle.style.textOverflow = "ellipsis";
     tr.appendChild(tdTitle);
 
-    // الميزانية
     const tdBudget = document.createElement("td");
-    if (order.budget && order.budget > 0) {
+    const budgetValue = normalizedOrder.budget;
+    if (budgetValue !== "" && budgetValue !== null && budgetValue !== undefined && budgetValue !== "—") {
       const budgetSpan = document.createElement("span");
       budgetSpan.className = "budget-display";
-      budgetSpan.textContent = order.budget.toLocaleString("ar-EG");
+      budgetSpan.textContent = typeof budgetValue === "number" ? budgetValue.toLocaleString("ar-EG") : String(budgetValue);
       const curr = document.createElement("span");
       curr.className = "price-currency";
-      curr.textContent = CURRENCY_MAP[order.currency] || order.currency || "";
+      curr.textContent = CURRENCY_MAP[normalizedOrder.currency] || normalizedOrder.currency || "";
       tdBudget.appendChild(budgetSpan);
       tdBudget.appendChild(curr);
     } else {
@@ -370,9 +404,9 @@ function openDetail(orderId) {
 }
 
 function renderDetailContent(order) {
+  const normalizedOrder = normalizeOrder(order);
   orderDetailBody.textContent = "";
 
-  // === معلومات العميل ===
   const customerSection = document.createElement("div");
   customerSection.className = "detail-section";
 
@@ -384,10 +418,10 @@ function renderDetailContent(order) {
   const customerGrid = document.createElement("div");
   customerGrid.className = "detail-grid";
 
-  customerGrid.appendChild(createDetailItem("الاسم", order.customerName));
-  customerGrid.appendChild(createDetailItem("البريد", order.customerEmail));
+  customerGrid.appendChild(createDetailItem("الاسم", normalizedOrder.customerName));
+  customerGrid.appendChild(createDetailItem("البريد", normalizedOrder.customerEmail));
 
-  const phoneVal = order.customerPhone || null;
+  const phoneVal = normalizedOrder.customerPhone || null;
   customerGrid.appendChild(createDetailItem("الهاتف", phoneVal));
 
   const websiteVal = order.websiteUrl && isSafeUrl(order.websiteUrl) ? order.websiteUrl : null;
@@ -414,15 +448,17 @@ function renderDetailContent(order) {
   const orderGrid = document.createElement("div");
   orderGrid.className = "detail-grid";
 
-  orderGrid.appendChild(createDetailItem("رقم الطلب", getOrderNumber(order)));
-  orderGrid.appendChild(createDetailItem("النوع", TYPE_MAP[order.type] || order.type || "—"));
+  orderGrid.appendChild(createDetailItem("رقم الطلب", getOrderNumber(normalizedOrder)));
+  orderGrid.appendChild(createDetailItem("النوع", TYPE_MAP[normalizedOrder.type] || normalizedOrder.type || "—"));
 
-  const titleItem = createDetailItem("الموضوع", order.title);
+  const titleItem = createDetailItem("الموضوع", normalizedOrder.title);
   titleItem.classList.add("detail-item--full");
   orderGrid.appendChild(titleItem);
 
-  if (order.budget && order.budget > 0) {
-    const budgetText = `${order.budget.toLocaleString("ar-EG")} ${CURRENCY_MAP[order.currency] || order.currency || ""}`;
+  if (normalizedOrder.budget !== "" && normalizedOrder.budget !== null && normalizedOrder.budget !== undefined && normalizedOrder.budget !== "—") {
+    const budgetText = typeof normalizedOrder.budget === "number"
+      ? `${normalizedOrder.budget.toLocaleString("ar-EG")} ${CURRENCY_MAP[normalizedOrder.currency] || normalizedOrder.currency || ""}`
+      : `${String(normalizedOrder.budget)} ${CURRENCY_MAP[normalizedOrder.currency] || normalizedOrder.currency || ""}`;
     orderGrid.appendChild(createDetailItem("الميزانية", budgetText));
   }
 

@@ -221,24 +221,30 @@ function renderOrders(orders) {
   const tbody = document.createElement("tbody");
 
   orders.forEach((order) => {
+    const normalizedOrder = {
+      ...order,
+      customerName: order.customerName || order.name || order.customer?.name || "—",
+      customerEmail: order.customerEmail || order.email || order.customer?.email || "—",
+      customerPhone: order.customerPhone || order.phone || order.customer?.phone || "—",
+      title: order.title || order.subject || order.service || order.productTitle || order.message || "—",
+      type: order.type || (order.service ? "service" : order.product ? "product" : "contact"),
+      status: order.status || "new",
+    };
     const tr = document.createElement("tr");
 
-    // رقم الطلب
     const tdNum = document.createElement("td");
     const numSpan = document.createElement("span");
     numSpan.className = "order-number";
-    numSpan.textContent = order.orderNumber || order.id.slice(0, 8);
+    numSpan.textContent = normalizedOrder.orderNumber || normalizedOrder.id.slice(0, 8);
     tdNum.appendChild(numSpan);
     tr.appendChild(tdNum);
 
-    // العميل
     const tdCustomer = document.createElement("td");
-    tdCustomer.textContent = order.customerName || "—";
+    tdCustomer.textContent = normalizedOrder.customerName || "—";
     tr.appendChild(tdCustomer);
 
-    // النوع
     const tdType = document.createElement("td");
-    tdType.textContent = TYPE_MAP[order.type] || order.type || "—";
+    tdType.textContent = TYPE_MAP[normalizedOrder.type] || normalizedOrder.type || "—";
     tr.appendChild(tdType);
 
     // الحالة
