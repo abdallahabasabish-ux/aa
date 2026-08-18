@@ -204,13 +204,3 @@ export async function resetPassword(email) {
   }
 }
 
-export async function isAdmin(forceRefresh = false) {
-  const user = auth.currentUser;
-  if (!user) return false;
-  try {
-    const r = await getIdTokenResult(user, forceRefresh);
-    return r.claims.admin === true;
-  } catch {
-    return false;
-  }
-}
