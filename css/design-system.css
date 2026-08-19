@@ -1,195 +1,324 @@
-/**
- * modal.js
- * إدارة المودال والإشعارات (Toast) ونموذج الطلب
- * التصميم الجديد — ينزلق من الأسفل
- */
+/* ============================================
+   DESIGN SYSTEM — التصميم الجديد
+   الهوية: برتقالي (#FF6600) + أزرق داكن + ذهبي
+   ============================================ */
 
-import { db } from "/js/firebase-init.js";
-import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-
-// ===== حالة المودال =====
-let currentItem = null;
-let currentType = 'service'; // 'service' | 'product' | 'portfolio'
-
-// ===== DOM =====
-const modalOverlay = document.getElementById('modalOverlay');
-const modalContainer = document.getElementById('modalContainer');
-const modalCloseBtn = document.getElementById('modalCloseBtn');
-const modalTitle = document.getElementById('modalTitle');
-const modalSubtitle = document.getElementById('modalSubtitle');
-const modalImage = document.getElementById('modalImage');
-const modalBody = document.getElementById('modalBody');
-const modalFeatures = document.getElementById('modalFeatures');
-const modalPrice = document.getElementById('modalPrice');
-const modalForm = document.getElementById('modalForm');
-const modalFormName = document.getElementById('modalFormName');
-const modalFormEmail = document.getElementById('modalFormEmail');
-const modalFormMessage = document.getElementById('modalFormMessage');
-const modalFormSubmit = document.getElementById('modalFormSubmit');
-const modalFormSubmitText = modalFormSubmit.querySelector('.btn-text');
-const modalFormSpinner = modalFormSubmit.querySelector('.spinner');
-
-// ===== Toast =====
-const toastContainer = document.getElementById('toastContainer');
-const toast = document.getElementById('toast');
-const toastMessage = document.getElementById('toastMessage');
-const toastClose = document.getElementById('toastClose');
-
-// ===== فتح المودال =====
-export function openModal(item, type = 'service') {
-  currentItem = item;
-  currentType = type;
-
-  // تعبئة البيانات
-  modalTitle.textContent = item.title || '—';
-  modalSubtitle.textContent = item.shortDescription || '';
-
-  // الصورة
-  if (item.image && isSafeUrl(item.image)) {
-    modalImage.src = item.image;
-    modalImage.alt = item.title || '';
-    modalImage.style.display = 'block';
-  } else {
-    modalImage.style.display = 'none';
-  }
-
-  // الوصف التفصيلي
-  modalBody.innerHTML = '';
-  if (item.description) {
-    const paragraphs = item.description.split('\n').filter(p => p.trim());
-    paragraphs.forEach(p => {
-      const para = document.createElement('p');
-      para.textContent = p;
-      modalBody.appendChild(para);
-    });
-  }
-
-  // المميزات
-  modalFeatures.innerHTML = '';
-  if (item.features && item.features.length > 0) {
-    item.features.forEach(f => {
-      const tag = document.createElement('span');
-      tag.className = 'modal-feature-tag';
-      tag.textContent = f;
-      modalFeatures.appendChild(tag);
-    });
-  }
-
-  // السعر
-  const currencyMap = { EGP: 'ج.م', USD: '$', SAR: 'ر.س', AED: 'د.إ' };
-  if (item.price > 0) {
-    modalPrice.textContent = `${Number(item.price).toLocaleString('ar-EG')} ${currencyMap[item.currency] || item.currency || ''}`;
-    modalPrice.className = 'modal-price';
-  } else {
-    modalPrice.textContent = 'مجاني';
-    modalPrice.className = 'modal-price modal-price-free';
-  }
-
-  // إعادة تعيين النموذج
-  modalForm.reset();
-  modalFormSubmit.disabled = false;
-  modalFormSubmit.classList.remove('loading');
-  modalFormSubmitText.style.display = '';
-  modalFormSpinner.style.display = 'none';
-
-  // إظهار المودال
-  modalOverlay.classList.add('active');
-  document.body.style.overflow = 'hidden';
+:root {
+  /* الألوان الأساسية */
+  --primary: #FF6600;
+  --primary-dark: #E05A00;
+  --primary-light: #FF8C3A;
+  --primary-gradient: linear-gradient(135deg, #FF6600 0%, #FF8C3A 100%);
+  
+  --secondary: #1A1A2E;
+  --secondary-light: #2D2D44;
+  --secondary-dark: #0D0D1A;
+  
+  --accent-gold: #F5A623;
+  --accent-gold-light: #FFD700;
+  
+  /* الخلفيات */
+  --bg-body: #FAF9F8;
+  --bg-white: #FFFFFF;
+  --bg-raised: #F3F2EF;
+  --bg-dark: #0D0D1A;
+  
+  /* النصوص */
+  --text-primary: #0D0D0D;
+  --text-secondary: #4A4A4A;
+  --text-muted: #8A8A8A;
+  --text-inverse: #FFFFFF;
+  
+  /* الحدود والظلال */
+  --border-light: rgba(0,0,0,0.06);
+  --border-medium: rgba(0,0,0,0.1);
+  --shadow-card: 0 20px 50px rgba(0,0,0,0.06), 0 8px 20px rgba(0,0,0,0.02);
+  --shadow-card-hover: 0 30px 70px rgba(255,102,0,0.10), 0 12px 30px rgba(0,0,0,0.04);
+  --shadow-modal: 0 40px 80px rgba(0,0,0,0.25);
+  
+  /* الخطوط */
+  --font: 'Cairo', system-ui, sans-serif;
+  --font-display: 'Cairo', system-ui, sans-serif;
+  
+  /* الأحجام */
+  --header-h: 72px;
+  --radius: 16px;
+  --radius-sm: 8px;
+  --radius-lg: 24px;
+  
+  /* الانتقالات */
+  --fast: 150ms ease;
+  --normal: 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  --slow: 500ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-// ===== إغلاق المودال =====
-export function closeModal() {
-  modalOverlay.classList.remove('active');
-  document.body.style.overflow = '';
-  currentItem = null;
+/* ===== شبكة خلفية دقيقة ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255,102,0,0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255,102,0,0.02) 0%, transparent 40%),
+    linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  pointer-events: none;
+  z-index: -1;
 }
 
-// ===== إظهار الإشعار (Toast) =====
-export function showToast(message) {
-  toastMessage.textContent = message;
-  toast.classList.add('visible');
-  clearTimeout(window.toastTimeout);
-  window.toastTimeout = setTimeout(() => {
-    toast.classList.remove('visible');
-  }, 5000);
+/* ===== الأزرار الجديدة ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: all var(--normal);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
 }
 
-// ===== إخفاء الإشعار =====
-export function hideToast() {
-  toast.classList.remove('visible');
-  clearTimeout(window.toastTimeout);
+.btn--primary {
+  padding: 14px 32px;
+  font-size: 0.9375rem;
+  color: var(--text-inverse);
+  background: var(--primary-gradient);
+  box-shadow: 0 8px 24px rgba(255,102,0,0.25);
 }
 
-// ===== دالة مساعدة للتحقق من الرابط =====
-function isSafeUrl(url) {
-  if (!url || typeof url !== 'string') return false;
-  const normalized = url.trim().toLowerCase();
-  return normalized.startsWith('http://') || normalized.startsWith('https://') || normalized === '';
+.btn--primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(255,102,0,0.35);
 }
 
-// ===== إرسال الطلب =====
-async function submitRequest(e) {
-  e.preventDefault();
+.btn--primary:active {
+  transform: translateY(0) scale(0.97);
+}
 
-  const name = modalFormName.value.trim();
-  const email = modalFormEmail.value.trim();
-  const message = modalFormMessage.value.trim();
+.btn--secondary {
+  padding: 14px 32px;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  background: var(--bg-white);
+  border: 2px solid var(--border-medium);
+}
 
-  if (!name || !email) {
-    showToast('⚠️ يرجى إدخال الاسم والبريد الإلكتروني.');
-    return;
+.btn--secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+}
+
+.btn--ghost {
+  padding: 12px 24px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border-light);
+}
+
+.btn--ghost:hover {
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+  background: var(--bg-white);
+}
+
+.btn--sm {
+  padding: 10px 20px;
+  font-size: 0.8125rem;
+}
+
+.btn--lg {
+  padding: 18px 40px;
+  font-size: 1.0625rem;
+}
+
+/* ===== البطاقات الجديدة (غير متماثلة) ===== */
+.card-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.card-grid--asymmetric {
+  grid-template-columns: 1.4fr 0.9fr 1fr;
+  grid-auto-rows: auto;
+}
+
+.card-grid--asymmetric .card:nth-child(1) { grid-column: span 1; grid-row: span 2; }
+.card-grid--asymmetric .card:nth-child(2) { grid-column: span 1; grid-row: span 1; }
+.card-grid--asymmetric .card:nth-child(3) { grid-column: span 1; grid-row: span 1; }
+.card-grid--asymmetric .card:nth-child(4) { grid-column: span 1; grid-row: span 1; }
+.card-grid--asymmetric .card:nth-child(5) { grid-column: span 2; grid-row: span 1; }
+
+.card {
+  background: var(--bg-white);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  transition: all var(--normal);
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(255,102,0,0.15);
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 60px;
+  background: var(--primary-gradient);
+  border-radius: 0 0 4px 0;
+  opacity: 0;
+  transition: opacity var(--normal);
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--primary-gradient);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.card-tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--primary);
+  background: rgba(255,102,0,0.06);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.card-price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.card-price--free {
+  color: #22C55E;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ===== تحسينات عامة ===== */
+.section-header-new {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px;
+}
+
+.section-header-new .label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: rgba(255,102,0,0.06);
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.section-header-new h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.section-header-new p {
+  font-size: 1.0625rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  line-height: 1.7;
+}
+
+/* ===== استجابة ===== */
+@media (max-width: 1023px) {
+  .card-grid--asymmetric {
+    grid-template-columns: 1fr 1fr;
   }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    showToast('⚠️ صيغة البريد الإلكتروني غير صحيحة.');
-    return;
+  .card-grid--asymmetric .card:nth-child(1),
+  .card-grid--asymmetric .card:nth-child(5) {
+    grid-column: span 1;
+    grid-row: span 1;
   }
-
-  modalFormSubmit.disabled = true;
-  modalFormSubmit.classList.add('loading');
-  modalFormSubmitText.style.display = 'none';
-  modalFormSpinner.style.display = 'block';
-
-  try {
-    await addDoc(collection(db, 'orders'), {
-      type: currentType === 'service' ? 'service_request' : currentType === 'product' ? 'product_request' : 'portfolio_inquiry',
-      itemId: currentItem.id,
-      itemTitle: currentItem.title,
-      itemSlug: currentItem.slug,
-      customerName: name,
-      customerEmail: email,
-      customerMessage: message || '',
-      status: 'new',
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
-    });
-
-    showToast('✅ تم إرسال طلبك بنجاح، سيتم التواصل معك خلال 24 ساعة.');
-
-    setTimeout(() => {
-      closeModal();
-    }, 800);
-
-  } catch (error) {
-    console.error('خطأ في إرسال الطلب:', error);
-    showToast('❌ حدث خطأ، يرجى المحاولة مرة أخرى.');
-  }
-
-  modalFormSubmit.disabled = false;
-  modalFormSubmit.classList.remove('loading');
-  modalFormSubmitText.style.display = '';
-  modalFormSpinner.style.display = 'none';
 }
 
-// ===== ربط الأحداث =====
-modalCloseBtn.addEventListener('click', closeModal);
-modalOverlay.addEventListener('click', (e) => {
-  if (e.target === modalOverlay) closeModal();
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
-});
-toastClose.addEventListener('click', hideToast);
-
-modalForm.addEventListener('submit', submitRequest);
+@media (max-width: 639px) {
+  .card-grid--asymmetric {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    padding: 20px;
+  }
+}
