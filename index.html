@@ -141,60 +141,11 @@
       </div>
 
       <div class="services-list" id="servicesList">
-        <a href="/services/web-development" class="service-item reveal">
-          <span class="service-number">01</span>
-          <div class="service-info">
-            <h3 class="service-name">تطوير مواقع الويب</h3>
-            <p class="service-brief">مواقع سريعة، متجاوبة، ومُحسّنة لمحركات البحث — مبنية بالتقنيات المناسبة لمشروعك، لا الأكثر شعبية.</p>
-          </div>
-          <span class="service-arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
-          </span>
-        </a>
-
-        <a href="/services/web-design" class="service-item reveal">
-          <span class="service-number">02</span>
-          <div class="service-info">
-            <h3 class="service-name">تصميم واجهات المستخدم</h3>
-            <p class="service-brief">تصميم يُحقق أهداف التحويل، لا يكتفي بأن يكون "جميلًا". كل قرار تصميمي مبرر بمنطق واستخدام حقيقي.</p>
-          </div>
-          <span class="service-arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
-          </span>
-        </a>
-
-        <a href="/services/seo" class="service-item reveal">
-          <span class="service-number">03</span>
-          <div class="service-info">
-            <h3 class="service-name">تحسين محركات البحث</h3>
-            <p class="service-brief">استراتيجية SEO مبنية على تحليل المنافسين والكلمات المفتاحية الفعلية — لا على قوائم مراجعة آلية.</p>
-          </div>
-          <span class="service-arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
-          </span>
-        </a>
-
-        <a href="/services/wordpress" class="service-item reveal">
-          <span class="service-number">04</span>
-          <div class="service-info">
-            <h3 class="service-name">ووردبريس</h3>
-            <p class="service-brief">مواقع ووردبريس مُحسّنة الأداء، بدون إضافات غير ضرورية تُبطئ الموقع وتُسبب مشاكل أمنية.</p>
-          </div>
-          <span class="service-arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
-          </span>
-        </a>
-
-        <a href="/services/blogger" class="service-item reveal">
-          <span class="service-number">05</span>
-          <div class="service-info">
-            <h3 class="service-name">بلوجر</h3>
-            <p class="service-brief">قوالب بلوجر مخصصة بالكامل — تصميم فريد، كود نظيف، وسرعة تحميل فعلية لا مزيفة.</p>
-          </div>
-          <span class="service-arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
-          </span>
-        </a>
+        <!-- يُملأ بواسطة JavaScript من Firestore -->
+        <div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;">
+          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:prdt-spin .7s linear infinite;"></div>
+          <p style="margin-top:12px;">جاري تحميل الخدمات...</p>
+        </div>
       </div>
     </div>
   </section>
@@ -212,57 +163,11 @@
       </div>
 
       <div class="products-grid" id="productsGrid">
-        <!-- يُملأ من Firestore أو يبقى كمحتوى ثابت -->
-        <a href="/products" class="product-card reveal">
-          <div class="product-card-thumb">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>
-          </div>
-          <div class="product-card-body">
-            <h3 class="product-card-name">قوالب بلوجر</h3>
-            <p class="product-card-desc">قوالب مخصصة بالكامل بتصميم فريد وأداء عالي</p>
-            <div class="product-card-footer">
-              <span class="product-card-price">ابتداءً من 150 ج.م</span>
-              <span class="product-card-link">
-                تصفح
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
-              </span>
-            </div>
-          </div>
-        </a>
-
-        <a href="/products" class="product-card reveal">
-          <div class="product-card-thumb">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"/></svg>
-          </div>
-          <div class="product-card-body">
-            <h3 class="product-card-name">قوالب ووردبريس</h3>
-            <p class="product-card-desc">ثيمات ووردبريس نظيفة وسريعة بدون إضافات ثقيلة</p>
-            <div class="product-card-footer">
-              <span class="product-card-price">ابتداءً من 300 ج.م</span>
-              <span class="product-card-link">
-                تصفح
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
-              </span>
-            </div>
-          </div>
-        </a>
-
-        <a href="/products" class="product-card reveal">
-          <div class="product-card-thumb">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75 9 3-3 2.148 2.148A12.061 12.061 0 0 1 2.25 12c0-3.182 1.25-6.08 3.286-8.214"/></svg>
-          </div>
-          <div class="product-card-body">
-            <h3 class="product-card-name">أدوات تحسين SEO</h3>
-            <p class="product-card-desc">أدوات وأكواد جاهزة لتحسين ظهور موقعك في محركات البحث</p>
-            <div class="product-card-footer">
-              <span class="product-card-price product-card-price--free">مجاني</span>
-              <span class="product-card-link">
-                تصفح
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
-              </span>
-            </div>
-          </div>
-        </a>
+        <!-- يُملأ بواسطة JavaScript من Firestore -->
+        <div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">
+          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:prdt-spin .7s linear infinite;"></div>
+          <p style="margin-top:12px;">جاري تحميل المنتجات...</p>
+        </div>
       </div>
 
       <div style="text-align:center;margin-top:40px" class="reveal">
@@ -282,36 +187,12 @@
         <h2 class="section-title">نتائج حقيقية، لا وعود</h2>
       </div>
 
-      <div class="portfolio-grid">
-        <a href="/portfolio" class="portfolio-card portfolio-card--large reveal">
-          <div class="portfolio-card-thumb">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>
-          </div>
-          <div class="portfolio-card-body">
-            <h3 class="portfolio-card-title">مشروع موقع تجاري متكامل</h3>
-            <span class="portfolio-card-cat">تطوير + تصميم + SEO</span>
-          </div>
-        </a>
-
-        <a href="/portfolio" class="portfolio-card reveal">
-          <div class="portfolio-card-thumb">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
-          </div>
-          <div class="portfolio-card-body">
-            <h3 class="portfolio-card-title">قالب بلوجر احترافي</h3>
-            <span class="portfolio-card-cat">تصميم + تطوير</span>
-          </div>
-        </a>
-
-        <a href="/portfolio" class="portfolio-card reveal">
-          <div class="portfolio-card-thumb">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75 9 3-3 2.148 2.148A12.061 12.061 0 0 1 2.25 12c0-3.182 1.25-6.08 3.286-8.214"/></svg>
-          </div>
-          <div class="portfolio-card-body">
-            <h3 class="portfolio-card-title">استراتيجية SEO لموقع تجاري</h3>
-            <span class="portfolio-card-cat">تحسين محركات البحث</span>
-          </div>
-        </a>
+      <div class="portfolio-grid" id="portfolioGrid">
+        <!-- يُملأ بواسطة JavaScript من Firestore -->
+        <div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">
+          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:prdt-spin .7s linear infinite;"></div>
+          <p style="margin-top:12px;">جاري تحميل الأعمال...</p>
+        </div>
       </div>
 
       <div style="margin-top:40px" class="reveal">
@@ -339,7 +220,10 @@
     <div class="container">
       <div class="footer-inner">
         <div>
-          <div class="footer-brand-name">Abdallah Abas</div>
+          <div class="footer-brand">
+            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
+            <div class="footer-brand-name">عبدالله عباس</div>
+          </div>
           <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
         </div>
         <div>
@@ -361,9 +245,9 @@
             <a href="/about" class="footer-link">عن عبدالله</a>
           </div>
         </div>
-          <div>
-            <div class="footer-heading">تواصل</div>
-            <div class="footer-links">
+        <div>
+          <div class="footer-heading">تواصل</div>
+          <div class="footer-links">
             <a href="/contact" class="footer-link">أرسل رسالة</a>
             <a href="/login.html" class="footer-link">تسجيل الدخول</a>
             <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
@@ -382,15 +266,8 @@
   <script>
     // --- Nav scroll effect ---
     const nav = document.getElementById('siteNav');
-    let lastScroll = 0;
     function handleNavScroll() {
-      const y = window.scrollY;
-      if (y > 40) {
-        nav.classList.add('site-nav--scrolled');
-      } else {
-        nav.classList.remove('site-nav--scrolled');
-      }
-      lastScroll = y;
+      nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
     }
     window.addEventListener('scroll', handleNavScroll, { passive: true });
     handleNavScroll();
@@ -449,17 +326,15 @@
     } else {
       revealElements.forEach(el => el.classList.add('reveal--visible'));
     }
-
   </script>
 
   <!-- ==================== LIVE DATA (Firestore) ==================== -->
   <script type="module">
     import { db } from "/js/firebase-init.js";
     import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { isSafeUrl } from "/js/security.js";
 
-    // نجلب كل المستندات بدون orderBy على مستوى Firestore عمدًا (نفس منطق صفحتي
-    // /services و /products): يتجنب الحاجة لـ composite index، ولا يستبعد أي
-    // عنصر ناقص حقل sortOrder بصمت. الترتيب يتم في المتصفح.
+    // ===== HELPERS =====
     const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
 
     function sortByOrder(a, b) {
@@ -471,9 +346,11 @@
       return timeB - timeA;
     }
 
+    // ===== 1. إنشاء عنصر الخدمة (مع الرابط الصحيح) =====
     function createServiceItem(service, index) {
       const a = document.createElement("a");
-      a.href = `/services/${service.slug || ""}`;
+      // ✅ الرابط الصحيح لصفحة تفاصيل الخدمة
+      a.href = `/service-detail.html?slug=${encodeURIComponent(service.slug || "")}`;
       a.className = "service-item";
 
       const num = document.createElement("span");
@@ -504,17 +381,18 @@
       return a;
     }
 
+    // ===== 2. إنشاء بطاقة المنتج =====
     function createProductCard(product) {
       const a = document.createElement("a");
-      a.href = `/product-detail.html?slug=${product.slug || ""}`;
+      a.href = `/product-detail.html?slug=${encodeURIComponent(product.slug || "")}`;
       a.className = "product-card";
 
       const thumb = document.createElement("div");
       thumb.className = "product-card-thumb";
-      if (product.image) {
+      if (product.image && isSafeUrl(product.image)) {
         const img = document.createElement("img");
         img.src = product.image;
-        img.alt = "";
+        img.alt = product.title || "";
         img.loading = "lazy";
         thumb.appendChild(img);
       } else {
@@ -560,10 +438,46 @@
       return a;
     }
 
-    // لو الجلب فشل أو رجع فاضي، بنسيب المحتوى الثابت الموجود في الصفحة
-    // كما هو (بدل ما نعرض قسم فاضي) — ونسجل السبب في الـ Console فقط.
+    // ===== 3. إنشاء بطاقة الأعمال =====
+    function createPortfolioItem(project) {
+      const a = document.createElement("a");
+      a.href = `/portfolio-detail.html?slug=${encodeURIComponent(project.slug || "")}`;
+      a.className = "portfolio-card";
 
+      const thumb = document.createElement("div");
+      thumb.className = "portfolio-card-thumb";
+      if (project.image && isSafeUrl(project.image)) {
+        const img = document.createElement("img");
+        img.src = project.image;
+        img.alt = project.title || "";
+        img.loading = "lazy";
+        thumb.appendChild(img);
+      } else {
+        thumb.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
+      }
+
+      const body = document.createElement("div");
+      body.className = "portfolio-card-body";
+
+      const title = document.createElement("h3");
+      title.className = "portfolio-card-title";
+      title.textContent = project.title || "—";
+
+      const cat = document.createElement("span");
+      cat.className = "portfolio-card-cat";
+      cat.textContent = (project.tags && project.tags.length > 0) ? project.tags.slice(0, 2).join(" · ") : "عمل";
+
+      body.appendChild(title);
+      body.appendChild(cat);
+
+      a.appendChild(thumb);
+      a.appendChild(body);
+      return a;
+    }
+
+    // ===== 4. تحميل الخدمات =====
     async function loadHomeServices() {
+      const list = document.getElementById("servicesList");
       try {
         const snap = await getDocs(collection(db, "services"));
         const services = snap.docs
@@ -572,20 +486,21 @@
           .sort(sortByOrder)
           .slice(0, 5);
 
+        list.textContent = "";
         if (services.length === 0) {
-          console.warn("[home] لا توجد خدمات فعّالة في Firestore — تم الإبقاء على المحتوى الثابت.");
+          list.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;">لا توجد خدمات حالياً</div>`;
           return;
         }
-
-        const list = document.getElementById("servicesList");
-        list.textContent = "";
         services.forEach((s, i) => list.appendChild(createServiceItem(s, i)));
       } catch (error) {
-        console.error("[home] فشل تحميل الخدمات من Firestore، تم الإبقاء على المحتوى الثابت:", error.code || error.message || error);
+        console.error("[home] فشل تحميل الخدمات:", error);
+        list.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;">حدث خطأ في تحميل الخدمات</div>`;
       }
     }
 
+    // ===== 5. تحميل المنتجات =====
     async function loadHomeProducts() {
+      const grid = document.getElementById("productsGrid");
       try {
         const snap = await getDocs(collection(db, "products"));
         const products = snap.docs
@@ -594,21 +509,56 @@
           .sort(sortByOrder)
           .slice(0, 3);
 
+        grid.textContent = "";
         if (products.length === 0) {
-          console.warn("[home] لا توجد منتجات فعّالة في Firestore — تم الإبقاء على المحتوى الثابت.");
+          grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">لا توجد منتجات حالياً</div>`;
           return;
         }
-
-        const grid = document.getElementById("productsGrid");
-        grid.textContent = "";
         products.forEach((p) => grid.appendChild(createProductCard(p)));
       } catch (error) {
-        console.error("[home] فشل تحميل المنتجات من Firestore، تم الإبقاء على المحتوى الثابت:", error.code || error.message || error);
+        console.error("[home] فشل تحميل المنتجات:", error);
+        grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">حدث خطأ في تحميل المنتجات</div>`;
       }
     }
 
+    // ===== 6. تحميل الأعمال =====
+    async function loadHomePortfolio() {
+      const grid = document.getElementById("portfolioGrid");
+      try {
+        const snap = await getDocs(collection(db, "portfolio"));
+        const projects = snap.docs
+          .map((d) => ({ id: d.id, ...d.data() }))
+          .filter((p) => p.active !== false)
+          .sort(sortByOrder)
+          .slice(0, 3);
+
+        grid.textContent = "";
+        if (projects.length === 0) {
+          grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">لا توجد أعمال حالياً</div>`;
+          return;
+        }
+
+        // أول عنصر يكون كبيراً (إذا كان موجوداً)
+        if (projects.length > 0) {
+          const first = createPortfolioItem(projects[0]);
+          first.classList.add("portfolio-card--large");
+          grid.appendChild(first);
+        }
+
+        // باقي العناصر
+        for (let i = 1; i < projects.length; i++) {
+          grid.appendChild(createPortfolioItem(projects[i]));
+        }
+      } catch (error) {
+        console.error("[home] فشل تحميل الأعمال:", error);
+        grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">حدث خطأ في تحميل الأعمال</div>`;
+      }
+    }
+
+    // ===== 7. بدء التحميل =====
     loadHomeServices();
     loadHomeProducts();
+    loadHomePortfolio();
   </script>
 </body>
 </html>
