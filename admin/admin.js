@@ -1,6 +1,7 @@
 /**
  * admin.js — لوحة التحكم الرئيسية (محسّنة)
  * تعرض إحصائيات حقيقية باستخدام getCountFromServer
+ * لا يتطلب فهارس مركبة — يستخدم فهارس أحادية فقط
  */
 
 import { requireAdmin } from "/js/auth-guard.js";
@@ -29,7 +30,7 @@ const dashContent = document.getElementById("dashboardContent");
 const headerAvatar = document.getElementById("headerAvatar");
 const headerUserName = document.getElementById("headerUserName");
 const ordersWrapper = document.getElementById("ordersTableWrapper");
-const refreshBtn = document.getElementById("refreshStatsBtn"); // سنضيفه في HTML لاحقاً
+const refreshBtn = document.getElementById("refreshStatsBtn");
 
 // ===============================
 // Sidebar
@@ -82,54 +83,66 @@ function getStatusBadge(status) {
 }
 
 // ===============================
-// Fetch Stats (محسّن)
+// Fetch Stats (بدون فهارس مركبة)
 // ===============================
 async function fetchStats() {
-  const results = { 
-    services: 0, 
-    products: 0, 
-    newOrders: 0, 
+  const results = {
+    services: 0,
+    products: 0,
+    newOrders: 0,
     unreadMessages: 0,
-    totalOrders: 0
   };
 
-  // الخدمات النشطة
+  // 1. الخدمات النشطة
   try {
     const snap = await getCountFromServer(
       query(collection(db, "services"), where("active", "==", true))
     );
     results.services = snap.data().count;
-  } catch {}
+  } catch (e) {
+    console.warn("فشل جلب عدد الخدمات:", e);
+  }
 
-  // المنتجات النشطة
+  // 2. المنتجات النشطة
   try {
     const snap = await getCountFromServer(
       query(collection(db, "products"), where("active", "==", true))
     );
     results.products = snap.data().count;
-  } catch {}
+  } catch (e) {
+    console.warn("فشل جلب عدد المنتجات:", e);
+  }
 
-  // الطلبات الجديدة (status == "new")
+  // 3. الطلبات الجديدة (status == "new")
   try {
     const snap = await getCountFromServer(
       query(collection(db, "orders"), where("status", "==", "new"))
     );
     results.newOrders = snap.data().count;
-  } catch {}
+  } catch (e) {
+    console.warn("فشل جلب عدد الطلبات الجديدة:", e);
+  }
 
-  // الرسائل غير المقروءة (type == "contact" AND read != true)
+  // 4. الرسائل غير المقروءة — بطريقة لا تحتاج فهرساً مركباً
+  //    نحسب: (جميع رسائل contact) - (رسائل contact المقروءة)
   try {
-    const snap = await getCountFromServer(
-      query(collection(db, "orders"), where("type", "==", "contact"), where("read", "!=", true))
+    // جميع رسائل contact
+    const totalContactSnap = await getCountFromServer(
+      query(collection(db, "orders"), where("type", "==", "contact"))
     );
-    results.unreadMessages = snap.data().count;
-  } catch {}
+    const totalContact = totalContactSnap.data().count;
 
-  // إجمالي الطلبات (للعرض في الجدول)
-  try {
-    const snap = await getCountFromServer(collection(db, "orders"));
-    results.totalOrders = snap.data().count;
-  } catch {}
+    // رسائل contact المقروءة
+    const readContactSnap = await getCountFromServer(
+      query(collection(db, "orders"), where("type", "==", "contact"), where("read", "==", true))
+    );
+    const readContact = readContactSnap.data().count;
+
+    results.unreadMessages = Math.max(0, totalContact - readContact);
+  } catch (e) {
+    console.warn("فشل جلب عدد الرسائل غير المقروءة:", e);
+    results.unreadMessages = 0;
+  }
 
   return results;
 }
@@ -146,7 +159,8 @@ async function fetchRecentOrders() {
     );
     const snapshot = await getDocs(q);
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-  } catch {
+  } catch (e) {
+    console.warn("فشل جلب الطلبات الأخيرة:", e);
     return [];
   }
 }
@@ -201,7 +215,6 @@ function renderOrders(orders) {
       <td></td>
       <td>${formatDate(order.createdAt)}</td>
     `;
-    // إضافة حالة الطلب
     const statusTd = tr.querySelectorAll("td")[3];
     statusTd.appendChild(getStatusBadge(order.status));
     tbody.appendChild(tr);
@@ -247,7 +260,6 @@ async function init(user) {
   setUserInfo(user);
   await loadDashboard();
 
-  // زر تحديث (إذا كان موجوداً)
   if (refreshBtn) {
     refreshBtn.addEventListener("click", async () => {
       refreshBtn.disabled = true;
