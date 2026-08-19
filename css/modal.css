@@ -1,0 +1,346 @@
+/* ============================================
+   MODAL & TOAST — الأنماط الجديدة
+   ============================================ */
+
+/* --- الخلفية الزجاجية --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 13, 26, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* --- المودال ينزلق من الأسفل --- */
+.modal-container {
+  max-width: 780px;
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: var(--bg-white);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 32px 32px 28px;
+  box-shadow: var(--shadow-modal);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+}
+
+.modal-overlay.active .modal-container {
+  transform: translateY(0);
+}
+
+/* --- شريط السحب (للموبايل) --- */
+.modal-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--border-medium);
+  border-radius: 2px;
+  margin: -8px auto 16px;
+  display: block;
+}
+
+/* --- زر الإغلاق --- */
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  background: var(--bg-raised);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close-btn:hover {
+  background: var(--border-medium);
+  color: var(--text-primary);
+  transform: rotate(90deg);
+}
+
+/* --- المحتوى --- */
+.modal-image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  background: var(--bg-raised);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+  padding-inline-end: 48px;
+}
+
+.modal-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.modal-body {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 0.9375rem;
+}
+
+.modal-body p {
+  margin-bottom: 12px;
+}
+
+.modal-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.modal-feature-tag {
+  background: rgba(255,102,0,0.06);
+  color: var(--primary);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.modal-price {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 16px 0 8px;
+}
+
+.modal-price-free {
+  color: #22C55E;
+}
+
+/* --- نموذج الطلب --- */
+.modal-form {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.modal-form-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.modal-form-group {
+  margin-bottom: 14px;
+}
+
+.modal-form-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.modal-form-input,
+.modal-form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  background: var(--bg-body);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: all var(--fast);
+}
+
+.modal-form-input:focus,
+.modal-form-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(255,102,0,0.08);
+  background: var(--bg-white);
+}
+
+.modal-form-textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.modal-form-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-inverse);
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--normal);
+  box-shadow: 0 8px 24px rgba(255,102,0,0.2);
+}
+
+.modal-form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255,102,0,0.3);
+}
+
+.modal-form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.modal-form-submit .spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: modal-spin 0.6s linear infinite;
+}
+
+.modal-form-submit.loading .spinner {
+  display: block;
+}
+.modal-form-submit.loading .btn-text {
+  display: none;
+}
+
+@keyframes modal-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- TOAST (إشعار من الأعلى) --- */
+.toast-container {
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  pointer-events: none;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 16px;
+}
+
+.toast {
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  padding: 16px 24px;
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(-30px) scale(0.95);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: auto;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.toast.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.toast-icon {
+  width: 28px;
+  height: 28px;
+  color: #22C55E;
+  flex-shrink: 0;
+  animation: toast-pulse 2s ease-in-out infinite;
+}
+
+@keyframes toast-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+  margin-inline-start: auto;
+}
+.toast-close:hover {
+  color: #fff;
+}
+
+/* ===== استجابة ===== */
+@media (max-width: 480px) {
+  .modal-container {
+    padding: 20px 16px 20px;
+    max-height: 95vh;
+  }
+  .modal-title {
+    font-size: 1.375rem;
+    padding-inline-end: 36px;
+  }
+  .modal-image {
+    max-height: 180px;
+  }
+  .modal-form-submit {
+    width: 100%;
+    justify-content: center;
+  }
+  .toast {
+    font-size: 0.8125rem;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .modal-container,
+  .modal-overlay,
+  .toast {
+    transition: none !important;
+  }
+  .modal-overlay.active .modal-container {
+    transform: none;
+  }
+  .toast.visible {
+    transform: none;
+  }
+}
