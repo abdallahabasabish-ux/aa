@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>جارٍ التحميل... — عبدالله عباس</title>
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="" id="metaDesc" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/portfolio.css" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION (مطابق) ===== -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" />
+        <span>عبدالله عباس</span>
+      </a>
+      <div class="nav-links">
+        <a href="/services" class="nav-link">الخدمات</a>
+        <a href="/products" class="nav-link">المنتجات</a>
+        <a href="/portfolio" class="nav-link" style="color:var(--accent)">الأعمال</a>
+        <a href="/blog" class="nav-link">المقالات</a>
+        <a href="/about" class="nav-link">عن عبدالله</a>
+      </div>
+      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-mobile-panel" id="mobilePanel">
+      <div class="nav-mobile-header">
+        <span class="nav-mobile-brand">عبدالله عباس</span>
+        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/services" class="nav-mobile-link">الخدمات</a>
+        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio" class="nav-mobile-link" style="color:var(--accent)">الأعمال</a>
+        <a href="/blog" class="nav-mobile-link">المقالات</a>
+        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+      </div>
+      <div class="nav-mobile-footer">
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN ===== -->
+  <main id="pageRoot">
+    <div class="pf-loading" id="loadingState">
+      <div class="pf-loading-spinner"></div>
+    </div>
+
+    <div class="pf-404" id="notFoundState" style="display:none">
+      <div class="pf-404-code">404</div>
+      <h1 class="pf-404-title">العمل غير موجود</h1>
+      <p class="pf-404-desc">العمل الذي تبحث عنه غير موجود أو تم حذفه.</p>
+      <a href="/portfolio" class="btn btn--primary btn--sm">عرض جميع الأعمال</a>
+    </div>
+
+    <div id="contentRoot" style="display:none"></div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" id="siteFooter" style="display:none">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">
+            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
+            <div class="footer-brand-name">عبدالله عباس</div>
+          </div>
+          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+        </div>
+        <div>
+          <div class="footer-heading">الخدمات</div>
+          <div class="footer-links">
+            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger" class="footer-link">بلوجر</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">المحتوى</div>
+          <div class="footer-links">
+            <a href="/products" class="footer-link">المنتجات</a>
+            <a href="/portfolio" class="footer-link">الأعمال</a>
+            <a href="/blog" class="footer-link">المقالات</a>
+            <a href="/about" class="footer-link">عن عبدالله</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">تواصل</div>
+          <div class="footer-links">
+            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
+        <span class="footer-copy">جميع الحقوق محفوظة</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { db } from "/js/firebase-init.js";
+    import { collection, query, where, limit, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { isSafeUrl, escapeHtml } from "/js/security.js";
+
+    // ===== NAV (مطابق) =====
+    const nav = document.getElementById("siteNav");
+    function handleNavScroll() { nav.classList.toggle("site-nav--scrolled", window.scrollY > 40); }
+    window.addEventListener("scroll", handleNavScroll, { passive: true });
+    handleNavScroll();
+
+    const mobileToggle = document.getElementById("mobileToggle");
+    const mobileClose = document.getElementById("mobileClose");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobilePanel = document.getElementById("mobilePanel");
+    function openMobile() { mobileMenu.classList.add("nav-mobile-menu--open"); mobilePanel.classList.add("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "false"); mobileToggle.setAttribute("aria-expanded", "true"); document.body.style.overflow = "hidden"; }
+    function closeMobile() { mobileMenu.classList.remove("nav-mobile-menu--open"); mobilePanel.classList.remove("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "true"); mobileToggle.setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; }
+    mobileToggle.addEventListener("click", openMobile);
+    mobileClose.addEventListener("click", closeMobile);
+    mobileMenu.addEventListener("click", (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMobile(); });
+    mobilePanel.querySelectorAll(".nav-mobile-link, .nav-mobile-cta").forEach((l) => l.addEventListener("click", closeMobile));
+
+    // ===== HELPERS =====
+    function getSlug() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("slug");
+    }
+
+    function formatDate(d) {
+      if (!d) return "";
+      const date = d instanceof Timestamp ? d.toDate() : new Date(d);
+      return date.toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
+    }
+
+    // ===== BUILD PAGE (لأعمال) =====
+    function buildBreadcrumb(project) {
+      const navEl = document.createElement("nav");
+      navEl.className = "pf-breadcrumb";
+      navEl.setAttribute("aria-label", "مسار التنقل");
+      navEl.innerHTML = `<a href="/">الرئيسية</a><span class="sep">/</span><a href="/portfolio">الأعمال</a><span class="sep">/</span><span class="current">${escapeHtml(project.title)}</span>`;
+      return navEl;
+    }
+
+    function buildHero(project) {
+      const section = document.createElement("section");
+      section.className = "pf-detail-hero";
+
+      const inner = document.createElement("div");
+      inner.className = "pf-detail-hero-inner";
+
+      const title = document.createElement("h1");
+      title.className = "pf-detail-hero-title";
+      title.textContent = project.title || "—";
+      inner.appendChild(title);
+
+      const tags = document.createElement("div");
+      tags.className = "pf-detail-hero-tags";
+      if (project.tags && Array.isArray(project.tags)) {
+        project.tags.forEach(t => {
+          const tag = document.createElement("span");
+          tag.className = "pf-detail-hero-tag";
+          tag.textContent = t;
+          tags.appendChild(tag);
+        });
+      }
+      inner.appendChild(tags);
+
+      if (project.image && isSafeUrl(project.image)) {
+        const imageDiv = document.createElement("div");
+        imageDiv.className = "pf-detail-hero-image";
+        const img = document.createElement("img");
+        img.src = project.image;
+        img.alt = project.title || "";
+        imageDiv.appendChild(img);
+        inner.appendChild(imageDiv);
+      }
+
+      section.appendChild(inner);
+      return section;
+    }
+
+    function buildBody(project) {
+      if (!project.description) return null;
+      const div = document.createElement("div");
+      div.className = "pf-detail-body";
+      const paragraphs = project.description.split("\n").filter(p => p.trim());
+      paragraphs.forEach(p => {
+        const para = document.createElement("p");
+        para.textContent = p;
+        div.appendChild(para);
+      });
+      return div;
+    }
+
+    function buildActions(project) {
+      const div = document.createElement("div");
+      div.className = "pf-detail-actions";
+
+      if (project.liveUrl && isSafeUrl(project.liveUrl)) {
+        const live = document.createElement("a");
+        live.href = project.liveUrl;
+        live.target = "_blank";
+        live.rel = "noopener noreferrer";
+        live.className = "btn btn--primary";
+        live.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>زيارة المشروع`;
+        div.appendChild(live);
+      }
+
+      const contact = document.createElement("a");
+      contact.href = "/contact";
+      contact.className = "btn btn--outline";
+      contact.textContent = "تواصل معي";
+      div.appendChild(contact);
+
+      return div;
+    }
+
+    function buildPage(project) {
+      const root = document.getElementById("contentRoot");
+      root.appendChild(buildBreadcrumb(project));
+      root.appendChild(buildHero(project));
+
+      const contentDiv = document.createElement("div");
+      contentDiv.className = "pf-detail-content";
+      const body = buildBody(project);
+      if (body) contentDiv.appendChild(body);
+      contentDiv.appendChild(buildActions(project));
+
+      root.appendChild(contentDiv);
+      root.style.display = "block";
+    }
+
+    function updateSEO(project) {
+      const title = project.seoTitle || project.title || "العمل";
+      const desc = project.metaDescription || project.shortDescription || "";
+      document.title = `${title} — عبدالله عباس`;
+      document.getElementById("metaDesc").setAttribute("content", desc);
+
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+      canonical.href = `https://abdallahsst.web.app/portfolio-detail?slug=${project.slug}`;
+
+      const old = document.getElementById("portfolioStructuredData");
+      if (old) old.remove();
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = "portfolioStructuredData";
+      const sd = {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "name": project.seoTitle || project.title,
+        "description": project.metaDescription || project.shortDescription,
+        "url": `https://abdallahsst.web.app/portfolio-detail?slug=${project.slug}`,
+        "author": { "@type": "Person", "name": "عبدالله عباس" }
+      };
+      script.textContent = JSON.stringify(sd);
+      document.head.appendChild(script);
+    }
+
+    function show404() {
+      document.getElementById("loadingState").style.display = "none";
+      document.getElementById("notFoundState").style.display = "block";
+      document.title = "العمل غير موجود — عبدالله عباس";
+    }
+
+    async function loadProject() {
+      const slug = getSlug();
+      if (!slug) { show404(); return; }
+
+      try {
+        const q = query(collection(db, "portfolio"), where("slug", "==", slug), limit(1));
+        const snap = await getDocs(q);
+        if (snap.empty) { show404(); return; }
+
+        const docSnap = snap.docs[0];
+        const project = { id: docSnap.id, ...docSnap.data() };
+        if (project.active === false) { show404(); return; }
+
+        updateSEO(project);
+        buildPage(project);
+        document.getElementById("siteFooter").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch {
+        show404();
+      }
+    }
+
+    loadProject();
+  </script>
+</body>
+</html>
