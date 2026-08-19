@@ -104,3 +104,42 @@ export function requireAuth(loginUrl = "/login.html") {
     });
   });
 }
+/**
+ * ينتظر المستخدم الحالي ويتحقق من تفعيل البريد الإلكتروني.
+ * يستخدم في الصفحات التي تتطلب حساباً مفعّلاً.
+ *
+ * @param {string} loginUrl
+ * @param {string} verifyUrl
+ * @returns {Promise<object|null>}
+ */
+export function requireVerifiedEmail(loginUrl = "/login.html", verifyUrl = "/verify-email.html") {
+  return new Promise((resolve, reject) => {
+    const timeout = setTimeout(() => {
+      unsubscribe();
+      window.location.href = loginUrl;
+      reject(new Error("Auth state timeout"));
+    }, 10000);
+
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      clearTimeout(timeout);
+      unsubscribe();
+
+      if (!user) {
+        window.location.href = loginUrl;
+        reject(new Error("Not authenticated"));
+        return;
+      }
+
+      // إعادة تحميل بيانات المستخدم
+      await user.reload();
+
+      if (!user.emailVerified) {
+        window.location.href = verifyUrl;
+        reject(new Error("Email not verified"));
+        return;
+      }
+
+      resolve(user);
+    });
+  });
+}
