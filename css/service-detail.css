@@ -621,56 +621,35 @@
     grid-template-columns: 1fr;
     padding: 0 24px 72px;
   }
-
   .sdet-sidebar {
     position: static;
     order: -1;
     margin-bottom: 48px;
   }
-
   .sdet-hero { margin-bottom: 48px; padding-bottom: 48px; }
   .sdet-section { margin-bottom: 40px; }
-
   .sdet-features-grid { grid-template-columns: 1fr; }
-
   .sdet-cta-card { padding: 28px 24px; }
-
   .sdet-cta-price-value { font-size: 1.75rem; }
 }
 
 @media (max-width: 639px) {
   .sdet-hero { padding-bottom: 40px; margin-bottom: 40px; }
-
   .sdet-hero-title { font-size: 1.625rem; }
-
   .sdet-hero-price { font-size: 1.25rem; }
   .sdet-hero-price-free { font-size: 1.125rem; }
-
   .sdet-content { padding: 0 16px 56px; }
-
   .sdet-hero-inner,
   .sdet-breadcrumb { padding: 0 16px; }
-
-  .sdet-process-step {
-    grid-template-columns: 36px 1fr;
-  }
-
+  .sdet-process-step { grid-template-columns: 36px 1fr; }
   .sdet-process-num { width: 36px; height: 36px; font-size: 0.8125rem; }
-
   .sdet-process-step::before { inset-inline-start: 17px; }
-
   .sdet-section-title { font-size: 1.1875rem; }
-
   .sdet-solution-block { padding: 24px 20px; }
-
   .sdet-features-grid { gap: 8px; }
-
   .sdet-faq-question { font-size: 0.875rem; padding: 16px 4px; }
-
   .sdet-faq-answer-inner { padding: 0 0 14px; font-size: 0.875rem; }
-
   .sdet-deliverable-item { font-size: 0.875rem; padding: 12px 0; gap: 12px; }
-
   .sdet-deliverable-check { width: 20px; height: 20px; }
   .sdet-deliverable-check svg { width: 10px; height: 10px; }
 }
@@ -697,13 +676,10 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
-    animation-duration: 0.0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
   .sdet-process-step::before { display: none; }
   .sdet-faq-toggle { transform: none; }
   .sdet-faq-item--open .sdet-faq-answer { max-height: none; overflow: visible; transition: none; }
-  .product-card:hover,
-  .svc-item:hover { transform: none; }
 }
