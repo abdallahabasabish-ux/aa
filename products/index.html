@@ -153,7 +153,7 @@
 
   <script type="module">
     import { db } from "/js/firebase-init.js";
-    import { collection, query, where, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { isSafeUrl } from "/js/security.js";
 
     // ===== NAV (مطابق) =====
@@ -296,13 +296,26 @@
       const empty = document.getElementById("emptyState");
 
       try {
-        // جلب جميع المنتجات ثم تصفيتها محلياً
-        const q = query(collection(db, "products"), orderBy("sortOrder", "asc"), orderBy("createdAt", "desc"));
-        const snap = await getDocs(q);
-        // المنتجات النشطة هي تلك التي active !== false
+        // نجلب كل المستندات بدون orderBy على مستوى Firestore عمدًا:
+        // 1) orderBy على حقلين مختلفين (sortOrder + createdAt) يتطلب composite index —
+        //    لو غير موجود، الاستعلام يفشل بالكامل بخطأ "query requires an index".
+        // 2) orderBy على حقل واحد (sortOrder) يستبعد بصمت أي منتج ناقص هذا الحقل —
+        //    بدون أي خطأ، فقط نتيجة فارغة أو ناقصة.
+        // الحل الآمن: نجلب الكل ونرتب في المتصفح.
+        const snap = await getDocs(collection(db, "products"));
+
         const products = snap.docs
           .map((d) => ({ id: d.id, ...d.data() }))
-          .filter((p) => p.active !== false);
+          .filter((p) => p.active !== false)
+          .sort((a, b) => {
+            const orderA = typeof a.sortOrder === "number" ? a.sortOrder : Infinity;
+            const orderB = typeof b.sortOrder === "number" ? b.sortOrder : Infinity;
+            if (orderA !== orderB) return orderA - orderB;
+
+            const timeA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : 0;
+            const timeB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : 0;
+            return timeB - timeA;
+          });
 
         loader.style.display = "none";
 
@@ -314,7 +327,10 @@
         products.forEach((p) => {
           grid.appendChild(createProductCard(p));
         });
-      } catch {
+      } catch (error) {
+        // نسجل الخطأ الحقيقي في الـ Console للمطوّر — الزائر يشوف رسالة عامة فقط.
+        // "permission-denied" هنا يعني تحديدًا أن Firestore Rules تمنع القراءة العامة لهذا الـ collection.
+        console.error("[products] فشل تحميل المنتجات:", error.code || error.message || error);
         loader.style.display = "none";
         empty.style.display = "flex";
         empty.querySelector("div:last-child").textContent = "حدث خطأ في تحميل المنتجات";
