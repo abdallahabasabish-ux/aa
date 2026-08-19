@@ -9,12 +9,69 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/auth.css" />
+  <style>
+    /* أنماط إضافية للأزرار الاجتماعية */
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: var(--auth-radius);
+      border: 1px solid var(--auth-border);
+      background: var(--auth-surface);
+      color: var(--auth-text-secondary);
+      font-family: var(--auth-font);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--auth-fast);
+    }
+    .social-btn:hover {
+      border-color: var(--auth-border-focus);
+      color: var(--auth-text-primary);
+      background: var(--auth-surface-hover);
+    }
+    .social-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .social-btn svg {
+      flex-shrink: 0;
+    }
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .auth-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--auth-border);
+    }
+    .auth-divider-text {
+      font-size: 0.75rem;
+      color: var(--auth-text-muted);
+      white-space: nowrap;
+    }
+    .social-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 480px) {
+      .social-buttons-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body style="visibility:hidden">
 
   <div class="auth-layout">
     
-    <!-- ========== BRAND PANEL (right in RTL) ========== -->
+    <!-- ========== BRAND PANEL ========== -->
     <div class="auth-brand-panel" aria-hidden="true">
       <div class="auth-brand-content">
         <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="auth-brand-logo" />
@@ -29,7 +86,7 @@
       <p class="auth-brand-copy">&copy; 2025 Abdallah Abas</p>
     </div>
 
-    <!-- ========== FORM PANEL (left in RTL) ========== -->
+    <!-- ========== FORM PANEL ========== -->
     <main class="auth-form-panel">
       <div class="auth-form-wrapper">
 
@@ -41,6 +98,7 @@
 
         <div id="authMessage" class="auth-message auth-animate-in" role="alert" aria-live="polite"></div>
 
+        <!-- ===== نموذج تسجيل الدخول ===== -->
         <form id="loginForm" class="auth-form auth-animate-in" novalidate>
           <div class="form-group">
             <label for="email" class="form-label">البريد الإلكتروني</label>
@@ -80,9 +138,38 @@
           </button>
         </form>
 
+        <!-- ===== الفاصل بين طرق تسجيل الدخول ===== -->
+        <div class="auth-divider auth-animate-in">
+          <span class="auth-divider-line"></span>
+          <span class="auth-divider-text">أو</span>
+          <span class="auth-divider-line"></span>
+        </div>
+
+        <!-- ===== أزرار تسجيل الدخول عبر مقدمي الخدمات ===== -->
+        <div class="social-buttons-grid auth-animate-in">
+          <!-- Google -->
+          <button type="button" id="googleLoginBtn" class="social-btn social-btn--google">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48">
+              <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+              <path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+              <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+              <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+            </svg>
+            Google
+          </button>
+
+          <!-- GitHub -->
+          <button type="button" id="githubLoginBtn" class="social-btn social-btn--github">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            GitHub
+          </button>
+        </div>
+
+        <!-- ===== الروابط الإضافية ===== -->
         <a href="/forgot-password.html" class="auth-link auth-animate-in">نسيت كلمة المرور؟</a>
 
-        <!-- 🔹 إضافة رابط إنشاء حساب جديد -->
         <div class="auth-link-row auth-animate-in">
           <span>ليس لديك حساب؟</span>
           <a href="/register.html">إنشاء حساب جديد</a>
@@ -96,7 +183,7 @@
   <script type="module">
     import { auth } from "/js/firebase-init.js";
     import { getIdTokenResult } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-    import { login, validateEmail, validatePassword } from "/js/auth.js";
+    import { login, loginWithGoogle, loginWithGithub, validateEmail, validatePassword } from "/js/auth.js";
     import { showUserMessage, clearUserMessage, showFieldError, clearFieldError } from "/js/error-handler.js";
     import { setButtonLoading, initPasswordToggle, setInputError } from "/js/ui.js";
 
@@ -107,6 +194,8 @@
     const passwordToggle = document.getElementById("passwordToggle");
     const submitBtn = document.getElementById("submitBtn");
     const msgContainer = document.getElementById("authMessage");
+    const googleBtn = document.getElementById("googleLoginBtn");
+    const githubBtn = document.getElementById("githubLoginBtn");
 
     // --- Init password toggle ---
     initPasswordToggle(passwordToggle, passwordInput);
@@ -130,6 +219,15 @@
       if (user && !redirectDone) {
         redirectDone = true;
         try {
+          // إعادة تحميل بيانات المستخدم للتحقق من تفعيل البريد
+          await user.reload();
+          
+          // إذا كان البريد غير مفعّل، توجه إلى صفحة التفعيل
+          if (!user.emailVerified) {
+            window.location.replace("/verify-email.html");
+            return;
+          }
+
           const r = await getIdTokenResult(user);
           window.location.replace(r.claims.admin ? "/admin/admin.html" : "/dashboard/dashboard.html");
           return;
@@ -139,51 +237,126 @@
       document.body.style.visibility = "visible";
     });
 
-    // --- Submit ---
-    function initForm() {
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    // --- Submit (البريد + كلمة المرور) ---
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-        clearUserMessage("authMessage");
-        clearFieldError("emailError");
-        clearFieldError("passwordError");
-        setInputError(emailInput, false);
-        setInputError(passwordInput, false);
+      clearUserMessage("authMessage");
+      clearFieldError("emailError");
+      clearFieldError("passwordError");
+      setInputError(emailInput, false);
+      setInputError(passwordInput, false);
 
-        const email = emailInput.value.trim();
-        const password = passwordInput.value;
-        let hasErr = false;
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      let hasErr = false;
 
-        const ev = validateEmail(email);
-        if (!ev.valid) { showFieldError("emailError", ev.message); setInputError(emailInput, true); hasErr = true; }
+      const ev = validateEmail(email);
+      if (!ev.valid) { showFieldError("emailError", ev.message); setInputError(emailInput, true); hasErr = true; }
 
-        const pv = validatePassword(password);
-        if (!pv.valid) { showFieldError("passwordError", pv.message); setInputError(passwordInput, true); hasErr = true; }
+      const pv = validatePassword(password);
+      if (!pv.valid) { showFieldError("passwordError", pv.message); setInputError(passwordInput, true); hasErr = true; }
 
-        if (hasErr) {
-          const first = form.querySelector(".form-input--error");
-          if (first) first.focus();
+      if (hasErr) {
+        const first = form.querySelector(".form-input--error");
+        if (first) first.focus();
+        return;
+      }
+
+      setButtonLoading(submitBtn, true);
+      const result = await login(email, password);
+      setButtonLoading(submitBtn, false);
+
+      if (result.ok) {
+        // التحقق من تفعيل البريد
+        await result.user.reload();
+        if (!result.user.emailVerified) {
+          window.location.replace("/verify-email.html");
           return;
         }
-
-        setButtonLoading(submitBtn, true);
-        const result = await login(email, password);
-        setButtonLoading(submitBtn, false);
-
-        if (result.ok) {
-          window.location.replace(result.claims?.admin ? "/admin/admin.html" : "/dashboard/dashboard.html");
-        } else {
-          showUserMessage("authMessage", result.userMessage, "error");
-          if (result.userMessage.includes("غير صحيحة")) {
-            setInputError(emailInput, true);
-            setInputError(passwordInput, true);
-          }
-          emailInput.focus();
+        window.location.replace(result.claims?.admin ? "/admin/admin.html" : "/dashboard/dashboard.html");
+      } else {
+        showUserMessage("authMessage", result.userMessage, "error");
+        if (result.userMessage.includes("غير صحيحة")) {
+          setInputError(emailInput, true);
+          setInputError(passwordInput, true);
         }
-      });
+        emailInput.focus();
+      }
+    });
+
+    // --- Google Login ---
+    googleBtn.addEventListener("click", async () => {
+      googleBtn.disabled = true;
+      googleBtn.innerHTML = `
+        <span style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.25);border-top-color:#fff;border-radius:50%;animation:auth-spin .6s linear infinite;"></span>
+        جاري الاتصال...
+      `;
+      const result = await loginWithGoogle();
+      googleBtn.disabled = false;
+      googleBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48">
+          <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+          <path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+          <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+          <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+        </svg>
+        Google
+      `;
+      
+      if (result.ok) {
+        // التحقق من تفعيل البريد
+        await result.user.reload();
+        if (!result.user.emailVerified) {
+          window.location.replace("/verify-email.html");
+          return;
+        }
+        // المستخدم مسجل بالفعل — التوجيه حسب الصلاحية
+        const tokenResult = await result.user.getIdTokenResult();
+        window.location.replace(tokenResult.claims.admin ? "/admin/admin.html" : "/dashboard/dashboard.html");
+      } else {
+        showUserMessage("authMessage", result.userMessage, "error");
+      }
+    });
+
+    // --- GitHub Login ---
+    githubBtn.addEventListener("click", async () => {
+      githubBtn.disabled = true;
+      githubBtn.innerHTML = `
+        <span style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.25);border-top-color:#fff;border-radius:50%;animation:auth-spin .6s linear infinite;"></span>
+        جاري الاتصال...
+      `;
+      const result = await loginWithGithub();
+      githubBtn.disabled = false;
+      githubBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        GitHub
+      `;
+      
+      if (result.ok) {
+        await result.user.reload();
+        if (!result.user.emailVerified) {
+          window.location.replace("/verify-email.html");
+          return;
+        }
+        const tokenResult = await result.user.getIdTokenResult();
+        window.location.replace(tokenResult.claims.admin ? "/admin/admin.html" : "/dashboard/dashboard.html");
+      } else {
+        showUserMessage("authMessage", result.userMessage, "error");
+      }
+    });
+
+    // ===== عرض رسالة التفعيل عند العودة من البريد =====
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("verified") === "true") {
+      showUserMessage("authMessage", "✅ تم تفعيل حسابك بنجاح. يمكنك تسجيل الدخول الآن.", "success");
+      // إزالة المعامل من الرابط
+      const newUrl = window.location.pathname;
+      window.history.replaceState({}, document.title, newUrl);
     }
 
-    initForm();
   </script>
 </body>
 </html>
