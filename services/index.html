@@ -4,23 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>الخدمات — عبدالله عباس</title>
-  <meta name="description" content="خدمات تطوير مواقع، تصميم واجهات، تحسين SEO، قوالب بلوجر وووردبريس — كل خدمة مبنية لحل مشكلة محددة، لا لبيع ميزات." />
+  <meta name="description" content="خدمات تطوير مواقع، تصميم واجهات، تحسين SEO، قوالب بلوجر وووردبريس — كل خدمة مبنية لحل مشكلة محددة." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://abdallahsst.web.app/services" />
+  <link rel="canonical" href="https://www.abdallahabas.com/services.html" />
 
-  <!-- Structured Data: CollectionPage -->
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://abdallahsst.firebaseio.com" />
+  <link rel="preconnect" href="https://firestore.googleapis.com" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/services.css" />
+
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "الخدمات — عبدالله عباس",
     "description": "خدمات تطوير مواقع، تصميم واجهات، تحسين SEO، قوالب بلوجر وووردبريس احترافية.",
-    "url": "https://abdallahsst.web.app/services",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "عبدالله عباس",
-      "url": "https://abdallahsst.web.app"
-    },
+    "url": "https://www.abdallahabas.com/services.html",
     "provider": {
       "@type": "Person",
       "name": "عبدالله عباس",
@@ -28,126 +39,118 @@
     }
   }
   </script>
-
-  <!-- BreadcrumbList -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://abdallahsst.web.app/" },
-      { "@type": "ListItem", "position": 2, "name": "الخدمات", "item": "https://abdallahsst.web.app/services" }
-    ]
-  }
-  </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="/css/services.css" />
 </head>
 <body>
 
   <!-- ==================== NAVIGATION ==================== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
-      <a href="/" class="nav-brand">
-        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" />
+      <a href="/index.html" class="nav-brand">
+        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" width="34" height="34" />
         <span>عبدالله عباس</span>
       </a>
-      <div class="nav-links">
-        <a href="/services" class="nav-link" style="color:var(--accent)">الخدمات</a>
-        <a href="/products" class="nav-link">المنتجات</a>
-        <a href="/portfolio" class="nav-link">الأعمال</a>
-        <a href="/blog" class="nav-link">المقالات</a>
-        <a href="/about" class="nav-link">عن عبدالله</a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="/services.html" class="nav-link" style="color:var(--accent)">الخدمات</a>
+        <a href="/products.html" class="nav-link">المنتجات</a>
+        <a href="/portfolio.html" class="nav-link">الأعمال</a>
+        <a href="/blog.html" class="nav-link">المقالات</a>
+        <a href="/about.html" class="nav-link">عن عبدالله</a>
       </div>
-      <a href="/contact" class="nav-cta">تواصل معي</a>
+
+      <a href="/contact.html" class="nav-cta">تواصل معي</a>
+
       <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
       </button>
     </div>
   </nav>
 
+  <!-- Mobile Menu -->
   <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-mobile-panel" id="mobilePanel">
       <div class="nav-mobile-header">
-        <span class="nav-mobile-brand">عبدالله عباس</span>
+        <span class="nav-mobile-brand">
+          <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo" width="30" height="30" />
+          <span>عبدالله عباس</span>
+        </span>
         <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
         </button>
       </div>
       <div class="nav-mobile-links">
-        <a href="/services" class="nav-mobile-link" style="color:var(--accent)">الخدمات</a>
-        <a href="/products" class="nav-mobile-link">المنتجات</a>
-        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
-        <a href="/blog" class="nav-mobile-link">المقالات</a>
-        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
-        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/services.html" class="nav-mobile-link" style="color:var(--accent)">الخدمات</a>
+        <a href="/products.html" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio.html" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog.html" class="nav-mobile-link">المقالات</a>
+        <a href="/about.html" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact.html" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
       </div>
       <div class="nav-mobile-footer">
-        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+        <a href="/contact.html" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
       </div>
     </div>
   </div>
 
-  <!-- ==================== MAIN ==================== -->
-  <main>
-    <!-- Hero -->
-    <section class="services-hero">
-      <div class="container">
-        <div class="services-hero-inner reveal">
-          <div class="services-hero-label">
-            <span class="services-hero-label-line"></span>
-            <span>الخدمات</span>
-          </div>
-          <h1 class="services-hero-title">حلول مبنية لحلول مشاكل حقيقية</h1>
-          <p class="services-hero-desc">كل خدمة تُقدّم بنتيجة واضحة: فهم المشروع ← تحديد الحل المناسب ← تنفيذ الجودة ← نتيجة ملموسة.</p>
+  <!-- ==================== HERO ==================== -->
+  <section class="services-hero">
+    <div class="container">
+      <div class="services-hero-inner reveal">
+        <div class="services-hero-label">
+          <span class="services-hero-label-line"></span>
+          <span>الخدمات</span>
+        </div>
+        <h1 class="services-hero-title">حلول مبنية لحل مشاكل حقيقية</h1>
+        <p class="services-hero-desc">كل خدمة تُقدّم بنتيجة واضحة: فهم المشروع ← تحديد الحل المناسب ← تنفيذ الجودة ← نتيجة ملموسة.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICES LIST ==================== -->
+  <section class="services-section">
+    <div class="container">
+
+      <!-- Loading -->
+      <div class="services-loading" id="pageLoader" style="display:flex;align-items:center;justify-content:center;min-height:200px">
+        <div style="width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;"></div>
+      </div>
+
+      <!-- Empty -->
+      <div class="services-empty" id="emptyState" style="display:none;flex-direction:column;align-items:center;padding:60px 20px;text-align:center">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--bg-raised);display:flex;align-items:center;justify-content:center;color:var(--text-dim);margin-bottom:20px">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/></svg>
+        </div>
+        <div style="font-size:1rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px">لا توجد خدمات بعد</div>
+        <div style="font-size:0.875rem;color:var(--text-muted)">سيتم إضافتها قريبًا</div>
+      </div>
+
+      <!-- Dynamic List -->
+      <div class="services-list" id="servicesList"></div>
+
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="services-cta">
+    <div class="container">
+      <div class="services-cta-inner reveal">
+        <div class="services-cta-text">
+          <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px;display:inline-block;vertical-align:middle;margin-inline-end:8px;">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/>
+            </svg>
+            لا تجد ما تحتاجه؟
+          </h2>
+          <p>قد تكون خدمتك مخصصة أو تحتاج حلًا مركبًا. تواصل معي وسنحدد المنهجية المناسبة.</p>
+        </div>
+        <div class="services-actions">
+          <a href="/contact.html" class="btn btn--primary">تواصل معي</a>
+          <a href="/contact.html" class="btn btn--outline btn--sm">استشارة مجانية</a>
         </div>
       </div>
-    </section>
-
-    <!-- Services List -->
-    <section class="services-section">
-      <div class="container">
-
-        <!-- Loading -->
-        <div class="services-loading" id="pageLoader" style="display:flex;align-items:center;justify-content:center;min-height:200px">
-          <div class="dash-loading-spinner" style="border-color:var(--border);border-top-color:var(--accent);width:28px;height:28px;border-width:3px"></div>
-        </div>
-
-        <!-- Empty (hidden by default) -->
-        <div class="services-empty" id="emptyState">
-          <div class="services-empty-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/></svg>
-          </div>
-          <div class="services-empty-title">لا توجد خدمات بعد</div>
-          <div class="services-empty-desc">سيتم إضافتها قريبًا</div>
-        </div>
-
-        <!-- Dynamic List -->
-        <div class="services-list" id="servicesList"></div>
-
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="services-cta">
-      <div class="container">
-        <div class="services-cta-inner reveal">
-          <div class="services-cta-text">
-            <h2>لا تجد ما تحتاجه؟</h2>
-            <p>قد تكون خدمتك مخصصة أو تحتاج حلاًا مركبًا. تواصل معي وأنا نحدد المنهجية المناسبة.</p>
-          </div>
-          <div class="services-actions">
-            <a href="/contact" class="btn btn--primary">تواصل معي</a>
-            <a href="/contact" class="btn btn--outline btn--sm">استشارة مجانية</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <!-- ==================== FOOTER ==================== -->
   <footer class="site-footer">
@@ -155,7 +158,7 @@
       <div class="footer-inner">
         <div>
           <div class="footer-brand">
-            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
+            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" width="38" height="38" />
             <div class="footer-brand-name">عبدالله عباس</div>
           </div>
           <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
@@ -163,27 +166,29 @@
         <div>
           <div class="footer-heading">الخدمات</div>
           <div class="footer-links">
-            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
-            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
-            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
-            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
-            <a href="/services/blogger" class="footer-link">بلوجر</a>
+            <a href="/services/web-development.html" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design.html" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo.html" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress.html" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger.html" class="footer-link">بلوجر</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">المحتوى</div>
           <div class="footer-links">
-            <a href="/products" class="footer-link">المنتجات</a>
-            <a href="/portfolio" class="footer-link">الأعمال</a>
-            <a href="/blog" class="footer-link">المقالات</a>
-            <a href="/about" class="footer-link">عن عبدالله</a>
+            <a href="/products.html" class="footer-link">المنتجات</a>
+            <a href="/portfolio.html" class="footer-link">الأعمال</a>
+            <a href="/blog.html" class="footer-link">المقالات</a>
+            <a href="/about.html" class="footer-link">عن عبدالله</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">تواصل</div>
           <div class="footer-links">
-            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/contact.html" class="footer-link">أرسل رسالة</a>
             <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+            <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
+            <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
           </div>
         </div>
       </div>
@@ -194,94 +199,83 @@
     </div>
   </footer>
 
-  <!-- ==================== SCRIPTS ==================== -->
-  <script type="module">
-    import { db } from "/js/firebase-init.js";
-    import {
-      collection,
-      getDocs,
-      Timestamp,
-    } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-    import { isSafeUrl } from "/js/security.js";
+  <!-- ==================== ANIMATION KEYFRAMES ==================== -->
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 
-    // --- Nav ---
-    const nav = document.getElementById("siteNav");
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+    // ===== NAV SCROLL =====
+    const nav = document.getElementById('siteNav');
     function handleNavScroll() {
-      nav.classList.toggle("site-nav--scrolled", window.scrollY > 40);
+      nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
     }
-    window.addEventListener("scroll", handleNavScroll, { passive: true });
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
     handleNavScroll();
 
-    // Mobile menu
-    const mobileToggle = document.getElementById("mobileToggle");
-    const mobileClose = document.getElementById("mobileClose");
-    const mobileMenu = document.getElementById("mobileMenu");
-    const mobilePanel = document.getElementById("mobilePanel");
+    // ===== MOBILE MENU =====
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileClose = document.getElementById('mobileClose');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobilePanel = document.getElementById('mobilePanel');
 
     function openMobile() {
-      mobileMenu.classList.add("nav-mobile-menu--open");
-      mobilePanel.classList.add("nav-mobile-panel--open");
-      mobileMenu.setAttribute("aria-hidden", "false");
-      mobileToggle.setAttribute("aria-expanded", "true");
-      document.body.style.overflow = "hidden";
+      mobileMenu.classList.add('nav-mobile-menu--open');
+      mobilePanel.classList.add('nav-mobile-panel--open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
     }
     function closeMobile() {
-      mobileMenu.classList.remove("nav-mobile-menu--open");
-      mobilePanel.classList.remove("nav-mobile-panel--open");
-      mobileMenu.setAttribute("aria-hidden", "true");
-      mobileToggle.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
+      mobileMenu.classList.remove('nav-mobile-menu--open');
+      mobilePanel.classList.remove('nav-mobile-panel--open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
     }
-    mobileToggle.addEventListener("click", openMobile);
-    mobileClose.addEventListener("click", closeMobile);
-    mobileMenu.addEventListener("click", (e) => { if (e.target === mobileMenu) closeMobile(); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMobile(); });
-    mobilePanel.querySelectorAll(".nav-mobile-link, .nav-mobile-cta").forEach((l) => l.addEventListener("click", closeMobile));
+    mobileToggle.addEventListener('click', openMobile);
+    mobileClose.addEventListener('click', closeMobile);
+    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
+    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
 
-    // --- Scroll Reveal ---
-    const reveals = document.querySelectorAll(".reveal");
-    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("reveal--visible");
-            obs.unobserve(e.target);
+    // ===== SCROLL REVEAL =====
+    const revealElements = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal--visible');
+            observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
-      reveals.forEach((el, i) => {
-        el.style.transitionDelay = `${i * 50}ms`;
-        obs.observe(el);
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      revealElements.forEach((el, i) => {
+        el.style.transitionDelay = `${i * 60}ms`;
+        observer.observe(el);
       });
     } else {
-      reveals.forEach((el) => el.classList.add("reveal--visible"));
+      revealElements.forEach(el => el.classList.add('reveal--visible'));
     }
+  </script>
 
-    // --- Helpers ---
+  <!-- ==================== LIVE DATA ==================== -->
+  <script type="module">
+    import { db } from "/js/firebase-init.js";
+    import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
     const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
 
-    function formatDate(d) {
-      if (!d) return "";
-      const date = d instanceof Timestamp ? d.toDate() : new Date(d);
-      return date.toLocaleDateString("ar-EG", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      });
+    function sortByOrder(a, b) {
+      const orderA = typeof a.sortOrder === "number" ? a.sortOrder : Infinity;
+      const orderB = typeof b.sortOrder === "number" ? b.sortOrder : Infinity;
+      if (orderA !== orderB) return orderA - orderB;
+      const timeA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : 0;
+      const timeB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : 0;
+      return timeB - timeA;
     }
 
-    function truncate(str, max) {
-      if (!str) return "";
-      return str.length > max ? str.slice(0, max).trim() + "..." : str;
-    }
-
-    function escapeHtml(str) {
-      if (typeof str !== "string") return "";
-      const map = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#x27;" };
-      return str.replace(/[&<>"']/g, (ch) => map[ch] || ch);
-    }
-
-    // --- Render Service Item ---
     function createServiceItem(service, index) {
       const item = document.createElement("div");
       item.className = "svc-item reveal";
@@ -301,7 +295,7 @@
       top.className = "svc-top";
 
       const nameLink = document.createElement("a");
-      nameLink.href = `/services/${service.slug}`;
+      nameLink.href = `/service-detail.html?slug=${encodeURIComponent(service.slug || "")}`;
       nameLink.className = "svc-name";
       nameLink.textContent = service.title || "—";
       top.appendChild(nameLink);
@@ -326,14 +320,12 @@
       if (features.length > 0) {
         const tagsContainer = document.createElement("div");
         tagsContainer.className = "svc-features";
-
         features.slice(0, 5).forEach((f) => {
           const tag = document.createElement("span");
           tag.className = "svc-feature-tag";
           tag.textContent = f;
           tagsContainer.appendChild(tag);
         });
-
         content.appendChild(tagsContainer);
       }
 
@@ -341,7 +333,10 @@
       if (service.deliveryTime) {
         const delivery = document.createElement("div");
         delivery.className = "svc-delivery";
-        delivery.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0ZM12 12a9 9 0 1 0 9 9 9.004 9.004 0 0 0-9-9 9.004 9.004 0 0 0-9-9ZM12.75 12.75h.008v.008h-.008v-.008ZM6 12.75a6.75 6.75 0 1 1 13.5 0 6.75 6.75 0 0 1-13.5 0Z"/></svg><span>${escapeHtml(service.deliveryTime)}</span>`;
+        delivery.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0ZM12 12a9 9 0 1 0 9 9 9.004 9.004 0 0 0-9-9 9.004 9.004 0 0 0-9-9ZM12.75 12.75h.008v.008h-.008v-.008ZM6 12.75a6.75 6.75 0 1 1 13.5 0 6.75 6.75 0 0 1-13.5 0Z"/></svg>
+          <span>${service.deliveryTime}</span>
+        `;
         content.appendChild(delivery);
       }
 
@@ -349,9 +344,9 @@
 
       // Arrow
       const arrow = document.createElement("a");
-      arrow.href = `/services/${service.slug}`;
+      arrow.href = `/service-detail.html?slug=${encodeURIComponent(service.slug || "")}`;
       arrow.className = "svc-arrow";
-      arrow.setAttribute("aria-label", `عرض تفاصيل: ${escapeHtml(service.title)}`);
+      arrow.setAttribute("aria-label", `عرض تفاصيل: ${service.title}`);
       arrow.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>`;
 
       inner.appendChild(arrow);
@@ -361,38 +356,22 @@
       return item;
     }
 
-    // --- Fetch & Render ---
     async function loadServices() {
       const loader = document.getElementById("pageLoader");
       const list = document.getElementById("servicesList");
       const empty = document.getElementById("emptyState");
 
       try {
-        // نجلب كل المستندات بدون orderBy على مستوى Firestore عمدًا:
-        // 1) orderBy على حقلين مختلفين (sortOrder + createdAt) يتطلب composite index —
-        //    لو غير موجود، الاستعلام يفشل بالكامل بخطأ "query requires an index".
-        // 2) orderBy على حقل واحد (sortOrder) يستبعد بصمت أي خدمة ناقصة هذا الحقل —
-        //    بدون أي خطأ، فقط نتيجة فارغة أو ناقصة.
-        // الحل الآمن: نجلب الكل ونرتب في المتصفح.
         const snapshot = await getDocs(collection(db, "services"));
-
         const services = snapshot.docs
           .map((d) => ({ id: d.id, ...d.data() }))
           .filter((s) => s.active !== false)
-          .sort((a, b) => {
-            const orderA = typeof a.sortOrder === "number" ? a.sortOrder : Infinity;
-            const orderB = typeof b.sortOrder === "number" ? b.sortOrder : Infinity;
-            if (orderA !== orderB) return orderA - orderB;
-
-            const timeA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : 0;
-            const timeB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : 0;
-            return timeB - timeA;
-          });
+          .sort(sortByOrder);
 
         loader.style.display = "none";
 
         if (services.length === 0) {
-          empty.classList.add("services-empty--visible");
+          empty.style.display = "flex";
           return;
         }
 
@@ -400,13 +379,10 @@
           list.appendChild(createServiceItem(svc, i));
         });
       } catch (error) {
-        // نسجل الخطأ الحقيقي في الـ Console للمطوّر — الزائر يشوف رسالة عامة فقط.
-        // "permission-denied" هنا يعني تحديدًا أن Firestore Rules تمنع القراءة العامة لهذا الـ collection.
-        console.error("[services] فشل تحميل الخدمات:", error.code || error.message || error);
+        console.error("[services] فشل تحميل الخدمات:", error);
         loader.style.display = "none";
-        empty.classList.add("services-empty--visible");
-        empty.querySelector(".services-empty-title").textContent = "حدث خطأ في تحميل الخدمات";
-        empty.querySelector(".services-empty-desc").textContent = "جرب تحديث الصفحة";
+        empty.style.display = "flex";
+        empty.querySelector("div:last-child").textContent = "حدث خطأ في تحميل الخدمات";
       }
     }
 
