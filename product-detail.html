@@ -124,7 +124,7 @@
 
   <script type="module">
     import { db } from "/js/firebase-init.js";
-    import { doc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { collection, query, where, limit, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { isSafeUrl, escapeHtml } from "/js/security.js";
 
     // ===== NAV (مطابق) =====
@@ -341,11 +341,14 @@
       if (!slug) { show404(); return; }
 
       try {
-        const docRef = doc(db, "products", slug);
-        const snap = await getDoc(docRef);
-        if (!snap.exists()) { show404(); return; }
+        // المستند مخزّن بمعرّف عشوائي (من addDoc)، مش بالـ slug —
+        // فبندور بحقل slug بدل ما نفترض إنه هو معرّف المستند.
+        const q = query(collection(db, "products"), where("slug", "==", slug), limit(1));
+        const snap = await getDocs(q);
+        if (snap.empty) { show404(); return; }
 
-        const product = { id: snap.id, ...snap.data() };
+        const docSnap = snap.docs[0];
+        const product = { id: docSnap.id, ...docSnap.data() };
         if (product.active === false) { show404(); return; }
 
         updateSEO(product);
