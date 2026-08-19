@@ -9,9 +9,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/admin.css" />
+  <style>
+    .settings-form { max-width: 700px; margin: 0 auto; }
+    .settings-form .form-grid { grid-template-columns: 1fr 1fr; }
+    .settings-form .form-full { grid-column: 1 / -1; }
+    .settings-save-area { margin-top: 24px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .settings-save-area .btn-primary { min-width: 160px; }
+    #settingsMessage { margin-top: 12px; padding: 10px 16px; border-radius: var(--admin-radius-sm); display: none; }
+    #settingsMessage.success { display: block; background: var(--admin-success-soft); color: var(--admin-success); border: 1px solid rgba(34,197,94,0.2); }
+    #settingsMessage.error { display: block; background: var(--admin-error-soft); color: var(--admin-error); border: 1px solid rgba(239,68,68,0.2); }
+  </style>
 </head>
-<body>
+<body style="visibility:hidden" data-admin="true">
+
   <div class="admin-layout">
+    <!-- Sidebar (مطابق لباقي الصفحات) -->
     <aside class="admin-sidebar" id="adminSidebar">
       <div class="sidebar-brand">
         <div class="sidebar-brand-name">عبدالله عباس</div>
@@ -20,50 +32,134 @@
       </div>
       <nav class="sidebar-nav" aria-label="القائمة الرئيسية">
         <div class="sidebar-nav-section">عام</div>
-        <a href="/admin/admin.html" class="sidebar-nav-item">
-          <span>نظرة عامة</span>
-        </a>
+        <a href="/admin/admin.html" class="sidebar-nav-item"><span>نظرة عامة</span></a>
         <div class="sidebar-nav-section">المحتوى</div>
-        <a href="/admin/services.html" class="sidebar-nav-item">
-          <span>الخدمات</span>
-        </a>
-        <a href="/admin/products.html" class="sidebar-nav-item">
-          <span>المنتجات</span>
-        </a>
-        <a href="/admin/portfolio.html" class="sidebar-nav-item">
-          <span>الأعمال</span>
-        </a>
-        <a href="/admin/articles.html" class="sidebar-nav-item">
-          <span>المقالات</span>
-        </a>
+        <a href="/admin/services.html" class="sidebar-nav-item"><span>الخدمات</span></a>
+        <a href="/admin/products.html" class="sidebar-nav-item"><span>المنتجات</span></a>
+        <a href="/admin/portfolio.html" class="sidebar-nav-item"><span>الأعمال</span></a>
+        <a href="/admin/articles.html" class="sidebar-nav-item"><span>المقالات</span></a>
         <div class="sidebar-nav-section">الإدارة</div>
-        <a href="/admin/orders.html" class="sidebar-nav-item">
-          <span>الطلبات</span>
-        </a>
-        <a href="/admin/customers.html" class="sidebar-nav-item">
-          <span>العملاء</span>
-        </a>
+        <a href="/admin/orders.html" class="sidebar-nav-item"><span>الطلبات</span></a>
+        <a href="/admin/customers.html" class="sidebar-nav-item"><span>العملاء</span></a>
+        <a href="/admin/messages.html" class="sidebar-nav-item"><span>الرسائل</span></a>
         <div class="sidebar-nav-section">النظام</div>
-        <a href="/admin/settings.html" class="sidebar-nav-item sidebar-nav-item--active">
-          <span>الإعدادات</span>
-        </a>
+        <a href="/admin/settings.html" class="sidebar-nav-item sidebar-nav-item--active"><span>الإعدادات</span></a>
       </nav>
+      <div class="sidebar-footer">
+        <button class="sidebar-logout" id="logoutBtn" type="button">تسجيل الخروج</button>
+      </div>
     </aside>
+
+    <div class="admin-overlay" id="adminOverlay"></div>
 
     <div class="admin-main">
       <header class="admin-header">
         <div class="header-right">
+          <button class="header-hamburger" id="hamburgerBtn" type="button" aria-label="فتح القائمة">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+          </button>
           <h1 class="header-title">إعدادات الموقع</h1>
+        </div>
+        <div class="header-left">
+          <div class="header-user">
+            <div class="header-avatar" id="headerAvatar">ع</div>
+            <div class="header-user-info">
+              <span class="header-user-name" id="headerUserName">—</span>
+              <span class="header-user-role">مدير</span>
+            </div>
+          </div>
         </div>
       </header>
 
       <div class="admin-content">
-        <div class="admin-empty-state" style="padding: 2rem; background:#fff; border-radius:18px; box-shadow:0 12px 30px rgba(15,23,42,0.06);">
-          <h2 style="margin:0 0 .75rem; color:#111827;">الإعدادات</h2>
-          <p style="margin:0; color:#6b7280;">هذه الصفحة جاهزة لإعدادات الموقع وسيتم ربطها بالأدوات لاحقًا.</p>
+        <div class="admin-loading" id="pageLoader"><div class="admin-loading-spinner"></div></div>
+        <div id="settingsContent" style="display:none">
+
+          <form id="settingsForm" class="settings-form admin-fade-in" novalidate>
+            <div class="form-section-title">المعلومات الأساسية</div>
+
+            <div class="form-grid">
+              <div class="admin-form-group">
+                <label class="admin-form-label" for="siteName">اسم الموقع</label>
+                <input type="text" class="admin-form-input" id="siteName" placeholder="عبدالله عباس" />
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label" for="siteTagline">الشعار (Tagline)</label>
+                <input type="text" class="admin-form-input" id="siteTagline" placeholder="حلول رقمية متكاملة" />
+              </div>
+            </div>
+
+            <div class="admin-form-group form-full">
+              <label class="admin-form-label" for="siteDescription">وصف الموقع</label>
+              <textarea class="admin-form-textarea" id="siteDescription" rows="2" placeholder="وصف مختصر للموقع يظهر في محركات البحث"></textarea>
+            </div>
+
+            <div class="admin-form-group form-full">
+              <label class="admin-form-label" for="siteLogo">رابط الشعار</label>
+              <input type="url" class="admin-form-input" id="siteLogo" placeholder="https://example.com/logo.png" dir="ltr" />
+              <div class="admin-form-hint">صورة الشعار (يفضل بصيغة PNG أو SVG شفافة)</div>
+            </div>
+
+            <div class="form-section-title">وسائل التواصل الاجتماعي</div>
+
+            <div class="form-grid">
+              <div class="admin-form-group">
+                <label class="admin-form-label" for="socialFacebook">فيسبوك</label>
+                <input type="url" class="admin-form-input" id="socialFacebook" placeholder="https://facebook.com/..." dir="ltr" />
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label" for="socialTwitter">تويتر / X</label>
+                <input type="url" class="admin-form-input" id="socialTwitter" placeholder="https://twitter.com/..." dir="ltr" />
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="admin-form-group">
+                <label class="admin-form-label" for="socialLinkedin">لينكد إن</label>
+                <input type="url" class="admin-form-input" id="socialLinkedin" placeholder="https://linkedin.com/..." dir="ltr" />
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label" for="socialInstagram">إنستغرام</label>
+                <input type="url" class="admin-form-input" id="socialInstagram" placeholder="https://instagram.com/..." dir="ltr" />
+              </div>
+            </div>
+            <div class="admin-form-group form-full">
+              <label class="admin-form-label" for="socialYoutube">يوتيوب</label>
+              <input type="url" class="admin-form-input" id="socialYoutube" placeholder="https://youtube.com/..." dir="ltr" />
+            </div>
+
+            <div class="form-section-title">معلومات الاتصال</div>
+
+            <div class="form-grid">
+              <div class="admin-form-group">
+                <label class="admin-form-label" for="contactEmail">البريد الإلكتروني الرئيسي</label>
+                <input type="email" class="admin-form-input" id="contactEmail" placeholder="contact@example.com" dir="ltr" />
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label" for="contactPhone">رقم الهاتف</label>
+                <input type="tel" class="admin-form-input" id="contactPhone" placeholder="+20xxxxxxxxx" dir="ltr" />
+              </div>
+            </div>
+            <div class="admin-form-group form-full">
+              <label class="admin-form-label" for="contactAddress">العنوان</label>
+              <input type="text" class="admin-form-input" id="contactAddress" placeholder="مصر، القاهرة..." />
+            </div>
+
+            <div class="settings-save-area">
+              <button type="submit" class="btn-primary" id="saveSettingsBtn">
+                <span class="btn-text">💾 حفظ الإعدادات</span>
+                <span class="btn-loader" style="display:none;width:18px;height:18px;border:2px solid rgba(255,255,255,0.25);border-top-color:#fff;border-radius:50%;animation:admin-spin .6s linear infinite;flex-shrink:0"></span>
+              </button>
+              <button type="button" class="btn-ghost" id="resetSettingsBtn">استعادة الافتراضي</button>
+            </div>
+
+            <div id="settingsMessage"></div>
+          </form>
+
         </div>
       </div>
     </div>
   </div>
+
+  <script type="module" src="/admin/settings.js"></script>
 </body>
 </html>
