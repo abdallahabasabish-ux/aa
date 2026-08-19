@@ -1,709 +1,508 @@
-/* ============================================
-   SERVICE DETAIL — EDITORIAL DEEP-DIVE
-   Light Theme · RTL · Premium
-   ============================================ */
-
-/* --- Breadcrumb --- */
-.sdet-breadcrumb {
-  padding: calc(var(--header-h) + 24px) 0 40px;
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.sdet-breadcrumb a {
-  color: var(--text-muted);
-  transition: color var(--fast);
-}
-
-.sdet-breadcrumb a:hover { color: var(--text-primary); }
-.sdet-breadcrumb .sep { color: var(--border-dark); }
-.sdet-breadcrumb .current { color: var(--text-primary); font-weight: 500; }
-
-/* --- Hero --- */
-.sdet-hero {
-  padding: 0 0 64px;
-  margin-bottom: 64px;
-  border-bottom: 1px solid var(--border-light);
-}
-
-.sdet-hero-inner {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.sdet-hero-top {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.sdet-category {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--accent);
-  background: var(--accent-soft);
-  padding: 4px 14px;
-  border-radius: 20px;
-}
-
-.sdet-delivery-tag {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.sdet-delivery-tag svg { width: 14px; height: 14px; }
-
-.sdet-hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-  margin-bottom: 20px;
-  max-width: 800px;
-}
-
-.sdet-hero-price {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 16px;
-  font-variant-numeric: tabular-nums;
-}
-
-.sdet-hero-price-free {
-  color: var(--accent);
-  font-size: 1.25rem;
-}
-
-.sdet-hero-price-currency {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  margin-inline-start: 4px;
-}
-
-.sdet-hero-cta {
-  margin-top: 8px;
-}
-
-/* --- Main Content Grid --- */
-.sdet-content {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 24px 100px;
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 48px;
-}
-
-.sdet-main { min-width: 0; }
-
-/* --- Section: Problem --- */
-.sdet-section { margin-bottom: 56px; }
-
-.sdet-section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 16px;
-}
-
-.sdet-section-label-line {
-  width: 20px;
-  height: 1.5px;
-  background: var(--accent);
-  border-radius: 1px;
-}
-
-.sdet-section-title {
-  font-family: var(--font-display);
-  font-size: 1.375rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.3;
-  margin-bottom: 20px;
-}
-
-.sdet-section-text {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
-  max-width: 640px;
-}
-
-.sdet-section-text p { margin-bottom: 16px; }
-.sdet-section-text p:last-child { margin-bottom: 0; }
-
-/* --- Section: Solution --- */
-.sdet-solution-block {
-  background: var(--bg-white);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 32px;
-  margin-bottom: 24px;
-}
-
-.sdet-solution-block p {
-  font-size: 0.9375rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
-  margin-bottom: 16px;
-}
-
-.sdet-solution-block p:last-child { margin-bottom: 0; }
-
-/* --- Section: Process --- */
-.sdet-process-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.sdet-process-step {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 0;
-  padding: 24px 0;
-  border-bottom: 1px solid var(--border-light);
-  position: relative;
-}
-
-.sdet-process-step:first-child { border-top: 1px solid var(--border-light); }
-
-.sdet-process-step::before {
-  content: '';
-  position: absolute;
-  inset-inline-start: 23px;
-  top: 48px;
-  bottom: 0;
-  width: 2px;
-  background: var(--border-light);
-}
-
-.sdet-process-step:last-child::before { display: none; }
-
-.sdet-process-num {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--bg-raised);
-  color: var(--text-dim);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 0.875rem;
-  font-weight: 700;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 1;
-}
-
-.sdet-process-content {
-  padding-top: 10px;
-}
-
-.sdet-process-title {
-  font-size: 1.0625rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-
-.sdet-process-desc {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-}
-
-/* --- Section: Features --- */
-.sdet-features-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.sdet-feature-card {
-  background: var(--bg-white);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 20px;
-  transition: border-color var(--fast);
-}
-
-.sdet-feature-card:hover { border-color: var(--border-dark); }
-
-.sdet-feature-title {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 6px;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.sdet-feature-icon {
-  width: 20px;
-  height: 20px;
-  color: var(--accent);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.sdet-feature-icon svg { width: 20px; height: 20px; }
-
-.sdet-feature-desc {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-}
-
-/* --- Section: Deliverables --- */
-.sdet-deliverables-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.sdet-deliverable-item {
-  display: flex;
-  gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border-light);
-  font-size: 0.9375rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.sdet-deliverable-item:last-child { border-bottom: none; }
-
-.sdet-deliverable-check {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--accent-soft);
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.sdet-deliverable-check svg { width: 12px; height: 12px; }
-
-/* --- FAQ --- */
-.sdet-faq-list {
-  border-top: 1px solid var(--border);
-  padding-top: 8px;
-}
-
-.sdet-faq-item {
-  border-bottom: 1px solid var(--border-light);
-}
-
-.sdet-faq-question {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 18px 4px;
-  font-family: var(--font);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-align: start;
-  transition: color var(--fast);
-}
-
-.sdet-faq-question:hover { color: var(--accent); }
-
-.sdet-faq-toggle {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--r-sm);
-  color: var(--text-dim);
-  flex-shrink: 0;
-  transition: transform var(--normal), color var(--fast), background var(--fast);
-}
-
-.sdet-faq-question:hover .sdet-faq-toggle {
-  background: var(--bg-raised);
-  color: var(--text-secondary);
-}
-
-.sdet-faq-toggle svg {
-  width: 18px;
-  height: 18px;
-  transition: transform var(--normal);
-}
-
-.sdet-faq-item--open .sdet-faq-toggle {
-  transform: rotate(180deg);
-  color: var(--accent);
-  background: var(--accent-soft);
-}
-
-.sdet-faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height var(--slow);
-}
-
-.sdet-faq-item--open .sdet-faq-answer {
-  max-height: 500px;
-}
-
-.sdet-faq-answer-inner {
-  padding: 0 0 18px;
-  font-size: 0.9375rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
-}
-
-/* --- Sidebar: CTA Card --- */
-.sdet-sidebar { position: sticky; top: calc(var(--header-h) + 24px); }
-
-.sdet-cta-card {
-  background: var(--text-primary);
-  border-radius: var(--r-lg);
-  padding: 36px 32px;
-  color: var(--text-inverse);
-  position: relative;
-  overflow: hidden;
-}
-
-.sdet-cta-card::before {
-  content: '';
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,102,0,0.12) 0%, transparent 70%);
-  top: -60px;
-  inset-inline-end: -60px;
-  pointer-events: none;
-}
-
-.sdet-cta-title {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--text-inverse);
-  margin-bottom: 10px;
-  line-height: 1.4;
-}
-
-.sdet-cta-desc {
-  font-size: 0.875rem;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.7;
-  margin-bottom: 28px;
-}
-
-.sdet-cta-price {
-  margin-bottom: 24px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.sdet-cta-price-label {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.4);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 6px;
-}
-
-.sdet-cta-price-value {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--text-inverse);
-  line-height: 1.1;
-  font-variant-numeric: tabular-nums;
-}
-
-.sdet-cta-price-currency {
-  font-size: 1rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.5);
-  margin-inline-start: 4px;
-}
-
-.sdet-cta-price-free {
-  font-size: 1.5rem;
-  color: var(--accent);
-}
-
-.sdet-cta-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 14px 24px;
-  font-family: var(--font);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  background: var(--accent);
-  border: none;
-  border-radius: var(--r-sm);
-  cursor: pointer;
-  transition: background var(--fast), transform 100ms ease;
-  text-decoration: none;
-}
-
-.sdet-cta-btn:hover { background: var(--accent-hover); }
-.sdet-cta-btn:active { transform: scale(0.98); }
-
-.sdet-cta-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
-
-/* Contact link */
-.sdet-contact-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 13px 24px;
-  font-family: var(--font);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.65);
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: var(--r-sm);
-  cursor: pointer;
-  transition: all var(--fast);
-  text-decoration: none;
-}
-
-.sdet-contact-link:hover {
-  color: var(--text-inverse);
-  border-color: rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.06);
-}
-
-.sdet-contact-link svg { width: 16px; height: 16px; }
-
-/* Delivery info in sidebar */
-.sdet-sidebar-info {
-  margin-top: 28px;
-  padding: 24px;
-  background: var(--bg-white);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-}
-
-.sdet-sidebar-info-title {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 16px;
-}
-
-.sdet-info-rows {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.sdet-info-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.8125rem;
-  gap: 8px;
-}
-
-.sdet-info-label {
-  color: var(--text-dim);
-}
-
-.sdet-info-value {
-  color: var(--text-primary);
-  font-weight: 500;
-  text-align: end;
-}
-
-.sdet-info-value a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: color var(--fast);
-}
-
-.sdet-info-value a:hover { color: var(--accent-hover); }
-
-/* --- 404 State --- */
-.sdet-404 {
-  padding: calc(var(--header-h) + 80px) 0 100px;
-  text-align: center;
-}
-
-.sdet-404-code {
-  font-family: var(--font-display);
-  font-size: 6rem;
-  font-weight: 800;
-  color: var(--border);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  margin-bottom: 16px;
-}
-
-.sdet-404-title {
-  font-size: 1.375rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-}
-
-.sdet-404-desc {
-  font-size: 0.9375rem;
-  color: var(--text-muted);
-  margin-bottom: 32px;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.7;
-}
-
-/* --- Loading --- */
-.sdet-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-}
-
-.sdet-loading-spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: sdet-spin 0.7s linear infinite;
-}
-
-@keyframes sdet-spin { to { transform: rotate(360deg); } }
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
-@media (max-width: 1023px) {
-  .sdet-content {
-    grid-template-columns: 1fr;
-    padding: 0 24px 72px;
-  }
-
-  .sdet-sidebar {
-    position: static;
-    order: -1;
-    margin-bottom: 48px;
-  }
-
-  .sdet-hero { margin-bottom: 48px; padding-bottom: 48px; }
-  .sdet-section { margin-bottom: 40px; }
-
-  .sdet-features-grid { grid-template-columns: 1fr; }
-
-  .sdet-cta-card { padding: 28px 24px; }
-
-  .sdet-cta-price-value { font-size: 1.75rem; }
-}
-
-@media (max-width: 639px) {
-  .sdet-hero { padding-bottom: 40px; margin-bottom: 40px; }
-
-  .sdet-hero-title { font-size: 1.625rem; }
-
-  .sdet-hero-price { font-size: 1.25rem; }
-  .sdet-hero-price-free { font-size: 1.125rem; }
-
-  .sdet-content { padding: 0 16px 56px; }
-
-  .sdet-hero-inner,
-  .sdet-breadcrumb { padding: 0 16px; }
-
-  .sdet-process-step {
-    grid-template-columns: 36px 1fr;
-  }
-
-  .sdet-process-num { width: 36px; height: 36px; font-size: 0.8125rem; }
-
-  .sdet-process-step::before { inset-inline-start: 17px; }
-
-  .sdet-section-title { font-size: 1.1875rem; }
-
-  .sdet-solution-block { padding: 24px 20px; }
-
-  .sdet-features-grid { gap: 8px; }
-
-  .sdet-faq-question { font-size: 0.875rem; padding: 16px 4px; }
-
-  .sdet-faq-answer-inner { padding: 0 0 14px; font-size: 0.875rem; }
-
-  .sdet-deliverable-item { font-size: 0.875rem; padding: 12px 0; gap: 12px; }
-
-  .sdet-deliverable-check { width: 20px; height: 20px; }
-  .sdet-deliverable-check svg { width: 10px; height: 10px; }
-}
-
-@media (min-width: 1280px) {
-  .sdet-content { gap: 64px; }
-  .sdet-hero-title { font-size: clamp(2.25rem, 3.5vw, 3.25rem); }
-  .sdet-hero-price { font-size: 1.75rem; }
-  .sdet-section-title { font-size: 1.5rem; }
-  .sdet-section-text { font-size: 1.0625rem; }
-  .sdet-feature-title { font-size: 1rem; }
-  .sdet-feature-desc { font-size: 0.9375rem; }
-  .sdet-deliverable-item { font-size: 1rem; }
-  .sdet-faq-question { font-size: 1rem; }
-  .sdet-faq-answer-inner { font-size: 1rem; }
-  .sdet-cta-card { padding: 44px 36px; }
-  .sdet-cta-price-value { font-size: 2.25rem; }
-  .sdet-cta-title { font-size: 1.25rem; }
-}
-
-/* ============================================
-   REDUCED MOTION
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-duration: 0.0ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .sdet-process-step::before { display: none; }
-  .sdet-faq-toggle { transform: none; }
-  .sdet-faq-item--open .sdet-faq-answer { max-height: none; overflow: visible; transition: none; }
-  .product-card:hover,
-  .svc-item:hover { transform: none; }
-}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>جارٍ التحميل... — عبدالله عباس</title>
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="" id="metaDesc" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/service-detail.css" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" />
+        <span>عبدالله عباس</span>
+      </a>
+      <div class="nav-links">
+        <a href="/services" class="nav-link">الخدمات</a>
+        <a href="/products" class="nav-link">المنتجات</a>
+        <a href="/portfolio" class="nav-link">الأعمال</a>
+        <a href="/blog" class="nav-link">المقالات</a>
+        <a href="/about" class="nav-link">عن عبدالله</a>
+      </div>
+      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-mobile-panel" id="mobilePanel">
+      <div class="nav-mobile-header">
+        <span class="nav-mobile-brand">عبدالله عباس</span>
+        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/services" class="nav-mobile-link">الخدمات</a>
+        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog" class="nav-mobile-link">المقالات</a>
+        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+      </div>
+      <div class="nav-mobile-footer">
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN ===== -->
+  <main id="pageRoot">
+    <!-- Loading -->
+    <div class="sdet-loading" id="loadingState">
+      <div class="sdet-loading-spinner"></div>
+    </div>
+
+    <!-- 404 -->
+    <div class="sdet-404" id="notFoundState" style="display:none">
+      <div class="sdet-404-code">404</div>
+      <h1 class="sdet-404-title">الخدمة غير موجودة</h1>
+      <p class="sdet-404-desc">الخدمة التي تبحث عنها غير موجودة أو تم حذفها.</p>
+      <a href="/services" class="btn btn--primary btn--sm">جميع الخدمات</a>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div id="contentRoot" style="display:none"></div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" id="siteFooter" style="display:none">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">
+            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
+            <div class="footer-brand-name">عبدالله عباس</div>
+          </div>
+          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+        </div>
+        <div>
+          <div class="footer-heading">الخدمات</div>
+          <div class="footer-links">
+            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger" class="footer-link">بلوجر</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">المحتوى</div>
+          <div class="footer-links">
+            <a href="/products" class="footer-link">المنتجات</a>
+            <a href="/portfolio" class="footer-link">الأعمال</a>
+            <a href="/blog" class="footer-link">المقالات</a>
+            <a href="/about" class="footer-link">عن عبدالله</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">تواصل</div>
+          <div class="footer-links">
+            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+            <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
+            <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
+        <span class="footer-copy">جميع الحقوق محفوظة</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { db } from "/js/firebase-init.js";
+    import { collection, query, where, limit, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { isSafeUrl, escapeHtml } from "/js/security.js";
+
+    // ===== NAV (مطابق) =====
+    const nav = document.getElementById("siteNav");
+    function handleNavScroll() { nav.classList.toggle("site-nav--scrolled", window.scrollY > 40); }
+    window.addEventListener("scroll", handleNavScroll, { passive: true });
+    handleNavScroll();
+
+    const mobileToggle = document.getElementById("mobileToggle");
+    const mobileClose = document.getElementById("mobileClose");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobilePanel = document.getElementById("mobilePanel");
+    function openMobile() { mobileMenu.classList.add("nav-mobile-menu--open"); mobilePanel.classList.add("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "false"); mobileToggle.setAttribute("aria-expanded", "true"); document.body.style.overflow = "hidden"; }
+    function closeMobile() { mobileMenu.classList.remove("nav-mobile-menu--open"); mobilePanel.classList.remove("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "true"); mobileToggle.setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; }
+    mobileToggle.addEventListener("click", openMobile);
+    mobileClose.addEventListener("click", closeMobile);
+    mobileMenu.addEventListener("click", (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMobile(); });
+    mobilePanel.querySelectorAll(".nav-mobile-link, .nav-mobile-cta").forEach((l) => l.addEventListener("click", closeMobile));
+
+    // ===== HELPERS =====
+    const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
+    const CATEGORY_MAP = {
+      "web-development": "تطوير مواقع",
+      "web-design": "تصميم مواقع",
+      "seo": "تحسين محركات البحث",
+      "graphic-design": "تصميم جرافيك",
+      "wordpress": "ووردبريس",
+      "blogger": "بلوجر",
+      "other": "أخرى",
+    };
+
+    function getSlug() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("slug");
+    }
+
+    function formatDate(d) {
+      if (!d) return "";
+      const date = d instanceof Timestamp ? d.toDate() : new Date(d);
+      return date.toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
+    }
+
+    // ===== بناء الصفحة =====
+    function buildBreadcrumb(service) {
+      const navEl = document.createElement("nav");
+      navEl.className = "sdet-breadcrumb";
+      navEl.setAttribute("aria-label", "مسار التنقل");
+      navEl.innerHTML = `
+        <a href="/">الرئيسية</a>
+        <span class="sep">/</span>
+        <a href="/services">الخدمات</a>
+        <span class="sep">/</span>
+        <span class="current">${escapeHtml(service.title)}</span>
+      `;
+      return navEl;
+    }
+
+    function buildHero(service) {
+      const section = document.createElement("section");
+      section.className = "sdet-hero";
+
+      const inner = document.createElement("div");
+      inner.className = "sdet-hero-inner";
+
+      // الجزء العلوي (تصنيف + مدة التسليم)
+      const top = document.createElement("div");
+      top.className = "sdet-hero-top";
+
+      if (service.category) {
+        const cat = document.createElement("span");
+        cat.className = "sdet-category";
+        cat.textContent = CATEGORY_MAP[service.category] || service.category;
+        top.appendChild(cat);
+      }
+
+      if (service.deliveryTime) {
+        const delivery = document.createElement("span");
+        delivery.className = "sdet-delivery-tag";
+        delivery.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0ZM12 12a9 9 0 1 0 9 9 9.004 9.004 0 0 0-9-9 9.004 9.004 0 0 0-9-9ZM12.75 12.75h.008v.008h-.008v-.008ZM6 12.75a6.75 6.75 0 1 1 13.5 0 6.75 6.75 0 0 1-13.5 0Z"/></svg>
+          ${escapeHtml(service.deliveryTime)}
+        `;
+        top.appendChild(delivery);
+      }
+
+      inner.appendChild(top);
+
+      // العنوان
+      const title = document.createElement("h1");
+      title.className = "sdet-hero-title";
+      title.textContent = service.title || "—";
+      inner.appendChild(title);
+
+      // السعر
+      const price = document.createElement("div");
+      price.className = "sdet-hero-price";
+      if (service.price > 0) {
+        price.textContent = `${Number(service.price).toLocaleString("ar-EG")} `;
+        const curr = document.createElement("span");
+        curr.className = "sdet-hero-price-currency";
+        curr.textContent = CURRENCY_MAP[service.currency] || service.currency || "";
+        price.appendChild(curr);
+      } else {
+        price.className = "sdet-hero-price sdet-hero-price-free";
+        price.textContent = "مجاني";
+      }
+      inner.appendChild(price);
+
+      // زر التواصل
+      const cta = document.createElement("div");
+      cta.className = "sdet-hero-cta";
+      const btn = document.createElement("a");
+      btn.href = "/contact";
+      btn.className = "btn btn--primary";
+      btn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+        تواصل لطلب الخدمة
+      `;
+      cta.appendChild(btn);
+      inner.appendChild(cta);
+
+      section.appendChild(inner);
+      return section;
+    }
+
+    function buildContent(service) {
+      const div = document.createElement("div");
+      div.className = "sdet-content";
+
+      // العمود الرئيسي
+      const main = document.createElement("div");
+      main.className = "sdet-main";
+
+      // الوصف التفصيلي
+      if (service.description) {
+        const section = document.createElement("div");
+        section.className = "sdet-section";
+
+        const label = document.createElement("div");
+        label.className = "sdet-section-label";
+        label.innerHTML = `<span class="sdet-section-label-line"></span><span>عن الخدمة</span>`;
+        section.appendChild(label);
+
+        const text = document.createElement("div");
+        text.className = "sdet-section-text";
+        const paragraphs = service.description.split("\n").filter(p => p.trim());
+        paragraphs.forEach(p => {
+          const para = document.createElement("p");
+          para.textContent = p;
+          text.appendChild(para);
+        });
+        section.appendChild(text);
+        main.appendChild(section);
+      }
+
+      // المميزات
+      if (service.features && service.features.length > 0) {
+        const section = document.createElement("div");
+        section.className = "sdet-section";
+
+        const label = document.createElement("div");
+        label.className = "sdet-section-label";
+        label.innerHTML = `<span class="sdet-section-label-line"></span><span>المميزات</span>`;
+        section.appendChild(label);
+
+        const grid = document.createElement("div");
+        grid.className = "sdet-features-grid";
+
+        service.features.forEach(f => {
+          const card = document.createElement("div");
+          card.className = "sdet-feature-card";
+
+          const title = document.createElement("div");
+          title.className = "sdet-feature-title";
+          title.innerHTML = `
+            <span class="sdet-feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></span>
+            ${escapeHtml(f)}
+          `;
+          card.appendChild(title);
+          grid.appendChild(card);
+        });
+
+        section.appendChild(grid);
+        main.appendChild(section);
+      }
+
+      // الشريط الجانبي
+      const sidebar = document.createElement("aside");
+      sidebar.className = "sdet-sidebar";
+
+      // بطاقة الطلب
+      const card = document.createElement("div");
+      card.className = "sdet-cta-card";
+
+      const ctaTitle = document.createElement("div");
+      ctaTitle.className = "sdet-cta-title";
+      ctaTitle.textContent = "اطلب الخدمة الآن";
+      card.appendChild(ctaTitle);
+
+      const ctaDesc = document.createElement("div");
+      ctaDesc.className = "sdet-cta-desc";
+      ctaDesc.textContent = "احصل على عرض سعر مخصص وتفاصيل تنفيذ الخدمة حسب احتياجك.";
+      card.appendChild(ctaDesc);
+
+      const priceSection = document.createElement("div");
+      priceSection.className = "sdet-cta-price";
+
+      const priceLabel = document.createElement("div");
+      priceLabel.className = "sdet-cta-price-label";
+      priceLabel.textContent = "السعر";
+      priceSection.appendChild(priceLabel);
+
+      const priceValue = document.createElement("div");
+      if (service.price > 0) {
+        priceValue.className = "sdet-cta-price-value";
+        priceValue.textContent = `${Number(service.price).toLocaleString("ar-EG")}`;
+        const curr = document.createElement("span");
+        curr.className = "sdet-cta-price-currency";
+        curr.textContent = CURRENCY_MAP[service.currency] || service.currency || "";
+        priceValue.appendChild(curr);
+      } else {
+        priceValue.className = "sdet-cta-price-free";
+        priceValue.textContent = "مجاني";
+      }
+      priceSection.appendChild(priceValue);
+      card.appendChild(priceSection);
+
+      const btn = document.createElement("a");
+      btn.href = "/contact";
+      btn.className = "sdet-cta-btn";
+      btn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.27 3.27a4 4 0 0 1 5.66 5.66h11.14a4 4 0 0 1 0 5.66 5.66H8.93a4 4 0 0 1-5.66-5.66l-3.27-3.27a4 4 0 0 1 0-5.66 5.66 4 0 0 1 5.66 0Z"/></svg>
+        طلب الخدمة
+      `;
+      card.appendChild(btn);
+
+      const contactLink = document.createElement("a");
+      contactLink.href = "/contact";
+      contactLink.className = "sdet-contact-link";
+      contactLink.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+        تواصل مباشر
+      `;
+      card.appendChild(contactLink);
+
+      sidebar.appendChild(card);
+
+      // معلومات إضافية
+      if (service.deliveryTime || service.category) {
+        const info = document.createElement("div");
+        info.className = "sdet-sidebar-info";
+
+        const infoTitle = document.createElement("div");
+        infoTitle.className = "sdet-sidebar-info-title";
+        infoTitle.textContent = "معلومات إضافية";
+        info.appendChild(infoTitle);
+
+        const rows = document.createElement("div");
+        rows.className = "sdet-info-rows";
+
+        if (service.deliveryTime) {
+          const row = document.createElement("div");
+          row.className = "sdet-info-row";
+          row.innerHTML = `
+            <span class="sdet-info-label">مدة التنفيذ</span>
+            <span class="sdet-info-value">${escapeHtml(service.deliveryTime)}</span>
+          `;
+          rows.appendChild(row);
+        }
+
+        if (service.category) {
+          const row = document.createElement("div");
+          row.className = "sdet-info-row";
+          row.innerHTML = `
+            <span class="sdet-info-label">التصنيف</span>
+            <span class="sdet-info-value">${CATEGORY_MAP[service.category] || service.category}</span>
+          `;
+          rows.appendChild(row);
+        }
+
+        if (service.updatedAt) {
+          const row = document.createElement("div");
+          row.className = "sdet-info-row";
+          row.innerHTML = `
+            <span class="sdet-info-label">آخر تحديث</span>
+            <span class="sdet-info-value">${formatDate(service.updatedAt)}</span>
+          `;
+          rows.appendChild(row);
+        }
+
+        info.appendChild(rows);
+        sidebar.appendChild(info);
+      }
+
+      div.appendChild(main);
+      div.appendChild(sidebar);
+      return div;
+    }
+
+    function buildPage(service) {
+      const root = document.getElementById("contentRoot");
+      root.appendChild(buildBreadcrumb(service));
+      root.appendChild(buildHero(service));
+      root.appendChild(buildContent(service));
+      root.style.display = "block";
+    }
+
+    function updateSEO(service) {
+      const title = service.seoTitle || service.title || "الخدمة";
+      const desc = service.metaDescription || service.shortDescription || "";
+      document.title = `${title} — عبدالله عباس`;
+      document.getElementById("metaDesc").setAttribute("content", desc);
+
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+      canonical.href = `https://abdallahsst.web.app/service-detail?slug=${service.slug}`;
+
+      const old = document.getElementById("serviceStructuredData");
+      if (old) old.remove();
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = "serviceStructuredData";
+      const sd = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": service.seoTitle || service.title,
+        "description": service.metaDescription || service.shortDescription,
+        "provider": {
+          "@type": "Person",
+          "name": "عبدالله عباس"
+        },
+        "url": `https://abdallahsst.web.app/service-detail?slug=${service.slug}`
+      };
+      if (service.price > 0) {
+        sd.offers = {
+          "@type": "Offer",
+          "price": service.price,
+          "priceCurrency": service.currency || "EGP",
+        };
+      }
+      script.textContent = JSON.stringify(sd);
+      document.head.appendChild(script);
+    }
+
+    function show404() {
+      document.getElementById("loadingState").style.display = "none";
+      document.getElementById("notFoundState").style.display = "block";
+      document.title = "الخدمة غير موجودة — عبدالله عباس";
+    }
+
+    async function loadService() {
+      const slug = getSlug();
+      if (!slug) { show404(); return; }
+
+      try {
+        const q = query(collection(db, "services"), where("slug", "==", slug), limit(1));
+        const snap = await getDocs(q);
+        if (snap.empty) { show404(); return; }
+
+        const docSnap = snap.docs[0];
+        const service = { id: docSnap.id, ...docSnap.data() };
+        if (service.active === false) { show404(); return; }
+
+        updateSEO(service);
+        buildPage(service);
+        document.getElementById("siteFooter").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (error) {
+        console.error("خطأ في تحميل الخدمة:", error);
+        show404();
+      }
+    }
+
+    loadService();
+  </script>
+</body>
+</html>
