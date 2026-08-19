@@ -130,7 +130,7 @@
     import { collection, query, where, limit, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { isSafeUrl, escapeHtml } from "/js/security.js";
 
-    // ===== NAV (مطابق) =====
+    // ===== NAV =====
     const nav = document.getElementById("siteNav");
     function handleNavScroll() { nav.classList.toggle("site-nav--scrolled", window.scrollY > 40); }
     window.addEventListener("scroll", handleNavScroll, { passive: true });
@@ -171,7 +171,7 @@
       return date.toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
     }
 
-    // ===== بناء الصفحة =====
+    // ===== BUILD BREADCRUMB =====
     function buildBreadcrumb(service) {
       const navEl = document.createElement("nav");
       navEl.className = "sdet-breadcrumb";
@@ -186,6 +186,7 @@
       return navEl;
     }
 
+    // ===== BUILD HERO =====
     function buildHero(service) {
       const section = document.createElement("section");
       section.className = "sdet-hero";
@@ -193,7 +194,6 @@
       const inner = document.createElement("div");
       inner.className = "sdet-hero-inner";
 
-      // الجزء العلوي (تصنيف + مدة التسليم)
       const top = document.createElement("div");
       top.className = "sdet-hero-top";
 
@@ -216,16 +216,14 @@
 
       inner.appendChild(top);
 
-      // العنوان
       const title = document.createElement("h1");
       title.className = "sdet-hero-title";
       title.textContent = service.title || "—";
       inner.appendChild(title);
 
-      // السعر
       const price = document.createElement("div");
-      price.className = "sdet-hero-price";
       if (service.price > 0) {
+        price.className = "sdet-hero-price";
         price.textContent = `${Number(service.price).toLocaleString("ar-EG")} `;
         const curr = document.createElement("span");
         curr.className = "sdet-hero-price-currency";
@@ -237,7 +235,6 @@
       }
       inner.appendChild(price);
 
-      // زر التواصل
       const cta = document.createElement("div");
       cta.className = "sdet-hero-cta";
       const btn = document.createElement("a");
@@ -254,15 +251,15 @@
       return section;
     }
 
+    // ===== BUILD CONTENT =====
     function buildContent(service) {
       const div = document.createElement("div");
       div.className = "sdet-content";
 
-      // العمود الرئيسي
       const main = document.createElement("div");
       main.className = "sdet-main";
 
-      // الوصف التفصيلي
+      // الوصف
       if (service.description) {
         const section = document.createElement("div");
         section.className = "sdet-section";
@@ -315,11 +312,10 @@
         main.appendChild(section);
       }
 
-      // الشريط الجانبي
+      // ===== SIDEBAR =====
       const sidebar = document.createElement("aside");
       sidebar.className = "sdet-sidebar";
 
-      // بطاقة الطلب
       const card = document.createElement("div");
       card.className = "sdet-cta-card";
 
@@ -428,6 +424,7 @@
       return div;
     }
 
+    // ===== BUILD PAGE =====
     function buildPage(service) {
       const root = document.getElementById("contentRoot");
       root.appendChild(buildBreadcrumb(service));
@@ -436,6 +433,7 @@
       root.style.display = "block";
     }
 
+    // ===== UPDATE SEO =====
     function updateSEO(service) {
       const title = service.seoTitle || service.title || "الخدمة";
       const desc = service.metaDescription || service.shortDescription || "";
@@ -473,12 +471,14 @@
       document.head.appendChild(script);
     }
 
+    // ===== 404 =====
     function show404() {
       document.getElementById("loadingState").style.display = "none";
       document.getElementById("notFoundState").style.display = "block";
       document.title = "الخدمة غير موجودة — عبدالله عباس";
     }
 
+    // ===== LOAD SERVICE =====
     async function loadService() {
       const slug = getSlug();
       if (!slug) { show404(); return; }
