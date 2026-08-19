@@ -371,10 +371,10 @@
       const empty = document.getElementById("emptyState");
 
       try {
+        // [تم التعديل] إزالة orderBy("createdAt", "desc") لتجنب الحاجة إلى فهرس مركب
         const q = query(
           collection(db, "services"),
-          orderBy("sortOrder", "asc"),
-          orderBy("createdAt", "desc")
+          orderBy("sortOrder", "asc")
         );
 
         const snapshot = await getDocs(q);
@@ -393,7 +393,7 @@
           list.appendChild(createServiceItem(svc, i));
         });
       } catch (error) {
-        console.error("Error loading services:", error);
+        console.error("Error loading services:", error); // عرض الخطأ في الكونسول للتشخيص
         loader.style.display = "none";
         empty.classList.add("services-empty--visible");
         empty.querySelector(".services-empty-title").textContent = "حدث خطأ في تحميل الخدمات";
