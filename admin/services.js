@@ -1,3 +1,15 @@
+/**
+ * services.js
+ * إدارة الخدمات — CRUD كامل.
+ *
+ * - قراءة الخدمات من Firestore
+ * - إضافة / تعديل / حذف
+ * - بحث فوري
+ * - تبديل active/featured
+ * - توليد slug تلقائي
+ * - لا innerHTML مع بيانات ديناميكية
+ */
+
 import { requireAdmin } from "/js/auth-guard.js";
 import { auth, db } from "/js/firebase-init.js";
 import { logout } from "/js/auth.js";
@@ -607,6 +619,4 @@ requireAdmin({ loginUrl: "/login.html" })
     document.body.style.visibility = "visible";
     return init(user);
   })
-  .catch(() => {
-    document.body.style.visibility = "visible";
-  });
+  .catch(() => {});
