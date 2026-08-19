@@ -9,27 +9,97 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://abdallahsst.firebaseio.com" />
+  <link rel="preconnect" href="https://firestore.googleapis.com" />
+
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/main.css" />
   <link rel="stylesheet" href="/css/service-detail.css" />
+
+  <style>
+    /* رسالة نجاح الإضافة للحقيبة */
+    .cart-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text-primary);
+      color: var(--text-inverse);
+      padding: 14px 28px;
+      border-radius: var(--r);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      pointer-events: none;
+      max-width: 90vw;
+    }
+    .cart-toast.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .cart-toast a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: underline;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    .cart-toast .close-toast {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      font-size: 1.2rem;
+      pointer-events: auto;
+      padding: 0 4px;
+      transition: color 0.2s;
+    }
+    .cart-toast .close-toast:hover {
+      color: #fff;
+    }
+    @media (max-width: 480px) {
+      .cart-toast {
+        font-size: 0.8125rem;
+        padding: 12px 18px;
+        bottom: 16px;
+        width: calc(100% - 32px);
+        text-align: center;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- ===== TOAST ===== -->
+  <div class="cart-toast" id="cartToast">
+    <span id="toastMessage">✅ تم الإضافة!</span>
+    <a href="/cart.html">🛒 عرض الحقيبة</a>
+    <button class="close-toast" id="closeToast" aria-label="إغلاق">✕</button>
+  </div>
 
   <!-- ===== NAVIGATION ===== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
-      <a href="/" class="nav-brand">
-        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" />
+      <a href="/index.html" class="nav-brand">
+        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" width="34" height="34" />
         <span>عبدالله عباس</span>
       </a>
       <div class="nav-links">
-        <a href="/services" class="nav-link">الخدمات</a>
-        <a href="/products" class="nav-link">المنتجات</a>
-        <a href="/portfolio" class="nav-link">الأعمال</a>
-        <a href="/blog" class="nav-link">المقالات</a>
-        <a href="/about" class="nav-link">عن عبدالله</a>
+        <a href="/services.html" class="nav-link">الخدمات</a>
+        <a href="/products.html" class="nav-link">المنتجات</a>
+        <a href="/portfolio.html" class="nav-link">الأعمال</a>
+        <a href="/blog.html" class="nav-link">المقالات</a>
+        <a href="/about.html" class="nav-link">عن عبدالله</a>
       </div>
-      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <a href="/contact.html" class="nav-cta">تواصل معي</a>
       <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
       </button>
@@ -45,36 +115,33 @@
         </button>
       </div>
       <div class="nav-mobile-links">
-        <a href="/services" class="nav-mobile-link">الخدمات</a>
-        <a href="/products" class="nav-mobile-link">المنتجات</a>
-        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
-        <a href="/blog" class="nav-mobile-link">المقالات</a>
-        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
-        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/services.html" class="nav-mobile-link">الخدمات</a>
+        <a href="/products.html" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio.html" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog.html" class="nav-mobile-link">المقالات</a>
+        <a href="/about.html" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact.html" class="nav-mobile-link">تواصل معي</a>
         <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
       </div>
       <div class="nav-mobile-footer">
-        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+        <a href="/contact.html" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
       </div>
     </div>
   </div>
 
   <!-- ===== MAIN ===== -->
   <main id="pageRoot">
-    <!-- Loading -->
     <div class="sdet-loading" id="loadingState">
       <div class="sdet-loading-spinner"></div>
     </div>
 
-    <!-- 404 -->
     <div class="sdet-404" id="notFoundState" style="display:none">
       <div class="sdet-404-code">404</div>
       <h1 class="sdet-404-title">الخدمة غير موجودة</h1>
       <p class="sdet-404-desc">الخدمة التي تبحث عنها غير موجودة أو تم حذفها.</p>
-      <a href="/services" class="btn btn--primary btn--sm">جميع الخدمات</a>
+      <a href="/services.html" class="btn btn--primary btn--sm">جميع الخدمات</a>
     </div>
 
-    <!-- المحتوى الرئيسي -->
     <div id="contentRoot" style="display:none"></div>
   </main>
 
@@ -84,7 +151,7 @@
       <div class="footer-inner">
         <div>
           <div class="footer-brand">
-            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
+            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" width="38" height="38" />
             <div class="footer-brand-name">عبدالله عباس</div>
           </div>
           <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
@@ -92,26 +159,26 @@
         <div>
           <div class="footer-heading">الخدمات</div>
           <div class="footer-links">
-            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
-            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
-            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
-            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
-            <a href="/services/blogger" class="footer-link">بلوجر</a>
+            <a href="/services/web-development.html" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design.html" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo.html" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress.html" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger.html" class="footer-link">بلوجر</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">المحتوى</div>
           <div class="footer-links">
-            <a href="/products" class="footer-link">المنتجات</a>
-            <a href="/portfolio" class="footer-link">الأعمال</a>
-            <a href="/blog" class="footer-link">المقالات</a>
-            <a href="/about" class="footer-link">عن عبدالله</a>
+            <a href="/products.html" class="footer-link">المنتجات</a>
+            <a href="/portfolio.html" class="footer-link">الأعمال</a>
+            <a href="/blog.html" class="footer-link">المقالات</a>
+            <a href="/about.html" class="footer-link">عن عبدالله</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">تواصل</div>
           <div class="footer-links">
-            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/contact.html" class="footer-link">أرسل رسالة</a>
             <a href="/login.html" class="footer-link">تسجيل الدخول</a>
             <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
             <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
@@ -124,6 +191,11 @@
       </div>
     </div>
   </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 
   <script type="module">
     import { db } from "/js/firebase-init.js";
@@ -148,6 +220,22 @@
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMobile(); });
     mobilePanel.querySelectorAll(".nav-mobile-link, .nav-mobile-cta").forEach((l) => l.addEventListener("click", closeMobile));
 
+    // ===== TOAST =====
+    function showToast(message) {
+      const toast = document.getElementById("cartToast");
+      const msg = document.getElementById("toastMessage");
+      msg.textContent = message;
+      toast.classList.add("visible");
+      clearTimeout(window.toastTimeout);
+      window.toastTimeout = setTimeout(() => {
+        toast.classList.remove("visible");
+      }, 5000);
+    }
+
+    document.getElementById("closeToast").addEventListener("click", () => {
+      document.getElementById("cartToast").classList.remove("visible");
+    });
+
     // ===== HELPERS =====
     const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
     const CATEGORY_MAP = {
@@ -171,15 +259,39 @@
       return date.toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
     }
 
+    // ===== ADD TO CART =====
+    function addToCart(service) {
+      let cart = JSON.parse(localStorage.getItem("serviceCart") || "[]");
+      
+      const existing = cart.find(item => item.id === service.id);
+      if (existing) {
+        showToast("⚠️ هذه الخدمة موجودة بالفعل في حقيبة الطلبات.");
+        return;
+      }
+      
+      cart.push({
+        id: service.id,
+        title: service.title,
+        slug: service.slug,
+        price: service.price || 0,
+        currency: service.currency || "EGP",
+        image: service.image || "",
+        quantity: 1
+      });
+      
+      localStorage.setItem("serviceCart", JSON.stringify(cart));
+      showToast(`✅ تم إضافة "${service.title}" إلى حقيبة الطلبات`);
+    }
+
     // ===== BUILD BREADCRUMB =====
     function buildBreadcrumb(service) {
       const navEl = document.createElement("nav");
       navEl.className = "sdet-breadcrumb";
       navEl.setAttribute("aria-label", "مسار التنقل");
       navEl.innerHTML = `
-        <a href="/">الرئيسية</a>
+        <a href="/index.html">الرئيسية</a>
         <span class="sep">/</span>
-        <a href="/services">الخدمات</a>
+        <a href="/services.html">الخدمات</a>
         <span class="sep">/</span>
         <span class="current">${escapeHtml(service.title)}</span>
       `;
@@ -235,23 +347,11 @@
       }
       inner.appendChild(price);
 
-      const cta = document.createElement("div");
-      cta.className = "sdet-hero-cta";
-      const btn = document.createElement("a");
-      btn.href = "/contact";
-      btn.className = "btn btn--primary";
-      btn.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
-        تواصل لطلب الخدمة
-      `;
-      cta.appendChild(btn);
-      inner.appendChild(cta);
-
       section.appendChild(inner);
       return section;
     }
 
-    // ===== BUILD CONTENT =====
+    // ===== BUILD CONTENT (مع زر الحقيبة) =====
     function buildContent(service) {
       const div = document.createElement("div");
       div.className = "sdet-content";
@@ -326,7 +426,7 @@
 
       const ctaDesc = document.createElement("div");
       ctaDesc.className = "sdet-cta-desc";
-      ctaDesc.textContent = "احصل على عرض سعر مخصص وتفاصيل تنفيذ الخدمة حسب احتياجك.";
+      ctaDesc.textContent = "أضف الخدمة إلى حقيبة الطلبات ثم أكمل الطلب.";
       card.appendChild(ctaDesc);
 
       const priceSection = document.createElement("div");
@@ -352,20 +452,22 @@
       priceSection.appendChild(priceValue);
       card.appendChild(priceSection);
 
-      // ===== ⭐ الزر مع SVG مُصلح (أيقونة بسيطة وآمنة) =====
-      const btn = document.createElement("a");
-      btn.href = "/contact";
+      // ===== زر "أضف إلى حقيبة الطلبات" =====
+      const btn = document.createElement("button");
       btn.className = "sdet-cta-btn";
+      btn.type = "button";
       btn.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
         </svg>
-        طلب الخدمة
+        أضف إلى حقيبة الطلبات
       `;
+      btn.addEventListener("click", () => addToCart(service));
       card.appendChild(btn);
 
+      // زر "تواصل مباشر" كخيار بديل
       const contactLink = document.createElement("a");
-      contactLink.href = "/contact";
+      contactLink.href = "/contact.html";
       contactLink.className = "sdet-contact-link";
       contactLink.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
@@ -445,7 +547,7 @@
 
       let canonical = document.querySelector('link[rel="canonical"]');
       if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
-      canonical.href = `https://abdallahsst.web.app/service-detail?slug=${service.slug}`;
+      canonical.href = `https://www.abdallahabas.com/service-detail.html?slug=${service.slug}`;
 
       const old = document.getElementById("serviceStructuredData");
       if (old) old.remove();
@@ -461,7 +563,7 @@
           "@type": "Person",
           "name": "عبدالله عباس"
         },
-        "url": `https://abdallahsst.web.app/service-detail?slug=${service.slug}`
+        "url": `https://www.abdallahabas.com/service-detail.html?slug=${service.slug}`
       };
       if (service.price > 0) {
         sd.offers = {
