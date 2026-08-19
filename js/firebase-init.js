@@ -1,3 +1,13 @@
+/**
+ * firebase-init.js
+ * تهيئة Firebase — الملف الوحيد الذي يحتوي على إعدادات المشروع.
+ *
+ * ملاحظة أمنية:
+ * Firebase Web API Key ليست secret بحد ذاتها.
+ * الأمان الحقيقي يتحقق عبر Security Rules + App Check + Custom Claims.
+ * لا تضع هنا: Service Account, Private Keys, Admin SDK secrets.
+ */
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import { getAuth, connectAuthEmulator } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 import { getFirestore, connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
@@ -14,23 +24,16 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-// Analytics — يعمل فقط في بيئة الإنتاج (https)
-try {
-  if (location.protocol === "https:" || location.hostname === "localhost") {
-    const { getAnalytics } = await import("https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js");
-    const analytics = getAnalytics(app);
-  }
-} catch {
-  // Analytics غير متاح — لا يؤثر على الوظائف الأساسية
-}
-
 // -----------------------------------------------
 // Emulator — فعّل فقط أثناء التطوير المحلي
 // -----------------------------------------------
+// Uncomment الأسطر التالية عند التطوير مع Firebase Emulator:
+//
 // if (location.hostname === "localhost") {
 //   connectAuthEmulator(auth, "http://localhost:9099");
 //   connectFirestoreEmulator(db, "localhost", 8080);
