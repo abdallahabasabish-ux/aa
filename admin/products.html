@@ -13,8 +13,7 @@
 <body style="visibility:hidden" data-admin="true">
 
   <div class="admin-layout">
-
-    <!-- ==================== SIDEBAR ==================== -->
+    <!-- ===== SIDEBAR ===== -->
     <aside class="admin-sidebar" id="adminSidebar">
       <div class="sidebar-brand">
         <div class="sidebar-brand-name">عبدالله عباس</div>
@@ -53,6 +52,10 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>
           <span>العملاء</span>
         </a>
+        <a href="/admin/messages.html" class="sidebar-nav-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+          <span>الرسائل</span>
+        </a>
         <div class="sidebar-nav-section">النظام</div>
         <a href="/admin/settings.html" class="sidebar-nav-item">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
@@ -67,10 +70,10 @@
       </div>
     </aside>
 
-    <!-- ==================== OVERLAY ==================== -->
+    <!-- ===== OVERLAY ===== -->
     <div class="admin-overlay" id="adminOverlay"></div>
 
-    <!-- ==================== MAIN ==================== -->
+    <!-- ===== MAIN ===== -->
     <div class="admin-main">
       <header class="admin-header">
         <div class="header-right">
@@ -114,7 +117,7 @@
     </div>
   </div>
 
-  <!-- ==================== MODAL: Add/Edit Product ==================== -->
+  <!-- ===== MODAL ===== -->
   <div class="admin-modal-overlay" id="modalOverlay"></div>
   <div class="admin-modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitleText">
     <div class="modal-header">
@@ -137,7 +140,6 @@
         <div class="admin-form-group">
           <label class="admin-form-label" for="prodTitleEn">اسم المنتج <span>(إنجليزي)</span></label>
           <input type="text" class="admin-form-input" id="prodTitleEn" maxlength="150" placeholder="e.g. Professional Blogger Template" dir="ltr" />
-          <div class="admin-form-error" id="prodTitleEnErr"></div>
         </div>
       </div>
 
@@ -145,7 +147,7 @@
         <div class="admin-form-group">
           <label class="admin-form-label" for="prodSlug">الرابط الثابت (Slug)</label>
           <input type="text" class="admin-form-input" id="prodSlug" maxlength="120" placeholder="professional-blogger-template" dir="ltr" />
-          <div class="admin-form-hint">يُنشأ تلقائيًا من الاسم العربي</div>
+          <div class="admin-form-hint">يُنشأ تلقائياً من الاسم العربي</div>
           <div class="admin-form-error" id="prodSlugErr"></div>
         </div>
         <div class="admin-form-group">
@@ -177,7 +179,7 @@
           <label class="admin-form-label" for="prodStatus">حالة المنتج</label>
           <select class="admin-form-select" id="prodStatus">
             <option value="available">متاح</option>
-            <option value="coming-soon">قريبًا</option>
+            <option value="coming-soon">قريباً</option>
             <option value="draft">مسودة</option>
             <option value="discontinued">متوقف</option>
           </select>
@@ -199,12 +201,13 @@
         <label class="admin-form-label" for="prodDescription">الوصف التفصيلي <span>(عربي)</span></label>
         <textarea class="admin-form-textarea" id="prodDescription" rows="4" placeholder="شرح تفصيلي للمنتج ومميزاته..."></textarea>
       </div>
+
       <div class="admin-form-group form-full">
         <label class="admin-form-label" for="prodDescriptionEn">الوصف التفصيلي <span>(إنجليزي)</span></label>
         <textarea class="admin-form-textarea" id="prodDescriptionEn" rows="4" placeholder="Detailed description..." dir="ltr"></textarea>
       </div>
 
-      <div class="form-section-title">المميزات <span style="font-weight:400;text-transform:none;letter-spacing:0">— سطر لكل ميزة</span></div>
+      <div class="form-section-title">المميزات</div>
       <div class="form-grid">
         <div class="admin-form-group">
           <label class="admin-form-label" for="prodFeatures">المميزات <span>(عربي)</span></label>
@@ -254,16 +257,13 @@
       <div class="admin-form-group">
         <label class="admin-form-label" for="prodDemoUrl">رابط المعاينة (Demo)</label>
         <input type="url" class="admin-form-input" id="prodDemoUrl" placeholder="https://demo.example.com" dir="ltr" />
-        <div class="admin-form-hint">رابط لمعاينة حية للمنتج</div>
       </div>
 
       <div class="admin-form-group">
         <label class="admin-form-label" for="prodImageUrl">رابط الصورة الرئيسية</label>
-        <div class="image-url-group">
-          <input type="url" class="admin-form-input" id="prodImageUrl" placeholder="https://example.com/image.webp" dir="ltr" />
-          <div class="image-preview-box" id="imagePreview">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>
-          </div>
+        <input type="url" class="admin-form-input" id="prodImageUrl" placeholder="https://example.com/image.webp" dir="ltr" />
+        <div class="image-preview-box" id="imagePreview">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>
         </div>
       </div>
 
@@ -273,7 +273,7 @@
         <div class="admin-form-group">
           <label class="admin-form-label" for="prodSortOrder">ترتيب العرض</label>
           <input type="number" class="admin-form-input" id="prodSortOrder" min="0" max="999" value="0" dir="ltr" />
-          <div class="admin-form-hint">الرقم الأصغر يظهر أولًا</div>
+          <div class="admin-form-hint">الرقم الأصغر يظهر أولاً</div>
         </div>
         <div class="admin-form-group" style="justify-content:center">
           <div class="form-toggle-row" style="width:100%">
@@ -304,7 +304,7 @@
 
       <div class="admin-form-group">
         <label class="admin-form-label" for="prodSeoTitle">عنوان SEO <span>(عربي)</span></label>
-        <input type="text" class="admin-form-input" id="prodSeoTitle" maxlength="70" placeholder="يظهر في نتائج البحث (70 حرفًا)" />
+        <input type="text" class="admin-form-input" id="prodSeoTitle" maxlength="70" placeholder="يظهر في نتائج البحث (70 حرفاً)" />
       </div>
       <div class="admin-form-group">
         <label class="admin-form-label" for="prodSeoTitleEn">عنوان SEO <span>(إنجليزي)</span></label>
@@ -312,7 +312,7 @@
       </div>
       <div class="admin-form-group">
         <label class="admin-form-label" for="prodMetaDesc">وصف Meta <span>(عربي)</span></label>
-        <textarea class="admin-form-textarea" id="prodMetaDesc" rows="2" maxlength="160" placeholder="وصف مختصر لنتائج البحث (160 حرفًا)"></textarea>
+        <textarea class="admin-form-textarea" id="prodMetaDesc" rows="2" maxlength="160" placeholder="وصف مختصر لنتائج البحث (160 حرفاً)"></textarea>
       </div>
       <div class="admin-form-group">
         <label class="admin-form-label" for="prodMetaDescEn">وصف Meta <span>(إنجليزي)</span></label>
@@ -329,7 +329,7 @@
     </div>
   </div>
 
-  <!-- ==================== CONFIRM DIALOG ==================== -->
+  <!-- ===== CONFIRM ===== -->
   <div class="admin-modal-overlay" id="confirmOverlay" style="z-index:280"></div>
   <div class="confirm-dialog" id="confirmDialog" style="display:none" role="alertdialog" aria-labelledby="confirmTitle">
     <div class="confirm-dialog-title" id="confirmTitle">حذف المنتج</div>
