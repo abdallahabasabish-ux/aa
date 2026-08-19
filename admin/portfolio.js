@@ -14,9 +14,9 @@ import {
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
-// -----------------------------------------------
+// ===============================
 // DOM
-// -----------------------------------------------
+// ===============================
 const sidebar = document.getElementById("adminSidebar");
 const overlay = document.getElementById("adminOverlay");
 const hamburger = document.getElementById("hamburgerBtn");
@@ -48,15 +48,15 @@ const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
 const imageUrlInput = document.getElementById("pfImageUrl");
 const imagePreview = document.getElementById("imagePreview");
 
-// -----------------------------------------------
+// ===============================
 // State
-// -----------------------------------------------
+// ===============================
 let allItems = [];
 let deleteTargetId = null;
 
-// -----------------------------------------------
+// ===============================
 // Sidebar
-// -----------------------------------------------
+// ===============================
 function openSidebar() {
   sidebar.classList.add("admin-sidebar--open");
   overlay.classList.add("admin-overlay--visible");
@@ -69,19 +69,28 @@ function closeSidebar() {
 }
 hamburger.addEventListener("click", openSidebar);
 overlay.addEventListener("click", closeSidebar);
-window.matchMedia("(min-width: 1024px)").addEventListener("change", (e) => { if (e.matches) closeSidebar(); });
+window.matchMedia("(min-width: 1024px)").addEventListener("change", (e) => {
+  if (e.matches) closeSidebar();
+});
 
 logoutBtn.addEventListener("click", async () => {
   const r = await logout();
   if (r.ok) window.location.replace("/login.html");
 });
 
-// -----------------------------------------------
+// ===============================
 // Slug Generator
-// -----------------------------------------------
+// ===============================
 function generateSlug(text) {
   if (!text) return "";
-  return text.trim().toLowerCase().replace(/\s+/g, "-").replace(/[^\u0621-\u064Aa-z0-9-]/g, "").replace(/-+/g, "-").replace(/^-|-$/g, "").slice(0, 100);
+  return text
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\u0621-\u064Aa-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 100);
 }
 
 document.getElementById("pfTitle").addEventListener("input", (e) => {
@@ -99,9 +108,9 @@ document.getElementById("pfSlug").addEventListener("input", (e) => {
   }
 });
 
-// -----------------------------------------------
+// ===============================
 // Image Preview
-// -----------------------------------------------
+// ===============================
 imageUrlInput.addEventListener("input", () => {
   const url = imageUrlInput.value.trim();
   imagePreview.textContent = "";
@@ -115,20 +124,22 @@ imageUrlInput.addEventListener("input", () => {
       imagePreview.classList.add("image-preview-box--has-image");
     });
     img.addEventListener("error", () => {
-      imagePreview.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
+      imagePreview.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>';
     });
     img.src = url;
   } else {
-    imagePreview.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
+    imagePreview.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>';
   }
 });
 
-// -----------------------------------------------
+// ===============================
 // Modal
-// -----------------------------------------------
+// ===============================
 function openModal(isEdit = false) {
   modalTitleText.textContent = isEdit ? "تعديل العمل" : "إضافة عمل";
-  document.getElementById("modalSaveBtn").querySelector(".btn-text").textContent = isEdit ? "تحديث العمل" : "حفظ العمل";
+  document.querySelector("#modalSaveBtn .btn-text").textContent = isEdit ? "تحديث العمل" : "حفظ العمل";
   modalOverlay.style.display = "block";
   requestAnimationFrame(() => {
     modalOverlay.classList.add("admin-modal-overlay--visible");
@@ -158,12 +169,13 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// -----------------------------------------------
+// ===============================
 // Confirm
-// -----------------------------------------------
+// ===============================
 function openConfirm(id, name) {
   deleteTargetId = id;
-  document.getElementById("confirmDesc").textContent = `هل أنت متأكد من حذف العمل "${name}"؟ لا يمكن التراجع عن هذا الإجراء.`;
+  document.getElementById("confirmDesc").textContent =
+    `هل أنت متأكد من حذف العمل "${name}"؟ لا يمكن التراجع عن هذا الإجراء.`;
   confirmOverlay.style.display = "block";
   confirmDialog.style.display = "block";
   requestAnimationFrame(() => confirmOverlay.classList.add("admin-modal-overlay--visible"));
@@ -189,31 +201,32 @@ confirmDeleteBtn.addEventListener("click", async () => {
     allItems = allItems.filter((p) => p.id !== deleteTargetId);
     renderItems(allItems);
     closeConfirm();
-  } catch {
-    alert("حدث خطأ أثناء الحذف.");
+  } catch (error) {
+    alert("حدث خطأ أثناء الحذف: " + error.message);
   }
   confirmDeleteBtn.disabled = false;
 });
 
-// -----------------------------------------------
+// ===============================
 // Form Helpers
-// -----------------------------------------------
+// ===============================
 function resetForm() {
   form.reset();
   document.getElementById("portfolioId").value = "";
   document.getElementById("pfSlug").removeAttribute("data-manual");
   document.getElementById("pfActive").checked = true;
   document.getElementById("pfSortOrder").value = "0";
-  form.querySelectorAll(".admin-form-error").forEach((el) => { el.textContent = ""; });
+  form.querySelectorAll(".admin-form-error").forEach((el) => (el.textContent = ""));
   form.querySelectorAll(".admin-form-input--error, .admin-form-textarea--error").forEach((el) => {
     el.classList.remove("admin-form-input--error", "admin-form-textarea--error");
   });
-  imagePreview.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
+  imagePreview.innerHTML =
+    '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>';
   imagePreview.className = "image-preview-box";
 }
 
 function getFormData() {
-  const tags = document.getElementById("pfTags").value.split(",").map(s => s.trim()).filter(Boolean);
+  const tags = document.getElementById("pfTags").value.split(",").map((s) => s.trim()).filter(Boolean);
   const imageUrl = document.getElementById("pfImageUrl").value.trim();
   const liveUrl = document.getElementById("pfLiveUrl").value.trim();
 
@@ -233,7 +246,6 @@ function getFormData() {
     seoTitle: document.getElementById("pfSeoTitle").value.trim(),
     seoTitleEn: document.getElementById("pfSeoTitleEn").value.trim(),
     metaDescription: document.getElementById("pfMetaDesc").value.trim(),
-    metaDescriptionEn: document.getElementById("pfMetaDescEn").value.trim(),
   };
 }
 
@@ -246,7 +258,7 @@ function validateForm() {
 }
 
 function setFormErrors(errors) {
-  form.querySelectorAll(".admin-form-error").forEach((el) => { el.textContent = ""; });
+  form.querySelectorAll(".admin-form-error").forEach((el) => (el.textContent = ""));
   form.querySelectorAll(".admin-form-input--error, .admin-form-textarea--error").forEach((el) => {
     el.classList.remove("admin-form-input--error", "admin-form-textarea--error");
   });
@@ -279,14 +291,15 @@ function fillForm(item) {
   document.getElementById("pfSeoTitle").value = item.seoTitle || "";
   document.getElementById("pfSeoTitleEn").value = item.seoTitleEn || "";
   document.getElementById("pfMetaDesc").value = item.metaDescription || "";
-  document.getElementById("pfMetaDescEn").value = item.metaDescriptionEn || "";
   imageUrlInput.dispatchEvent(new Event("input"));
 }
 
-// -----------------------------------------------
-// Save
-// -----------------------------------------------
+// ===============================
+// Save (Create / Update)
+// ===============================
 modalSaveBtn.addEventListener("click", async () => {
+  console.log("🟢 زر الحفظ تم الضغط عليه");
+
   const { valid, errors } = validateForm();
   if (!valid) {
     setFormErrors(errors);
@@ -299,6 +312,7 @@ modalSaveBtn.addEventListener("click", async () => {
   const id = document.getElementById("portfolioId").value;
   const isEdit = !!id;
 
+  // إظهار حالة التحميل
   const btnText = modalSaveBtn.querySelector(".btn-text");
   const btnLoader = modalSaveBtn.querySelector(".btn-loader");
   btnText.style.display = "none";
@@ -306,65 +320,97 @@ modalSaveBtn.addEventListener("click", async () => {
   modalSaveBtn.disabled = true;
 
   try {
+    // تحقق من المستخدم والصلاحية
+    if (!auth.currentUser) {
+      throw new Error("يجب تسجيل الدخول كمدير.");
+    }
+    const tokenResult = await auth.currentUser.getIdTokenResult();
+    if (!tokenResult.claims.admin) {
+      throw new Error("ليس لديك صلاحية Admin. تأكد من تعيين الصلاحيات.");
+    }
+
+    console.log("✅ المستخدم مصرح له:", auth.currentUser.uid);
+    console.log("📦 البيانات المرسلة:", data);
+
     if (isEdit) {
-      await updateDoc(doc(db, "portfolio", id), { ...data, updatedAt: serverTimestamp() });
-      const idx = allItems.findIndex(p => p.id === id);
+      await updateDoc(doc(db, "portfolio", id), {
+        ...data,
+        updatedAt: serverTimestamp(),
+      });
+      const idx = allItems.findIndex((p) => p.id === id);
       if (idx !== -1) allItems[idx] = { ...allItems[idx], ...data, updatedAt: new Date() };
     } else {
-      const docRef = await addDoc(collection(db, "portfolio"), { ...data, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
-      allItems.push({ id: docRef.id, ...data, createdAt: new Date(), updatedAt: new Date() });
+      const docRef = await addDoc(collection(db, "portfolio"), {
+        ...data,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+      allItems.push({
+        id: docRef.id,
+        ...data,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
     }
+
     renderItems(allItems);
     closeModal();
-  } catch {
-    alert("حدث خطأ أثناء الحفظ.");
+    alert("✅ تم الحفظ بنجاح!");
+  } catch (error) {
+    console.error("❌ خطأ في الحفظ:", error);
+    alert(`❌ فشل الحفظ: ${error.message || "خطأ غير معروف"}`);
   }
 
+  // إعادة الزر
   btnText.style.display = "";
   btnLoader.style.display = "none";
   modalSaveBtn.disabled = false;
 });
 
-// -----------------------------------------------
+// ===============================
 // Add Button
-// -----------------------------------------------
+// ===============================
 addBtn.addEventListener("click", () => {
   resetForm();
   openModal(false);
   setTimeout(() => document.getElementById("pfTitle").focus(), 300);
 });
 
-// -----------------------------------------------
+// ===============================
 // Toggle
-// -----------------------------------------------
+// ===============================
 async function toggleField(id, field, value) {
   try {
     await updateDoc(doc(db, "portfolio", id), { [field]: value, updatedAt: serverTimestamp() });
-    const item = allItems.find(p => p.id === id);
+    const item = allItems.find((p) => p.id === id);
     if (item) item[field] = value;
-  } catch {
-    alert("حدث خطأ أثناء التحديث.");
+  } catch (error) {
+    alert("حدث خطأ أثناء التحديث: " + error.message);
     renderItems(allItems);
   }
 }
 
-// -----------------------------------------------
+// ===============================
 // Search
-// -----------------------------------------------
+// ===============================
 searchInput.addEventListener("input", () => {
   const q = searchInput.value.trim().toLowerCase();
-  if (!q) { renderItems(allItems); return; }
-  const filtered = allItems.filter(p =>
-    (p.title || "").toLowerCase().includes(q) ||
-    (p.slug || "").toLowerCase().includes(q) ||
-    (p.tags || []).some(t => t.toLowerCase().includes(q))
+  if (!q) {
+    renderItems(allItems);
+    return;
+  }
+  const filtered = allItems.filter(
+    (p) =>
+      (p.title || "").toLowerCase().includes(q) ||
+      (p.slug || "").toLowerCase().includes(q) ||
+      (p.tags || []).some((t) => t.toLowerCase().includes(q))
   );
   renderItems(filtered);
 });
 
-// -----------------------------------------------
+// ===============================
 // Render
-// -----------------------------------------------
+// ===============================
 function renderItems(items) {
   tableWrapper.textContent = "";
   if (items.length === 0) {
@@ -381,9 +427,10 @@ function renderItems(items) {
 
   const table = document.createElement("table");
   table.className = "admin-table";
+
   const thead = document.createElement("thead");
   const hRow = document.createElement("tr");
-  ["المشروع", "الوسوم", "نشط", "مميز", "إجراءات"].forEach(t => {
+  ["المشروع", "الوسوم", "نشط", "مميز", "إجراءات"].forEach((t) => {
     const th = document.createElement("th");
     th.textContent = t;
     hRow.appendChild(th);
@@ -392,10 +439,10 @@ function renderItems(items) {
   table.appendChild(thead);
 
   const tbody = document.createElement("tbody");
-  items.forEach(item => {
+  items.forEach((item) => {
     const tr = document.createElement("tr");
 
-    // المشروع (صورة + اسم)
+    // المشروع
     const tdName = document.createElement("td");
     const div = document.createElement("div");
     div.className = "product-image-cell";
@@ -408,7 +455,8 @@ function renderItems(items) {
       img.loading = "lazy";
       thumb.appendChild(img);
     } else {
-      thumb.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
+      thumb.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>';
     }
     const nameSpan = document.createElement("span");
     nameSpan.className = "service-title-text";
@@ -424,7 +472,7 @@ function renderItems(items) {
     tagsContainer.style.display = "flex";
     tagsContainer.style.gap = "4px";
     tagsContainer.style.flexWrap = "wrap";
-    (item.tags || []).slice(0, 3).forEach(t => {
+    (item.tags || []).slice(0, 3).forEach((t) => {
       const tag = document.createElement("span");
       tag.className = "category-badge";
       tag.textContent = t;
@@ -477,14 +525,20 @@ function renderItems(items) {
     const editBtn = document.createElement("button");
     editBtn.className = "btn-ghost";
     editBtn.type = "button";
-    editBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/></svg>`;
+    editBtn.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/></svg>';
     editBtn.setAttribute("aria-label", "تعديل");
-    editBtn.addEventListener("click", () => { resetForm(); fillForm(item); openModal(true); });
+    editBtn.addEventListener("click", () => {
+      resetForm();
+      fillForm(item);
+      openModal(true);
+    });
 
     const delBtn = document.createElement("button");
     delBtn.className = "btn-danger";
     delBtn.type = "button";
-    delBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/></svg>`;
+    delBtn.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/></svg>';
     delBtn.setAttribute("aria-label", "حذف");
     delBtn.addEventListener("click", () => openConfirm(item.id, item.title));
 
@@ -500,37 +554,39 @@ function renderItems(items) {
   tableWrapper.appendChild(table);
 }
 
-// -----------------------------------------------
+// ===============================
 // Fetch
-// -----------------------------------------------
+// ===============================
 async function fetchItems() {
   try {
     const q = query(collection(db, "portfolio"), orderBy("sortOrder", "asc"), orderBy("createdAt", "desc"));
     const snap = await getDocs(q);
-    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  } catch {
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  } catch (error) {
+    console.error("خطأ في جلب الأعمال:", error);
     return [];
   }
 }
 
-// -----------------------------------------------
+// ===============================
 // User Info
-// -----------------------------------------------
+// ===============================
 function setUserInfo(user) {
   const name = user.displayName || user.email || "مدير";
   headerUserName.textContent = name;
   headerAvatar.textContent = name.trim().charAt(0);
 }
 
-// -----------------------------------------------
+// ===============================
 // Init
-// -----------------------------------------------
+// ===============================
 async function init(user) {
   setUserInfo(user);
   allItems = await fetchItems();
   renderItems(allItems);
   pageLoader.style.display = "none";
   portfolioContent.style.display = "block";
+
   if (new URLSearchParams(location.search).get("action") === "new") {
     resetForm();
     openModal(false);
