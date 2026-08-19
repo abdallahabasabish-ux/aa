@@ -264,6 +264,7 @@ export async function resetPassword(email) {
   }
 }
 
+
 /**
  * التحقق مما إذا كان المستخدم الحالي لديه صلاحية admin.
  *
@@ -280,4 +281,101 @@ export async function isAdmin(forceRefresh = false) {
   } catch {
     return false;
   }
+}
+// ============================================
+// دوال تسجيل الدخول عبر مقدمي الخدمات (Google, GitHub)
+// ============================================
+
+import {
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  signInWithPopup,
+  sendEmailVerification,
+  updateProfile,
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+/**
+ * تسجيل الدخول عبر Google
+ */
+export async function loginWithGoogle() {
+  try {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    await logAuditEvent("login_google_success", {
+      uid: user.uid,
+      emailPrefix: user.email ? user.email.split("@")[0] : "unknown",
+    });
+
+    return {
+      ok: true,
+      user,
+      isNewUser: result._tokenResponse?.isNewUser || false,
+    };
+  } catch (error) {
+    await logAuditEvent("login_google_failure", {
+      errorCode: error.code,
+    });
+    return mapAuthError(error);
+  }
+}
+
+/**
+ * تسجيل الدخول عبر GitHub
+ */
+export async function loginWithGithub() {
+  try {
+    const provider = new GithubAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    await logAuditEvent("login_github_success", {
+      uid: user.uid,
+      emailPrefix: user.email ? user.email.split("@")[0] : "unknown",
+    });
+
+    return {
+      ok: true,
+      user,
+      isNewUser: result._tokenResponse?.isNewUser || false,
+    };
+  } catch (error) {
+    await logAuditEvent("login_github_failure", {
+      errorCode: error.code,
+    });
+    return mapAuthError(error);
+  }
+}
+
+/**
+ * إرسال رابط تفعيل البريد الإلكتروني
+ */
+export async function sendVerificationEmail() {
+  const user = auth.currentUser;
+  if (!user) {
+    return { ok: false, userMessage: "يجب تسجيل الدخول أولاً." };
+  }
+
+  try {
+    await sendEmailVerification(user);
+    return {
+      ok: true,
+      userMessage: "تم إرسال رابط التفعيل إلى بريدك الإلكتروني.",
+    };
+  } catch (error) {
+    return mapAuthError(error);
+  }
+}
+
+/**
+ * التحقق من أن البريد الإلكتروني مفعّل
+ */
+export async function isEmailVerified() {
+  const user = auth.currentUser;
+  if (!user) return false;
+
+  // إعادة تحميل بيانات المستخدم للتأكد من أحدث حالة
+  await user.reload();
+  return user.emailVerified;
 }
