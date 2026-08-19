@@ -132,7 +132,17 @@ function openModal(message) {
   if (message.phone) {
     grid.appendChild(createDetailItem("الهاتف", message.phone));
   }
+  if (message.websiteUrl) {
+  const urlItem = createDetailItem("رابط الموقع", message.websiteUrl);
 
+  const valEl = urlItem.querySelector('.detail-value');
+  if (valEl) {
+    valEl.className = 'detail-value detail-value--link';
+    valEl.innerHTML = `<a href="${message.websiteUrl}" target="_blank" rel="noopener noreferrer" style="color:var(--admin-accent);text-decoration:underline;">${message.websiteUrl}</a>`;
+  }
+  grid.appendChild(urlItem);
+  }
+  
   if (message.budget) {
     grid.appendChild(createDetailItem("الميزانية", message.budget));
   }
