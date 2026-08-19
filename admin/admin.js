@@ -1,9 +1,6 @@
 /**
- * admin.js
- * لوحة التحكم — منطق النظرة العامة.
- *
- * يُحمّل بيانات حقيقية من Firestore فقط.
- * لا يُنشئ بيانات وهمية أبدًا.
+ * admin.js — لوحة التحكم الرئيسية (محسّنة)
+ * تعرض إحصائيات حقيقية باستخدام getCountFromServer
  */
 
 import { requireAdmin } from "/js/auth-guard.js";
@@ -20,9 +17,9 @@ import {
   Timestamp,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
-// -----------------------------------------------
-// DOM References
-// -----------------------------------------------
+// ===============================
+// DOM
+// ===============================
 const sidebar = document.getElementById("adminSidebar");
 const overlay = document.getElementById("adminOverlay");
 const hamburger = document.getElementById("hamburgerBtn");
@@ -32,63 +29,41 @@ const dashContent = document.getElementById("dashboardContent");
 const headerAvatar = document.getElementById("headerAvatar");
 const headerUserName = document.getElementById("headerUserName");
 const ordersWrapper = document.getElementById("ordersTableWrapper");
+const refreshBtn = document.getElementById("refreshStatsBtn"); // سنضيفه في HTML لاحقاً
 
-// -----------------------------------------------
-// Sidebar Toggle (Mobile)
-// -----------------------------------------------
+// ===============================
+// Sidebar
+// ===============================
 function openSidebar() {
   sidebar.classList.add("admin-sidebar--open");
   overlay.classList.add("admin-overlay--visible");
   document.body.style.overflow = "hidden";
 }
-
 function closeSidebar() {
   sidebar.classList.remove("admin-sidebar--open");
   overlay.classList.remove("admin-overlay--visible");
   document.body.style.overflow = "";
 }
-
 hamburger.addEventListener("click", openSidebar);
 overlay.addEventListener("click", closeSidebar);
-
-// إغلاق الـ sidebar عند تغيير حجم الشاشة لسطح المكتب
-const mql = window.matchMedia("(min-width: 1024px)");
-mql.addEventListener("change", (e) => {
+window.matchMedia("(min-width: 1024px)").addEventListener("change", (e) => {
   if (e.matches) closeSidebar();
 });
 
-// -----------------------------------------------
-// Logout
-// -----------------------------------------------
 logoutBtn.addEventListener("click", async () => {
-  const result = await logout();
-  if (result.ok) {
-    window.location.replace("/login.html");
-  }
+  const r = await logout();
+  if (r.ok) window.location.replace("/login.html");
 });
 
-// -----------------------------------------------
+// ===============================
 // Helpers
-// -----------------------------------------------
-
-/**
- * تنسيق التاريخ بالعربية.
- * @param {Timestamp|Date|null} date
- * @returns {string}
- */
+// ===============================
 function formatDate(date) {
   if (!date) return "—";
   const d = date instanceof Timestamp ? date.toDate() : new Date(date);
-  return d.toLocaleDateString("ar-EG", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  return d.toLocaleDateString("ar-EG", { year: "numeric", month: "short", day: "numeric" });
 }
 
-/**
- * خريطة الحالات — لون + نص عربي.
- */
 const STATUS_MAP = {
   new: { label: "جديد", cls: "new" },
   reviewing: { label: "قيد المراجعة", cls: "reviewing" },
@@ -106,73 +81,62 @@ function getStatusBadge(status) {
   return span;
 }
 
-/**
- * خريطة أنواع الطلبات.
- */
-const TYPE_MAP = {
-  service: "خدمة",
-  product: "منتج",
-};
-
-// -----------------------------------------------
-// Fetch Stats (using getCountFromServer — efficient)
-// -----------------------------------------------
+// ===============================
+// Fetch Stats (محسّن)
+// ===============================
 async function fetchStats() {
-  const results = { services: 0, products: 0, newOrders: 0, customers: 0 };
+  const results = { 
+    services: 0, 
+    products: 0, 
+    newOrders: 0, 
+    unreadMessages: 0,
+    totalOrders: 0
+  };
 
+  // الخدمات النشطة
   try {
     const snap = await getCountFromServer(
       query(collection(db, "services"), where("active", "==", true))
     );
     results.services = snap.data().count;
-  } catch { /* مجموعة غير موجودة → 0 */ }
+  } catch {}
 
+  // المنتجات النشطة
   try {
     const snap = await getCountFromServer(
       query(collection(db, "products"), where("active", "==", true))
     );
     results.products = snap.data().count;
-  } catch { /* مجموعة غير موجودة → 0 */ }
+  } catch {}
 
+  // الطلبات الجديدة (status == "new")
   try {
     const snap = await getCountFromServer(
       query(collection(db, "orders"), where("status", "==", "new"))
     );
     results.newOrders = snap.data().count;
-  } catch { /* مجموعة غير موجودة → 0 */ }
+  } catch {}
 
-  // عدد العملاء — نحسب من مجموعة user_products (كل uid فريد)
-  // أو من Auth list (يحتاج Admin SDK) — نستخدم طريقة بسيطة
+  // الرسائل غير المقروءة (type == "contact" AND read != true)
   try {
-    const snap = await getCountFromServer(collection(db, "user_products"));
-    // ملاحظة: هذا عدد السجلات وليس المستخدمين الفريدين
-    // لحساب المستخدمين الفريدين نحتاج Cloud Function
-    // لذلك نعرض العدد كـ "سجل" أو نتركه 0 حتى يُبنى بشكل صحيح
-    results.customers = snap.data().count;
-  } catch { /* مجموعة غير موجودة → 0 */ }
+    const snap = await getCountFromServer(
+      query(collection(db, "orders"), where("type", "==", "contact"), where("read", "!=", true))
+    );
+    results.unreadMessages = snap.data().count;
+  } catch {}
+
+  // إجمالي الطلبات (للعرض في الجدول)
+  try {
+    const snap = await getCountFromServer(collection(db, "orders"));
+    results.totalOrders = snap.data().count;
+  } catch {}
 
   return results;
 }
 
-/**
- * عرض الأرقام في البطاقات.
- */
-function renderStats(stats) {
-  const setVal = (id, val) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.textContent = val.toLocaleString("ar-EG");
-  };
-
-  setVal("statServices", stats.services);
-  setVal("statProducts", stats.products);
-  setVal("statNewOrders", stats.newOrders);
-  setVal("statCustomers", stats.customers);
-}
-
-// -----------------------------------------------
-// Fetch Recent Orders
-// -----------------------------------------------
+// ===============================
+// Fetch Recent Orders (جميع الطلبات، آخر 5)
+// ===============================
 async function fetchRecentOrders() {
   try {
     const q = query(
@@ -187,76 +151,59 @@ async function fetchRecentOrders() {
   }
 }
 
-/**
- * عرض جدول الطلبات أو حالة فارغة.
- * يستخدم createElement — لا innerHTML مع بيانات ديناميكية.
- */
-function renderOrders(orders) {
-  // مسح المحتوى السابق
-  ordersWrapper.textContent = "";
+// ===============================
+// Render
+// ===============================
+function renderStats(stats) {
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val.toLocaleString("ar-EG");
+  };
+  setVal("statServices", stats.services);
+  setVal("statProducts", stats.products);
+  setVal("statNewOrders", stats.newOrders);
+  setVal("statUnreadMessages", stats.unreadMessages);
+}
 
+function renderOrders(orders) {
+  ordersWrapper.textContent = "";
   if (orders.length === 0) {
-    ordersWrapper.appendChild(createEmptyState());
+    ordersWrapper.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/></svg></div>
+        <div class="empty-state-title">لا توجد طلبات بعد</div>
+        <div class="empty-state-desc">ستظهر الطلبات الواردة هنا فور تسجيلها</div>
+      </div>
+    `;
     return;
   }
 
   const table = document.createElement("table");
   table.className = "admin-table";
 
-  // Header
   const thead = document.createElement("thead");
-  const headRow = document.createElement("tr");
-
-  const headers = ["رقم الطلب", "العميل", "النوع", "الحالة", "التاريخ"];
-  headers.forEach((text) => {
-    const th = document.createElement("th");
-    th.textContent = text;
-    headRow.appendChild(th);
-  });
-
-  thead.appendChild(headRow);
+  thead.innerHTML = `<tr><th>رقم الطلب</th><th>العميل</th><th>النوع</th><th>الحالة</th><th>التاريخ</th></tr>`;
   table.appendChild(thead);
 
-  // Body
   const tbody = document.createElement("tbody");
-
   orders.forEach((order) => {
-    const normalizedOrder = {
+    const normalized = {
       ...order,
       customerName: order.customerName || order.name || order.customer?.name || "—",
-      customerEmail: order.customerEmail || order.email || order.customer?.email || "—",
-      customerPhone: order.customerPhone || order.phone || order.customer?.phone || "—",
-      title: order.title || order.subject || order.service || order.productTitle || order.message || "—",
       type: order.type || (order.service ? "service" : order.product ? "product" : "contact"),
       status: order.status || "new",
     };
     const tr = document.createElement("tr");
-
-    const tdNum = document.createElement("td");
-    const numSpan = document.createElement("span");
-    numSpan.className = "order-number";
-    numSpan.textContent = normalizedOrder.orderNumber || normalizedOrder.id.slice(0, 8);
-    tdNum.appendChild(numSpan);
-    tr.appendChild(tdNum);
-
-    const tdCustomer = document.createElement("td");
-    tdCustomer.textContent = normalizedOrder.customerName || "—";
-    tr.appendChild(tdCustomer);
-
-    const tdType = document.createElement("td");
-    tdType.textContent = TYPE_MAP[normalizedOrder.type] || normalizedOrder.type || "—";
-    tr.appendChild(tdType);
-
-    // الحالة
-    const tdStatus = document.createElement("td");
-    tdStatus.appendChild(getStatusBadge(order.status));
-    tr.appendChild(tdStatus);
-
-    // التاريخ
-    const tdDate = document.createElement("td");
-    tdDate.textContent = formatDate(order.createdAt);
-    tr.appendChild(tdDate);
-
+    tr.innerHTML = `
+      <td><span class="order-number">${order.orderNumber || order.id.slice(0, 8)}</span></td>
+      <td>${normalized.customerName}</td>
+      <td>${normalized.type === "contact" ? "رسالة" : normalized.type === "service" ? "خدمة" : "منتج"}</td>
+      <td></td>
+      <td>${formatDate(order.createdAt)}</td>
+    `;
+    // إضافة حالة الطلب
+    const statusTd = tr.querySelectorAll("td")[3];
+    statusTd.appendChild(getStatusBadge(order.status));
     tbody.appendChild(tr);
   });
 
@@ -264,83 +211,58 @@ function renderOrders(orders) {
   ordersWrapper.appendChild(table);
 }
 
-/**
- * إنشاء حالة فارغة.
- */
-function createEmptyState() {
-  const div = document.createElement("div");
-  div.className = "empty-state";
-
-  const iconDiv = document.createElement("div");
-  iconDiv.className = "empty-state-icon";
-  iconDiv.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/></svg>`;
-
-  const title = document.createElement("div");
-  title.className = "empty-state-title";
-  title.textContent = "لا توجد طلبات بعد";
-
-  const desc = document.createElement("div");
-  desc.className = "empty-state-desc";
-  desc.textContent = "ستظهر الطلبات الواردة هنا فور تسجيلها";
-
-  div.appendChild(iconDiv);
-  div.appendChild(title);
-  div.appendChild(desc);
-
-  return div;
-}
-
-// -----------------------------------------------
-// Set User Info in Header
-// -----------------------------------------------
-function setUserInfo(user) {
-  const name = user.displayName || user.email || "مدير";
-  headerUserName.textContent = name;
-
-  // الحرف الأول من الاسم
-  const initial = name.trim().charAt(0);
-  headerAvatar.textContent = initial;
-}
-
-// -----------------------------------------------
-// Initialize Dashboard
-// -----------------------------------------------
-async function initDashboard(user) {
-  setUserInfo(user);
-
+// ===============================
+// Load All Data
+// ===============================
+async function loadDashboard() {
   try {
-    // تحميل الإحصائيات والطلبات بالتوازي
     const [stats, orders] = await Promise.all([
       fetchStats(),
       fetchRecentOrders(),
     ]);
-
     renderStats(stats);
     renderOrders(orders);
-
-    // إظهار المحتوى وإخفاء الـ loader
-    pageLoader.style.display = "none";
-    dashContent.style.display = "block";
   } catch (error) {
-    // في حال فشل تحميل البيانات
-    pageLoader.style.display = "none";
-    dashContent.style.display = "block";
-
-    // عرض أصفار كبيانات حقيقية (فشل الجلب ≠ بيانات وهمية)
-    renderStats({ services: 0, products: 0, newOrders: 0, customers: 0 });
+    console.error("خطأ في تحميل لوحة التحكم:", error);
+    renderStats({ services: 0, products: 0, newOrders: 0, unreadMessages: 0 });
     renderOrders([]);
+  }
+  pageLoader.style.display = "none";
+  dashContent.style.display = "block";
+}
+
+// ===============================
+// User Info
+// ===============================
+function setUserInfo(user) {
+  const name = user.displayName || user.email || "مدير";
+  headerUserName.textContent = name;
+  headerAvatar.textContent = name.trim().charAt(0);
+}
+
+// ===============================
+// Init
+// ===============================
+async function init(user) {
+  setUserInfo(user);
+  await loadDashboard();
+
+  // زر تحديث (إذا كان موجوداً)
+  if (refreshBtn) {
+    refreshBtn.addEventListener("click", async () => {
+      refreshBtn.disabled = true;
+      refreshBtn.textContent = "جاري التحديث...";
+      await loadDashboard();
+      refreshBtn.disabled = false;
+      refreshBtn.textContent = "تحديث";
+    });
   }
 }
 
-// -----------------------------------------------
-// Auth Guard + Start
-// -----------------------------------------------
-requireAdmin({
-  loginUrl: "/login.html",
-})
+requireAdmin({ loginUrl: "/login.html" })
   .then((user) => {
     document.body.style.visibility = "visible";
-    return initDashboard(user);
+    return init(user);
   })
   .catch(() => {
     document.body.style.visibility = "visible";
