@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>تم تأكيد الطلب — عبدالله عباس</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- ===== CSS ===== -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/order-confirmation.css" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" />
+        <span>عبدالله عباس</span>
+      </a>
+      <div class="nav-links">
+        <a href="/services" class="nav-link">الخدمات</a>
+        <a href="/products" class="nav-link">المنتجات</a>
+        <a href="/portfolio" class="nav-link">الأعمال</a>
+        <a href="/blog" class="nav-link">المقالات</a>
+        <a href="/about" class="nav-link">عن عبدالله</a>
+      </div>
+      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-mobile-panel" id="mobilePanel">
+      <div class="nav-mobile-header">
+        <span class="nav-mobile-brand">عبدالله عباس</span>
+        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/services" class="nav-mobile-link">الخدمات</a>
+        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog" class="nav-mobile-link">المقالات</a>
+        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+      </div>
+      <div class="nav-mobile-footer">
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN ===== -->
+  <main class="confirmation-page">
+    <div class="confirmation-card">
+
+      <!-- أيقونة النجاح -->
+      <div class="confirmation-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+      </div>
+
+      <!-- العنوان -->
+      <h1 class="confirmation-title">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:28px;height:28px;display:inline-block;vertical-align:middle;margin-inline-end:8px;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        تم استلام طلبك بنجاح!
+      </h1>
+
+      <p class="confirmation-desc">
+        شكراً لك على ثقتك. سيتم مراجعة طلبك والتواصل معك في أقرب وقت.
+      </p>
+
+      <!-- رقم الطلب -->
+      <div class="confirmation-order-num" id="orderNumber">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-inline-end:6px;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9"/>
+        </svg>
+        <span id="orderNumberText">#ORD-XXXX</span>
+      </div>
+
+      <p class="confirmation-desc" style="font-size:0.875rem;color:var(--text-dim);">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin-inline-end:4px;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+        </svg>
+        يمكنك متابعة حالة طلبك من خلال لوحة التحكم.
+      </p>
+
+      <!-- الأزرار -->
+      <div class="confirmation-actions">
+        <a href="/dashboard/dashboard.html" class="btn btn--primary">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px;flex-shrink:0;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25a2.25 2.25 0 01-2.25-2.25v-2.25z"/>
+          </svg>
+          لوحة التحكم
+        </a>
+        <a href="/services" class="btn btn--outline">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px;flex-shrink:0;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/>
+          </svg>
+          تصفح خدمات أخرى
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">
+            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
+            <div class="footer-brand-name">عبدالله عباس</div>
+          </div>
+          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+        </div>
+        <div>
+          <div class="footer-heading">الخدمات</div>
+          <div class="footer-links">
+            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger" class="footer-link">بلوجر</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">المحتوى</div>
+          <div class="footer-links">
+            <a href="/products" class="footer-link">المنتجات</a>
+            <a href="/portfolio" class="footer-link">الأعمال</a>
+            <a href="/blog" class="footer-link">المقالات</a>
+            <a href="/about" class="footer-link">عن عبدالله</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">تواصل</div>
+          <div class="footer-links">
+            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+            <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
+            <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
+        <span class="footer-copy">جميع الحقوق محفوظة</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // ===== NAV =====
+    const nav = document.getElementById('siteNav');
+    function handleNavScroll() { nav.classList.toggle('site-nav--scrolled', window.scrollY > 40); }
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    handleNavScroll();
+
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileClose = document.getElementById('mobileClose');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobilePanel = document.getElementById('mobilePanel');
+    function openMobile() { mobileMenu.classList.add('nav-mobile-menu--open'); mobilePanel.classList.add('nav-mobile-panel--open'); mobileMenu.setAttribute('aria-hidden', 'false'); mobileToggle.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+    function closeMobile() { mobileMenu.classList.remove('nav-mobile-menu--open'); mobilePanel.classList.remove('nav-mobile-panel--open'); mobileMenu.setAttribute('aria-hidden', 'true'); mobileToggle.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+    mobileToggle.addEventListener('click', openMobile);
+    mobileClose.addEventListener('click', closeMobile);
+    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
+    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
+
+    // ===== توليد رقم طلب عشوائي =====
+    function generateOrderNumber() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let result = '#ORD-';
+      for (let i = 0; i < 6; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    document.getElementById('orderNumberText').textContent = generateOrderNumber();
+  </script>
+</body>
+</html>
