@@ -200,9 +200,7 @@
     import {
       collection,
       query,
-      where,
-      orderBy,
-      getDocs,
+      getDocs, // إزالة orderBy
       Timestamp,
     } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { isSafeUrl } from "/js/security.js";
@@ -371,16 +369,29 @@
       const empty = document.getElementById("emptyState");
 
       try {
-        // [تم التعديل] إزالة orderBy("createdAt", "desc") لتجنب الحاجة إلى فهرس مركب
-        const q = query(
-          collection(db, "services"),
-          orderBy("sortOrder", "asc")
-        );
-
+        // [تم التعديل] إزالة orderBy بالكامل، نجلب جميع المستندات
+        const q = query(collection(db, "services"));
         const snapshot = await getDocs(q);
+        console.log("✅ Services fetched:", snapshot.size, "documents");
+
+        // تحويل إلى مصفوفة
         let services = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
-        // تصفية الخدمات النشطة (التي active !== false)
+        console.log("📋 Raw services data:", services);
+
+        // تصفية النشطة
         services = services.filter((s) => s.active !== false);
+        console.log("🔍 بعد تصفية active:", services.length);
+
+        // ترتيب يدوي حسب sortOrder ثم createdAt (تنازلي)
+        services.sort((a, b) => {
+          const aOrder = a.sortOrder ?? 0;
+          const bOrder = b.sortOrder ?? 0;
+          if (aOrder !== bOrder) return aOrder - bOrder;
+          // إذا تساوى sortOrder، نستخدم createdAt (الأحدث أولاً)
+          const aDate = a.createdAt ? new Date(a.createdAt.seconds * 1000) : 0;
+          const bDate = b.createdAt ? new Date(b.createdAt.seconds * 1000) : 0;
+          return bDate - aDate;
+        });
 
         loader.style.display = "none";
 
@@ -393,11 +404,12 @@
           list.appendChild(createServiceItem(svc, i));
         });
       } catch (error) {
-        console.error("Error loading services:", error); // عرض الخطأ في الكونسول للتشخيص
+        console.error("❌ Error loading services:", error);
         loader.style.display = "none";
         empty.classList.add("services-empty--visible");
         empty.querySelector(".services-empty-title").textContent = "حدث خطأ في تحميل الخدمات";
-        empty.querySelector(".services-empty-desc").textContent = "جرب تحديث الصفحة";
+        // عرض رسالة الخطأ الفعلية للمستخدم (للتشخيص)
+        empty.querySelector(".services-empty-desc").textContent = error.message || "جرب تحديث الصفحة";
       }
     }
 
