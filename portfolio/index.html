@@ -18,7 +18,6 @@
 
   <link rel="stylesheet" href="/css/main.css" />
   <link rel="stylesheet" href="/css/design-system.css" />
-  <link rel="stylesheet" href="/css/modal.css" />
   <link rel="stylesheet" href="/css/portfolio.css" />
 
   <script type="application/ld+json">
@@ -32,50 +31,6 @@
   </script>
 </head>
 <body>
-
-  <!-- ===== TOAST ===== -->
-  <div class="toast-container" id="toastContainer">
-    <div class="toast" id="toast">
-      <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-      </svg>
-      <span id="toastMessage">✅ تم الإرسال بنجاح</span>
-      <button class="toast-close" id="toastClose" aria-label="إغلاق">✕</button>
-    </div>
-  </div>
-
-  <!-- ===== MODAL ===== -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-container" id="modalContainer">
-      <span class="modal-handle"></span>
-      <button class="modal-close-btn" id="modalCloseBtn" aria-label="إغلاق">✕</button>
-      <img class="modal-image" id="modalImage" src="" alt="" loading="lazy" />
-      <h2 class="modal-title" id="modalTitle">—</h2>
-      <p class="modal-subtitle" id="modalSubtitle"></p>
-      <div class="modal-body" id="modalBody"></div>
-      <div class="modal-features" id="modalFeatures"></div>
-      <div class="modal-price" id="modalPrice"></div>
-      <form class="modal-form" id="modalForm" novalidate>
-        <div class="modal-form-title">📩 استفسار عن العمل</div>
-        <div class="modal-form-group">
-          <label class="modal-form-label" for="modalFormName">الاسم الكامل <span style="color:var(--primary);">*</span></label>
-          <input type="text" class="modal-form-input" id="modalFormName" required placeholder="أدخل اسمك" />
-        </div>
-        <div class="modal-form-group">
-          <label class="modal-form-label" for="modalFormEmail">البريد الإلكتروني <span style="color:var(--primary);">*</span></label>
-          <input type="email" class="modal-form-input" id="modalFormEmail" required placeholder="بريدك الإلكتروني" dir="ltr" />
-        </div>
-        <div class="modal-form-group">
-          <label class="modal-form-label" for="modalFormMessage">رسالة (اختياري)</label>
-          <textarea class="modal-form-textarea" id="modalFormMessage" placeholder="أي تفاصيل إضافية..."></textarea>
-        </div>
-        <button type="submit" class="modal-form-submit" id="modalFormSubmit">
-          <span class="btn-text">إرسال الاستفسار</span>
-          <span class="spinner"></span>
-        </button>
-      </form>
-    </div>
-  </div>
 
   <!-- ===== NAVIGATION ===== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
@@ -146,12 +101,10 @@
   <!-- ===== PORTFOLIO LIST ===== -->
   <section class="portfolio-section">
     <div class="container">
-      <!-- Loading -->
       <div class="portfolio-loading" id="pageLoader">
         <div class="portfolio-loading-spinner"></div>
       </div>
 
-      <!-- Empty -->
       <div class="portfolio-empty" id="emptyState">
         <div class="portfolio-empty-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -162,7 +115,6 @@
         <div class="portfolio-empty-desc">سيتم إضافتها قريبًا</div>
       </div>
 
-      <!-- Dynamic Grid -->
       <div class="portfolio-grid" id="portfolioGrid"></div>
     </div>
   </section>
@@ -312,7 +264,6 @@
     import { db } from "/js/firebase-init.js";
     import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { isSafeUrl } from "/js/security.js";
-    import { openModal, showToast } from "/js/modal.js";
 
     function sortByOrder(a, b) {
       var orderA = typeof a.sortOrder === "number" ? a.sortOrder : Infinity;
@@ -327,7 +278,6 @@
       var card = document.createElement("div");
       card.className = "portfolio-item";
 
-      // الصورة
       var thumb = document.createElement("div");
       thumb.className = "portfolio-item-thumb";
       if (project.image && isSafeUrl(project.image)) {
@@ -341,7 +291,6 @@
       }
       card.appendChild(thumb);
 
-      // المحتوى
       var body = document.createElement("div");
       body.className = "portfolio-item-body";
 
@@ -426,10 +375,6 @@
     }
 
     loadPortfolio();
-
-    // ===== EXPOSE =====
-    window.openModal = openModal;
-    window.showToast = showToast;
   </script>
 </body>
 </html>
