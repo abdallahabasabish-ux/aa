@@ -38,7 +38,7 @@
 </head>
 <body>
 
-  <!-- ===== TOAST ===== -->
+  <!-- ===== TOAST (للإشعارات) ===== -->
   <div class="toast-container" id="toastContainer">
     <div class="toast" id="toast">
       <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -83,7 +83,7 @@
   </div>
 
   <!-- ===== NAVIGATION ===== -->
-  <nav class="site-nav" id="siteNav">
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
       <a href="/" class="nav-brand">
         <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" width="34" height="34" />
@@ -97,8 +97,10 @@
         <a href="/about.html" class="nav-link">عن عبدالله</a>
       </div>
       <a href="/contact.html" class="nav-cta">تواصل معي</a>
-      <button class="nav-mobile-toggle" id="mobileToggle" aria-label="فتح القائمة">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+        </svg>
       </button>
     </div>
   </nav>
@@ -111,8 +113,10 @@
           <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo" width="30" height="30" />
           <span>عبدالله عباس</span>
         </span>
-        <button class="nav-mobile-close" id="mobileClose" aria-label="إغلاق القائمة">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+          </svg>
         </button>
       </div>
       <div class="nav-mobile-links">
@@ -147,18 +151,24 @@
   <!-- ===== SERVICES LIST ===== -->
   <section class="services-section">
     <div class="container">
+      <!-- Loading -->
       <div class="services-loading" id="pageLoader">
         <div class="services-loading-spinner"></div>
       </div>
 
+      <!-- Empty -->
       <div class="services-empty" id="emptyState">
         <div class="services-empty-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/>
+          </svg>
         </div>
         <div class="services-empty-title">لا توجد خدمات بعد</div>
         <div class="services-empty-desc">سيتم إضافتها قريبًا</div>
       </div>
 
+      <!-- Dynamic Grid -->
       <div class="services-grid" id="servicesGrid"></div>
     </div>
   </section>
@@ -170,7 +180,7 @@
         <div class="services-cta-text">
           <h2>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:28px;height:28px;flex-shrink:0;">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
             </svg>
             لا تجد ما تحتاجه؟
           </h2>
@@ -231,13 +241,15 @@
     </div>
   </footer>
 
+  <!-- ===== ANIMATION ===== -->
   <style>
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 
+  <!-- ===== SCRIPTS ===== -->
   <script>
     // ===== NAV SCROLL =====
-    const nav = document.getElementById('siteNav');
+    var nav = document.getElementById('siteNav');
     function handleNavScroll() {
       nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
     }
@@ -245,10 +257,10 @@
     handleNavScroll();
 
     // ===== MOBILE MENU =====
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mobileClose = document.getElementById('mobileClose');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobilePanel = document.getElementById('mobilePanel');
+    var mobileToggle = document.getElementById('mobileToggle');
+    var mobileClose = document.getElementById('mobileClose');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var mobilePanel = document.getElementById('mobilePanel');
 
     function openMobile() {
       mobileMenu.classList.add('nav-mobile-menu--open');
@@ -257,6 +269,7 @@
       mobileToggle.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
     }
+
     function closeMobile() {
       mobileMenu.classList.remove('nav-mobile-menu--open');
       mobilePanel.classList.remove('nav-mobile-panel--open');
@@ -264,29 +277,38 @@
       mobileToggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
+
     mobileToggle.addEventListener('click', openMobile);
     mobileClose.addEventListener('click', closeMobile);
-    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
-    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target === mobileMenu) closeMobile();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMobile();
+    });
+    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(function(l) {
+      l.addEventListener('click', closeMobile);
+    });
 
     // ===== SCROLL REVEAL =====
-    const revealElements = document.querySelectorAll('.reveal');
+    var revealElements = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add('reveal--visible');
             observer.unobserve(entry.target);
           }
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-      revealElements.forEach((el, i) => {
-        el.style.transitionDelay = `${i * 60}ms`;
+      revealElements.forEach(function(el, i) {
+        el.style.transitionDelay = (i * 60) + 'ms';
         observer.observe(el);
       });
     } else {
-      revealElements.forEach(el => el.classList.add('reveal--visible'));
+      revealElements.forEach(function(el) {
+        el.classList.add('reveal--visible');
+      });
     }
   </script>
 
@@ -296,117 +318,111 @@
     import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { openModal, showToast } from "/js/modal.js";
 
-    const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
+    var CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
 
     // ===== SVG ICONS لكل نوع خدمة =====
-    const ICON_MAP = {
+    var ICON_MAP = {
       'web-development': {
-        svg: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>`,
+        svg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>',
         cls: 'service-card-icon--dev'
       },
       'web-design': {
-        svg: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"/></svg>`,
+        svg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>',
         cls: 'service-card-icon--design'
       },
       'seo': {
-        svg: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75 9 3-3 2.148 2.148A12.061 12.061 0 0 1 2.25 12c0-3.182 1.25-6.08 3.286-8.214"/></svg>`,
+        svg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75 9l3-3 2.148 2.148A12.061 12.061 0 012.25 12c0-3.182 1.25-6.08 3.286-8.214"/></svg>',
         cls: 'service-card-icon--seo'
       },
       'wordpress': {
-        svg: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/></svg>`,
+        svg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>',
         cls: 'service-card-icon--wordpress'
       },
       'blogger': {
-        svg: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z"/></svg>`,
+        svg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/></svg>',
         cls: 'service-card-icon--blogger'
       }
     };
 
     function getIcon(category) {
       return ICON_MAP[category] || {
-        svg: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/></svg>`,
+        svg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/></svg>',
         cls: 'service-card-icon--other'
       };
     }
 
     function sortByOrder(a, b) {
-      const orderA = typeof a.sortOrder === "number" ? a.sortOrder : Infinity;
-      const orderB = typeof b.sortOrder === "number" ? b.sortOrder : Infinity;
+      var orderA = typeof a.sortOrder === "number" ? a.sortOrder : Infinity;
+      var orderB = typeof b.sortOrder === "number" ? b.sortOrder : Infinity;
       if (orderA !== orderB) return orderA - orderB;
-      const timeA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : 0;
-      const timeB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : 0;
+      var timeA = a.createdAt && a.createdAt.toDate ? a.createdAt.toDate().getTime() : 0;
+      var timeB = b.createdAt && b.createdAt.toDate ? b.createdAt.toDate().getTime() : 0;
       return timeB - timeA;
     }
 
     function createServiceCard(service, index) {
-      const card = document.createElement("div");
+      var card = document.createElement("div");
       card.className = "service-card";
 
-      const number = document.createElement("div");
+      var number = document.createElement("div");
       number.className = "service-card-number";
       number.textContent = String(index + 1).padStart(2, "0");
       card.appendChild(number);
 
-      // أيقونة SVG
-      const iconData = getIcon(service.category);
-      const icon = document.createElement("div");
-      icon.className = `service-card-icon ${iconData.cls}`;
+      var iconData = getIcon(service.category);
+      var icon = document.createElement("div");
+      icon.className = "service-card-icon " + iconData.cls;
       icon.innerHTML = iconData.svg;
       card.appendChild(icon);
 
-      const title = document.createElement("h3");
+      var title = document.createElement("h3");
       title.className = "service-card-title";
       title.textContent = service.title || "—";
       card.appendChild(title);
 
-      const desc = document.createElement("p");
+      var desc = document.createElement("p");
       desc.className = "service-card-desc";
       desc.textContent = service.shortDescription || "";
       card.appendChild(desc);
 
       if (service.features && service.features.length > 0) {
-        const features = document.createElement("div");
+        var features = document.createElement("div");
         features.className = "service-card-features";
-        service.features.slice(0, 4).forEach(f => {
-          const tag = document.createElement("span");
+        service.features.slice(0, 4).forEach(function(f) {
+          var tag = document.createElement("span");
           tag.className = "service-card-feature";
           tag.textContent = f;
           features.appendChild(tag);
         });
         if (service.features.length > 4) {
-          const more = document.createElement("span");
+          var more = document.createElement("span");
           more.className = "service-card-feature";
-          more.textContent = `+${service.features.length - 4}`;
+          more.textContent = "+" + (service.features.length - 4);
           features.appendChild(more);
         }
         card.appendChild(features);
       }
 
-      const footer = document.createElement("div");
+      var footer = document.createElement("div");
       footer.className = "service-card-footer";
 
-      const price = document.createElement("span");
+      var price = document.createElement("span");
       if (service.price > 0) {
         price.className = "service-card-price";
-        price.textContent = `${Number(service.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[service.currency] || service.currency || ""}`;
+        price.textContent = Number(service.price).toLocaleString("ar-EG") + " " + (CURRENCY_MAP[service.currency] || service.currency || "");
       } else {
         price.className = "service-card-price service-card-price-free";
         price.textContent = "مجاني";
       }
       footer.appendChild(price);
 
-      const actions = document.createElement("div");
+      var actions = document.createElement("div");
       actions.className = "service-card-actions";
 
-      const detailsBtn = document.createElement("button");
+      var detailsBtn = document.createElement("button");
       detailsBtn.className = "btn-details";
-      detailsBtn.innerHTML = `
-        تفاصيل
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
-        </svg>
-      `;
-      detailsBtn.addEventListener("click", (e) => {
+      detailsBtn.innerHTML = 'تفاصيل <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>';
+      detailsBtn.addEventListener("click", function(e) {
         e.preventDefault();
         openModal(service, "service");
       });
@@ -419,15 +435,15 @@
     }
 
     async function loadServices() {
-      const loader = document.getElementById("pageLoader");
-      const grid = document.getElementById("servicesGrid");
-      const empty = document.getElementById("emptyState");
+      var loader = document.getElementById("pageLoader");
+      var grid = document.getElementById("servicesGrid");
+      var empty = document.getElementById("emptyState");
 
       try {
-        const snapshot = await getDocs(collection(db, "services"));
-        const services = snapshot.docs
-          .map((d) => ({ id: d.id, ...d.data() }))
-          .filter((s) => s.active !== false)
+        var snapshot = await getDocs(collection(db, "services"));
+        var services = snapshot.docs
+          .map(function(d) { return { id: d.id, ...d.data() }; })
+          .filter(function(s) { return s.active !== false; })
           .sort(sortByOrder);
 
         loader.style.display = "none";
@@ -437,7 +453,7 @@
           return;
         }
 
-        services.forEach((svc, i) => {
+        services.forEach(function(svc, i) {
           grid.appendChild(createServiceCard(svc, i));
         });
       } catch (error) {
@@ -450,6 +466,7 @@
 
     loadServices();
 
+    // ===== EXPOSE =====
     window.openModal = openModal;
     window.showToast = showToast;
   </script>
