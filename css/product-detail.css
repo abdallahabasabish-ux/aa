@@ -1,0 +1,573 @@
+/* ============================================
+   PRODUCT DETAIL — صفحة تفاصيل المنتج
+   تصميم احترافي مع Glassmorphism
+   ============================================ */
+
+/* --- Breadcrumb --- */
+.pdet-breadcrumb {
+  padding: calc(var(--header-h) + 24px) 0 32px;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: var(--bg-body);
+}
+
+.pdet-breadcrumb a {
+  color: var(--text-muted);
+  transition: color var(--fast);
+}
+
+.pdet-breadcrumb a:hover {
+  color: var(--text-primary);
+}
+
+.pdet-breadcrumb .sep {
+  color: var(--border-medium);
+}
+
+.pdet-breadcrumb .current {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* --- Hero --- */
+.pdet-hero {
+  padding: 0 0 48px;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-body);
+}
+
+.pdet-hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.pdet-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* صورة المنتج */
+.pdet-hero-image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-light);
+  position: relative;
+}
+
+.pdet-hero-image img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+
+.pdet-hero-image-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 4rem;
+  background: var(--bg-raised);
+}
+
+/* شارات */
+.pdet-hero-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.pdet-hero-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 50px;
+  background: rgba(255, 102, 0, 0.06);
+  color: var(--primary);
+  border: 1px solid rgba(255, 102, 0, 0.06);
+}
+
+.pdet-hero-badge--version {
+  background: var(--bg-raised);
+  color: var(--text-muted);
+  border-color: var(--border-light);
+}
+
+.pdet-hero-badge--free {
+  background: rgba(34, 197, 94, 0.08);
+  color: #22C55E;
+  border-color: rgba(34, 197, 94, 0.1);
+}
+
+/* معلومات المنتج */
+.pdet-hero-info {
+  padding-top: 8px;
+}
+
+.pdet-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 12px;
+}
+
+.pdet-hero-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.pdet-hero-price {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 20px;
+}
+
+.pdet-hero-price-free {
+  color: #22C55E;
+}
+
+.pdet-hero-price-currency {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-inline-start: 4px;
+}
+
+/* ===== زر طلب المنتج المحسّن ===== */
+.pdet-request-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 8px 30px rgba(255, 102, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.pdet-request-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.pdet-request-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(255, 102, 0, 0.35);
+}
+
+.pdet-request-btn:hover::after {
+  opacity: 1;
+}
+
+.pdet-request-btn:active {
+  transform: scale(0.97);
+}
+
+.pdet-request-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.pdet-request-btn:hover svg {
+  transform: translateX(-4px) scale(1.1);
+}
+
+.pdet-request-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ===== المودال المخصص لطلب المنتج ===== */
+.pdet-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.pdet-modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.pdet-modal {
+  max-width: 560px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  padding: 32px 32px 28px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: scale(0.95) translateY(20px);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pdet-modal-overlay.active .pdet-modal {
+  transform: scale(1) translateY(0);
+}
+
+.pdet-modal-close {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.04);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pdet-modal-close:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--text-primary);
+  transform: rotate(90deg);
+}
+
+.pdet-modal-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  background: rgba(255, 102, 0, 0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+.pdet-modal-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.pdet-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.pdet-modal-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: 24px;
+}
+
+.pdet-modal-product {
+  background: var(--bg-raised);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pdet-modal-product-image {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--bg-white);
+  flex-shrink: 0;
+}
+
+.pdet-modal-product-info {
+  flex: 1;
+}
+
+.pdet-modal-product-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.pdet-modal-product-price {
+  font-size: 0.8125rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ===== نموذج الطلب ===== */
+.pdet-form-group {
+  margin-bottom: 16px;
+}
+
+.pdet-form-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.pdet-form-label .required {
+  color: var(--primary);
+}
+
+.pdet-form-input,
+.pdet-form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.pdet-form-input:focus,
+.pdet-form-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.06);
+}
+
+.pdet-form-input.error,
+.pdet-form-textarea.error {
+  border-color: #EF4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.06);
+}
+
+.pdet-form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.pdet-form-error {
+  font-size: 0.75rem;
+  color: #EF4444;
+  margin-top: 4px;
+  display: none;
+}
+
+.pdet-form-error.visible {
+  display: block;
+}
+
+.pdet-form-submit {
+  width: 100%;
+  padding: 14px;
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(255, 102, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pdet-form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255, 102, 0, 0.3);
+}
+
+.pdet-form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pdet-form-submit .spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: pdet-spin 0.6s linear infinite;
+}
+
+.pdet-form-submit.loading .spinner {
+  display: block;
+}
+.pdet-form-submit.loading .btn-text {
+  display: none;
+}
+
+@keyframes pdet-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== TOAST (إشعار) ===== */
+.pdet-toast {
+  position: fixed;
+  top: calc(var(--header-h) + 20px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-30px);
+  z-index: 2000;
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  padding: 16px 28px;
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  border: 1px solid rgba(255,255,255,0.06);
+  max-width: 90vw;
+  pointer-events: none;
+}
+
+.pdet-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.pdet-toast-icon {
+  width: 28px;
+  height: 28px;
+  color: #22C55E;
+  flex-shrink: 0;
+}
+
+.pdet-toast-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+.pdet-toast-close:hover {
+  color: #fff;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1023px) {
+  .pdet-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .pdet-hero-image img {
+    aspect-ratio: 16/9;
+  }
+  .pdet-modal {
+    padding: 24px 20px 20px;
+  }
+}
+
+@media (max-width: 639px) {
+  .pdet-hero {
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+  }
+  .pdet-hero-inner,
+  .pdet-breadcrumb {
+    padding: 0 16px;
+  }
+  .pdet-hero-title {
+    font-size: 1.375rem;
+  }
+  .pdet-hero-price {
+    font-size: 1.375rem;
+  }
+  .pdet-request-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+  }
+  .pdet-modal {
+    padding: 20px 16px 16px;
+    margin: 0 8px;
+  }
+  .pdet-toast {
+    font-size: 0.8125rem;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .pdet-modal,
+  .pdet-modal-overlay,
+  .pdet-toast {
+    transition: none !important;
+  }
+  .pdet-modal-overlay.active .pdet-modal {
+    transform: none !important;
+  }
+  .pdet-request-btn:hover {
+    transform: none !important;
+  }
+}
