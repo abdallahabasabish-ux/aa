@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <!-- ==================== POPUP (العرض الخاص) ==================== -->
+  <!-- ==================== POPUP ==================== -->
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup-card">
       <button class="popup-close" id="popupClose" aria-label="إغلاق">
@@ -68,29 +68,26 @@
         </svg>
       </button>
 
-      <div class="popup-badge">🎉 عرض خاص</div>
-
       <div class="popup-icon">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
         </svg>
       </div>
 
-      <h2 class="popup-title">عرض الترحيب بالزوار الجدد! 🎊</h2>
-      <p class="popup-desc">استفد من عرضنا الخاص لأول مرة في الموقع. خصم فوري على جميع الخدمات والمنتجات الرقمية.</p>
+      <h2 class="popup-title">🎉 عرض خاص للزوار الجدد</h2>
+      <p class="popup-desc">استفد من خصم 20% على أول خدمة أو منتج لك في الموقع.</p>
 
-      <span class="popup-highlight">
-        20%
-        <small>خصم</small>
-      </span>
+      <div class="popup-offer">
+        20% <small>خصم</small>
+      </div>
 
       <div class="popup-timer">
-        ⏳ ينتهي العرض خلال: <span id="countdownTimer">24:00:00</span>
+        ⏳ ينتهي خلال: <span id="countdownTimer">24:00:00</span>
       </div>
 
       <div class="popup-actions">
-        <a href="/contact" class="btn btn-primary">احصل على العرض الآن</a>
-        <a href="#" class="btn btn-secondary" id="popupLater">لاحقاً</a>
+        <a href="/contact" class="btn btn-primary">احصل على العرض</a>
+        <button class="btn btn-secondary" id="popupLater">لاحقاً</button>
       </div>
     </div>
   </div>
@@ -102,7 +99,7 @@
         <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" width="34" height="34" />
         <span>عبدالله عباس</span>
       </a>
-      <div class="nav-links" id="navLinks">
+      <div class="nav-links">
         <a href="/services/" class="nav-link">الخدمات</a>
         <a href="/products/" class="nav-link">المنتجات</a>
         <a href="/portfolio/" class="nav-link">الأعمال</a>
@@ -112,7 +109,7 @@
       <a href="/contact" class="nav-cta">تواصل معي</a>
       <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
         </svg>
       </button>
     </div>
@@ -128,7 +125,7 @@
         </span>
         <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
           </svg>
         </button>
       </div>
@@ -149,39 +146,28 @@
 
   <!-- ==================== HERO ==================== -->
   <section class="hero-section">
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-
     <div class="container container--wide">
       <div class="hero-inner">
         <div class="hero-content reveal">
-          <div class="hero-badge">
-            <span class="line"></span>
-            <span>حلول رقمية متكاملة</span>
-          </div>
-
-          <h1 class="hero-title">
+          <h1>
             نبني <span class="highlight">حلولاً رقمية</span><br />
             تبدأ بفهم عميق<br />
             وتنتهي بنتيجة ملموسة.
           </h1>
-
-          <p class="hero-desc">
-            لا نبيع قوالب جاهزة، بل نصنع تجارب رقمية فريدة تحقق أهدافك الحقيقية. 
+          <p>
+            لا نبيع قوالب جاهزة، بل نصنع تجارب رقمية فريدة تحقق أهدافك الحقيقية.
             من التحليل والتصميم إلى التطوير والتحسين، كل خطوة مبنية على فهم عميق لاحتياجاتك.
           </p>
-
           <div class="hero-actions">
             <a href="/contact" class="btn btn-primary">
               ابدأ مشروعك
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/>
               </svg>
             </a>
             <a href="/portfolio/" class="btn btn-secondary">استكشف أعمالنا</a>
           </div>
 
-          <!-- إحصائيات -->
           <div class="hero-stats">
             <div class="stat-item">
               <span class="number"><span class="accent">+</span>50</span>
@@ -202,101 +188,82 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal" aria-hidden="true">
-          <div class="hero-visual-wrapper">
-            <div class="orbit orbit-1"></div>
-            <div class="orbit orbit-2"></div>
-            <div class="orbit orbit-3"></div>
-            <div class="hero-visual-center">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
-                </svg>
-              </div>
-              <h3>تطوير · تصميم · تحسين</h3>
-              <p>حلول رقمية متكاملة بجودة احترافية</p>
+        <div class="hero-image reveal" aria-hidden="true">
+          <div class="image-box">
+            <div class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/>
+              </svg>
             </div>
+            <h3>تطوير · تصميم · تحسين</h3>
+            <p>حلول رقمية متكاملة بجودة احترافية</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== CLIENTS / PARTNERS ==================== -->
-  <section class="clients-section">
+  <!-- ==================== SERVICES ==================== -->
+  <section class="section-padding section-padding--gray" id="services">
     <div class="container">
-      <div class="clients-title">شركاء الثقة</div>
-      <div class="clients-grid">
-        <span class="client-item">شركة النخبة</span>
-        <span class="client-item">مؤسسة التقنية</span>
-        <span class="client-item">مجموعة الريادة</span>
-        <span class="client-item">شركة الإبداع</span>
-        <span class="client-item">مؤسسة المستقبل</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== SERVICES PREVIEW ==================== -->
-  <section class="section-padding section-padding--alt" id="services">
-    <div class="container">
-      <div class="section-header-center reveal">
-        <span class="label">ما نقدّمه</span>
-        <h2>خدمات مصممة لحل مشاكل حقيقية</h2>
-        <p>كل خدمة تبدأ بفهم المشروع، لا بتقديم قائمة مميزات جاهزة.</p>
+      <div class="section-header reveal">
+        <span class="label">خدماتنا</span>
+        <h2>ما نقدّمه لك</h2>
+        <p>خدمات مصممة لحل مشاكلك الحقيقية، بجودة واحترافية.</p>
       </div>
 
-      <div class="card-grid card-grid--asymmetric" id="servicesGrid">
-        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">
-          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border-light);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;"></div>
-          <p style="margin-top:12px;">جاري تحميل الخدمات...</p>
+      <div class="services-grid" id="servicesGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#999;font-size:0.875rem;">
+          <div style="display:inline-block;width:24px;height:24px;border:3px solid #eee;border-top-color:#FF6600;border-radius:50%;animation:spin .7s linear infinite;"></div>
+          <p style="margin-top:10px;">جاري تحميل الخدمات...</p>
         </div>
       </div>
 
-      <div style="text-align:center;margin-top:40px;" class="reveal">
+      <div style="text-align:center;margin-top:32px;" class="reveal">
         <a href="/services/" class="btn btn-secondary">جميع الخدمات</a>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PRODUCTS PREVIEW ==================== -->
+  <!-- ==================== PRODUCTS ==================== -->
   <section class="section-padding" id="products">
     <div class="container">
-      <div class="section-header-center reveal">
-        <span class="label">منتجات جاهزة</span>
-        <h2>أدوات وقوالب احترافية</h2>
-        <p>منتجات مُختبرة فعليًا — قوالب، أدوات، ومصادر رقمية.</p>
+      <div class="section-header reveal">
+        <span class="label">منتجاتنا</span>
+        <h2>أدوات وقوالب جاهزة</h2>
+        <p>منتجات رقمية جاهزة للاستخدام الفوري، بأسعار تنافسية.</p>
       </div>
 
-      <div class="card-grid" id="productsGrid" style="grid-template-columns:repeat(3,1fr);gap:24px;">
-        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">
-          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border-light);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;"></div>
-          <p style="margin-top:12px;">جاري تحميل المنتجات...</p>
+      <div class="products-grid" id="productsGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#999;font-size:0.875rem;">
+          <div style="display:inline-block;width:24px;height:24px;border:3px solid #eee;border-top-color:#FF6600;border-radius:50%;animation:spin .7s linear infinite;"></div>
+          <p style="margin-top:10px;">جاري تحميل المنتجات...</p>
         </div>
       </div>
 
-      <div style="text-align:center;margin-top:40px;" class="reveal">
+      <div style="text-align:center;margin-top:32px;" class="reveal">
         <a href="/products/" class="btn btn-secondary">جميع المنتجات</a>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PORTFOLIO PREVIEW ==================== -->
-  <section class="section-padding section-padding--alt" id="portfolio">
+  <!-- ==================== PORTFOLIO ==================== -->
+  <section class="section-padding section-padding--gray" id="portfolio">
     <div class="container">
-      <div class="section-header-center reveal">
-        <span class="label">أعمال مختارة</span>
-        <h2>نتائج حقيقية، لا وعود</h2>
-        <p>مشاريع نفذناها لعملائنا — كل مشروع يحكي قصة حل لمشكلة حقيقية.</p>
+      <div class="section-header reveal">
+        <span class="label">أعمالنا</span>
+        <h2>مشاريع حقيقية بنتائج ملموسة</h2>
+        <p>نفخر بما نقدّمه لعملائنا، وهذه نماذج من أعمالنا.</p>
       </div>
 
-      <div class="card-grid" id="portfolioGrid" style="grid-template-columns:1.2fr 0.8fr 0.8fr;gap:24px;">
-        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">
-          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border-light);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;"></div>
-          <p style="margin-top:12px;">جاري تحميل الأعمال...</p>
+      <div class="portfolio-grid" id="portfolioGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#999;font-size:0.875rem;">
+          <div style="display:inline-block;width:24px;height:24px;border:3px solid #eee;border-top-color:#FF6600;border-radius:50%;animation:spin .7s linear infinite;"></div>
+          <p style="margin-top:10px;">جاري تحميل الأعمال...</p>
         </div>
       </div>
 
-      <div style="text-align:center;margin-top:40px;" class="reveal">
+      <div style="text-align:center;margin-top:32px;" class="reveal">
         <a href="/portfolio/" class="btn btn-secondary">جميع الأعمال</a>
       </div>
     </div>
@@ -305,16 +272,16 @@
   <!-- ==================== TESTIMONIALS ==================== -->
   <section class="section-padding" id="testimonials">
     <div class="container">
-      <div class="section-header-center reveal">
+      <div class="section-header reveal">
         <span class="label">شهادات العملاء</span>
-        <h2>ما يقوله عملاؤنا</h2>
-        <p>آراء حقيقية من أشخاص ومشاريع عملنا معهم.</p>
+        <h2>ماذا يقولون عنا؟</h2>
+        <p>آراء حقيقية من أشخاص وثقوا بنا.</p>
       </div>
 
       <div class="testimonials-grid reveal">
         <div class="testimonial-card">
           <div class="stars">★★★★★</div>
-          <p class="quote">"عمل احترافي ودقيق، ساعدنا في إطلاق منصتنا الرقمية بسرعة كبيرة. التواصل كان ممتازاً طوال فترة المشروع."</p>
+          <p class="quote">"عمل احترافي وسريع، ساعدنا في إطلاق منصتنا الرقمية. التواصل كان ممتازاً طوال المشروع."</p>
           <div class="author">
             <div class="avatar">أ</div>
             <div class="info">
@@ -326,7 +293,7 @@
 
         <div class="testimonial-card">
           <div class="stars">★★★★★</div>
-          <p class="quote">"صمم لنا موقعاً متكاملاً مع تحسين SEO، النتائج كانت مذهلة — زادت زيارات موقعنا بأكثر من 200% في ثلاثة أشهر."</p>
+          <p class="quote">"صمم لنا موقعاً متكاملاً مع تحسين SEO، زادت زيارات موقعنا بأكثر من 200% في ثلاثة أشهر."</p>
           <div class="author">
             <div class="avatar">ن</div>
             <div class="info">
@@ -352,7 +319,7 @@
   </section>
 
   <!-- ==================== CTA ==================== -->
-  <section class="section-padding section-padding--alt">
+  <section class="section-padding section-padding--gray">
     <div class="container">
       <div class="cta-section reveal">
         <div class="glow"></div>
@@ -360,13 +327,13 @@
           <h2>لديك مشروع أو فكرة؟</h2>
           <p>نحن هنا لمساعدتك في تحديد الحل الأنسب — حتى لو لم تقرر بعد.</p>
           <div class="cta-actions">
-            <a href="/contact" class="btn-cta-primary">
-              تواصل معنا الآن
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+            <a href="/contact" class="btn-cta btn-cta-primary">
+              تواصل معنا
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/>
               </svg>
             </a>
-            <a href="/services/" class="btn-cta-secondary">استكشف الخدمات</a>
+            <a href="/services/" class="btn-cta btn-cta-secondary">استكشف الخدمات</a>
           </div>
         </div>
       </div>
@@ -498,10 +465,9 @@
       localStorage.setItem('popupClosed', 'true');
     }
 
-    // التحقق من عدم إغلاق البوب أب سابقاً
     const popupClosed = localStorage.getItem('popupClosed');
     if (!popupClosed) {
-      setTimeout(showPopup, 2000);
+      setTimeout(showPopup, 1500);
     }
 
     popupClose.addEventListener('click', hidePopup);
@@ -513,18 +479,18 @@
       if (e.key === 'Escape' && popupOverlay.classList.contains('active')) hidePopup();
     });
 
-    // ===== COUNTDOWN TIMER =====
-    let time = 24 * 60 * 60; // 24 ساعة
+    // ===== COUNTDOWN =====
+    let time = 24 * 60 * 60;
     const timerElement = document.getElementById('countdownTimer');
 
     function updateTimer() {
-      const hours = Math.floor(time / 3600);
-      const minutes = Math.floor((time % 3600) / 60);
-      const seconds = time % 60;
-      timerElement.textContent = 
-        String(hours).padStart(2, '0') + ':' +
-        String(minutes).padStart(2, '0') + ':' +
-        String(seconds).padStart(2, '0');
+      const h = Math.floor(time / 3600);
+      const m = Math.floor((time % 3600) / 60);
+      const s = time % 60;
+      timerElement.textContent =
+        String(h).padStart(2, '0') + ':' +
+        String(m).padStart(2, '0') + ':' +
+        String(s).padStart(2, '0');
       if (time > 0) time--;
     }
     updateTimer();
@@ -549,181 +515,149 @@
       return timeB - timeA;
     }
 
-    // ===== CREATE SERVICE CARD =====
+    // ===== SERVICE CARD =====
     function createServiceCard(service) {
       const card = document.createElement("div");
-      card.className = "card";
+      card.className = "service-card";
 
       const icon = document.createElement("div");
-      icon.className = "card-icon";
-      icon.textContent = "✓";
+      icon.className = "icon";
+      icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/></svg>`;
       card.appendChild(icon);
 
       const title = document.createElement("h3");
-      title.className = "card-title";
       title.textContent = service.title || "—";
       card.appendChild(title);
 
       const desc = document.createElement("p");
-      desc.className = "card-desc";
       desc.textContent = service.shortDescription || "";
       card.appendChild(desc);
 
-      const footer = document.createElement("div");
-      footer.className = "card-footer";
-
-      const tags = document.createElement("div");
-      tags.className = "card-tags";
-      if (service.features && service.features.length > 0) {
-        service.features.slice(0, 2).forEach(f => {
-          const tag = document.createElement("span");
-          tag.className = "card-tag";
-          tag.textContent = f;
-          tags.appendChild(tag);
-        });
-        if (service.features.length > 2) {
-          const more = document.createElement("span");
-          more.className = "card-tag";
-          more.textContent = `+${service.features.length - 2}`;
-          tags.appendChild(more);
-        }
+      const price = document.createElement("div");
+      price.className = "price";
+      if (service.price > 0) {
+        price.textContent = `${Number(service.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[service.currency] || service.currency || ""}`;
+      } else {
+        price.textContent = "مجاني";
+        price.classList.add("free");
       }
-      footer.appendChild(tags);
+      card.appendChild(price);
 
-      const actions = document.createElement("div");
-      actions.className = "card-actions";
-
-      const detailsBtn = document.createElement("a");
-      detailsBtn.href = "/services/" + encodeURIComponent(service.slug || "");
-      detailsBtn.className = "btn btn-ghost btn-sm";
-      detailsBtn.textContent = "تفاصيل";
-      actions.appendChild(detailsBtn);
-
-      footer.appendChild(actions);
-      card.appendChild(footer);
+      const btn = document.createElement("a");
+      btn.href = "/services/" + encodeURIComponent(service.slug || "");
+      btn.className = "btn-details";
+      btn.textContent = "تفاصيل";
+      card.appendChild(btn);
 
       return card;
     }
 
-    // ===== CREATE PRODUCT CARD =====
+    // ===== PRODUCT CARD =====
     function createProductCard(product) {
       const card = document.createElement("div");
-      card.className = "card";
+      card.className = "product-card";
 
-      const img = document.createElement("img");
-      img.className = "card-image";
+      const image = document.createElement("div");
+      image.className = "image";
       if (product.image && isSafeUrl(product.image)) {
+        const img = document.createElement("img");
         img.src = product.image;
         img.alt = product.title || "";
         img.loading = "lazy";
+        image.appendChild(img);
       } else {
-        img.style.display = "none";
         const placeholder = document.createElement("div");
-        placeholder.className = "card-image-placeholder";
+        placeholder.className = "placeholder";
         placeholder.textContent = "📦";
-        card.appendChild(placeholder);
+        image.appendChild(placeholder);
       }
-      card.appendChild(img);
+      card.appendChild(image);
+
+      const info = document.createElement("div");
+      info.className = "info";
 
       const title = document.createElement("h3");
-      title.className = "card-title";
       title.textContent = product.title || "—";
-      card.appendChild(title);
+      info.appendChild(title);
 
       const desc = document.createElement("p");
-      desc.className = "card-desc";
       desc.textContent = product.shortDescription || "";
-      card.appendChild(desc);
+      info.appendChild(desc);
 
       const footer = document.createElement("div");
-      footer.className = "card-footer";
+      footer.className = "footer";
 
       const price = document.createElement("span");
+      price.className = "price";
       if (product.price > 0) {
-        price.className = "card-price";
         price.textContent = `${Number(product.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[product.currency] || product.currency || ""}`;
       } else {
-        price.className = "card-price card-price--free";
         price.textContent = "مجاني";
+        price.classList.add("free");
       }
       footer.appendChild(price);
 
-      const actions = document.createElement("div");
-      actions.className = "card-actions";
+      const btn = document.createElement("a");
+      btn.href = "/products/" + encodeURIComponent(product.slug || "");
+      btn.className = "btn-details";
+      btn.textContent = "تفاصيل";
+      footer.appendChild(btn);
 
-      const detailsBtn = document.createElement("a");
-      detailsBtn.href = "/products/" + encodeURIComponent(product.slug || "");
-      detailsBtn.className = "btn btn-ghost btn-sm";
-      detailsBtn.textContent = "تفاصيل";
-      actions.appendChild(detailsBtn);
-
-      footer.appendChild(actions);
-      card.appendChild(footer);
-
+      info.appendChild(footer);
+      card.appendChild(info);
       return card;
     }
 
-    // ===== CREATE PORTFOLIO CARD =====
+    // ===== PORTFOLIO CARD =====
     function createPortfolioCard(project) {
       const card = document.createElement("div");
-      card.className = "card";
+      card.className = "portfolio-card";
 
-      const img = document.createElement("img");
-      img.className = "card-image";
+      const image = document.createElement("div");
+      image.className = "image";
       if (project.image && isSafeUrl(project.image)) {
+        const img = document.createElement("img");
         img.src = project.image;
         img.alt = project.title || "";
         img.loading = "lazy";
+        image.appendChild(img);
       } else {
-        img.style.display = "none";
         const placeholder = document.createElement("div");
-        placeholder.className = "card-image-placeholder";
+        placeholder.className = "placeholder";
         placeholder.textContent = "🎯";
-        card.appendChild(placeholder);
+        image.appendChild(placeholder);
       }
-      card.appendChild(img);
+      card.appendChild(image);
+
+      const info = document.createElement("div");
+      info.className = "info";
 
       const title = document.createElement("h3");
-      title.className = "card-title";
       title.textContent = project.title || "—";
-      card.appendChild(title);
+      info.appendChild(title);
 
-      const desc = document.createElement("p");
-      desc.className = "card-desc";
-      desc.textContent = project.shortDescription || "";
-      card.appendChild(desc);
-
-      const footer = document.createElement("div");
-      footer.className = "card-footer";
-
-      const tags = document.createElement("div");
-      tags.className = "card-tags";
       if (project.tags && project.tags.length > 0) {
-        project.tags.slice(0, 2).forEach(t => {
+        const tags = document.createElement("div");
+        tags.className = "tags";
+        project.tags.slice(0, 3).forEach(t => {
           const tag = document.createElement("span");
-          tag.className = "card-tag";
           tag.textContent = t;
           tags.appendChild(tag);
         });
+        info.appendChild(tags);
       }
-      footer.appendChild(tags);
 
-      const actions = document.createElement("div");
-      actions.className = "card-actions";
+      const btn = document.createElement("a");
+      btn.href = "/portfolio/" + encodeURIComponent(project.slug || "");
+      btn.className = "btn-details";
+      btn.textContent = "تفاصيل";
+      info.appendChild(btn);
 
-      const detailsBtn = document.createElement("a");
-      detailsBtn.href = "/portfolio/" + encodeURIComponent(project.slug || "");
-      detailsBtn.className = "btn btn-ghost btn-sm";
-      detailsBtn.textContent = "تفاصيل";
-      actions.appendChild(detailsBtn);
-
-      footer.appendChild(actions);
-      card.appendChild(footer);
-
+      card.appendChild(info);
       return card;
     }
 
-    // ===== LOAD FUNCTIONS =====
+    // ===== LOAD =====
     async function loadServices() {
       const grid = document.getElementById("servicesGrid");
       try {
@@ -731,12 +665,12 @@
         const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(s => s.active !== false).sort(sortByOrder).slice(0, 4);
         grid.textContent = "";
         if (items.length === 0) {
-          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد خدمات حالياً</div>`;
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">لا توجد خدمات حالياً</div>`;
           return;
         }
         items.forEach(s => grid.appendChild(createServiceCard(s)));
       } catch {
-        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ في تحميل الخدمات</div>`;
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">حدث خطأ في تحميل الخدمات</div>`;
       }
     }
 
@@ -747,12 +681,12 @@
         const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(p => p.active !== false).sort(sortByOrder).slice(0, 3);
         grid.textContent = "";
         if (items.length === 0) {
-          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد منتجات حالياً</div>`;
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">لا توجد منتجات حالياً</div>`;
           return;
         }
         items.forEach(p => grid.appendChild(createProductCard(p)));
       } catch {
-        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ في تحميل المنتجات</div>`;
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">حدث خطأ في تحميل المنتجات</div>`;
       }
     }
 
@@ -763,21 +697,19 @@
         const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(p => p.active !== false).sort(sortByOrder).slice(0, 3);
         grid.textContent = "";
         if (items.length === 0) {
-          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد أعمال حالياً</div>`;
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">لا توجد أعمال حالياً</div>`;
           return;
         }
         items.forEach(p => grid.appendChild(createPortfolioCard(p)));
       } catch {
-        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ في تحميل الأعمال</div>`;
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">حدث خطأ في تحميل الأعمال</div>`;
       }
     }
 
-    // ===== START =====
     loadServices();
     loadProducts();
     loadPortfolio();
 
-    // ===== EXPOSE MODAL =====
     window.openModal = openModal;
     window.showToast = showToast;
   </script>
