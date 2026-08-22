@@ -1,5 +1,6 @@
 /* ============================================
-   PORTFOLIO — تصميم احترافي ومتناسق
+   PORTFOLIO — تصميم احترافي ومتجانس
+   مع تجاوب كامل لجميع الأجهزة
    ============================================ */
 
 /* --- Hero --- */
@@ -92,7 +93,7 @@
   gap: 28px;
 }
 
-/* --- بطاقة العمل (مثل المنتجات والخدمات) --- */
+/* --- بطاقة العمل --- */
 .portfolio-item {
   background: var(--bg-white);
   border-radius: var(--radius-lg);
@@ -498,9 +499,10 @@
 }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE — التجاوب الكامل
    ============================================ */
 
+/* --- الشاشات المتوسطة (تابلت) --- */
 @media (max-width: 1023px) {
   .portfolio-grid {
     grid-template-columns: 1fr 1fr;
@@ -514,6 +516,7 @@
   }
 }
 
+/* --- الشاشات الصغيرة (جوال) --- */
 @media (max-width: 639px) {
   .portfolio-hero {
     padding-top: calc(var(--header-h) + 40px);
@@ -528,6 +531,10 @@
   }
   .portfolio-item-thumb {
     aspect-ratio: 16/9;
+  }
+  .pf-detail-hero {
+    padding-bottom: 32px;
+    margin-bottom: 32px;
   }
   .pf-detail-hero-inner,
   .pf-breadcrumb {
@@ -548,9 +555,101 @@
   }
 }
 
-@media (min-width: 1280px) {
+/* --- الجوالات الصغيرة جداً (320px - 480px) --- */
+@media (max-width: 480px) {
+  .portfolio-hero-title {
+    font-size: 1.5rem;
+  }
+  .portfolio-hero-desc {
+    font-size: 0.9375rem;
+  }
+  .portfolio-item-title {
+    font-size: 0.9375rem;
+  }
+  .portfolio-item-desc {
+    font-size: 0.8125rem;
+  }
+  .portfolio-item-tag {
+    font-size: 0.6rem;
+    padding: 2px 10px;
+  }
+  .portfolio-item-body {
+    padding: 14px 16px 14px;
+  }
+  .pf-detail-hero-title {
+    font-size: 1.25rem;
+  }
+  .pf-detail-hero-tag {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+  }
+  .pf-detail-body {
+    font-size: 0.875rem;
+  }
+  .pf-detail-actions {
+    gap: 12px;
+  }
+  .pf-detail-actions .btn {
+    font-size: 0.875rem;
+    padding: 12px 20px;
+  }
+  .portfolio-item-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/* --- الجوالات الصغيرة جداً جداً (أقل من 360px) --- */
+@media (max-width: 360px) {
+  .portfolio-hero-title {
+    font-size: 1.25rem;
+  }
+  .portfolio-hero-desc {
+    font-size: 0.875rem;
+  }
+  .portfolio-item-title {
+    font-size: 0.875rem;
+  }
+  .pf-detail-hero-title {
+    font-size: 1.125rem;
+  }
+  .pf-detail-hero-tags {
+    gap: 4px;
+  }
+  .pf-detail-hero-tag {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+  }
+}
+
+/* --- الشاشات الكبيرة (1440px فما فوق) --- */
+@media (min-width: 1440px) {
   .portfolio-grid {
+    gap: 36px;
+  }
+  .portfolio-section {
+    padding: 80px 0 100px;
+  }
+  .pf-detail-hero-grid {
+    gap: 64px;
+  }
+}
+
+/* --- الشاشات الكبيرة جداً (1920px فما فوق) --- */
+@media (min-width: 1920px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(4, 1fr);
     gap: 32px;
+  }
+  .portfolio-section {
+    padding: 80px 0 120px;
+  }
+  .pf-detail-hero-inner {
+    max-width: 1400px;
+  }
+  .pf-detail-hero-grid {
+    gap: 80px;
   }
 }
 
@@ -571,4 +670,26 @@
   .pf-loading-spinner {
     animation: none !important;
   }
+}
+
+/* ============================================
+   FOCUS VISIBLE
+   ============================================ */
+
+.portfolio-item-link:focus-visible,
+.portfolio-item-live:focus-visible,
+.pf-detail-actions .btn:focus-visible,
+.pf-breadcrumb a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+
+::selection {
+  background: var(--primary);
+  color: var(--text-inverse);
 }
