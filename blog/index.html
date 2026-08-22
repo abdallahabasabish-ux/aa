@@ -6,7 +6,19 @@
   <title>المدونة — عبدالله عباس</title>
   <meta name="description" content="مقالات وأفكار في تطوير الويب، التصميم، تحسين محركات البحث، والتجارب الرقمية." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://abdallahsst.web.app/blog" />
+  <link rel="canonical" href="https://www.abdallahabas.com/blog/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://abdallahsst.firebaseio.com" />
+  <link rel="preconnect" href="https://firestore.googleapis.com" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/design-system.css" />
+  <link rel="stylesheet" href="/css/blog.css" />
 
   <script type="application/ld+json">
   {
@@ -14,95 +26,123 @@
     "@type": "CollectionPage",
     "name": "المدونة — عبدالله عباس",
     "description": "مقالات وأفكار في تطوير الويب والتصميم.",
-    "url": "https://abdallahsst.web.app/blog"
+    "url": "https://www.abdallahabas.com/blog/"
   }
   </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="/css/blog.css" />
 </head>
 <body>
 
-  <!-- ===== NAVIGATION (مطابق) ===== -->
+  <!-- ===== NAVIGATION ===== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
       <a href="/" class="nav-brand">
-        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" />
+        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" width="34" height="34" />
         <span>عبدالله عباس</span>
       </a>
       <div class="nav-links">
-        <a href="/services" class="nav-link">الخدمات</a>
-        <a href="/products" class="nav-link">المنتجات</a>
-        <a href="/portfolio" class="nav-link">الأعمال</a>
-        <a href="/blog" class="nav-link" style="color:var(--accent)">المقالات</a>
-        <a href="/about" class="nav-link">عن عبدالله</a>
+        <a href="/services/" class="nav-link">الخدمات</a>
+        <a href="/products/" class="nav-link">المنتجات</a>
+        <a href="/portfolio/" class="nav-link">الأعمال</a>
+        <a href="/blog/" class="nav-link" style="color:var(--primary);">المقالات</a>
+        <a href="/about.html" class="nav-link">عن عبدالله</a>
       </div>
-      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <a href="/contact.html" class="nav-cta">تواصل معي</a>
       <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+        </svg>
       </button>
     </div>
   </nav>
 
+  <!-- ===== MOBILE MENU ===== -->
   <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-mobile-panel" id="mobilePanel">
       <div class="nav-mobile-header">
-        <span class="nav-mobile-brand">عبدالله عباس</span>
+        <span class="nav-mobile-brand">
+          <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo" width="30" height="30" />
+          <span>عبدالله عباس</span>
+        </span>
         <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+          </svg>
         </button>
       </div>
       <div class="nav-mobile-links">
-        <a href="/services" class="nav-mobile-link">الخدمات</a>
-        <a href="/products" class="nav-mobile-link">المنتجات</a>
-        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
-        <a href="/blog" class="nav-mobile-link" style="color:var(--accent)">المقالات</a>
-        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
-        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/services/" class="nav-mobile-link">الخدمات</a>
+        <a href="/products/" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio/" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog/" class="nav-mobile-link" style="color:var(--primary);">المقالات</a>
+        <a href="/about.html" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact.html" class="nav-mobile-link">تواصل معي</a>
         <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
       </div>
       <div class="nav-mobile-footer">
-        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+        <a href="/contact.html" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
       </div>
     </div>
   </div>
 
-  <!-- ===== MAIN ===== -->
-  <main>
-    <section class="blog-hero">
-      <div class="container">
-        <div class="blog-hero-inner reveal">
-          <div class="blog-hero-label">
-            <span class="blog-hero-label-line"></span>
-            <span>المدونة</span>
-          </div>
-          <h1 class="blog-hero-title">مقالات وأفكار رقمية</h1>
-          <p class="blog-hero-desc">أكتب عن تجاربي في تطوير الويب، التصميم، تحسين محركات البحث، وأدوات تساعدك في رحلتك الرقمية.</p>
+  <!-- ===== HERO ===== -->
+  <section class="blog-hero">
+    <div class="container">
+      <div class="blog-hero-inner reveal">
+        <div class="blog-hero-label">
+          <span class="blog-hero-label-line"></span>
+          <span>المدونة</span>
+        </div>
+        <h1 class="blog-hero-title">مقالات وأفكار <span>رقمية</span></h1>
+        <p class="blog-hero-desc">أكتب عن تجاربي في تطوير الويب، التصميم، تحسين محركات البحث، وأدوات تساعدك في رحلتك الرقمية.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOG LIST ===== -->
+  <section class="blog-section">
+    <div class="container">
+      <!-- Loading -->
+      <div class="blog-loading" id="pageLoader">
+        <div class="blog-loading-spinner"></div>
+      </div>
+
+      <!-- Empty -->
+      <div class="blog-empty" id="emptyState">
+        <div class="blog-empty-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/>
+          </svg>
+        </div>
+        <div class="blog-empty-title">لا توجد مقالات بعد</div>
+        <div class="blog-empty-desc">سيتم إضافتها قريبًا</div>
+      </div>
+
+      <!-- Dynamic Grid -->
+      <div class="blog-grid" id="blogGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section style="padding:0 0 80px;background:var(--bg-body);">
+    <div class="container">
+      <div class="services-cta-inner reveal" style="background:linear-gradient(135deg,var(--secondary-dark),var(--secondary));border-radius:var(--radius-lg);padding:48px 40px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(255,102,0,0.08),transparent 60%);"></div>
+        <div class="services-cta-text" style="position:relative;z-index:1;">
+          <h2 style="font-family:var(--font-display);font-size:clamp(1.125rem,2vw,1.5rem);font-weight:700;color:var(--text-inverse);line-height:1.3;margin-bottom:6px;display:flex;align-items:center;gap:10px;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:28px;height:28px;flex-shrink:0;color:var(--primary-light);">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/>
+            </svg>
+            هل لديك موضوع ترغب بقراءته؟
+          </h2>
+          <p style="font-size:0.9375rem;color:rgba(255,255,255,0.5);line-height:1.7;">أنا دائمًا أرحب بموضوعات جديدة. تواصل معي واقترح موضوعًا، وسأكتب عنه.</p>
+        </div>
+        <div class="services-actions" style="position:relative;z-index:1;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <a href="/contact.html" class="btn btn--primary" style="background:var(--primary-gradient);color:#fff;box-shadow:0 8px 24px rgba(255,102,0,0.25);">اقتراح موضوع</a>
+          <a href="/contact.html" class="btn btn--secondary" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">تواصل معي</a>
         </div>
       </div>
-    </section>
-
-    <section class="blog-section">
-      <div class="container">
-        <div class="blog-loading" id="pageLoader" style="display:flex;align-items:center;justify-content:center;min-height:200px">
-          <div style="width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:post-spin .7s linear infinite"></div>
-        </div>
-
-        <div class="blog-empty" id="emptyState" style="display:none;flex-direction:column;align-items:center;padding:60px 20px;text-align:center">
-          <div style="width:64px;height:64px;border-radius:50%;background:var(--bg-raised);display:flex;align-items:center;justify-content:center;color:var(--text-dim);margin-bottom:20px">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z"/></svg>
-          </div>
-          <div style="font-size:1rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px">لا توجد مقالات بعد</div>
-          <div style="font-size:0.875rem;color:var(--text-muted)">سيتم إضافتها قريبًا</div>
-        </div>
-
-        <div class="blog-grid" id="blogGrid"></div>
-      </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
@@ -110,7 +150,7 @@
       <div class="footer-inner">
         <div>
           <div class="footer-brand">
-            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
+            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" width="38" height="38" />
             <div class="footer-brand-name">عبدالله عباس</div>
           </div>
           <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
@@ -118,27 +158,29 @@
         <div>
           <div class="footer-heading">الخدمات</div>
           <div class="footer-links">
-            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
-            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
-            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
-            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
-            <a href="/services/blogger" class="footer-link">بلوجر</a>
+            <a href="/services/web-development.html" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design.html" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo.html" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress.html" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger.html" class="footer-link">بلوجر</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">المحتوى</div>
           <div class="footer-links">
-            <a href="/products" class="footer-link">المنتجات</a>
-            <a href="/portfolio" class="footer-link">الأعمال</a>
-            <a href="/blog" class="footer-link">المقالات</a>
-            <a href="/about" class="footer-link">عن عبدالله</a>
+            <a href="/products/" class="footer-link">المنتجات</a>
+            <a href="/portfolio/" class="footer-link">الأعمال</a>
+            <a href="/blog/" class="footer-link">المقالات</a>
+            <a href="/about.html" class="footer-link">عن عبدالله</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">تواصل</div>
           <div class="footer-links">
-            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/contact.html" class="footer-link">أرسل رسالة</a>
             <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+            <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
+            <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
           </div>
         </div>
       </div>
@@ -149,123 +191,185 @@
     </div>
   </footer>
 
-  <script type="module">
-    import { db } from "/js/firebase-init.js";
-    import { collection, query, where, orderBy, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-    import { isSafeUrl, escapeHtml } from "/js/security.js";
+  <!-- ===== ANIMATION ===== -->
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 
-    // ===== NAV (مطابق) =====
-    const nav = document.getElementById("siteNav");
-    function handleNavScroll() { nav.classList.toggle("site-nav--scrolled", window.scrollY > 40); }
-    window.addEventListener("scroll", handleNavScroll, { passive: true });
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // ===== NAV SCROLL =====
+    var nav = document.getElementById('siteNav');
+    function handleNavScroll() {
+      nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
+    }
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
     handleNavScroll();
 
-    const mobileToggle = document.getElementById("mobileToggle");
-    const mobileClose = document.getElementById("mobileClose");
-    const mobileMenu = document.getElementById("mobileMenu");
-    const mobilePanel = document.getElementById("mobilePanel");
-    function openMobile() { mobileMenu.classList.add("nav-mobile-menu--open"); mobilePanel.classList.add("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "false"); mobileToggle.setAttribute("aria-expanded", "true"); document.body.style.overflow = "hidden"; }
-    function closeMobile() { mobileMenu.classList.remove("nav-mobile-menu--open"); mobilePanel.classList.remove("nav-mobile-panel--open"); mobileMenu.setAttribute("aria-hidden", "true"); mobileToggle.setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; }
-    mobileToggle.addEventListener("click", openMobile);
-    mobileClose.addEventListener("click", closeMobile);
-    mobileMenu.addEventListener("click", (e) => { if (e.target === mobileMenu) closeMobile(); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMobile(); });
-    mobilePanel.querySelectorAll(".nav-mobile-link, .nav-mobile-cta").forEach((l) => l.addEventListener("click", closeMobile));
+    // ===== MOBILE MENU =====
+    var mobileToggle = document.getElementById('mobileToggle');
+    var mobileClose = document.getElementById('mobileClose');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var mobilePanel = document.getElementById('mobilePanel');
 
-    // ===== SCROLL REVEAL =====
-    const reveals = document.querySelectorAll(".reveal");
-    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("reveal--visible"); obs.unobserve(e.target); } });
-      }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
-      reveals.forEach((el, i) => { el.style.transitionDelay = `${i * 50}ms`; obs.observe(el); });
-    } else {
-      reveals.forEach((el) => el.classList.add("reveal--visible"));
+    function openMobile() {
+      mobileMenu.classList.add('nav-mobile-menu--open');
+      mobilePanel.classList.add('nav-mobile-panel--open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
     }
 
-    // ===== RENDER =====
+    function closeMobile() {
+      mobileMenu.classList.remove('nav-mobile-menu--open');
+      mobilePanel.classList.remove('nav-mobile-panel--open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    mobileToggle.addEventListener('click', openMobile);
+    mobileClose.addEventListener('click', closeMobile);
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target === mobileMenu) closeMobile();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMobile();
+    });
+    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(function(l) {
+      l.addEventListener('click', closeMobile);
+    });
+
+    // ===== SCROLL REVEAL =====
+    var revealElements = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal--visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      revealElements.forEach(function(el, i) {
+        el.style.transitionDelay = (i * 60) + 'ms';
+        observer.observe(el);
+      });
+    } else {
+      revealElements.forEach(function(el) {
+        el.classList.add('reveal--visible');
+      });
+    }
+  </script>
+
+  <!-- ===== LIVE DATA ===== -->
+  <script type="module">
+    import { db } from "/js/firebase-init.js";
+    import { collection, query, orderBy, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { isSafeUrl } from "/js/security.js";
+
     function formatDate(d) {
       if (!d) return "";
-      const date = d instanceof Timestamp ? d.toDate() : new Date(d);
+      var date = d instanceof Timestamp ? d.toDate() : new Date(d);
       return date.toLocaleDateString("ar-EG", { year: "numeric", month: "short", day: "numeric" });
     }
 
-    function createBlogCard(post) {
-      const card = document.createElement("div");
-      card.className = "blog-card reveal";
+    function sortByOrder(a, b) {
+      var orderA = typeof a.sortOrder === "number" ? a.sortOrder : Infinity;
+      var orderB = typeof b.sortOrder === "number" ? b.sortOrder : Infinity;
+      if (orderA !== orderB) return orderA - orderB;
+      var timeA = a.createdAt && a.createdAt.toDate ? a.createdAt.toDate().getTime() : 0;
+      var timeB = b.createdAt && b.createdAt.toDate ? b.createdAt.toDate().getTime() : 0;
+      return timeB - timeA;
+    }
 
-      const thumb = document.createElement("div");
-      thumb.className = "blog-card-thumb";
+    function createBlogCard(post) {
+      var card = document.createElement("div");
+      card.className = "blog-card";
+
+      // ===== الصورة =====
+      var thumbWrapper = document.createElement("div");
+      thumbWrapper.className = "blog-card-thumb";
+
       if (post.image && isSafeUrl(post.image)) {
-        const img = document.createElement("img");
+        var img = document.createElement("img");
         img.src = post.image;
-        img.alt = "";
+        img.alt = post.title || "";
         img.loading = "lazy";
-        thumb.appendChild(img);
+        thumbWrapper.appendChild(img);
       } else {
-        thumb.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z"/></svg>`;
+        thumbWrapper.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/></svg>';
       }
 
-      const body = document.createElement("div");
+      // شارة التصنيف
+      if (post.category) {
+        var badge = document.createElement("span");
+        badge.className = "blog-card-badge";
+        badge.textContent = post.category;
+        thumbWrapper.appendChild(badge);
+      }
+
+      card.appendChild(thumbWrapper);
+
+      // ===== المحتوى =====
+      var body = document.createElement("div");
       body.className = "blog-card-body";
 
-      const top = document.createElement("div");
+      var top = document.createElement("div");
       top.className = "blog-card-top";
 
-      if (post.category) {
-        const cat = document.createElement("span");
-        cat.className = "blog-card-category";
-        cat.textContent = post.category;
-        top.appendChild(cat);
-      }
-
-      const date = document.createElement("span");
+      var date = document.createElement("span");
       date.className = "blog-card-date";
-      date.textContent = formatDate(post.createdAt);
+      date.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008z"/></svg> ' + formatDate(post.createdAt);
       top.appendChild(date);
 
-      const title = document.createElement("h3");
+      body.appendChild(top);
+
+      var title = document.createElement("h3");
       title.className = "blog-card-title";
-      const link = document.createElement("a");
-      link.href = `/post.html?slug=${post.slug}`;
+      var link = document.createElement("a");
+      link.href = "/post.html?slug=" + encodeURIComponent(post.slug || "");
       link.textContent = post.title || "—";
       title.appendChild(link);
+      body.appendChild(title);
 
-      const excerpt = document.createElement("p");
+      var excerpt = document.createElement("p");
       excerpt.className = "blog-card-excerpt";
       excerpt.textContent = post.excerpt || "";
+      body.appendChild(excerpt);
 
-      const footer = document.createElement("div");
+      // ===== الفوتر =====
+      var footer = document.createElement("div");
       footer.className = "blog-card-footer";
-      const readmore = document.createElement("a");
-      readmore.href = `/post.html?slug=${post.slug}`;
+
+      var author = document.createElement("span");
+      author.className = "blog-card-author";
+      author.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg> ' + (post.author || "عبدالله عباس");
+      footer.appendChild(author);
+
+      var readmore = document.createElement("a");
+      readmore.href = "/post.html?slug=" + encodeURIComponent(post.slug || "");
       readmore.className = "blog-card-readmore";
-      readmore.innerHTML = `اقرأ المقال <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>`;
+      readmore.innerHTML = 'اقرأ المقال <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>';
       footer.appendChild(readmore);
 
-      body.appendChild(top);
-      body.appendChild(title);
-      body.appendChild(excerpt);
       body.appendChild(footer);
-
-      card.appendChild(thumb);
       card.appendChild(body);
 
       return card;
     }
 
     async function loadPosts() {
-      const loader = document.getElementById("pageLoader");
-      const grid = document.getElementById("blogGrid");
-      const empty = document.getElementById("emptyState");
+      var loader = document.getElementById("pageLoader");
+      var grid = document.getElementById("blogGrid");
+      var empty = document.getElementById("emptyState");
 
       try {
-        const q = query(collection(db, "blog"), orderBy("createdAt", "desc"));
-        const snap = await getDocs(q);
-        // تصفية المقالات النشطة (التي active !== false)
-        const posts = snap.docs
-          .map((d) => ({ id: d.id, ...d.data() }))
-          .filter((p) => p.active !== false);
+        var q = query(collection(db, "blog"), orderBy("createdAt", "desc"));
+        var snapshot = await getDocs(q);
+        var posts = snapshot.docs
+          .map(function(d) { return { id: d.id, ...d.data() }; })
+          .filter(function(p) { return p.active !== false; });
 
         loader.style.display = "none";
 
@@ -274,13 +378,14 @@
           return;
         }
 
-        posts.forEach((p) => {
+        posts.forEach(function(p) {
           grid.appendChild(createBlogCard(p));
         });
-      } catch {
+      } catch (error) {
+        console.error("[blog] فشل تحميل المقالات:", error);
         loader.style.display = "none";
         empty.style.display = "flex";
-        empty.querySelector("div:last-child").textContent = "حدث خطأ في تحميل المقالات";
+        empty.querySelector(".blog-empty-desc").textContent = "حدث خطأ في تحميل المقالات";
       }
     }
 
