@@ -6,15 +6,26 @@
   <title>تواصل معي — عبدالله عباس</title>
   <meta name="description" content="تواصل مع عبدالله عباس لمناقشة مشروعك. أقدّم حلول تطوير مواقع، تصميم، تحسين محركات البحث، وقوالب بلوجر وووردبريس احترافية." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://abdallahsst.web.app/contact" />
+  <link rel="canonical" href="https://www.abdallahabas.com/contact.html" />
 
-  <!-- Structured Data -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://abdallahsst.firebaseio.com" />
+  <link rel="preconnect" href="https://firestore.googleapis.com" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/design-system.css" />
+  <link rel="stylesheet" href="/css/contact.css" />
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     "name": "تواصل مع عبدالله عباس",
-    "url": "https://abdallahsst.web.app/contact",
+    "url": "https://www.abdallahabas.com/contact.html",
     "description": "تواصل مع عبدالله عباس لمناقشة مشروعك الرقمي.",
     "mainEntity": {
       "@type": "Person",
@@ -23,30 +34,24 @@
     }
   }
   </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="/css/contact.css" />
 </head>
 <body>
 
-  <!-- ==================== NAVIGATION ==================== -->
+  <!-- ===== NAVIGATION ===== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
       <a href="/" class="nav-brand">
-        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" />
+        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" width="34" height="34" />
         <span>عبدالله عباس</span>
       </a>
       <div class="nav-links">
-        <a href="/services" class="nav-link">الخدمات</a>
-        <a href="/products" class="nav-link">المنتجات</a>
-        <a href="/portfolio" class="nav-link">الأعمال</a>
-        <a href="/blog" class="nav-link">المقالات</a>
-        <a href="/about" class="nav-link">عن عبدالله</a>
+        <a href="/services/" class="nav-link">الخدمات</a>
+        <a href="/products/" class="nav-link">المنتجات</a>
+        <a href="/portfolio/" class="nav-link">الأعمال</a>
+        <a href="/blog/" class="nav-link">المقالات</a>
+        <a href="/about.html" class="nav-link">عن عبدالله</a>
       </div>
-      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <a href="/contact.html" class="nav-cta">تواصل معي</a>
       <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
       </button>
@@ -63,40 +68,42 @@
         </button>
       </div>
       <div class="nav-mobile-links">
-        <a href="/services" class="nav-mobile-link">الخدمات</a>
-        <a href="/products" class="nav-mobile-link">المنتجات</a>
-        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
-        <a href="/blog" class="nav-mobile-link">المقالات</a>
-        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
-        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/services/" class="nav-mobile-link">الخدمات</a>
+        <a href="/products/" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio/" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog/" class="nav-mobile-link">المقالات</a>
+        <a href="/about.html" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact.html" class="nav-mobile-link">تواصل معي</a>
         <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
       </div>
       <div class="nav-mobile-footer">
-        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+        <a href="/contact.html" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
       </div>
     </div>
   </div>
 
-  <!-- ==================== MAIN ==================== -->
+  <!-- ===== MAIN ===== -->
   <main class="contact-page">
     <div class="container">
-
       <!-- Hero -->
       <div class="contact-hero reveal">
         <div class="contact-hero-inner">
-          <h1 class="contact-hero-title">لديك مشروع؟<br />أخبرني عنه.</h1>
+          <div class="contact-hero-label">
+            <span class="contact-hero-label-line"></span>
+            <span>تواصل معي</span>
+          </div>
+          <h1 class="contact-hero-title">لديك مشروع؟<br /><span>أخبرني عنه.</span></h1>
           <p class="contact-hero-desc">ليست كل رسالة تحتاج ردًا فوريًا — لكن كل رسالة تُقرأ. اكتب ما يكفي لفهم احتياجك، وسأردّ بجدية.</p>
         </div>
       </div>
 
       <!-- Grid -->
       <div class="contact-grid">
-
         <!-- Form -->
         <div class="contact-form-card reveal">
           <div id="formView">
             <h2 class="contact-form-heading">أرسل رسالتك</h2>
-            <p class="contact-form-sub">الحقول المطلوبة مُعلّمة بعلامة <span style="color:var(--accent)">*</span></p>
+            <p class="contact-form-sub">الحقول المطلوبة مُعلّمة بعلامة <span style="color:var(--primary);">*</span></p>
 
             <div id="formMessage" class="c-message" role="alert" aria-live="polite"></div>
 
@@ -106,19 +113,19 @@
                 <div class="c-form-group">
                   <label class="c-form-label" for="cName">الاسم الكامل <span class="required">*</span></label>
                   <input type="text" class="c-form-input" id="cName" name="name" required maxlength="80" autocomplete="name" />
-                  <div id="cNameErr" class="c-form-error" aria-live="polite"></div>
+                  <div id="cNameErr" class="c-form-error"></div>
                 </div>
                 <div class="c-form-group">
                   <label class="c-form-label" for="cEmail">البريد الإلكتروني <span class="required">*</span></label>
                   <input type="email" class="c-form-input" id="cEmail" name="email" required autocomplete="email" dir="ltr" />
-                  <div id="cEmailErr" class="c-form-error" aria-live="polite"></div>
+                  <div id="cEmailErr" class="c-form-error"></div>
                 </div>
               </div>
 
               <div class="c-form-group">
                 <label class="c-form-label" for="cPhone">رقم الهاتف</label>
                 <input type="tel" class="c-form-input" id="cPhone" name="phone" maxlength="20" autocomplete="tel" dir="ltr" placeholder="+20xxxxxxxxx" />
-                <div id="cPhoneErr" class="c-form-error" aria-live="polite"></div>
+                <div id="cPhoneErr" class="c-form-error"></div>
               </div>
 
               <div class="c-form-group">
@@ -133,32 +140,52 @@
                   <option value="graphic-design">تصميم جرافيك</option>
                   <option value="other">أخرى</option>
                 </select>
-                <div id="cServiceErr" class="c-form-error" aria-live="polite"></div>
+                <div id="cServiceErr" class="c-form-error"></div>
               </div>
 
+              <!-- ===== حقل الميزانية الجديد (بالدولار) ===== -->
               <div class="c-form-group">
-                <label class="c-form-label" for="cBudget">الميزانية التقريبية</label>
+                <label class="c-form-label" for="cBudget">الميزانية المتوقعة (بالدولار $)</label>
                 <select class="c-form-select" id="cBudget" name="budget">
                   <option value="">اختر إذا كنت تعرف</option>
-                  <option value="less-5000">أقل من 5,000 ج.م</option>
-                  <option value="5000-15000">5,000 - 15,000 ج.م</option>
-                  <option value="15000-50000">15,000 - 50,000 ج.م</option>
-                  <option value="50000+">أكثر من 50,000 ج.م</option>
+                  <option value="less-100">أقل من 100 $</option>
+                  <option value="100-500">100 - 500 $</option>
+                  <option value="500-1000">500 - 1,000 $</option>
+                  <option value="1000-3000">1,000 - 3,000 $</option>
+                  <option value="3000-5000">3,000 - 5,000 $</option>
+                  <option value="5000-plus">أكثر من 5,000 $</option>
                   <option value="not-sure">غير متأكد بعد</option>
                 </select>
+                <div class="c-form-hint">اختر النطاق التقريبي لميزانيتك ليساعدني في تقديم عرض مناسب</div>
               </div>
 
+              <!-- ===== حقل رابط الموقع ===== -->
               <div class="c-form-group">
                 <label class="c-form-label" for="cUrl">رابط الموقع الحالي (إن وُجد)</label>
                 <input type="url" class="c-form-input" id="cUrl" name="websiteUrl" placeholder="https://example.com" dir="ltr" />
                 <div class="c-form-hint">اختياري — يساعد في فهم مشروعك أسرع</div>
-                <div id="cUrlErr" class="c-form-error" aria-live="polite"></div>
+                <div id="cUrlErr" class="c-form-error"></div>
               </div>
 
+              <!-- ===== حقل الموافقة على سياسة AdSense ===== -->
+              <div class="c-form-group">
+                <div class="c-form-checkbox-group">
+                  <input type="checkbox" id="cAdsenseConsent" name="adsenseConsent" required />
+                  <label for="cAdsenseConsent">
+                    أوافق على <a href="/privacy-policy.html" target="_blank">سياسة الخصوصية</a> 
+                    وشروط استخدام <a href="/terms-conditions.html" target="_blank">Google AdSense</a> 
+                    وأقر بأنني أبلغ من العمر 18 عامًا أو أكثر.
+                    <span style="color:var(--primary);">*</span>
+                  </label>
+                </div>
+                <div id="cAdsenseErr" class="c-form-error"></div>
+              </div>
+
+              <!-- ===== تفاصيل المشروع ===== -->
               <div class="c-form-group">
                 <label class="c-form-label" for="cMessage">تفاصيل المشروع <span class="required">*</span></label>
                 <textarea class="c-form-textarea" id="cMessageInput" name="message" required maxlength="3000" rows="5" placeholder="اكتب باختصار: ماذا تحتاج، وما المشكلة التي تريد حلّها، وأي معلومات تساعد في فهم مشروعك..."></textarea>
-                <div id="cMessageErr" class="c-form-error" aria-live="polite"></div>
+                <div id="cMessageErr" class="c-form-error"></div>
               </div>
 
               <button type="submit" class="c-form-submit" id="submitBtn">
@@ -186,14 +213,13 @@
 
         <!-- Sidebar -->
         <aside class="contact-sidebar">
-
           <!-- Info -->
           <div class="contact-info-card reveal">
             <h3 class="contact-info-title">طرق التواصل الأخرى</h3>
             <div class="contact-info-list">
               <div class="contact-info-item">
                 <div class="contact-info-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.375c0 .621-.504 1.125-1.125 1.125h-15a1.125 1.125 0 0 1-1.125-1.125V6.75m19.5 0v3.75m-19.5 0h19.5"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
                 </div>
                 <div class="contact-info-text">
                   <span class="contact-info-label">البريد الإلكتروني</span>
@@ -243,20 +269,18 @@
               </div>
             </div>
           </div>
-
         </aside>
       </div>
-
     </div>
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
         <div>
           <div class="footer-brand">
-            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
+            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" width="38" height="38" />
             <div class="footer-brand-name">عبدالله عباس</div>
           </div>
           <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
@@ -264,27 +288,29 @@
         <div>
           <div class="footer-heading">الخدمات</div>
           <div class="footer-links">
-            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
-            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
-            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
-            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
-            <a href="/services/blogger" class="footer-link">بلوجر</a>
+            <a href="/services/web-development.html" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design.html" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo.html" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress.html" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger.html" class="footer-link">بلوجر</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">المحتوى</div>
           <div class="footer-links">
-            <a href="/products" class="footer-link">المنتجات</a>
-            <a href="/portfolio" class="footer-link">الأعمال</a>
-            <a href="/blog" class="footer-link">المقالات</a>
-            <a href="/about" class="footer-link">عن عبدالله</a>
+            <a href="/products/" class="footer-link">المنتجات</a>
+            <a href="/portfolio/" class="footer-link">الأعمال</a>
+            <a href="/blog/" class="footer-link">المقالات</a>
+            <a href="/about.html" class="footer-link">عن عبدالله</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">تواصل</div>
           <div class="footer-links">
-            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/contact.html" class="footer-link">أرسل رسالة</a>
             <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+            <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
+            <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
           </div>
         </div>
       </div>
@@ -295,13 +321,9 @@
     </div>
   </footer>
 
-  <!-- ==================== SCRIPTS ==================== -->
-  <script type="module">
-    import { auth, db } from "/js/firebase-init.js";
-    import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-    import { isSafeUrl } from "/js/security.js";
-
-    // --- Nav ---
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // ===== NAVIGATION =====
     const nav = document.getElementById('siteNav');
     function handleNavScroll() {
       nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
@@ -309,6 +331,7 @@
     window.addEventListener('scroll', handleNavScroll, { passive: true });
     handleNavScroll();
 
+    // ===== MOBILE MENU =====
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileClose = document.getElementById('mobileClose');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -334,7 +357,7 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
     mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
 
-    // --- Scroll Reveal ---
+    // ===== SCROLL REVEAL =====
     const reveals = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const obs = new IntersectionObserver((entries) => {
@@ -344,20 +367,25 @@
     } else {
       reveals.forEach(el => el.classList.add('reveal--visible'));
     }
+  </script>
 
-    // --- Form ---
+  <script type="module">
+    import { auth, db } from "/js/firebase-init.js";
+    import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { isSafeUrl } from "/js/security.js";
+
+    // ===== DOM =====
     const form = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const formView = document.getElementById('formView');
     const successView = document.getElementById('successView');
     const msgContainer = document.getElementById('formMessage');
 
-    // Clear errors on input
+    // ===== Clear errors on input =====
     const clearError = (inputId, errId) => {
       document.getElementById(inputId).addEventListener('input', () => {
         const errEl = document.getElementById(errId);
         errEl.textContent = '';
-        errEl.classList.remove('c-form-error--visible');
         document.getElementById(inputId).classList.remove('c-form-input--error', 'c-form-textarea--error');
         clearMessage();
       });
@@ -368,23 +396,20 @@
     clearError('cService', 'cServiceErr');
     clearError('cUrl', 'cUrlErr');
     clearError('cMessageInput', 'cMessageErr');
+    clearError('cAdsenseConsent', 'cAdsenseErr');
 
-    // Helpers
+    // ===== Helpers =====
     function showError(inputId, errId, msg) {
       document.getElementById(errId).textContent = msg;
-      document.getElementById(errId).classList.add('c-form-error--visible');
       document.getElementById(inputId).classList.add('c-form-input--error', 'c-form-textarea--error');
     }
 
     function clearErrors() {
-      ['cNameErr','cEmailErr','cPhoneErr','cServiceErr','cUrlErr','cMessageErr'].forEach(id => {
-        const el = document.getElementById(id);
-        el.textContent = '';
-        el.classList.remove('c-form-error--visible');
+      ['cNameErr','cEmailErr','cPhoneErr','cServiceErr','cUrlErr','cMessageErr','cAdsenseErr'].forEach(id => {
+        document.getElementById(id).textContent = '';
       });
       ['cName','cEmail','cPhone','cService','cUrl','cMessageInput'].forEach(id => {
-        const el = document.getElementById(id);
-        el.classList.remove('c-form-input--error', 'c-form-textarea--error');
+        document.getElementById(id).classList.remove('c-form-input--error', 'c-form-textarea--error');
       });
     }
 
@@ -403,7 +428,7 @@
       submitBtn.classList.toggle('c-form-submit--loading', on);
     }
 
-    // Validate
+    // ===== Validate =====
     function validate() {
       clearErrors();
       let hasErr = false;
@@ -430,11 +455,15 @@
       if (!message) { showError('cMessageInput', 'cMessageErr', 'تفاصيل المشروع مطلوبة.'); hasErr = true; if (!firstErr) firstErr = 'cMessageInput'; }
       else if (message.length < 15) { showError('cMessageInput', 'cMessageErr', 'اكتب تفاصيل أكثر عن مشروعك (15 حرفًا على الأقل).'); hasErr = true; if (!firstErr) firstErr = 'cMessageInput'; }
 
+      // ===== التحقق من الموافقة على AdSense =====
+      const consent = document.getElementById('cAdsenseConsent').checked;
+      if (!consent) { showError('cAdsenseConsent', 'cAdsenseErr', 'يجب الموافقة على السياسة والشروط.'); hasErr = true; if (!firstErr) firstErr = 'cAdsenseConsent'; }
+
       if (hasErr && firstErr) document.getElementById(firstErr).focus();
       return !hasErr;
     }
 
-    // Submit
+    // ===== Submit =====
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       clearMessage();
@@ -450,6 +479,7 @@
         budget: document.getElementById('cBudget').value,
         websiteUrl: isSafeUrl(document.getElementById('cUrl').value.trim()) ? document.getElementById('cUrl').value.trim() : '',
         message: document.getElementById('cMessageInput').value.trim(),
+        adsenseConsent: document.getElementById('cAdsenseConsent').checked,
         subject: document.getElementById('cService').value || 'استفسار عام',
         title: document.getElementById('cService').value || 'استفسار عام',
         type: 'contact',
