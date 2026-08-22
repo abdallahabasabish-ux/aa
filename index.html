@@ -6,329 +6,265 @@
   <title>عبدالله عباس — حلول رقمية احترافية</title>
   <meta name="description" content="عبدالله عباس — بناء حلول رقمية متكاملة: تطوير مواقع، تصميم واجهات، تحسين محركات البحث، قوالب بلوجر وووردبريس احترافية." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.abdallahabas.com/" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="عبدالله عباس — حلول رقمية احترافية" />
-  <meta property="og:description" content="بناء حلول رقمية متكاملة: تطوير مواقع، تصميم واجهات، تحسين محركات البحث." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.abdallahabas.com/" />
-
-  <!-- Preconnect -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://abdallahsst.firebaseio.com" />
-  <link rel="preconnect" href="https://firestore.googleapis.com" />
+  <link rel="canonical" href="https://abdallahabas.web.app/" />
 
   <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Favicon -->
+  <!-- Favicon placeholder -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="/css/home.css" />
 
-  <style>
-    /* أنماط مؤقتة للتحميل */
-    .loading-placeholder {
-      text-align: center;
-      padding: 40px 0;
-      color: #999;
-      font-size: 0.875rem;
-      grid-column: 1 / -1;
-    }
-    .loading-placeholder .spinner {
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      border: 3px solid #eee;
-      border-top-color: #FF6600;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "عبدالله عباس",
+    "alternateName": "Abdallah Abbas",
+    "url": "https://abdallahsst.web.app",
+    "jobTitle": "مطور ويب ومصمم رقمي",
+    "knowsAbout": ["تطوير المواقع", "تصميم الويب", "تحسين محركات البحث", "بلوجر", "ووردبريس"],
+    "sameAs": []
+  }
+  </script>
 </head>
 <body>
 
-  <!-- ===== TOAST ===== -->
-  <div class="toast-container" id="toastContainer">
-    <div class="toast" id="toast">
-      <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-      </svg>
-      <span id="toastMessage">✅ تم الإرسال بنجاح</span>
-      <button class="toast-close" id="toastClose" aria-label="إغلاق">✕</button>
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" />
+        <span>Abdallah Abas</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="/services" class="nav-link">الخدمات</a>
+        <a href="/products" class="nav-link">المنتجات</a>
+        <a href="/portfolio" class="nav-link">الأعمال</a>
+        <a href="/blog" class="nav-link">المقالات</a>
+        <a href="/about" class="nav-link">عن عبدالله</a>
+      </div>
+
+      <a href="/contact" class="nav-cta">تواصل معي</a>
+
+      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="nav-mobile-panel" id="mobilePanel">
+      <div class="nav-mobile-header">
+        <span class="nav-mobile-brand">
+          <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo" />
+          <span>عبدالله عباس</span>
+        </span>
+        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="nav-mobile-links">
+        <a href="/services" class="nav-mobile-link">الخدمات</a>
+        <a href="/products" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog" class="nav-mobile-link">المقالات</a>
+        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+      </div>
+      <div class="nav-mobile-footer">
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+      </div>
     </div>
   </div>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero-section">
-    <div class="hero-bg-video">
-      <video autoplay loop muted playsinline class="hero-video">
-        <source src="https://khamsat.hsoubcdn.com/assets/media/hero_khamsat-30996c078e7d2c8ea951fb0f827908119f08ce92c80b0bec2caea193d155fafa.mp4" type="video/mp4" />
-      </video>
-    </div>
-    <div class="container">
-      <div class="hero-content">
-        <h1 class="hero-title">أكبر سوق عربي للخدمات الرقمية</h1>
-        <p class="hero-subtitle">حلول رقمية متكاملة لإنجاز أعمالك بسهولة وأمان</p>
-        <div class="hero-search">
-          <form action="/search" method="get" class="search-form">
-            <input type="text" name="q" class="search-input" placeholder="ابحث عن خدمة..." />
-            <button type="submit" class="search-btn">بحث</button>
-          </form>
-          <div class="popular-tags">
-            <span class="tags-label">كلمات شائعة:</span>
-            <a href="/search?q=تطوير+مواقع">تطوير مواقع</a>
-            <a href="/search?q=تصميم+واجهات">تصميم واجهات</a>
-            <a href="/search?q=SEO">تحسين محركات البحث</a>
-            <a href="/search?q=ووردبريس">ووردبريس</a>
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
+    <div class="container container--wide">
+      <div class="hero-inner">
+        <div class="hero-content reveal">
+          <div class="hero-eyebrow">
+            <span class="hero-eyebrow-line"></span>
+            <span>حلول رقمية</span>
+          </div>
+
+          <h1 class="hero-title">
+            أحلّل هدفك أولًا،<br />
+            ثم<span class="hero-title-accent">أبني الحل</span><br />
+            المناسب له.
+          </h1>
+
+          <p class="hero-desc">
+            موقع ويب لا يعمل وحده — يحتاج استراتيجية. أقدّم حلولًا رقمية تُبنى حول هدفك الحقيقي، لا حول قالب جاهز يُلصق على مشروعك.
+          </p>
+
+          <div class="hero-actions">
+            <a href="/contact" class="btn btn--primary">
+              ابدأ مشروعك
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
+            </a>
+            <a href="/portfolio" class="btn btn--outline">شاهد أعمالي</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="hero-visual-box">
+            <div class="hero-visual-grid"></div>
+            <div class="hero-visual-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
+            </div>
+            <span class="hero-visual-label">تطوير · تصميم · تحسين</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== CATEGORIES GRID ===== -->
-  <section class="categories-section">
+  <!-- ==================== SERVICES ==================== -->
+  <section class="section" id="services">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">كافة الخدمات الاحترافية لتطوير أعمالك</h2>
+      <div class="section-header reveal">
+        <div class="section-label">
+          <span class="section-label-line"></span>
+          <span>ما أقدّمه</span>
+        </div>
+        <h2 class="section-title">خدمات مصممة لحل مشاكل حقيقية</h2>
+        <p class="section-desc">كل خدمة تبدأ بفهم المشروع، لا بتقديم قائمة مميزات جاهزة.</p>
       </div>
-      <div class="categories-grid">
-        <a href="/services/web-development" class="category-card">
-          <span>تطوير مواقع</span>
-        </a>
-        <a href="/services/web-design" class="category-card">
-          <span>تصميم واجهات</span>
-        </a>
-        <a href="/services/seo" class="category-card">
-          <span>تحسين محركات البحث</span>
-        </a>
-        <a href="/services/wordpress" class="category-card">
-          <span>ووردبريس</span>
-        </a>
-        <a href="/services/blogger" class="category-card">
-          <span>بلوجر</span>
-        </a>
-        <a href="/services/graphic-design" class="category-card">
-          <span>تصميم جرافيك</span>
-        </a>
-        <a href="/products/" class="category-card">
-          <span>منتجات رقمية</span>
-        </a>
-        <a href="/portfolio/" class="category-card">
-          <span>أعمال سابقة</span>
-        </a>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== POPULAR SERVICES ===== -->
-  <section class="services-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">خدمات شائعة</h2>
-      </div>
-      <div class="services-grid" id="servicesGrid">
-        <div class="loading-placeholder">
-          <div class="spinner"></div>
-          <p>جاري تحميل الخدمات...</p>
+      <div class="services-list" id="servicesList">
+        <!-- يُملأ بواسطة JavaScript من Firestore -->
+        <div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;">
+          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:prdt-spin .7s linear infinite;"></div>
+          <p style="margin-top:12px;">جاري تحميل الخدمات...</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== HOW IT WORKS ===== -->
-  <section class="how-it-works">
+  <!-- ==================== PRODUCTS ==================== -->
+  <section class="section section--sm" id="products" style="background:var(--bg-white)">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">نفذ أعمالك بسهولة وأمان</h2>
+      <div class="section-header reveal" style="text-align:center;max-width:100%">
+        <div class="section-label" style="justify-content:center">
+          <span class="section-label-line"></span>
+          <span>منتجات جاهزة</span>
+        </div>
+        <h2 class="section-title section-title--center">أدوات وقوالب جاهزة للاستخدام الفوري</h2>
+        <p class="section-desc section-desc--center">منتجات مُختبرة فعليًا، ليست مجرد قوالب مُعادة بيع.</p>
       </div>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-icon">
-            <svg width="40" height="40" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
-            </svg>
-          </div>
-          <h3>تصفح الخدمات</h3>
-          <p>ابحث عن الخدمة التي تحتاجها باستخدام مربع البحث أو عبر التصنيفات</p>
+
+      <div class="products-grid" id="productsGrid">
+        <!-- يُملأ بواسطة JavaScript من Firestore -->
+        <div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">
+          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:prdt-spin .7s linear infinite;"></div>
+          <p style="margin-top:12px;">جاري تحميل المنتجات...</p>
         </div>
-        <div class="step-card">
-          <div class="step-icon">
-            <svg width="40" height="40" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
-            </svg>
-          </div>
-          <h3>اطلب الخدمة</h3>
-          <p>راجع وصف الخدمة وتقييمات المشترين ثم اطلبها لفتح تواصل مع البائع</p>
+      </div>
+
+      <div style="text-align:center;margin-top:40px" class="reveal">
+        <a href="/products" class="btn btn--outline btn--sm">جميع المنتجات</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PORTFOLIO ==================== -->
+  <section class="section" id="portfolio">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">
+          <span class="section-label-line"></span>
+          <span>أعمال مختارة</span>
         </div>
-        <div class="step-card">
-          <div class="step-icon">
-            <svg width="40" height="40" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
-            </svg>
-          </div>
-          <h3>استلم خدمتك</h3>
-          <p>تواصل مع البائع مباشرة داخل الموقع حتى استلام طلبك كاملاً</p>
+        <h2 class="section-title">نتائج حقيقية، لا وعود</h2>
+      </div>
+
+      <div class="portfolio-grid" id="portfolioGrid">
+        <!-- يُملأ بواسطة JavaScript من Firestore -->
+        <div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">
+          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:prdt-spin .7s linear infinite;"></div>
+          <p style="margin-top:12px;">جاري تحميل الأعمال...</p>
+        </div>
+      </div>
+
+      <div style="margin-top:40px" class="reveal">
+        <a href="/portfolio" class="btn btn--outline btn--sm">جميع الأعمال</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="section section--sm">
+    <div class="container">
+      <div class="cta-section reveal">
+        <h2 class="cta-title">عندك مشروع أو فكرة تحتاج تنفيذها؟</h2>
+        <p class="cta-desc">أقدّر مساعدتك في تحديد الحل الأنسب — حتى لو لم تقرر بعد.</p>
+        <div class="cta-actions">
+          <a href="/contact" class="btn btn--white">تواصل معي الآن</a>
+          <a href="/services" class="btn btn--ghost-light">تصفح الخدمات</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== WHY KHAMSAT ===== -->
-  <section class="why-section">
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">لماذا عبدالله عباس خيارك الأفضل لإنجاز أعمالك</h2>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">
+            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
+            <div class="footer-brand-name">عبدالله عباس</div>
+          </div>
+          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+        </div>
+        <div>
+          <div class="footer-heading">الخدمات</div>
+          <div class="footer-links">
+            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger" class="footer-link">بلوجر</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">المحتوى</div>
+          <div class="footer-links">
+            <a href="/products" class="footer-link">المنتجات</a>
+            <a href="/portfolio" class="footer-link">الأعمال</a>
+            <a href="/blog" class="footer-link">المقالات</a>
+            <a href="/about" class="footer-link">عن عبدالله</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">تواصل</div>
+          <div class="footer-links">
+            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+            <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
+            <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
+          </div>
+        </div>
       </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="64" height="64" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
-              <path d="m352 384v-48h48c4.417969 0 8-3.582031 8-8v-32c0-4.417969-3.582031-8-8-8h-48v-48c0-4.417969-3.582031-8-8-8h-32c-4.417969 0-8 3.582031-8 8v48h-48c-4.417969 0-8 3.582031-8 8v32c0 4.417969 3.582031 8 8 8h48v48c0 4.417969 3.582031 8 8 8h32c4.417969 0 8-3.582031 8-8zm-16-56v48h-16v-48c0-4.417969-3.582031-8-8-8h-48v-16h48c4.417969 0 8-3.582031 8-8v-48h16v48c0 4.417969 3.582031 8 8 8h48v16h-48c-4.417969 0-8 3.582031-8 8zm0 0"/>
-            </svg>
-          </div>
-          <h4>أكثر من 30 تصنيف</h4>
-          <p>تصنيفات تضم خدمات متنوعة في كافة المجالات الرقمية</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <path d="M42,42a4,4,0,0,0-4-4H25.13L26,31.12A.49.49,0,0,0,26,31c0-5.54-3.92-7-6-7a1,1,0,0,0-1,.73l-4,13.89A7.67,7.67,0,0,1,12,41.79V41a1,1,0,0,0-1-1H1a1,1,0,0,0-1,1V63a1,1,0,0,0,1,1H11a1,1,0,0,0,1-1v-.67L17.73,64A.8.8,0,0,0,18,64H35a4,4,0,0,0,3-6.58,4,4,0,0,0,1-6,4,4,0,0,0,1-6A4,4,0,0,0,42,42ZM10,62H2V42h8Zm25,0H18.14L12,60.25V43.88c3-.69,4.81-4.26,4.89-4.43a1.34,1.34,0,0,0,.07-.18l3.77-13.18c1.17.26,3.25,1.23,3.27,4.85l-1,7.94a1,1,0,0,0,.24.78A1,1,0,0,0,24,40H38a2,2,0,0,1,0,4H33a1,1,0,0,0,0,2h4a2,2,0,0,1,0,4H32a1,1,0,0,0,0,2h4a2,2,0,0,1,0,4H31a1,1,0,0,0,0,2h4a2,2,0,0,1,0,4Z"/>
-            </svg>
-          </div>
-          <h4>أسعار اقتصادية</h4>
-          <p>خدمات ذات جودة عالية بأسعار تنافسية تناسب الجميع</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="64" height="64" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-              <path d="m30 0a30 30 0 1 0 15.212 55.856l8.819 2.4a3.439 3.439 0 0 0 4.225-4.225l-2.4-8.819a30 30 0 0 0 -25.856-45.212zm23.814 45.326 2.513 9.233a1.439 1.439 0 0 1 -1.769 1.766l-9.233-2.513a.992.992 0 0 0 -.783.112 28 28 0 1 1 9.383-9.383 1 1 0 0 0 -.111.785z"/>
-            </svg>
-          </div>
-          <h4>دعم فني متواصل</h4>
-          <p>فريق محترف للرد على الاستفسارات وحل المشكلات في أسرع وقت</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="64" height="64" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <path d="m48.695 96.676c0.42188 0.13281 0.86328 0.19922 1.3047 0.19922 0.42969 0 0.85938-0.066406 1.2734-0.19141 6.2812-1.8008 12.219-4.6406 17.562-8.4023 0.65625-0.51172 0.79687-1.4531 0.31641-2.1367-0.48438-0.67969-1.418-0.86328-2.1211-0.41016-5.0664 3.5625-10.695 6.25-16.648 7.9531-0.25781 0.082031-0.53906 0.082031-0.79687 0-7.7773-2.207-14.969-6.1094-21.062-11.426-0.30469-0.30078-0.72266-0.46094-1.1523-0.44922-0.42969 0.015625-0.83594 0.21094-1.1172 0.53125-0.28516 0.32422-0.42188 0.75-0.38281 1.1758 0.039062 0.42969 0.25391 0.82031 0.59375 1.0859 6.4297 5.6133 14.02 9.7344 22.23 12.07z"/>
-            </svg>
-          </div>
-          <h4>ضمان الحقوق</h4>
-          <p>نضمن حقوقك المالية واستلامك العمل كاملاً وفق ما هو متفق عليه</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="64" height="64" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-              <path d="M442.542,428.834l-0.126-0.018v-27.623c0-4.157-3.368-7.525-7.525-7.525c-4.157,0-7.525,3.368-7.525,7.525v25.436
-                l-12.641-1.836l-12.44-25.207c-4.561-9.247-17.772-9.26-22.344-0.001l-1.97,3.992v-26.182c0-4.157-3.368-7.525-7.525-7.525
-                c-4.157,0-7.525,3.368-7.525,7.525v48.062l-23.238,3.376c-10.211,1.484-14.295,14.042-6.905,21.251l9.807,9.558h-38.058
-                c3.133-3.055,1.103-1.075,9.806-9.558c0-0.001,0.001-0.001,0.001-0.002c7.367-7.156,3.341-19.76-6.906-21.249l-16.563-2.407
-                l-12.483-73.753l7.026-10.576l3.91,2.777c6.802,4.832,16.345,2.469,20.087-5.026c0-0.001,0-0.001,0-0.001l25.879-51.866
-                L394.2,310.8c2.077,0.889,33.164,14.825,33.164,51.758v3.52c0,4.157,3.368,7.525,7.525,7.525c4.157,0,7.525-3.368,7.525-7.525
-                v-3.52c0-47.66-40.792-64.979-42.529-65.693c-0.047-0.02-0.095-0.039-0.143-0.058l-97.573-37.787v-23.498
-                c15.565-12.007,26.325-29.932,28.894-50.381c18.739-1.07,32.588-16.153,32.588-34.009c0-8.282-3.017-16.187-8.385-22.317v-30.34
-                c0-47.955-34.134-89.312-81.164-98.336c-4.073-0.785-8.024,1.889-8.807,5.972c-0.784,4.08,1.89,8.024,5.972,8.807
-                c39.952,7.668,68.951,42.808,68.951,83.557v20.373c-2.733-0.902-5.594-1.46-8.539-1.677c0-8.189,0.682-5.999-25.429-34.062
-                l-0.001-0.001c-4.601-4.944-12.042-5.85-17.693-2.157c-27.846,18.191-61.681,27.507-93.148,25.721
-                c-5.344-0.304-8.049-0.092-12.398,3.532c-2.094,1.942-3.53,4.554-4.109,7.189c-2.553,0.263-6.025,1.013-8.864,2.049V98.473
-                c0-40.749,28.998-75.89,68.951-83.557c4.081-0.783,6.755-4.726,5.972-8.807c-0.782-4.08-4.729-6.759-8.807-5.972
-                c-47.03,9.025-81.164,50.381-81.164,98.336v31.129c-5.429,6.074-8.383,13.574-8.383,21.529c0,17.83,13.815,32.936,32.58,34.008
-                c2.532,20.361,13.268,39.132,30.538,51.567v22.316l-97.466,37.786c-0.047,0.019-0.094,0.037-0.141,0.057
-                c-1.737,0.714-42.529,18.033-42.529,65.693v66.257l-0.126,0.018c-4.727,0.687-8.581,3.936-10.057,8.478
-                c-1.477,4.543-0.269,9.437,3.152,12.772l20.129,19.62l-4.753,27.706c-0.807,4.707,1.093,9.377,4.957,12.185
-                c3.863,2.807,8.889,3.171,13.119,0.947l24.882-13.08l24.881,13.08c4.226,2.222,9.254,1.859,13.119-0.947
-                c3.866-2.808,5.764-7.477,4.956-12.186l-3.897-22.717h56.992l-3.897,22.718c-1.742,10.17,8.94,17.936,18.077,13.132l24.882-13.08
-                l24.881,13.08c4.226,2.222,9.254,1.859,13.119-0.947c3.866-2.808,5.764-7.477,4.956-12.186l-3.897-22.717h56.992l-3.897,22.718
-                c-1.742,10.17,8.94,17.936,18.076,13.133l24.882-13.08l24.881,13.08c9.133,4.803,19.82-2.961,18.076-13.133l-4.752-27.705
-                l20.13-19.621C456.838,442.879,452.753,430.318,442.542,428.834z"/>
-            </svg>
-          </div>
-          <h4>مقدمي خدمات محترفون</h4>
-          <p>ملفات شخصية تبرز الخدمات والتقييمات السابقة</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="64" height="64" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-              <path d="M331.678,132.295c10.095,1.302,16.924,9.518,16.924,18.836c0,9.386-6.874,17.553-16.924,18.843V132.295z"/>
-              <path d="M178.577,169.973c-10.034-1.288-16.924-9.431-16.924-18.843c0-9.267,7.865-16.703,16.924-18.474V169.973z"/>
-            </svg>
-          </div>
-          <h4>تعاملات آمنة وموثوقة</h4>
-          <p>نوثق مقدمي الخدمات لتعاملات آمنة وجدية</p>
-        </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
+        <span class="footer-copy">جميع الحقوق محفوظة</span>
       </div>
     </div>
-  </section>
-
-  <!-- ===== FAQ ===== -->
-  <section class="faq-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">الأسئلة الشائعة</h2>
-      </div>
-      <div class="faq-grid">
-        <div class="faq-item">
-          <button class="faq-question">
-            ما هو عبدالله عباس؟
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>عبدالله عباس هو منصة متخصصة في تقديم الحلول الرقمية المتكاملة، تشمل تطوير المواقع، تصميم الواجهات، تحسين محركات البحث، وقوالب بلوجر وووردبريس احترافية.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">
-            كيف يمكن أن أستفيد من خدمات عبدالله عباس؟
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>يمكنك الاستفادة من خلال تصفح الخدمات المتاحة، اختيار ما يناسب احتياجك، والتواصل المباشر لطلب الخدمة. جميع الخدمات مقدمة بجودة عالية وأسعار تنافسية.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">
-            كيف يضمن الموقع حقوقي؟
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>الموقع يضمن حقوقك بشكل كامل، حيث يقوم بدور الوسيط بين مقدم الخدمة والعميل، ويحمي حقوق الطرفين المالية في حال الالتزام بشروط الموقع وبنود الضمان.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">
-            ماذا يحدث بعد طلب الخدمة؟
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>بعد طلب الخدمة، ستتمكن من التواصل المباشر مع مقدم الخدمة. بعد تنفيذ الخدمة، يمكنك تقييمها، وفي حال عدم الرضا يمكنك إلغاء الطلب واستعادة رصيدك.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CTA ===== -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-content">
-        <h3>أنجز أعمالك بسهولة وأمان</h3>
-        <a href="/contact" class="cta-button">سجل الآن</a>
-      </div>
-    </div>
-  </section>
+  </footer>
 
   <!-- ==================== SCRIPTS ==================== -->
   <script>
-    // ===== NAV SCROLL =====
+    // --- Nav scroll effect ---
     const nav = document.getElementById('siteNav');
     function handleNavScroll() {
       nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
@@ -336,7 +272,7 @@
     window.addEventListener('scroll', handleNavScroll, { passive: true });
     handleNavScroll();
 
-    // ===== MOBILE MENU =====
+    // --- Mobile menu ---
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileClose = document.getElementById('mobileClose');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -349,6 +285,7 @@
       mobileToggle.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
     }
+
     function closeMobile() {
       mobileMenu.classList.remove('nav-mobile-menu--open');
       mobilePanel.classList.remove('nav-mobile-panel--open');
@@ -356,13 +293,21 @@
       mobileToggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
+
     mobileToggle.addEventListener('click', openMobile);
     mobileClose.addEventListener('click', closeMobile);
-    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
-    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) closeMobile();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobilePanel.classList.contains('nav-mobile-panel--open')) closeMobile();
+    });
 
-    // ===== SCROLL REVEAL =====
+    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(link => {
+      link.addEventListener('click', closeMobile);
+    });
+
+    // --- Scroll reveal (IntersectionObserver) ---
     const revealElements = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const observer = new IntersectionObserver((entries) => {
@@ -373,6 +318,7 @@
           }
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
       revealElements.forEach((el, i) => {
         el.style.transitionDelay = `${i * 60}ms`;
         observer.observe(el);
@@ -380,35 +326,16 @@
     } else {
       revealElements.forEach(el => el.classList.add('reveal--visible'));
     }
-
-    // ===== FAQ =====
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const item = this.parentElement;
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
-        if (!isOpen) item.classList.add('open');
-      });
-    });
   </script>
 
-  <!-- ==================== LIVE DATA ==================== -->
+  <!-- ==================== LIVE DATA (Firestore) ==================== -->
   <script type="module">
     import { db } from "/js/firebase-init.js";
     import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { isSafeUrl } from "/js/security.js";
-    import { openModal, showToast } from "/js/modal.js";
 
+    // ===== HELPERS =====
     const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
-    const CATEGORY_MAP = {
-      "web-development": "تطوير",
-      "web-design": "تصميم",
-      "seo": "SEO",
-      "graphic-design": "جرافيك",
-      "wordpress": "ووردبريس",
-      "blogger": "بلوجر",
-      "other": "أخرى"
-    };
 
     function sortByOrder(a, b) {
       const orderA = typeof a.sortOrder === "number" ? a.sortOrder : Infinity;
@@ -419,85 +346,219 @@
       return timeB - timeA;
     }
 
-    function createServiceCard(service) {
-      const card = document.createElement("div");
-      card.className = "service-card";
+    // ===== 1. إنشاء عنصر الخدمة (مع الرابط الصحيح) =====
+    function createServiceItem(service, index) {
+      const a = document.createElement("a");
+      // ✅ الرابط الصحيح لصفحة تفاصيل الخدمة
+      a.href = `/service-detail.html?slug=${encodeURIComponent(service.slug || "")}`;
+      a.className = "service-item";
 
-      // الصورة
+      const num = document.createElement("span");
+      num.className = "service-number";
+      num.textContent = String(index + 1).padStart(2, "0");
+
+      const info = document.createElement("div");
+      info.className = "service-info";
+
+      const name = document.createElement("h3");
+      name.className = "service-name";
+      name.textContent = service.title || "—";
+
+      const brief = document.createElement("p");
+      brief.className = "service-brief";
+      brief.textContent = service.shortDescription || "";
+
+      info.appendChild(name);
+      info.appendChild(brief);
+
+      const arrow = document.createElement("span");
+      arrow.className = "service-arrow";
+      arrow.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>`;
+
+      a.appendChild(num);
+      a.appendChild(info);
+      a.appendChild(arrow);
+      return a;
+    }
+
+    // ===== 2. إنشاء بطاقة المنتج =====
+    function createProductCard(product) {
+      const a = document.createElement("a");
+      a.href = `/product-detail.html?slug=${encodeURIComponent(product.slug || "")}`;
+      a.className = "product-card";
+
       const thumb = document.createElement("div");
-      thumb.className = "service-card-thumb";
-      if (service.image && isSafeUrl(service.image)) {
+      thumb.className = "product-card-thumb";
+      if (product.image && isSafeUrl(product.image)) {
         const img = document.createElement("img");
-        img.src = service.image;
-        img.alt = service.title || "";
+        img.src = product.image;
+        img.alt = product.title || "";
         img.loading = "lazy";
         thumb.appendChild(img);
       } else {
-        thumb.innerHTML = `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 3h18v18H3z"/><path d="M9 9h6v6H9z"/></svg>`;
+        thumb.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
       }
-      card.appendChild(thumb);
 
-      // المحتوى
       const body = document.createElement("div");
-      body.className = "service-card-body";
+      body.className = "product-card-body";
 
-      const title = document.createElement("h4");
-      title.className = "service-card-title";
-      const link = document.createElement("a");
-      link.href = "/service-detail.html?slug=" + encodeURIComponent(service.slug || "");
-      link.textContent = service.title || "—";
-      title.appendChild(link);
-      body.appendChild(title);
+      const name = document.createElement("h3");
+      name.className = "product-card-name";
+      name.textContent = product.title || "—";
 
-      const category = document.createElement("div");
-      category.className = "service-card-category";
-      category.textContent = CATEGORY_MAP[service.category] || service.category || "خدمة";
-      body.appendChild(category);
+      const desc = document.createElement("p");
+      desc.className = "product-card-desc";
+      desc.textContent = product.shortDescription || "";
 
-      const rating = document.createElement("div");
-      rating.className = "service-card-rating";
-      rating.innerHTML = '★★★★★ <span class="rating-count">(0)</span>';
-      body.appendChild(rating);
+      const footer = document.createElement("div");
+      footer.className = "product-card-footer";
 
-      const price = document.createElement("div");
-      price.className = "service-card-price";
-      if (service.price > 0) {
-        price.innerHTML = `تبدأ من <span>${Number(service.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[service.currency] || service.currency || ""}</span>`;
+      const price = document.createElement("span");
+      if (product.price > 0) {
+        price.className = "product-card-price";
+        price.textContent = `ابتداءً من ${Number(product.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[product.currency] || product.currency || ""}`;
       } else {
-        price.innerHTML = `<span>مجاني</span>`;
+        price.className = "product-card-price product-card-price--free";
+        price.textContent = "مجاني";
       }
-      body.appendChild(price);
 
-      card.appendChild(body);
-      return card;
+      const link = document.createElement("span");
+      link.className = "product-card-link";
+      link.innerHTML = `تصفح <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>`;
+
+      footer.appendChild(price);
+      footer.appendChild(link);
+
+      body.appendChild(name);
+      body.appendChild(desc);
+      body.appendChild(footer);
+
+      a.appendChild(thumb);
+      a.appendChild(body);
+      return a;
     }
 
-    async function loadServices() {
-      const grid = document.getElementById("servicesGrid");
+    // ===== 3. إنشاء بطاقة الأعمال =====
+    function createPortfolioItem(project) {
+      const a = document.createElement("a");
+      a.href = `/portfolio-detail.html?slug=${encodeURIComponent(project.slug || "")}`;
+      a.className = "portfolio-card";
+
+      const thumb = document.createElement("div");
+      thumb.className = "portfolio-card-thumb";
+      if (project.image && isSafeUrl(project.image)) {
+        const img = document.createElement("img");
+        img.src = project.image;
+        img.alt = project.title || "";
+        img.loading = "lazy";
+        thumb.appendChild(img);
+      } else {
+        thumb.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
+      }
+
+      const body = document.createElement("div");
+      body.className = "portfolio-card-body";
+
+      const title = document.createElement("h3");
+      title.className = "portfolio-card-title";
+      title.textContent = project.title || "—";
+
+      const cat = document.createElement("span");
+      cat.className = "portfolio-card-cat";
+      cat.textContent = (project.tags && project.tags.length > 0) ? project.tags.slice(0, 2).join(" · ") : "عمل";
+
+      body.appendChild(title);
+      body.appendChild(cat);
+
+      a.appendChild(thumb);
+      a.appendChild(body);
+      return a;
+    }
+
+    // ===== 4. تحميل الخدمات =====
+    async function loadHomeServices() {
+      const list = document.getElementById("servicesList");
       try {
         const snap = await getDocs(collection(db, "services"));
-        const items = snap.docs
-          .map(d => ({ id: d.id, ...d.data() }))
-          .filter(s => s.active !== false)
+        const services = snap.docs
+          .map((d) => ({ id: d.id, ...d.data() }))
+          .filter((s) => s.active !== false)
           .sort(sortByOrder)
-          .slice(0, 8);
+          .slice(0, 5);
 
-        grid.textContent = "";
-        if (items.length === 0) {
-          grid.innerHTML = `<div class="loading-placeholder">لا توجد خدمات حالياً</div>`;
+        list.textContent = "";
+        if (services.length === 0) {
+          list.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;">لا توجد خدمات حالياً</div>`;
           return;
         }
-        items.forEach(s => grid.appendChild(createServiceCard(s)));
-      } catch {
-        grid.innerHTML = `<div class="loading-placeholder">حدث خطأ في تحميل الخدمات</div>`;
+        services.forEach((s, i) => list.appendChild(createServiceItem(s, i)));
+      } catch (error) {
+        console.error("[home] فشل تحميل الخدمات:", error);
+        list.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;">حدث خطأ في تحميل الخدمات</div>`;
       }
     }
 
-    loadServices();
+    // ===== 5. تحميل المنتجات =====
+    async function loadHomeProducts() {
+      const grid = document.getElementById("productsGrid");
+      try {
+        const snap = await getDocs(collection(db, "products"));
+        const products = snap.docs
+          .map((d) => ({ id: d.id, ...d.data() }))
+          .filter((p) => p.active !== false)
+          .sort(sortByOrder)
+          .slice(0, 3);
 
-    window.openModal = openModal;
-    window.showToast = showToast;
+        grid.textContent = "";
+        if (products.length === 0) {
+          grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">لا توجد منتجات حالياً</div>`;
+          return;
+        }
+        products.forEach((p) => grid.appendChild(createProductCard(p)));
+      } catch (error) {
+        console.error("[home] فشل تحميل المنتجات:", error);
+        grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">حدث خطأ في تحميل المنتجات</div>`;
+      }
+    }
+
+    // ===== 6. تحميل الأعمال =====
+    async function loadHomePortfolio() {
+      const grid = document.getElementById("portfolioGrid");
+      try {
+        const snap = await getDocs(collection(db, "portfolio"));
+        const projects = snap.docs
+          .map((d) => ({ id: d.id, ...d.data() }))
+          .filter((p) => p.active !== false)
+          .sort(sortByOrder)
+          .slice(0, 3);
+
+        grid.textContent = "";
+        if (projects.length === 0) {
+          grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">لا توجد أعمال حالياً</div>`;
+          return;
+        }
+
+        // أول عنصر يكون كبيراً (إذا كان موجوداً)
+        if (projects.length > 0) {
+          const first = createPortfolioItem(projects[0]);
+          first.classList.add("portfolio-card--large");
+          grid.appendChild(first);
+        }
+
+        // باقي العناصر
+        for (let i = 1; i < projects.length; i++) {
+          grid.appendChild(createPortfolioItem(projects[i]));
+        }
+      } catch (error) {
+        console.error("[home] فشل تحميل الأعمال:", error);
+        grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">حدث خطأ في تحميل الأعمال</div>`;
+      }
+    }
+
+    // ===== 7. بدء التحميل =====
+    loadHomeServices();
+    loadHomeProducts();
+    loadHomePortfolio();
   </script>
-
 </body>
 </html>
