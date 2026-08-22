@@ -274,15 +274,6 @@
       return date.toLocaleDateString("ar-EG", { year: "numeric", month: "short", day: "numeric" });
     }
 
-    function sortByOrder(a, b) {
-      var orderA = typeof a.sortOrder === "number" ? a.sortOrder : Infinity;
-      var orderB = typeof b.sortOrder === "number" ? b.sortOrder : Infinity;
-      if (orderA !== orderB) return orderA - orderB;
-      var timeA = a.createdAt && a.createdAt.toDate ? a.createdAt.toDate().getTime() : 0;
-      var timeB = b.createdAt && b.createdAt.toDate ? b.createdAt.toDate().getTime() : 0;
-      return timeB - timeA;
-    }
-
     function createBlogCard(post) {
       var card = document.createElement("div");
       card.className = "blog-card";
@@ -320,7 +311,8 @@
 
       var date = document.createElement("span");
       date.className = "blog-card-date";
-      date.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008z"/></svg> ' + formatDate(post.createdAt);
+      // أيقونة التاريخ بحجم مناسب
+      date.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;vertical-align:middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008z"/></svg> ' + formatDate(post.createdAt);
       top.appendChild(date);
 
       body.appendChild(top);
@@ -344,13 +336,14 @@
 
       var author = document.createElement("span");
       author.className = "blog-card-author";
-      author.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg> ' + (post.author || "عبدالله عباس");
+      // أيقونة الكاتب بحجم مناسب
+      author.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;vertical-align:middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg> ' + (post.author || "عبدالله عباس");
       footer.appendChild(author);
 
       var readmore = document.createElement("a");
       readmore.href = "/post.html?slug=" + encodeURIComponent(post.slug || "");
       readmore.className = "blog-card-readmore";
-      readmore.innerHTML = 'اقرأ المقال <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>';
+      readmore.innerHTML = 'اقرأ المقال <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;vertical-align:middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>';
       footer.appendChild(readmore);
 
       body.appendChild(footer);
