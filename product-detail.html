@@ -20,13 +20,17 @@
   <link rel="stylesheet" href="/css/product-detail.css" />
 
   <style>
-    /* أنيميشن إضافي للـ Toast */
     @keyframes pdet-toast-slide {
       0% { opacity: 0; transform: translateX(-50%) translateY(-30px) scale(0.95); }
       100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
     }
     .pdet-toast.visible {
       animation: pdet-toast-slide 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .pdet-request-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
     }
   </style>
 </head>
@@ -39,60 +43,6 @@
     </svg>
     <span id="pdetToastMessage">✅ تم الإرسال بنجاح</span>
     <button class="pdet-toast-close" id="pdetToastClose" aria-label="إغلاق">✕</button>
-  </div>
-
-  <!-- ===== MODAL ===== -->
-  <div class="pdet-modal-overlay" id="pdetModalOverlay">
-    <div class="pdet-modal" id="pdetModal">
-      <button class="pdet-modal-close" id="pdetModalClose" aria-label="إغلاق">✕</button>
-
-      <div class="pdet-modal-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-        </svg>
-      </div>
-
-      <h2 class="pdet-modal-title">طلب المنتج</h2>
-      <p class="pdet-modal-subtitle">املأ بياناتك وسنقوم بالتواصل معك</p>
-
-      <!-- ملخص المنتج -->
-      <div class="pdet-modal-product">
-        <img class="pdet-modal-product-image" id="pdetModalProductImage" src="" alt="" />
-        <div class="pdet-modal-product-info">
-          <div class="pdet-modal-product-name" id="pdetModalProductName">—</div>
-          <div class="pdet-modal-product-price" id="pdetModalProductPrice">—</div>
-        </div>
-      </div>
-
-      <!-- النموذج -->
-      <form id="pdetForm" novalidate>
-        <div class="pdet-form-group">
-          <label class="pdet-form-label" for="pdetFormName">الاسم الكامل <span class="required">*</span></label>
-          <input type="text" class="pdet-form-input" id="pdetFormName" required placeholder="أدخل اسمك" />
-          <div class="pdet-form-error" id="pdetFormNameError"></div>
-        </div>
-
-        <div class="pdet-form-group">
-          <label class="pdet-form-label" for="pdetFormEmail">البريد الإلكتروني <span class="required">*</span></label>
-          <input type="email" class="pdet-form-input" id="pdetFormEmail" required placeholder="بريدك الإلكتروني" dir="ltr" />
-          <div class="pdet-form-error" id="pdetFormEmailError"></div>
-        </div>
-
-        <div class="pdet-form-group">
-          <label class="pdet-form-label" for="pdetFormMessage">رسالة (اختياري)</label>
-          <textarea class="pdet-form-textarea" id="pdetFormMessage" placeholder="أي تفاصيل إضافية تريد إضافتها..."></textarea>
-        </div>
-
-        <button type="submit" class="pdet-form-submit" id="pdetFormSubmit">
-          <span class="btn-text">إرسال الطلب</span>
-          <span class="spinner"></span>
-        </button>
-      </form>
-
-      <p style="text-align:center;font-size:0.75rem;color:var(--text-dim);margin-top:16px;">
-        سيتم التواصل معك خلال 24 ساعة
-      </p>
-    </div>
   </div>
 
   <!-- ===== NAVIGATION ===== -->
@@ -257,7 +207,7 @@
     import { db, auth } from "/js/firebase-init.js";
     import { collection, query, where, limit, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { isSafeUrl, escapeHtml } from "/js/security.js";
-    import { openProductModal, showProductToast } from "/js/product-request.js";
+    import { requestProduct, showProductToast } from "/js/product-request.js";
 
     // ===== HELPERS =====
     const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
@@ -266,12 +216,6 @@
       tool: { label: "أداة", cls: "tool" },
       resource: { label: "مصدر", cls: "resource" },
       "digital-product": { label: "منتج رقمي", cls: "digital-product" }
-    };
-    const STATUS_MAP = {
-      available: { label: "متاح", cls: "available" },
-      "coming-soon": { label: "قريباً", cls: "coming-soon" },
-      draft: { label: "مسودة", cls: "draft" },
-      discontinued: { label: "متوقف", cls: "discontinued" }
     };
 
     function getSlug() {
@@ -337,14 +281,12 @@
       const badges = document.createElement("div");
       badges.className = "pdet-hero-badges";
 
-      // نوع المنتج
       const typeInfo = TYPE_MAP[product.type] || { label: product.type || "منتج", cls: "" };
       const typeBadge = document.createElement("span");
       typeBadge.className = "pdet-hero-badge";
       typeBadge.textContent = typeInfo.label;
       badges.appendChild(typeBadge);
 
-      // الإصدار
       if (product.version) {
         const verBadge = document.createElement("span");
         verBadge.className = "pdet-hero-badge pdet-hero-badge--version";
@@ -352,7 +294,6 @@
         badges.appendChild(verBadge);
       }
 
-      // الحالة
       if (product.status === "available") {
         const statusBadge = document.createElement("span");
         statusBadge.className = "pdet-hero-badge";
@@ -371,7 +312,6 @@
       title.textContent = product.title || "—";
       infoCol.appendChild(title);
 
-      // الوصف المختصر
       if (product.shortDescription) {
         const subtitle = document.createElement("p");
         subtitle.className = "pdet-hero-subtitle";
@@ -394,27 +334,18 @@
       }
       infoCol.appendChild(price);
 
-      // ===== زر "طلب المنتج" =====
+      // ===== زر "طلب المنتج" (مرتبط بالدالة الجديدة) =====
       const btn = document.createElement("button");
       btn.className = "pdet-request-btn";
       btn.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
         </svg>
         طلب المنتج
       `;
       
       btn.addEventListener("click", () => {
-        // التحقق من تسجيل الدخول
-        if (!auth.currentUser) {
-          showProductToast("⚠️ يرجى تسجيل الدخول أولاً", "error");
-          setTimeout(() => {
-            window.location.href = `/login.html?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
-          }, 1500);
-          return;
-        }
-        // فتح المودال
-        openProductModal(product);
+        requestProduct(product);
       });
       
       infoCol.appendChild(btn);
@@ -426,7 +357,7 @@
       return section;
     }
 
-    // ===== BUILD CONTENT (الوصف التفصيلي) =====
+    // ===== BUILD CONTENT =====
     function buildContent(product) {
       const div = document.createElement("div");
       div.className = "pdet-content";
@@ -450,7 +381,6 @@
         section.appendChild(para);
       });
 
-      // المميزات إن وجدت
       if (product.features && product.features.length > 0) {
         const featTitle = document.createElement("h3");
         featTitle.style.cssText = "font-family:var(--font-display);font-size:1.0625rem;font-weight:700;color:var(--text-primary);margin:28px 0 12px;";
@@ -554,7 +484,7 @@
     loadProduct();
 
     // ===== EXPOSE =====
-    window.openProductModal = openProductModal;
+    window.requestProduct = requestProduct;
     window.showProductToast = showProductToast;
   </script>
 </body>
