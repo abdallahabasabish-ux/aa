@@ -19,6 +19,59 @@
   <link rel="stylesheet" href="/css/design-system.css" />
   <link rel="stylesheet" href="/css/modal.css" />
   <link rel="stylesheet" href="/css/service-detail.css" />
+
+  <style>
+    /* أنماط إضافية للصورة في صفحة التفاصيل */
+    .sdet-hero-image {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-raised);
+      border: 1px solid var(--border-light);
+      margin-bottom: 24px;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+    }
+    .sdet-hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .sdet-hero-image svg {
+      width: 48px;
+      height: 48px;
+    }
+    .sdet-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .sdet-hero-info {
+      padding-top: 8px;
+    }
+    @media (max-width: 1023px) {
+      .sdet-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .sdet-hero-image {
+        aspect-ratio: 16/9;
+        margin-bottom: 0;
+      }
+    }
+    @media (max-width: 639px) {
+      .sdet-hero-grid {
+        gap: 20px;
+      }
+      .sdet-hero-image {
+        aspect-ratio: 16/10;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -120,12 +173,10 @@
 
   <!-- ===== MAIN ===== -->
   <main id="pageRoot">
-    <!-- Loading -->
     <div class="sdet-loading" id="loadingState">
       <div class="sdet-loading-spinner"></div>
     </div>
 
-    <!-- 404 -->
     <div class="sdet-404" id="notFoundState" style="display:none;">
       <div class="sdet-404-code">404</div>
       <h1 class="sdet-404-title">الخدمة غير موجودة</h1>
@@ -133,7 +184,6 @@
       <a href="/services/" class="btn btn--primary">جميع الخدمات</a>
     </div>
 
-    <!-- Content -->
     <div id="contentRoot" style="display:none;"></div>
   </main>
 
@@ -280,6 +330,27 @@
       var inner = document.createElement("div");
       inner.className = "sdet-hero-inner";
 
+      var grid = document.createElement("div");
+      grid.className = "sdet-hero-grid";
+
+      // ===== الصورة (العمود الأيسر) =====
+      var imageCol = document.createElement("div");
+      imageCol.className = "sdet-hero-image";
+      if (service.image && isSafeUrl(service.image)) {
+        var img = document.createElement("img");
+        img.src = service.image;
+        img.alt = service.title || "";
+        img.loading = "lazy";
+        imageCol.appendChild(img);
+      } else {
+        imageCol.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/></svg>';
+      }
+      grid.appendChild(imageCol);
+
+      // ===== المعلومات (العمود الأيمن) =====
+      var infoCol = document.createElement("div");
+      infoCol.className = "sdet-hero-info";
+
       var top = document.createElement("div");
       top.className = "sdet-hero-top";
 
@@ -297,12 +368,19 @@
         top.appendChild(delivery);
       }
 
-      inner.appendChild(top);
+      infoCol.appendChild(top);
 
       var title = document.createElement("h1");
       title.className = "sdet-hero-title";
       title.textContent = service.title || "—";
-      inner.appendChild(title);
+      infoCol.appendChild(title);
+
+      if (service.shortDescription) {
+        var subtitle = document.createElement("p");
+        subtitle.style.cssText = "font-size:1rem;color:var(--text-secondary);line-height:1.7;margin-bottom:16px;";
+        subtitle.textContent = service.shortDescription;
+        infoCol.appendChild(subtitle);
+      }
 
       var price = document.createElement("div");
       if (service.price > 0) {
@@ -316,9 +394,8 @@
         price.className = "sdet-hero-price sdet-hero-price-free";
         price.textContent = "مجاني";
       }
-      inner.appendChild(price);
+      infoCol.appendChild(price);
 
-      // زر طلب الخدمة
       var cta = document.createElement("div");
       cta.className = "sdet-hero-cta";
       var btn = document.createElement("button");
@@ -328,9 +405,12 @@
         openModal(service, "service");
       });
       cta.appendChild(btn);
-      inner.appendChild(cta);
+      infoCol.appendChild(cta);
 
+      grid.appendChild(infoCol);
+      inner.appendChild(grid);
       section.appendChild(inner);
+
       return section;
     }
 
@@ -544,6 +624,9 @@
           "price": service.price,
           "priceCurrency": service.currency || "EGP"
         };
+      }
+      if (service.image && isSafeUrl(service.image)) {
+        sd.image = service.image;
       }
       script.textContent = JSON.stringify(sd);
       document.head.appendChild(script);
