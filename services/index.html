@@ -6,32 +6,28 @@
   <title>الخدمات — عبدالله عباس</title>
   <meta name="description" content="خدمات تطوير مواقع، تصميم واجهات، تحسين SEO، قوالب بلوجر وووردبريس — كل خدمة مبنية لحل مشكلة محددة." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.abdallahabas.com/services.html" />
+  <link rel="canonical" href="https://www.abdallahabas.com/services/" />
 
-  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://abdallahsst.firebaseio.com" />
   <link rel="preconnect" href="https://firestore.googleapis.com" />
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
 
-  <!-- Styles -->
   <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/design-system.css" />
+  <link rel="stylesheet" href="/css/modal.css" />
   <link rel="stylesheet" href="/css/services.css" />
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "الخدمات — عبدالله عباس",
     "description": "خدمات تطوير مواقع، تصميم واجهات، تحسين SEO، قوالب بلوجر وووردبريس احترافية.",
-    "url": "https://www.abdallahabas.com/services.html",
+    "url": "https://www.abdallahabas.com/services/",
     "provider": {
       "@type": "Person",
       "name": "عبدالله عباس",
@@ -42,31 +38,72 @@
 </head>
 <body>
 
-  <!-- ==================== NAVIGATION ==================== -->
-  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
+  <!-- ===== TOAST ===== -->
+  <div class="toast-container" id="toastContainer">
+    <div class="toast" id="toast">
+      <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <span id="toastMessage">✅ تم الإرسال بنجاح</span>
+      <button class="toast-close" id="toastClose" aria-label="إغلاق">✕</button>
+    </div>
+  </div>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-container" id="modalContainer">
+      <span class="modal-handle"></span>
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="إغلاق">✕</button>
+      <img class="modal-image" id="modalImage" src="" alt="" loading="lazy" />
+      <h2 class="modal-title" id="modalTitle">—</h2>
+      <p class="modal-subtitle" id="modalSubtitle"></p>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-features" id="modalFeatures"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <form class="modal-form" id="modalForm" novalidate>
+        <div class="modal-form-title">📩 طلب الخدمة</div>
+        <div class="modal-form-group">
+          <label class="modal-form-label" for="modalFormName">الاسم الكامل <span style="color:var(--primary);">*</span></label>
+          <input type="text" class="modal-form-input" id="modalFormName" required placeholder="أدخل اسمك" />
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label" for="modalFormEmail">البريد الإلكتروني <span style="color:var(--primary);">*</span></label>
+          <input type="email" class="modal-form-input" id="modalFormEmail" required placeholder="بريدك الإلكتروني" dir="ltr" />
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label" for="modalFormMessage">رسالة (اختياري)</label>
+          <textarea class="modal-form-textarea" id="modalFormMessage" placeholder="أي تفاصيل إضافية..."></textarea>
+        </div>
+        <button type="submit" class="modal-form-submit" id="modalFormSubmit">
+          <span class="btn-text">إرسال الطلب</span>
+          <span class="spinner"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="site-nav" id="siteNav">
     <div class="nav-inner">
-      <a href="/index.html" class="nav-brand">
+      <a href="/" class="nav-brand">
         <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" width="34" height="34" />
         <span>عبدالله عباس</span>
       </a>
-
-      <div class="nav-links" id="navLinks">
-        <a href="/services.html" class="nav-link" style="color:var(--accent)">الخدمات</a>
-        <a href="/products.html" class="nav-link">المنتجات</a>
-        <a href="/portfolio.html" class="nav-link">الأعمال</a>
-        <a href="/blog.html" class="nav-link">المقالات</a>
+      <div class="nav-links">
+        <a href="/services/" class="nav-link" style="color:var(--primary);">الخدمات</a>
+        <a href="/products/" class="nav-link">المنتجات</a>
+        <a href="/portfolio/" class="nav-link">الأعمال</a>
+        <a href="/blog/" class="nav-link">المقالات</a>
         <a href="/about.html" class="nav-link">عن عبدالله</a>
       </div>
-
       <a href="/contact.html" class="nav-cta">تواصل معي</a>
-
-      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+      <button class="nav-mobile-toggle" id="mobileToggle" aria-label="فتح القائمة">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
       </button>
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
+  <!-- ===== MOBILE MENU ===== -->
   <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-mobile-panel" id="mobilePanel">
       <div class="nav-mobile-header">
@@ -74,15 +111,15 @@
           <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo" width="30" height="30" />
           <span>عبدالله عباس</span>
         </span>
-        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+        <button class="nav-mobile-close" id="mobileClose" aria-label="إغلاق القائمة">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
         </button>
       </div>
       <div class="nav-mobile-links">
-        <a href="/services.html" class="nav-mobile-link" style="color:var(--accent)">الخدمات</a>
-        <a href="/products.html" class="nav-mobile-link">المنتجات</a>
-        <a href="/portfolio.html" class="nav-mobile-link">الأعمال</a>
-        <a href="/blog.html" class="nav-mobile-link">المقالات</a>
+        <a href="/services/" class="nav-mobile-link" style="color:var(--primary);">الخدمات</a>
+        <a href="/products/" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio/" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog/" class="nav-mobile-link">المقالات</a>
         <a href="/about.html" class="nav-mobile-link">عن عبدالله</a>
         <a href="/contact.html" class="nav-mobile-link">تواصل معي</a>
         <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
@@ -93,7 +130,7 @@
     </div>
   </div>
 
-  <!-- ==================== HERO ==================== -->
+  <!-- ===== HERO ===== -->
   <section class="services-hero">
     <div class="container">
       <div class="services-hero-inner reveal">
@@ -107,31 +144,26 @@
     </div>
   </section>
 
-  <!-- ==================== SERVICES LIST ==================== -->
+  <!-- ===== SERVICES LIST ===== -->
   <section class="services-section">
     <div class="container">
-
-      <!-- Loading -->
-      <div class="services-loading" id="pageLoader" style="display:flex;align-items:center;justify-content:center;min-height:200px">
-        <div style="width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;"></div>
+      <div class="services-loading" id="pageLoader">
+        <div class="services-loading-spinner"></div>
       </div>
 
-      <!-- Empty -->
-      <div class="services-empty" id="emptyState" style="display:none;flex-direction:column;align-items:center;padding:60px 20px;text-align:center">
-        <div style="width:64px;height:64px;border-radius:50%;background:var(--bg-raised);display:flex;align-items:center;justify-content:center;color:var(--text-dim);margin-bottom:20px">
+      <div class="services-empty" id="emptyState">
+        <div class="services-empty-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/></svg>
         </div>
-        <div style="font-size:1rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px">لا توجد خدمات بعد</div>
-        <div style="font-size:0.875rem;color:var(--text-muted)">سيتم إضافتها قريبًا</div>
+        <div class="services-empty-title">لا توجد خدمات بعد</div>
+        <div class="services-empty-desc">سيتم إضافتها قريبًا</div>
       </div>
 
-      <!-- Dynamic List -->
-      <div class="services-list" id="servicesList"></div>
-
+      <div class="services-grid" id="servicesGrid"></div>
     </div>
   </section>
 
-  <!-- ==================== CTA ==================== -->
+  <!-- ===== CTA ===== -->
   <section class="services-cta">
     <div class="container">
       <div class="services-cta-inner reveal">
@@ -146,13 +178,13 @@
         </div>
         <div class="services-actions">
           <a href="/contact.html" class="btn btn--primary">تواصل معي</a>
-          <a href="/contact.html" class="btn btn--outline btn--sm">استشارة مجانية</a>
+          <a href="/contact.html" class="btn btn--secondary btn--sm">استشارة مجانية</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
@@ -176,9 +208,9 @@
         <div>
           <div class="footer-heading">المحتوى</div>
           <div class="footer-links">
-            <a href="/products.html" class="footer-link">المنتجات</a>
-            <a href="/portfolio.html" class="footer-link">الأعمال</a>
-            <a href="/blog.html" class="footer-link">المقالات</a>
+            <a href="/products/" class="footer-link">المنتجات</a>
+            <a href="/portfolio/" class="footer-link">الأعمال</a>
+            <a href="/blog/" class="footer-link">المقالات</a>
             <a href="/about.html" class="footer-link">عن عبدالله</a>
           </div>
         </div>
@@ -199,12 +231,10 @@
     </div>
   </footer>
 
-  <!-- ==================== ANIMATION KEYFRAMES ==================== -->
   <style>
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 
-  <!-- ==================== SCRIPTS ==================== -->
   <script>
     // ===== NAV SCROLL =====
     const nav = document.getElementById('siteNav');
@@ -260,10 +290,11 @@
     }
   </script>
 
-  <!-- ==================== LIVE DATA ==================== -->
+  <!-- ===== LIVE DATA ===== -->
   <script type="module">
     import { db } from "/js/firebase-init.js";
     import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { openModal, showToast } from "/js/modal.js";
 
     const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
 
@@ -276,89 +307,83 @@
       return timeB - timeA;
     }
 
-    function createServiceItem(service, index) {
-      const item = document.createElement("div");
-      item.className = "svc-item reveal";
+    function createServiceCard(service, index) {
+      const card = document.createElement("div");
+      card.className = "service-card";
 
-      const num = document.createElement("span");
-      num.className = "svc-num";
-      num.textContent = String(index + 1).padStart(2, "0");
+      const number = document.createElement("div");
+      number.className = "service-card-number";
+      number.textContent = String(index + 1).padStart(2, "0");
+      card.appendChild(number);
 
-      const inner = document.createElement("div");
-      inner.className = "svc-item-inner";
+      const icon = document.createElement("div");
+      icon.className = "service-card-icon";
+      icon.textContent = "✓";
+      card.appendChild(icon);
 
-      const content = document.createElement("div");
-      content.className = "svc-content";
+      const title = document.createElement("h3");
+      title.className = "service-card-title";
+      title.textContent = service.title || "—";
+      card.appendChild(title);
 
-      // Top: name + price
-      const top = document.createElement("div");
-      top.className = "svc-top";
+      const desc = document.createElement("p");
+      desc.className = "service-card-desc";
+      desc.textContent = service.shortDescription || "";
+      card.appendChild(desc);
 
-      const nameLink = document.createElement("a");
-      nameLink.href = `/service-detail.html?slug=${encodeURIComponent(service.slug || "")}`;
-      nameLink.className = "svc-name";
-      nameLink.textContent = service.title || "—";
-      top.appendChild(nameLink);
-
-      if (service.price && service.price > 0) {
-        const priceTag = document.createElement("span");
-        priceTag.className = "svc-price-tag";
-        priceTag.textContent = `ابتداءً من ${Number(service.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[service.currency] || service.currency || ""}`;
-        top.appendChild(priceTag);
-      }
-
-      content.appendChild(top);
-
-      // Brief
-      const brief = document.createElement("p");
-      brief.className = "svc-brief";
-      brief.textContent = service.shortDescription || "";
-      content.appendChild(brief);
-
-      // Features (max 5)
-      const features = service.features || [];
-      if (features.length > 0) {
-        const tagsContainer = document.createElement("div");
-        tagsContainer.className = "svc-features";
-        features.slice(0, 5).forEach((f) => {
+      if (service.features && service.features.length > 0) {
+        const features = document.createElement("div");
+        features.className = "service-card-features";
+        service.features.slice(0, 4).forEach(f => {
           const tag = document.createElement("span");
-          tag.className = "svc-feature-tag";
+          tag.className = "service-card-feature";
           tag.textContent = f;
-          tagsContainer.appendChild(tag);
+          features.appendChild(tag);
         });
-        content.appendChild(tagsContainer);
+        if (service.features.length > 4) {
+          const more = document.createElement("span");
+          more.className = "service-card-feature";
+          more.textContent = `+${service.features.length - 4}`;
+          features.appendChild(more);
+        }
+        card.appendChild(features);
       }
 
-      // Delivery
-      if (service.deliveryTime) {
-        const delivery = document.createElement("div");
-        delivery.className = "svc-delivery";
-        delivery.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0ZM12 12a9 9 0 1 0 9 9 9.004 9.004 0 0 0-9-9 9.004 9.004 0 0 0-9-9ZM12.75 12.75h.008v.008h-.008v-.008ZM6 12.75a6.75 6.75 0 1 1 13.5 0 6.75 6.75 0 0 1-13.5 0Z"/></svg>
-          <span>${service.deliveryTime}</span>
-        `;
-        content.appendChild(delivery);
+      const footer = document.createElement("div");
+      footer.className = "service-card-footer";
+
+      const price = document.createElement("span");
+      if (service.price > 0) {
+        price.className = "service-card-price";
+        price.textContent = `${Number(service.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[service.currency] || service.currency || ""}`;
+      } else {
+        price.className = "service-card-price service-card-price-free";
+        price.textContent = "مجاني";
       }
+      footer.appendChild(price);
 
-      inner.appendChild(content);
+      const actions = document.createElement("div");
+      actions.className = "service-card-actions";
 
-      // Arrow
-      const arrow = document.createElement("a");
-      arrow.href = `/service-detail.html?slug=${encodeURIComponent(service.slug || "")}`;
-      arrow.className = "svc-arrow";
-      arrow.setAttribute("aria-label", `عرض تفاصيل: ${service.title}`);
-      arrow.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>`;
+      const detailsBtn = document.createElement("a");
+      detailsBtn.href = "#";
+      detailsBtn.className = "btn btn--ghost btn--sm";
+      detailsBtn.textContent = "تفاصيل";
+      detailsBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal(service, "service");
+      });
+      actions.appendChild(detailsBtn);
 
-      inner.appendChild(arrow);
-      item.appendChild(num);
-      item.appendChild(inner);
+      footer.appendChild(actions);
+      card.appendChild(footer);
 
-      return item;
+      return card;
     }
 
     async function loadServices() {
       const loader = document.getElementById("pageLoader");
-      const list = document.getElementById("servicesList");
+      const grid = document.getElementById("servicesGrid");
       const empty = document.getElementById("emptyState");
 
       try {
@@ -371,22 +396,25 @@
         loader.style.display = "none";
 
         if (services.length === 0) {
-          empty.style.display = "flex";
+          empty.classList.add("services-empty--visible");
           return;
         }
 
         services.forEach((svc, i) => {
-          list.appendChild(createServiceItem(svc, i));
+          grid.appendChild(createServiceCard(svc, i));
         });
       } catch (error) {
         console.error("[services] فشل تحميل الخدمات:", error);
         loader.style.display = "none";
-        empty.style.display = "flex";
-        empty.querySelector("div:last-child").textContent = "حدث خطأ في تحميل الخدمات";
+        empty.classList.add("services-empty--visible");
+        empty.querySelector(".services-empty-desc").textContent = "حدث خطأ في تحميل الخدمات";
       }
     }
 
     loadServices();
+
+    window.openModal = openModal;
+    window.showToast = showToast;
   </script>
 </body>
 </html>
