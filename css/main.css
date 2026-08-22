@@ -536,6 +536,45 @@ button:focus-visible,
   background: var(--primary);
   color: var(--text-inverse);
 }
+/* ===== إصلاح التفاعل اللمسي ===== */
+button,
+a,
+.btn,
+.nav-link,
+.nav-cta,
+.nav-mobile-toggle,
+.nav-mobile-close,
+.nav-mobile-link,
+.nav-mobile-cta,
+.sdet-cta-btn,
+.pdet-request-btn,
+.pdet-demo-btn,
+.modal-close-btn,
+.modal-form-submit,
+.toast-close,
+.svc-arrow,
+.service-card .btn-details,
+.product-card .btn-product-details {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ===== تأكد من أن الأزرار ليست مغطاة ===== */
+body,
+html {
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===== إصلاح القوائم المتنقلة (قد تمنع النقر بعد الإغلاق) ===== */
+.nav-mobile-menu {
+  pointer-events: none; /* منع النقر عند الإخفاء */
+}
+.nav-mobile-menu--open {
+  pointer-events: auto; /* السماح عند الفتح */
+}
 
 /* ============================================
    10. تقليل الحركة (Reduced Motion)
