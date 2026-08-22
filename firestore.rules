@@ -1,7 +1,9 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // القراءة العامة للمجموعات العامة
+    // ============================================
+    // المجموعات العامة (قراءة للجميع، كتابة للمشرف)
+    // ============================================
     match /services/{document} {
       allow read: if true;
       allow write: if request.auth.token.admin == true;
@@ -18,21 +20,74 @@ service cloud.firestore {
       allow read: if true;
       allow write: if request.auth.token.admin == true;
     }
-    
-    // الطلبات — المستخدم يقرأ ويعدل طلباته فقط، المشرف يقرأ الكل ويكتب
+
+    // ============================================
+    // إعدادات الموقع (Settings)
+    // ============================================
+    match /settings/{document} {
+      allow read: if true;
+      allow write: if request.auth.token.admin == true;
+    }
+
+    // ============================================
+    // الطلبات (Orders) — المستخدم يقرأ ويعدل طلباته فقط، المشرف يقرأ الكل ويكتب
+    // ============================================
     match /orders/{document} {
       allow read: if request.auth != null && (request.auth.uid == resource.data.userId || request.auth.token.admin == true);
       allow write: if request.auth != null && (request.auth.uid == resource.data.userId || request.auth.token.admin == true);
       allow create: if request.auth != null;
     }
 
-    // المستخدمين — العميل يقرأ ويكتب بياناته فقط
+    // ============================================
+    // المستخدمين — العميل يقرأ ويكتب بياناته فقط، المشرف يقرأ الكل
+    // ============================================
     match /users/{document} {
       allow read: if request.auth != null && (request.auth.uid == document || request.auth.token.admin == true);
       allow write: if request.auth != null && request.auth.uid == document;
     }
 
-    // سجل التدقيق — فقط المشرف يقرأ
+    // ============================================
+    // منتجات المستخدم (user_products) — ما اشتراه المستخدم
+    // ============================================
+    match /user_products/{document} {
+      allow read: if request.auth != null && (request.auth.uid == resource.data.userId || request.auth.token.admin == true);
+      allow write: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null;
+    }
+
+    // ============================================
+    // المفضلة (Favorites) — المستخدم يضيف ويزيل مفضلاته
+    // ============================================
+    match /favorites/{document} {
+      allow read: if request.auth != null && (request.auth.uid == resource.data.userId || request.auth.token.admin == true);
+      allow write: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    // ============================================
+    // التقييمات والمراجعات (Reviews) — القراءة للجميع، الكتابة للمستخدمين المسجلين
+    // ============================================
+    match /reviews/{document} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    // ============================================
+    // الرسائل (Messages) — المستخدم يرسل، المشرف يقرأ ويكتب
+    // (يمكن استخدامها مع orders أو كمجموعة مستقلة)
+    // ============================================
+    match /messages/{document} {
+      allow read: if request.auth != null && request.auth.token.admin == true;
+      allow create: if request.auth != null;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+
+    // ============================================
+    // سجل التدقيق (Audit Logs) — فقط المشرف يقرأ
+    // ============================================
     match /audit_logs/{document} {
       allow read: if request.auth.token.admin == true;
       allow write: if false;
