@@ -1,6 +1,6 @@
 /**
  * admin/articles.js
- * إدارة المقالات — CRUD كامل مع TinyMCE ورفع الصور
+ * إدارة المقالات — CRUD كامل مع TinyMCE، رفع صور، حفظ تلقائي، معاينة، وإحصائيات
  */
 
 import { requireAdmin } from "/js/auth-guard.js";
@@ -17,7 +17,6 @@ import {
   updateDoc,
   deleteDoc,
   serverTimestamp,
-  Timestamp,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 import {
   ref,
@@ -44,6 +43,10 @@ const formContainer = document.getElementById("articleFormContainer");
 const articleForm = document.getElementById("articleForm");
 const cancelEditBtn = document.getElementById("cancelEditBtn");
 const saveArticleBtn = document.getElementById("saveArticleBtn");
+const previewBtn = document.getElementById("previewBtn");
+const autoSaveNotice = document.getElementById("autoSaveNotice");
+const autoSaveDot = document.getElementById("autoSaveDot");
+const autoSaveText = document.getElementById("autoSaveText");
 
 // حقول النموذج
 const articleId = document.getElementById("articleId");
@@ -72,6 +75,19 @@ const confirmMessage = document.getElementById("confirmMessage");
 const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
 const confirmCancelBtn = document.getElementById("confirmCancelBtn");
 
+// معاينة
+const previewOverlay = document.getElementById("previewOverlay");
+const closePreview = document.getElementById("closePreview");
+const previewTitle = document.getElementById("previewTitle");
+const previewMeta = document.getElementById("previewMeta");
+const previewContent = document.getElementById("previewContent");
+
+// إحصائيات
+const statTotal = document.getElementById("statTotal");
+const statPublished = document.getElementById("statPublished");
+const statDraft = document.getElementById("statDraft");
+const statScheduled = document.getElementById("statScheduled");
+
 // ============================================
 // الحالة
 // ============================================
@@ -80,12 +96,13 @@ let deleteTargetId = null;
 let editor = null;
 let isEditMode = false;
 let uploadedImageUrl = "";
+let autoSaveTimer = null;
+let currentAutoSaveData = null;
 
 // ============================================
 // TinyMCE تهيئة المحرر
 // ============================================
 async function initEditor() {
-  // تأكد من تحميل TinyMCE
   if (typeof tinymce === "undefined") {
     console.warn("TinyMCE not loaded. Using textarea fallback.");
     return;
@@ -110,8 +127,8 @@ async function initEditor() {
     setup: function(ed) {
       editor = ed;
       ed.on("change", function() {
-        // تحديث قيمة textarea للتحقق
         artBody.value = ed.getContent();
+        triggerAutoSave();
       });
     },
   });
@@ -160,6 +177,7 @@ artTitle.addEventListener("input", () => {
   if (!artSlug.dataset.manual) {
     artSlug.value = generateSlug(artTitle.value);
   }
+  triggerAutoSave();
 });
 artSlug.addEventListener("input", () => {
   if (artSlug.value !== generateSlug(artTitle.value)) {
@@ -167,26 +185,22 @@ artSlug.addEventListener("input", () => {
   } else {
     delete artSlug.dataset.manual;
   }
+  triggerAutoSave();
 });
 
 // ============================================
-// رفع الصورة إلى Firebase Storage
+// رفع الصورة
 // ============================================
-uploadImageBtn.addEventListener("click", () => {
-  imageFileInput.click();
-});
+uploadImageBtn.addEventListener("click", () => imageFileInput.click());
 
 imageFileInput.addEventListener("change", async (e) => {
   const file = e.target.files[0];
   if (!file) return;
-
-  // التحقق من نوع الملف
   if (!file.type.startsWith("image/")) {
     alert("يرجى اختيار ملف صورة صالح.");
     return;
   }
 
-  // تعطيل الزر أثناء الرفع
   uploadImageBtn.disabled = true;
   uploadImageBtn.textContent = "جاري الرفع...";
 
@@ -215,6 +229,7 @@ imageFileInput.addEventListener("change", async (e) => {
         uploadImageBtn.textContent = "📤 رفع صورة";
         uploadProgress.style.width = "0%";
         removeImageBtn.style.display = "inline-block";
+        triggerAutoSave();
       } catch (err) {
         console.error("Error getting download URL:", err);
         alert("حدث خطأ أثناء الحصول على رابط الصورة.");
@@ -242,25 +257,23 @@ removeImageBtn.addEventListener("click", async () => {
     try {
       const oldRef = ref(storage, uploadedImageUrl);
       await deleteObject(oldRef);
-    } catch (e) {
-      console.warn("Could not delete old image:", e);
-    }
+    } catch (e) { console.warn("Could not delete old image:", e); }
   }
   uploadedImageUrl = "";
   artImage.value = "";
   updateImagePreview("");
   removeImageBtn.style.display = "none";
+  triggerAutoSave();
 });
 
 // ============================================
-// فتح/إغلاق نموذج المقال
+// فتح/إغلاق النموذج
 // ============================================
 function openForm(article = null) {
   isEditMode = !!article;
-  formContainer.style.display = "block";
+  formContainer.classList.add("active");
 
   if (article) {
-    // ملء النموذج للتحرير
     articleId.value = article.id;
     artTitle.value = article.title || "";
     artSlug.value = article.slug || "";
@@ -268,32 +281,23 @@ function openForm(article = null) {
     artCategory.value = article.category || "";
     artAuthor.value = article.author || "";
     artExcerpt.value = article.excerpt || "";
-    if (editor) {
-      editor.setContent(article.body || "");
-    } else {
-      artBody.value = article.body || "";
-    }
+    if (editor) editor.setContent(article.body || "");
+    else artBody.value = article.body || "";
     uploadedImageUrl = article.image || "";
     artImage.value = uploadedImageUrl;
     updateImagePreview(uploadedImageUrl);
-    if (uploadedImageUrl) {
-      removeImageBtn.style.display = "inline-block";
-    } else {
-      removeImageBtn.style.display = "none";
-    }
+    removeImageBtn.style.display = uploadedImageUrl ? "inline-block" : "none";
     artSortOrder.value = article.sortOrder ?? 0;
     artActive.checked = article.active !== false;
     artSeoTitle.value = article.seoTitle || "";
     artMetaDesc.value = article.metaDescription || "";
-
-    document.querySelector("#saveArticleBtn .btn-text").textContent = "💾 تحديث المقال";
+    saveArticleBtn.querySelector(".btn-text").textContent = "💾 تحديث المقال";
   } else {
-    // إضافة جديدة
     resetForm();
-    document.querySelector("#saveArticleBtn .btn-text").textContent = "💾 حفظ المقال";
+    saveArticleBtn.querySelector(".btn-text").textContent = "💾 حفظ المقال";
   }
 
-  // تمرير إلى النموذج
+  clearErrors();
   formContainer.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -315,84 +319,150 @@ function resetForm() {
   artActive.checked = true;
   artSeoTitle.value = "";
   artMetaDesc.value = "";
-  // مسح الأخطاء
-  document.querySelectorAll(".error").forEach(el => el.textContent = "");
+  clearErrors();
 }
 
 function closeForm() {
-  formContainer.style.display = "none";
+  formContainer.classList.remove("active");
   resetForm();
   isEditMode = false;
+  clearAutoSave();
 }
 
 cancelEditBtn.addEventListener("click", closeForm);
 
 addArticleBtn.addEventListener("click", () => {
   openForm(null);
-  // التركيز على حقل العنوان
   setTimeout(() => artTitle.focus(), 300);
 });
 
 // ============================================
-// حفظ المقال
+// التحقق من الأخطاء
 // ============================================
-articleForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  // التحقق من صحة الحقول
-  const title = artTitle.value.trim();
-  const excerpt = artExcerpt.value.trim();
-  const body = editor ? editor.getContent() : artBody.value.trim();
-
-  let hasError = false;
+function clearErrors() {
   document.querySelectorAll(".error").forEach(el => el.textContent = "");
+}
 
-  if (!title) {
+function validateForm() {
+  clearErrors();
+  let valid = true;
+  if (!artTitle.value.trim()) {
     document.getElementById("artTitleErr").textContent = "عنوان المقال مطلوب.";
-    hasError = true;
+    valid = false;
   }
-  if (!excerpt) {
+  if (!artExcerpt.value.trim()) {
     document.getElementById("artExcerptErr").textContent = "ملخص المقال مطلوب.";
-    hasError = true;
+    valid = false;
   }
+  const body = editor ? editor.getContent() : artBody.value.trim();
   if (!body) {
     document.getElementById("artBodyErr").textContent = "محتوى المقال مطلوب.";
-    hasError = true;
+    valid = false;
   }
+  return valid;
+}
 
-  if (hasError) return;
+// ============================================
+// حفظ تلقائي
+// ============================================
+function triggerAutoSave() {
+  if (!formContainer.classList.contains("active")) return;
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(() => {
+    performAutoSave();
+  }, 30000); // 30 ثانية
+}
 
-  // تعطيل الزر وإظهار التحميل
-  saveArticleBtn.disabled = true;
-  saveArticleBtn.querySelector(".btn-text").style.display = "none";
-  saveArticleBtn.querySelector(".spinner").style.display = "block";
+async function performAutoSave() {
+  if (!formContainer.classList.contains("active")) return;
+  const data = getFormData();
+  if (!data.title && !data.body) return; // لا شيء للحفظ
 
-  const data = {
-    title: title,
-    slug: artSlug.value.trim() || generateSlug(title),
+  autoSaveDot.className = "dot saving";
+  autoSaveText.textContent = "جاري الحفظ...";
+
+  try {
+    const id = articleId.value;
+    if (id) {
+      await updateDoc(doc(db, "blog", id), {
+        ...data,
+        updatedAt: serverTimestamp(),
+      });
+    } else {
+      // إذا كان مقالاً جديداً، نحفظه كمسودة مؤقتة
+      const docRef = await addDoc(collection(db, "blog"), {
+        ...data,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        active: false,
+        isDraft: true,
+      });
+      articleId.value = docRef.id;
+      // إضافة للمصفوفة المحلية
+      allArticles.push({
+        id: docRef.id,
+        ...data,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        active: false,
+        isDraft: true,
+      });
+      renderArticles(allArticles);
+      updateStats(allArticles);
+    }
+    autoSaveDot.className = "dot saved";
+    autoSaveText.textContent = "تم الحفظ تلقائياً";
+  } catch (e) {
+    console.error("Auto-save failed:", e);
+    autoSaveDot.className = "dot";
+    autoSaveText.textContent = "فشل الحفظ التلقائي";
+  }
+}
+
+function clearAutoSave() {
+  clearTimeout(autoSaveTimer);
+  autoSaveDot.className = "dot";
+  autoSaveText.textContent = "تم الحفظ";
+}
+
+function getFormData() {
+  return {
+    title: artTitle.value.trim(),
+    slug: artSlug.value.trim() || generateSlug(artTitle.value),
     category: artCategory.value,
     author: artAuthor.value.trim() || "عبدالله عباس",
-    excerpt: excerpt,
-    body: body,
+    excerpt: artExcerpt.value.trim(),
+    body: editor ? editor.getContent() : artBody.value.trim(),
     image: artImage.value || "",
     sortOrder: parseInt(artSortOrder.value, 10) || 0,
     active: artActive.checked,
     seoTitle: artSeoTitle.value.trim(),
     metaDescription: artMetaDesc.value.trim(),
-    updatedAt: serverTimestamp(),
   };
+}
 
+// ============================================
+// حفظ المقال (يدوي)
+// ============================================
+articleForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (!validateForm()) return;
+
+  saveArticleBtn.disabled = true;
+  saveArticleBtn.querySelector(".btn-text").style.display = "none";
+  saveArticleBtn.querySelector(".spinner").style.display = "block";
+
+  const data = getFormData();
   try {
     const id = articleId.value;
     if (id) {
-      // تحديث
-      await updateDoc(doc(db, "blog", id), data);
+      await updateDoc(doc(db, "blog", id), {
+        ...data,
+        updatedAt: serverTimestamp(),
+      });
       const idx = allArticles.findIndex(a => a.id === id);
-      if (idx !== -1) {
-        allArticles[idx] = { ...allArticles[idx], ...data, updatedAt: new Date() };
-      }
+      if (idx !== -1) allArticles[idx] = { ...allArticles[idx], ...data, updatedAt: new Date() };
     } else {
-      // إضافة جديدة
       data.createdAt = serverTimestamp();
       const docRef = await addDoc(collection(db, "blog"), data);
       allArticles.push({
@@ -402,23 +472,59 @@ articleForm.addEventListener("submit", async (e) => {
         updatedAt: new Date(),
       });
     }
-
     renderArticles(allArticles);
+    updateStats(allArticles);
     closeForm();
-    // إشعار نجاح (بسيط)
     alert(isEditMode ? "✅ تم تحديث المقال بنجاح." : "✅ تم إضافة المقال بنجاح.");
   } catch (error) {
     console.error("Error saving article:", error);
-    alert("❌ حدث خطأ أثناء حفظ المقال. تأكد من اتصال الإنترنت.");
+    alert("❌ حدث خطأ أثناء حفظ المقال.");
   }
-
   saveArticleBtn.disabled = false;
   saveArticleBtn.querySelector(".btn-text").style.display = "";
   saveArticleBtn.querySelector(".spinner").style.display = "none";
 });
 
 // ============================================
-// عرض المقالات في جدول
+// معاينة المقال
+// ============================================
+previewBtn.addEventListener("click", () => {
+  const title = artTitle.value.trim() || "عنوان المقال";
+  const author = artAuthor.value.trim() || "عبدالله عباس";
+  const date = new Date().toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
+  const content = editor ? editor.getContent() : artBody.value.trim() || "لا يوجد محتوى لعرضه.";
+  const image = artImage.value;
+
+  previewTitle.textContent = title;
+  previewMeta.textContent = `بواسطة ${author} • ${date}`;
+  let html = content;
+  if (image && isSafeUrl(image)) {
+    html = `<img src="${image}" alt="${title}" style="max-width:100%;border-radius:8px;margin-bottom:16px;" />` + html;
+  }
+  previewContent.innerHTML = html;
+  previewOverlay.classList.add("active");
+  document.body.style.overflow = "hidden";
+});
+
+closePreview.addEventListener("click", () => {
+  previewOverlay.classList.remove("active");
+  document.body.style.overflow = "";
+});
+previewOverlay.addEventListener("click", (e) => {
+  if (e.target === previewOverlay) {
+    previewOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && previewOverlay.classList.contains("active")) {
+    previewOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+});
+
+// ============================================
+// عرض المقالات في جدول + إحصائيات
 // ============================================
 function renderArticles(articles) {
   tableWrapper.textContent = "";
@@ -427,9 +533,9 @@ function renderArticles(articles) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
     empty.innerHTML = `
-      <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/></svg></div>
-      <div class="title">${searchInput.value.trim() ? "لا توجد نتائج" : "لا توجد مقالات بعد"}</div>
-      <div class="desc">${searchInput.value.trim() ? "جرّب كلمات بحث مختلفة" : "ابدأ بإضافة أول مقال"}</div>
+      <div class="empty-state-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/></svg></div>
+      <div class="empty-state-title">${searchInput.value.trim() ? "لا توجد نتائج" : "لا توجد مقالات بعد"}</div>
+      <div class="empty-state-desc">${searchInput.value.trim() ? "جرّب كلمات بحث مختلفة" : "ابدأ بإضافة أول مقال"}</div>
     `;
     tableWrapper.appendChild(empty);
     return;
@@ -534,6 +640,21 @@ function renderArticles(articles) {
 }
 
 // ============================================
+// تحديث الإحصائيات
+// ============================================
+function updateStats(articles) {
+  const total = articles.length;
+  const published = articles.filter(a => a.active === true).length;
+  const draft = articles.filter(a => a.active === false).length;
+  const scheduled = articles.filter(a => a.scheduledDate).length; // إذا كانت هناك ميزة جدولة
+
+  statTotal.textContent = total;
+  statPublished.textContent = published;
+  statDraft.textContent = draft;
+  statScheduled.textContent = scheduled;
+}
+
+// ============================================
 // تبديل حالة النشاط
 // ============================================
 async function toggleActive(id, value) {
@@ -541,6 +662,7 @@ async function toggleActive(id, value) {
     await updateDoc(doc(db, "blog", id), { active: value, updatedAt: serverTimestamp() });
     const article = allArticles.find(a => a.id === id);
     if (article) article.active = value;
+    updateStats(allArticles);
   } catch (e) {
     console.error("Error toggling active:", e);
     renderArticles(allArticles);
@@ -575,6 +697,7 @@ confirmDeleteBtn.addEventListener("click", async () => {
     await deleteDoc(doc(db, "blog", deleteTargetId));
     allArticles = allArticles.filter(a => a.id !== deleteTargetId);
     renderArticles(allArticles);
+    updateStats(allArticles);
     confirmModal.classList.remove("active");
     deleteTargetId = null;
   } catch (e) {
@@ -621,11 +744,11 @@ async function init(user) {
   await initEditor();
   allArticles = await fetchArticles();
   renderArticles(allArticles);
+  updateStats(allArticles);
 
   pageLoader.style.display = "none";
   articlesContent.style.display = "block";
 
-  // فتح النموذج تلقائياً إذا كان هناك ?action=new
   if (new URLSearchParams(location.search).get("action") === "new") {
     openForm(null);
     setTimeout(() => artTitle.focus(), 300);
