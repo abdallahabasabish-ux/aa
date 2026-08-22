@@ -54,60 +54,45 @@
       <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
       </svg>
-      <span id="toastMessage">تم الإرسال بنجاح</span>
+      <span id="toastMessage">✅ تم الإرسال بنجاح</span>
       <button class="toast-close" id="toastClose" aria-label="إغلاق">✕</button>
     </div>
   </div>
 
-  <!-- ==================== MODAL ==================== -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-container" id="modalContainer">
-      <span class="modal-handle"></span>
-      <button class="modal-close-btn" id="modalCloseBtn" aria-label="إغلاق">✕</button>
-      <img class="modal-image" id="modalImage" src="" alt="" loading="lazy" />
-      <h2 class="modal-title" id="modalTitle">—</h2>
-      <p class="modal-subtitle" id="modalSubtitle"></p>
-      <div class="modal-body" id="modalBody"></div>
-      <div class="modal-features" id="modalFeatures"></div>
-      <div class="modal-price" id="modalPrice"></div>
-      <form class="modal-form" id="modalForm" novalidate>
-        <div class="modal-form-title">طلب الخدمة</div>
-        <div class="modal-form-group">
-          <label class="modal-form-label" for="modalFormName">الاسم الكامل <span style="color:var(--primary);">*</span></label>
-          <input type="text" class="modal-form-input" id="modalFormName" required placeholder="أدخل اسمك" />
-        </div>
-        <div class="modal-form-group">
-          <label class="modal-form-label" for="modalFormEmail">البريد الإلكتروني <span style="color:var(--primary);">*</span></label>
-          <input type="email" class="modal-form-input" id="modalFormEmail" required placeholder="بريدك الإلكتروني" dir="ltr" />
-        </div>
-        <div class="modal-form-group">
-          <label class="modal-form-label" for="modalFormMessage">رسالة (اختياري)</label>
-          <textarea class="modal-form-textarea" id="modalFormMessage" placeholder="أي تفاصيل إضافية..."></textarea>
-        </div>
-        <button type="submit" class="modal-form-submit" id="modalFormSubmit">
-          <span class="btn-text">إرسال الطلب</span>
-          <span class="spinner"></span>
-        </button>
-      </form>
-    </div>
-  </div>
+  <!-- ==================== POPUP (العرض الخاص) ==================== -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-card">
+      <button class="popup-close" id="popupClose" aria-label="إغلاق">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
 
-  <!-- ==================== SPECIAL OFFER BANNER ==================== -->
-  <div class="special-offer-banner" id="specialOfferBanner">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-    </svg>
-    <span>
-      🎉 عرض خاص للزوار الجدد:
-      <span class="highlight">خصم 20%</span>
-      على أول خدمة أو منتج
-    </span>
-    <a href="/contact.html" class="btn-banner">
-      احصل على العرض
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-      </svg>
-    </a>
+      <div class="popup-badge">🎉 عرض خاص</div>
+
+      <div class="popup-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+        </svg>
+      </div>
+
+      <h2 class="popup-title">عرض الترحيب بالزوار الجدد! 🎊</h2>
+      <p class="popup-desc">استفد من عرضنا الخاص لأول مرة في الموقع. خصم فوري على جميع الخدمات والمنتجات الرقمية.</p>
+
+      <span class="popup-highlight">
+        20%
+        <small>خصم</small>
+      </span>
+
+      <div class="popup-timer">
+        ⏳ ينتهي العرض خلال: <span id="countdownTimer">24:00:00</span>
+      </div>
+
+      <div class="popup-actions">
+        <a href="/contact" class="btn btn-primary">احصل على العرض الآن</a>
+        <a href="#" class="btn btn-secondary" id="popupLater">لاحقاً</a>
+      </div>
+    </div>
   </div>
 
   <!-- ==================== NAVIGATION ==================== -->
@@ -164,32 +149,36 @@
 
   <!-- ==================== HERO ==================== -->
   <section class="hero-section">
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
     <div class="container container--wide">
       <div class="hero-inner">
         <div class="hero-content reveal">
           <div class="hero-badge">
             <span class="line"></span>
-            <span>حلول رقمية</span>
+            <span>حلول رقمية متكاملة</span>
           </div>
 
           <h1 class="hero-title">
-            أحلّل هدفك أولًا،<br />
-            ثم <span class="highlight">أبني الحل</span><br />
-            المناسب له.
+            نبني <span class="highlight">حلولاً رقمية</span><br />
+            تبدأ بفهم عميق<br />
+            وتنتهي بنتيجة ملموسة.
           </h1>
 
           <p class="hero-desc">
-            موقع ويب لا يعمل وحده — يحتاج استراتيجية. أقدّم حلولًا رقمية تُبنى حول هدفك الحقيقي، لا حول قالب جاهز يُلصق على مشروعك.
+            لا نبيع قوالب جاهزة، بل نصنع تجارب رقمية فريدة تحقق أهدافك الحقيقية. 
+            من التحليل والتصميم إلى التطوير والتحسين، كل خطوة مبنية على فهم عميق لاحتياجاتك.
           </p>
 
           <div class="hero-actions">
-            <a href="/contact" class="btn btn--primary btn--lg">
+            <a href="/contact" class="btn btn-primary">
               ابدأ مشروعك
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
               </svg>
             </a>
-            <a href="/portfolio/" class="btn btn--secondary btn--lg">شاهد أعمالي</a>
+            <a href="/portfolio/" class="btn btn-secondary">استكشف أعمالنا</a>
           </div>
 
           <!-- إحصائيات -->
@@ -214,10 +203,12 @@
         </div>
 
         <div class="hero-visual reveal" aria-hidden="true">
-          <div class="hero-visual-box">
-            <div class="grid-pattern"></div>
-            <div class="content">
-              <div class="hero-visual-icon">
+          <div class="hero-visual-wrapper">
+            <div class="orbit orbit-1"></div>
+            <div class="orbit orbit-2"></div>
+            <div class="orbit orbit-3"></div>
+            <div class="hero-visual-center">
+              <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
                 </svg>
@@ -231,11 +222,25 @@
     </div>
   </section>
 
+  <!-- ==================== CLIENTS / PARTNERS ==================== -->
+  <section class="clients-section">
+    <div class="container">
+      <div class="clients-title">شركاء الثقة</div>
+      <div class="clients-grid">
+        <span class="client-item">شركة النخبة</span>
+        <span class="client-item">مؤسسة التقنية</span>
+        <span class="client-item">مجموعة الريادة</span>
+        <span class="client-item">شركة الإبداع</span>
+        <span class="client-item">مؤسسة المستقبل</span>
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== SERVICES PREVIEW ==================== -->
-  <section class="section-padding" id="services">
+  <section class="section-padding section-padding--alt" id="services">
     <div class="container">
       <div class="section-header-center reveal">
-        <span class="label">ما أقدّمه</span>
+        <span class="label">ما نقدّمه</span>
         <h2>خدمات مصممة لحل مشاكل حقيقية</h2>
         <p>كل خدمة تبدأ بفهم المشروع، لا بتقديم قائمة مميزات جاهزة.</p>
       </div>
@@ -248,13 +253,13 @@
       </div>
 
       <div style="text-align:center;margin-top:40px;" class="reveal">
-        <a href="/services/" class="btn btn--secondary">جميع الخدمات</a>
+        <a href="/services/" class="btn btn-secondary">جميع الخدمات</a>
       </div>
     </div>
   </section>
 
   <!-- ==================== PRODUCTS PREVIEW ==================== -->
-  <section class="section-padding section-padding--alt" id="products">
+  <section class="section-padding" id="products">
     <div class="container">
       <div class="section-header-center reveal">
         <span class="label">منتجات جاهزة</span>
@@ -270,18 +275,18 @@
       </div>
 
       <div style="text-align:center;margin-top:40px;" class="reveal">
-        <a href="/products/" class="btn btn--secondary">جميع المنتجات</a>
+        <a href="/products/" class="btn btn-secondary">جميع المنتجات</a>
       </div>
     </div>
   </section>
 
   <!-- ==================== PORTFOLIO PREVIEW ==================== -->
-  <section class="section-padding" id="portfolio">
+  <section class="section-padding section-padding--alt" id="portfolio">
     <div class="container">
       <div class="section-header-center reveal">
         <span class="label">أعمال مختارة</span>
         <h2>نتائج حقيقية، لا وعود</h2>
-        <p>مشاريع نفذتها لعملائي — كل مشروع يحكي قصة حل لمشكلة حقيقية.</p>
+        <p>مشاريع نفذناها لعملائنا — كل مشروع يحكي قصة حل لمشكلة حقيقية.</p>
       </div>
 
       <div class="card-grid" id="portfolioGrid" style="grid-template-columns:1.2fr 0.8fr 0.8fr;gap:24px;">
@@ -292,28 +297,28 @@
       </div>
 
       <div style="text-align:center;margin-top:40px;" class="reveal">
-        <a href="/portfolio/" class="btn btn--secondary">جميع الأعمال</a>
+        <a href="/portfolio/" class="btn btn-secondary">جميع الأعمال</a>
       </div>
     </div>
   </section>
 
   <!-- ==================== TESTIMONIALS ==================== -->
-  <section class="section-padding section-padding--alt" id="testimonials">
+  <section class="section-padding" id="testimonials">
     <div class="container">
       <div class="section-header-center reveal">
         <span class="label">شهادات العملاء</span>
-        <h2>ما يقوله عملائي</h2>
-        <p>آراء حقيقية من أشخاص ومشاريع عملت معهم.</p>
+        <h2>ما يقوله عملاؤنا</h2>
+        <p>آراء حقيقية من أشخاص ومشاريع عملنا معهم.</p>
       </div>
 
       <div class="testimonials-grid reveal">
         <div class="testimonial-card">
           <div class="stars">★★★★★</div>
-          <p class="quote">"عمل احترافي ودقيق، ساعدني في إطلاق موقعي بسرعة كبيرة. التواصل كان ممتازاً طوال فترة المشروع."</p>
+          <p class="quote">"عمل احترافي ودقيق، ساعدنا في إطلاق منصتنا الرقمية بسرعة كبيرة. التواصل كان ممتازاً طوال فترة المشروع."</p>
           <div class="author">
             <div class="avatar">أ</div>
             <div class="info">
-              <div class="name">أحمد محمد</div>
+              <div class="name">أحمد المحمد</div>
               <div class="role">مؤسس شركة تقنية</div>
             </div>
           </div>
@@ -321,11 +326,11 @@
 
         <div class="testimonial-card">
           <div class="stars">★★★★★</div>
-          <p class="quote">"صمم لي موقعاً متكاملاً مع تحسين SEO، النتائج كانت مذهلة — زادت زيارات موقعي بأكثر من 200%."</p>
+          <p class="quote">"صمم لنا موقعاً متكاملاً مع تحسين SEO، النتائج كانت مذهلة — زادت زيارات موقعنا بأكثر من 200% في ثلاثة أشهر."</p>
           <div class="author">
             <div class="avatar">ن</div>
             <div class="info">
-              <div class="name">نورة سليمان</div>
+              <div class="name">نورة السليمان</div>
               <div class="role">مديرة تسويق</div>
             </div>
           </div>
@@ -333,7 +338,7 @@
 
         <div class="testimonial-card">
           <div class="stars">★★★★★</div>
-          <p class="quote">"قوالب بلوجر الاحترافية غيرت شكل مدونتي بالكامل. سرعة التحميل والتصميم المتميز هما ما يميزان عمله."</p>
+          <p class="quote">"قوالب بلوجر الاحترافية غيرت شكل مدونتي بالكامل. سرعة التحميل والتصميم المتميز هما ما يميزان عملهم."</p>
           <div class="author">
             <div class="avatar">س</div>
             <div class="info">
@@ -347,21 +352,21 @@
   </section>
 
   <!-- ==================== CTA ==================== -->
-  <section class="section-padding">
+  <section class="section-padding section-padding--alt">
     <div class="container">
       <div class="cta-section reveal">
         <div class="glow"></div>
         <div class="content">
-          <h2>عندك مشروع أو فكرة تحتاج تنفيذها؟</h2>
-          <p>أقدّر مساعدتك في تحديد الحل الأنسب — حتى لو لم تقرر بعد.</p>
+          <h2>لديك مشروع أو فكرة؟</h2>
+          <p>نحن هنا لمساعدتك في تحديد الحل الأنسب — حتى لو لم تقرر بعد.</p>
           <div class="cta-actions">
             <a href="/contact" class="btn-cta-primary">
-              تواصل معي الآن
+              تواصل معنا الآن
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
               </svg>
             </a>
-            <a href="/services/" class="btn-cta-secondary">تصفح الخدمات</a>
+            <a href="/services/" class="btn-cta-secondary">استكشف الخدمات</a>
           </div>
         </div>
       </div>
@@ -477,17 +482,53 @@
       revealElements.forEach(el => el.classList.add('reveal--visible'));
     }
 
-    // ===== إغلاق بانر العرض الخاص بعد 5 ثواني (اختياري) =====
-    // يمكنك إزالة هذا إذا أردت البانر ثابتاً
-    // setTimeout(() => {
-    //   const banner = document.getElementById('specialOfferBanner');
-    //   if (banner) {
-    //     banner.style.transition = 'opacity 0.5s, transform 0.5s';
-    //     banner.style.transform = 'translateY(-100%)';
-    //     banner.style.opacity = '0';
-    //     setTimeout(() => { banner.style.display = 'none'; }, 500);
-    //   }
-    // }, 8000);
+    // ===== POPUP =====
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupClose = document.getElementById('popupClose');
+    const popupLater = document.getElementById('popupLater');
+
+    function showPopup() {
+      popupOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hidePopup() {
+      popupOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      localStorage.setItem('popupClosed', 'true');
+    }
+
+    // التحقق من عدم إغلاق البوب أب سابقاً
+    const popupClosed = localStorage.getItem('popupClosed');
+    if (!popupClosed) {
+      setTimeout(showPopup, 2000);
+    }
+
+    popupClose.addEventListener('click', hidePopup);
+    popupLater.addEventListener('click', hidePopup);
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) hidePopup();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popupOverlay.classList.contains('active')) hidePopup();
+    });
+
+    // ===== COUNTDOWN TIMER =====
+    let time = 24 * 60 * 60; // 24 ساعة
+    const timerElement = document.getElementById('countdownTimer');
+
+    function updateTimer() {
+      const hours = Math.floor(time / 3600);
+      const minutes = Math.floor((time % 3600) / 60);
+      const seconds = time % 60;
+      timerElement.textContent = 
+        String(hours).padStart(2, '0') + ':' +
+        String(minutes).padStart(2, '0') + ':' +
+        String(seconds).padStart(2, '0');
+      if (time > 0) time--;
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
   </script>
 
   <!-- ==================== LIVE DATA ==================== -->
@@ -554,7 +595,7 @@
 
       const detailsBtn = document.createElement("a");
       detailsBtn.href = "/services/" + encodeURIComponent(service.slug || "");
-      detailsBtn.className = "btn btn--ghost btn--sm";
+      detailsBtn.className = "btn btn-ghost btn-sm";
       detailsBtn.textContent = "تفاصيل";
       actions.appendChild(detailsBtn);
 
@@ -612,7 +653,7 @@
 
       const detailsBtn = document.createElement("a");
       detailsBtn.href = "/products/" + encodeURIComponent(product.slug || "");
-      detailsBtn.className = "btn btn--ghost btn--sm";
+      detailsBtn.className = "btn btn-ghost btn-sm";
       detailsBtn.textContent = "تفاصيل";
       actions.appendChild(detailsBtn);
 
@@ -672,7 +713,7 @@
 
       const detailsBtn = document.createElement("a");
       detailsBtn.href = "/portfolio/" + encodeURIComponent(project.slug || "");
-      detailsBtn.className = "btn btn--ghost btn--sm";
+      detailsBtn.className = "btn btn-ghost btn-sm";
       detailsBtn.textContent = "تفاصيل";
       actions.appendChild(detailsBtn);
 
