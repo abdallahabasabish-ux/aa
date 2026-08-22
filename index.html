@@ -13,7 +13,6 @@
   <meta property="og:description" content="بناء حلول رقمية متكاملة: تطوير مواقع، تصميم واجهات، تحسين محركات البحث." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.abdallahabas.com/" />
-  <meta property="og:image" content="https://www.abdallahabas.com/assets/og-image.jpg" />
 
   <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,26 +28,34 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="/css/design-system.css" />
-  <link rel="stylesheet" href="/css/modal.css" />
   <link rel="stylesheet" href="/css/home.css" />
 
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "عبدالله عباس",
-    "alternateName": "Abdallah Abbas",
-    "url": "https://www.abdallahabas.com",
-    "jobTitle": "مطور ويب ومصمم رقمي",
-    "knowsAbout": ["تطوير المواقع", "تصميم الويب", "تحسين محركات البحث", "بلوجر", "ووردبريس"]
-  }
-  </script>
+  <style>
+    /* أنماط مؤقتة للتحميل */
+    .loading-placeholder {
+      text-align: center;
+      padding: 40px 0;
+      color: #999;
+      font-size: 0.875rem;
+      grid-column: 1 / -1;
+    }
+    .loading-placeholder .spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid #eee;
+      border-top-color: #FF6600;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ==================== TOAST ==================== -->
+  <!-- ===== TOAST ===== -->
   <div class="toast-container" id="toastContainer">
     <div class="toast" id="toast">
       <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -59,340 +66,265 @@
     </div>
   </div>
 
-  <!-- ==================== POPUP ==================== -->
-  <div class="popup-overlay" id="popupOverlay">
-    <div class="popup-card">
-      <button class="popup-close" id="popupClose" aria-label="إغلاق">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
-
-      <div class="popup-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
-        </svg>
-      </div>
-
-      <h2 class="popup-title">🎉 عرض خاص للزوار الجدد</h2>
-      <p class="popup-desc">استفد من خصم 20% على أول خدمة أو منتج لك في الموقع.</p>
-
-      <div class="popup-offer">
-        20% <small>خصم</small>
-      </div>
-
-      <div class="popup-timer">
-        ⏳ ينتهي خلال: <span id="countdownTimer">24:00:00</span>
-      </div>
-
-      <div class="popup-actions">
-        <a href="/contact" class="btn btn-primary">احصل على العرض</a>
-        <button class="btn btn-secondary" id="popupLater">لاحقاً</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== NAVIGATION ==================== -->
-  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
-    <div class="nav-inner">
-      <a href="/" class="nav-brand">
-        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" width="34" height="34" />
-        <span>عبدالله عباس</span>
-      </a>
-      <div class="nav-links">
-        <a href="/services/" class="nav-link">الخدمات</a>
-        <a href="/products/" class="nav-link">المنتجات</a>
-        <a href="/portfolio/" class="nav-link">الأعمال</a>
-        <a href="/blog/" class="nav-link">المقالات</a>
-        <a href="/about" class="nav-link">عن عبدالله</a>
-      </div>
-      <a href="/contact" class="nav-cta">تواصل معي</a>
-      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
-        </svg>
-      </button>
-    </div>
-  </nav>
-
-  <!-- ==================== MOBILE MENU ==================== -->
-  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
-    <div class="nav-mobile-panel" id="mobilePanel">
-      <div class="nav-mobile-header">
-        <span class="nav-mobile-brand">
-          <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo" width="30" height="30" />
-          <span>عبدالله عباس</span>
-        </span>
-        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
-          </svg>
-        </button>
-      </div>
-      <div class="nav-mobile-links">
-        <a href="/services/" class="nav-mobile-link">الخدمات</a>
-        <a href="/products/" class="nav-mobile-link">المنتجات</a>
-        <a href="/portfolio/" class="nav-mobile-link">الأعمال</a>
-        <a href="/blog/" class="nav-mobile-link">المقالات</a>
-        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
-        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
-        <a href="/login" class="nav-mobile-link">تسجيل الدخول</a>
-      </div>
-      <div class="nav-mobile-footer">
-        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== HERO ==================== -->
+  <!-- ===== HERO ===== -->
   <section class="hero-section">
-    <div class="container container--wide">
-      <div class="hero-inner">
-        <div class="hero-content reveal">
-          <h1>
-            نبني <span class="highlight">حلولاً رقمية</span><br />
-            تبدأ بفهم عميق<br />
-            وتنتهي بنتيجة ملموسة.
-          </h1>
-          <p>
-            لا نبيع قوالب جاهزة، بل نصنع تجارب رقمية فريدة تحقق أهدافك الحقيقية.
-            من التحليل والتصميم إلى التطوير والتحسين، كل خطوة مبنية على فهم عميق لاحتياجاتك.
-          </p>
-          <div class="hero-actions">
-            <a href="/contact" class="btn btn-primary">
-              ابدأ مشروعك
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/>
-              </svg>
-            </a>
-            <a href="/portfolio/" class="btn btn-secondary">استكشف أعمالنا</a>
-          </div>
-
-          <div class="hero-stats">
-            <div class="stat-item">
-              <span class="number"><span class="accent">+</span>50</span>
-              <span class="label">مشروع منفذ</span>
-            </div>
-            <div class="stat-item">
-              <span class="number"><span class="accent">+</span>30</span>
-              <span class="label">عميل سعيد</span>
-            </div>
-            <div class="stat-item">
-              <span class="number"><span class="accent">5</span>+</span>
-              <span class="label">سنوات خبرة</span>
-            </div>
-            <div class="stat-item">
-              <span class="number"><span class="accent">100</span>%</span>
-              <span class="label">التزام بالجودة</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-image reveal" aria-hidden="true">
-          <div class="image-box">
-            <div class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/>
-              </svg>
-            </div>
-            <h3>تطوير · تصميم · تحسين</h3>
-            <p>حلول رقمية متكاملة بجودة احترافية</p>
+    <div class="hero-bg-video">
+      <video autoplay loop muted playsinline class="hero-video">
+        <source src="https://khamsat.hsoubcdn.com/assets/media/hero_khamsat-30996c078e7d2c8ea951fb0f827908119f08ce92c80b0bec2caea193d155fafa.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">أكبر سوق عربي للخدمات الرقمية</h1>
+        <p class="hero-subtitle">حلول رقمية متكاملة لإنجاز أعمالك بسهولة وأمان</p>
+        <div class="hero-search">
+          <form action="/search" method="get" class="search-form">
+            <input type="text" name="q" class="search-input" placeholder="ابحث عن خدمة..." />
+            <button type="submit" class="search-btn">بحث</button>
+          </form>
+          <div class="popular-tags">
+            <span class="tags-label">كلمات شائعة:</span>
+            <a href="/search?q=تطوير+مواقع">تطوير مواقع</a>
+            <a href="/search?q=تصميم+واجهات">تصميم واجهات</a>
+            <a href="/search?q=SEO">تحسين محركات البحث</a>
+            <a href="/search?q=ووردبريس">ووردبريس</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== SERVICES ==================== -->
-  <section class="section-padding section-padding--gray" id="services">
+  <!-- ===== CATEGORIES GRID ===== -->
+  <section class="categories-section">
     <div class="container">
-      <div class="section-header reveal">
-        <span class="label">خدماتنا</span>
-        <h2>ما نقدّمه لك</h2>
-        <p>خدمات مصممة لحل مشاكلك الحقيقية، بجودة واحترافية.</p>
+      <div class="section-header">
+        <h2 class="section-title">كافة الخدمات الاحترافية لتطوير أعمالك</h2>
       </div>
+      <div class="categories-grid">
+        <a href="/services/web-development" class="category-card">
+          <span>تطوير مواقع</span>
+        </a>
+        <a href="/services/web-design" class="category-card">
+          <span>تصميم واجهات</span>
+        </a>
+        <a href="/services/seo" class="category-card">
+          <span>تحسين محركات البحث</span>
+        </a>
+        <a href="/services/wordpress" class="category-card">
+          <span>ووردبريس</span>
+        </a>
+        <a href="/services/blogger" class="category-card">
+          <span>بلوجر</span>
+        </a>
+        <a href="/services/graphic-design" class="category-card">
+          <span>تصميم جرافيك</span>
+        </a>
+        <a href="/products/" class="category-card">
+          <span>منتجات رقمية</span>
+        </a>
+        <a href="/portfolio/" class="category-card">
+          <span>أعمال سابقة</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
+  <!-- ===== POPULAR SERVICES ===== -->
+  <section class="services-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">خدمات شائعة</h2>
+      </div>
       <div class="services-grid" id="servicesGrid">
-        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#999;font-size:0.875rem;">
-          <div style="display:inline-block;width:24px;height:24px;border:3px solid #eee;border-top-color:#FF6600;border-radius:50%;animation:spin .7s linear infinite;"></div>
-          <p style="margin-top:10px;">جاري تحميل الخدمات...</p>
-        </div>
-      </div>
-
-      <div style="text-align:center;margin-top:32px;" class="reveal">
-        <a href="/services/" class="btn btn-secondary">جميع الخدمات</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== PRODUCTS ==================== -->
-  <section class="section-padding" id="products">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="label">منتجاتنا</span>
-        <h2>أدوات وقوالب جاهزة</h2>
-        <p>منتجات رقمية جاهزة للاستخدام الفوري، بأسعار تنافسية.</p>
-      </div>
-
-      <div class="products-grid" id="productsGrid">
-        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#999;font-size:0.875rem;">
-          <div style="display:inline-block;width:24px;height:24px;border:3px solid #eee;border-top-color:#FF6600;border-radius:50%;animation:spin .7s linear infinite;"></div>
-          <p style="margin-top:10px;">جاري تحميل المنتجات...</p>
-        </div>
-      </div>
-
-      <div style="text-align:center;margin-top:32px;" class="reveal">
-        <a href="/products/" class="btn btn-secondary">جميع المنتجات</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== PORTFOLIO ==================== -->
-  <section class="section-padding section-padding--gray" id="portfolio">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="label">أعمالنا</span>
-        <h2>مشاريع حقيقية بنتائج ملموسة</h2>
-        <p>نفخر بما نقدّمه لعملائنا، وهذه نماذج من أعمالنا.</p>
-      </div>
-
-      <div class="portfolio-grid" id="portfolioGrid">
-        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#999;font-size:0.875rem;">
-          <div style="display:inline-block;width:24px;height:24px;border:3px solid #eee;border-top-color:#FF6600;border-radius:50%;animation:spin .7s linear infinite;"></div>
-          <p style="margin-top:10px;">جاري تحميل الأعمال...</p>
-        </div>
-      </div>
-
-      <div style="text-align:center;margin-top:32px;" class="reveal">
-        <a href="/portfolio/" class="btn btn-secondary">جميع الأعمال</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== TESTIMONIALS ==================== -->
-  <section class="section-padding" id="testimonials">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="label">شهادات العملاء</span>
-        <h2>ماذا يقولون عنا؟</h2>
-        <p>آراء حقيقية من أشخاص وثقوا بنا.</p>
-      </div>
-
-      <div class="testimonials-grid reveal">
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">"عمل احترافي وسريع، ساعدنا في إطلاق منصتنا الرقمية. التواصل كان ممتازاً طوال المشروع."</p>
-          <div class="author">
-            <div class="avatar">أ</div>
-            <div class="info">
-              <div class="name">أحمد المحمد</div>
-              <div class="role">مؤسس شركة تقنية</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">"صمم لنا موقعاً متكاملاً مع تحسين SEO، زادت زيارات موقعنا بأكثر من 200% في ثلاثة أشهر."</p>
-          <div class="author">
-            <div class="avatar">ن</div>
-            <div class="info">
-              <div class="name">نورة السليمان</div>
-              <div class="role">مديرة تسويق</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">"قوالب بلوجر الاحترافية غيرت شكل مدونتي بالكامل. سرعة التحميل والتصميم المتميز هما ما يميزان عملهم."</p>
-          <div class="author">
-            <div class="avatar">س</div>
-            <div class="info">
-              <div class="name">سعد الدوسري</div>
-              <div class="role">مدون وصانع محتوى</div>
-            </div>
-          </div>
+        <div class="loading-placeholder">
+          <div class="spinner"></div>
+          <p>جاري تحميل الخدمات...</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== CTA ==================== -->
-  <section class="section-padding section-padding--gray">
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="how-it-works">
     <div class="container">
-      <div class="cta-section reveal">
-        <div class="glow"></div>
-        <div class="content">
-          <h2>لديك مشروع أو فكرة؟</h2>
-          <p>نحن هنا لمساعدتك في تحديد الحل الأنسب — حتى لو لم تقرر بعد.</p>
-          <div class="cta-actions">
-            <a href="/contact" class="btn-cta btn-cta-primary">
-              تواصل معنا
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/>
-              </svg>
-            </a>
-            <a href="/services/" class="btn-cta btn-cta-secondary">استكشف الخدمات</a>
+      <div class="section-header">
+        <h2 class="section-title">نفذ أعمالك بسهولة وأمان</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon">
+            <svg width="40" height="40" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
+            </svg>
+          </div>
+          <h3>تصفح الخدمات</h3>
+          <p>ابحث عن الخدمة التي تحتاجها باستخدام مربع البحث أو عبر التصنيفات</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">
+            <svg width="40" height="40" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
+            </svg>
+          </div>
+          <h3>اطلب الخدمة</h3>
+          <p>راجع وصف الخدمة وتقييمات المشترين ثم اطلبها لفتح تواصل مع البائع</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">
+            <svg width="40" height="40" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
+            </svg>
+          </div>
+          <h3>استلم خدمتك</h3>
+          <p>تواصل مع البائع مباشرة داخل الموقع حتى استلام طلبك كاملاً</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY KHAMSAT ===== -->
+  <section class="why-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">لماذا عبدالله عباس خيارك الأفضل لإنجاز أعمالك</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="64" height="64" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+              <path d="m352 384v-48h48c4.417969 0 8-3.582031 8-8v-32c0-4.417969-3.582031-8-8-8h-48v-48c0-4.417969-3.582031-8-8-8h-32c-4.417969 0-8 3.582031-8 8v48h-48c-4.417969 0-8 3.582031-8 8v32c0 4.417969 3.582031 8 8 8h48v48c0 4.417969 3.582031 8 8 8h32c4.417969 0 8-3.582031 8-8zm-16-56v48h-16v-48c0-4.417969-3.582031-8-8-8h-48v-16h48c4.417969 0 8-3.582031 8-8v-48h16v48c0 4.417969 3.582031 8 8 8h48v16h-48c-4.417969 0-8 3.582031-8 8zm0 0"/>
+            </svg>
+          </div>
+          <h4>أكثر من 30 تصنيف</h4>
+          <p>تصنيفات تضم خدمات متنوعة في كافة المجالات الرقمية</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <path d="M42,42a4,4,0,0,0-4-4H25.13L26,31.12A.49.49,0,0,0,26,31c0-5.54-3.92-7-6-7a1,1,0,0,0-1,.73l-4,13.89A7.67,7.67,0,0,1,12,41.79V41a1,1,0,0,0-1-1H1a1,1,0,0,0-1,1V63a1,1,0,0,0,1,1H11a1,1,0,0,0,1-1v-.67L17.73,64A.8.8,0,0,0,18,64H35a4,4,0,0,0,3-6.58,4,4,0,0,0,1-6,4,4,0,0,0,1-6A4,4,0,0,0,42,42ZM10,62H2V42h8Zm25,0H18.14L12,60.25V43.88c3-.69,4.81-4.26,4.89-4.43a1.34,1.34,0,0,0,.07-.18l3.77-13.18c1.17.26,3.25,1.23,3.27,4.85l-1,7.94a1,1,0,0,0,.24.78A1,1,0,0,0,24,40H38a2,2,0,0,1,0,4H33a1,1,0,0,0,0,2h4a2,2,0,0,1,0,4H32a1,1,0,0,0,0,2h4a2,2,0,0,1,0,4H31a1,1,0,0,0,0,2h4a2,2,0,0,1,0,4Z"/>
+            </svg>
+          </div>
+          <h4>أسعار اقتصادية</h4>
+          <p>خدمات ذات جودة عالية بأسعار تنافسية تناسب الجميع</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="64" height="64" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+              <path d="m30 0a30 30 0 1 0 15.212 55.856l8.819 2.4a3.439 3.439 0 0 0 4.225-4.225l-2.4-8.819a30 30 0 0 0 -25.856-45.212zm23.814 45.326 2.513 9.233a1.439 1.439 0 0 1 -1.769 1.766l-9.233-2.513a.992.992 0 0 0 -.783.112 28 28 0 1 1 9.383-9.383 1 1 0 0 0 -.111.785z"/>
+            </svg>
+          </div>
+          <h4>دعم فني متواصل</h4>
+          <p>فريق محترف للرد على الاستفسارات وحل المشكلات في أسرع وقت</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="64" height="64" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="m48.695 96.676c0.42188 0.13281 0.86328 0.19922 1.3047 0.19922 0.42969 0 0.85938-0.066406 1.2734-0.19141 6.2812-1.8008 12.219-4.6406 17.562-8.4023 0.65625-0.51172 0.79687-1.4531 0.31641-2.1367-0.48438-0.67969-1.418-0.86328-2.1211-0.41016-5.0664 3.5625-10.695 6.25-16.648 7.9531-0.25781 0.082031-0.53906 0.082031-0.79687 0-7.7773-2.207-14.969-6.1094-21.062-11.426-0.30469-0.30078-0.72266-0.46094-1.1523-0.44922-0.42969 0.015625-0.83594 0.21094-1.1172 0.53125-0.28516 0.32422-0.42188 0.75-0.38281 1.1758 0.039062 0.42969 0.25391 0.82031 0.59375 1.0859 6.4297 5.6133 14.02 9.7344 22.23 12.07z"/>
+            </svg>
+          </div>
+          <h4>ضمان الحقوق</h4>
+          <p>نضمن حقوقك المالية واستلامك العمل كاملاً وفق ما هو متفق عليه</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="64" height="64" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+              <path d="M442.542,428.834l-0.126-0.018v-27.623c0-4.157-3.368-7.525-7.525-7.525c-4.157,0-7.525,3.368-7.525,7.525v25.436
+                l-12.641-1.836l-12.44-25.207c-4.561-9.247-17.772-9.26-22.344-0.001l-1.97,3.992v-26.182c0-4.157-3.368-7.525-7.525-7.525
+                c-4.157,0-7.525,3.368-7.525,7.525v48.062l-23.238,3.376c-10.211,1.484-14.295,14.042-6.905,21.251l9.807,9.558h-38.058
+                c3.133-3.055,1.103-1.075,9.806-9.558c0-0.001,0.001-0.001,0.001-0.002c7.367-7.156,3.341-19.76-6.906-21.249l-16.563-2.407
+                l-12.483-73.753l7.026-10.576l3.91,2.777c6.802,4.832,16.345,2.469,20.087-5.026c0-0.001,0-0.001,0-0.001l25.879-51.866
+                L394.2,310.8c2.077,0.889,33.164,14.825,33.164,51.758v3.52c0,4.157,3.368,7.525,7.525,7.525c4.157,0,7.525-3.368,7.525-7.525
+                v-3.52c0-47.66-40.792-64.979-42.529-65.693c-0.047-0.02-0.095-0.039-0.143-0.058l-97.573-37.787v-23.498
+                c15.565-12.007,26.325-29.932,28.894-50.381c18.739-1.07,32.588-16.153,32.588-34.009c0-8.282-3.017-16.187-8.385-22.317v-30.34
+                c0-47.955-34.134-89.312-81.164-98.336c-4.073-0.785-8.024,1.889-8.807,5.972c-0.784,4.08,1.89,8.024,5.972,8.807
+                c39.952,7.668,68.951,42.808,68.951,83.557v20.373c-2.733-0.902-5.594-1.46-8.539-1.677c0-8.189,0.682-5.999-25.429-34.062
+                l-0.001-0.001c-4.601-4.944-12.042-5.85-17.693-2.157c-27.846,18.191-61.681,27.507-93.148,25.721
+                c-5.344-0.304-8.049-0.092-12.398,3.532c-2.094,1.942-3.53,4.554-4.109,7.189c-2.553,0.263-6.025,1.013-8.864,2.049V98.473
+                c0-40.749,28.998-75.89,68.951-83.557c4.081-0.783,6.755-4.726,5.972-8.807c-0.782-4.08-4.729-6.759-8.807-5.972
+                c-47.03,9.025-81.164,50.381-81.164,98.336v31.129c-5.429,6.074-8.383,13.574-8.383,21.529c0,17.83,13.815,32.936,32.58,34.008
+                c2.532,20.361,13.268,39.132,30.538,51.567v22.316l-97.466,37.786c-0.047,0.019-0.094,0.037-0.141,0.057
+                c-1.737,0.714-42.529,18.033-42.529,65.693v66.257l-0.126,0.018c-4.727,0.687-8.581,3.936-10.057,8.478
+                c-1.477,4.543-0.269,9.437,3.152,12.772l20.129,19.62l-4.753,27.706c-0.807,4.707,1.093,9.377,4.957,12.185
+                c3.863,2.807,8.889,3.171,13.119,0.947l24.882-13.08l24.881,13.08c4.226,2.222,9.254,1.859,13.119-0.947
+                c3.866-2.808,5.764-7.477,4.956-12.186l-3.897-22.717h56.992l-3.897,22.718c-1.742,10.17,8.94,17.936,18.077,13.132l24.882-13.08
+                l24.881,13.08c4.226,2.222,9.254,1.859,13.119-0.947c3.866-2.808,5.764-7.477,4.956-12.186l-3.897-22.717h56.992l-3.897,22.718
+                c-1.742,10.17,8.94,17.936,18.076,13.133l24.882-13.08l24.881,13.08c9.133,4.803,19.82-2.961,18.076-13.133l-4.752-27.705
+                l20.13-19.621C456.838,442.879,452.753,430.318,442.542,428.834z"/>
+            </svg>
+          </div>
+          <h4>مقدمي خدمات محترفون</h4>
+          <p>ملفات شخصية تبرز الخدمات والتقييمات السابقة</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="64" height="64" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+              <path d="M331.678,132.295c10.095,1.302,16.924,9.518,16.924,18.836c0,9.386-6.874,17.553-16.924,18.843V132.295z"/>
+              <path d="M178.577,169.973c-10.034-1.288-16.924-9.431-16.924-18.843c0-9.267,7.865-16.703,16.924-18.474V169.973z"/>
+            </svg>
+          </div>
+          <h4>تعاملات آمنة وموثوقة</h4>
+          <p>نوثق مقدمي الخدمات لتعاملات آمنة وجدية</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">الأسئلة الشائعة</h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <button class="faq-question">
+            ما هو عبدالله عباس؟
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>عبدالله عباس هو منصة متخصصة في تقديم الحلول الرقمية المتكاملة، تشمل تطوير المواقع، تصميم الواجهات، تحسين محركات البحث، وقوالب بلوجر وووردبريس احترافية.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            كيف يمكن أن أستفيد من خدمات عبدالله عباس؟
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>يمكنك الاستفادة من خلال تصفح الخدمات المتاحة، اختيار ما يناسب احتياجك، والتواصل المباشر لطلب الخدمة. جميع الخدمات مقدمة بجودة عالية وأسعار تنافسية.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            كيف يضمن الموقع حقوقي؟
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>الموقع يضمن حقوقك بشكل كامل، حيث يقوم بدور الوسيط بين مقدم الخدمة والعميل، ويحمي حقوق الطرفين المالية في حال الالتزام بشروط الموقع وبنود الضمان.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            ماذا يحدث بعد طلب الخدمة؟
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>بعد طلب الخدمة، ستتمكن من التواصل المباشر مع مقدم الخدمة. بعد تنفيذ الخدمة، يمكنك تقييمها، وفي حال عدم الرضا يمكنك إلغاء الطلب واستعادة رصيدك.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="site-footer">
+  <!-- ===== CTA ===== -->
+  <section class="cta-section">
     <div class="container">
-      <div class="footer-inner">
-        <div>
-          <div class="footer-brand">
-            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" width="38" height="38" />
-            <div class="footer-brand-name">عبدالله عباس</div>
-          </div>
-          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
-        </div>
-        <div>
-          <div class="footer-heading">الخدمات</div>
-          <div class="footer-links">
-            <a href="/services/web-development">تطوير مواقع</a>
-            <a href="/services/web-design">تصميم واجهات</a>
-            <a href="/services/seo">تحسين محركات البحث</a>
-            <a href="/services/wordpress">ووردبريس</a>
-            <a href="/services/blogger">بلوجر</a>
-          </div>
-        </div>
-        <div>
-          <div class="footer-heading">المحتوى</div>
-          <div class="footer-links">
-            <a href="/products/">المنتجات</a>
-            <a href="/portfolio/">الأعمال</a>
-            <a href="/blog/">المقالات</a>
-            <a href="/about">عن عبدالله</a>
-          </div>
-        </div>
-        <div>
-          <div class="footer-heading">تواصل</div>
-          <div class="footer-links">
-            <a href="/contact">أرسل رسالة</a>
-            <a href="/login">تسجيل الدخول</a>
-            <a href="/privacy-policy">سياسة الخصوصية</a>
-            <a href="/terms-conditions">الشروط والأحكام</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
-        <span class="footer-copy">جميع الحقوق محفوظة</span>
+      <div class="cta-content">
+        <h3>أنجز أعمالك بسهولة وأمان</h3>
+        <a href="/contact" class="cta-button">سجل الآن</a>
       </div>
     </div>
-  </footer>
-
-  <!-- ==================== ANIMATION ==================== -->
-  <style>
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
+  </section>
 
   <!-- ==================== SCRIPTS ==================== -->
   <script>
@@ -449,52 +381,15 @@
       revealElements.forEach(el => el.classList.add('reveal--visible'));
     }
 
-    // ===== POPUP =====
-    const popupOverlay = document.getElementById('popupOverlay');
-    const popupClose = document.getElementById('popupClose');
-    const popupLater = document.getElementById('popupLater');
-
-    function showPopup() {
-      popupOverlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function hidePopup() {
-      popupOverlay.classList.remove('active');
-      document.body.style.overflow = '';
-      localStorage.setItem('popupClosed', 'true');
-    }
-
-    const popupClosed = localStorage.getItem('popupClosed');
-    if (!popupClosed) {
-      setTimeout(showPopup, 1500);
-    }
-
-    popupClose.addEventListener('click', hidePopup);
-    popupLater.addEventListener('click', hidePopup);
-    popupOverlay.addEventListener('click', (e) => {
-      if (e.target === popupOverlay) hidePopup();
+    // ===== FAQ =====
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const item = this.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
     });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && popupOverlay.classList.contains('active')) hidePopup();
-    });
-
-    // ===== COUNTDOWN =====
-    let time = 24 * 60 * 60;
-    const timerElement = document.getElementById('countdownTimer');
-
-    function updateTimer() {
-      const h = Math.floor(time / 3600);
-      const m = Math.floor((time % 3600) / 60);
-      const s = time % 60;
-      timerElement.textContent =
-        String(h).padStart(2, '0') + ':' +
-        String(m).padStart(2, '0') + ':' +
-        String(s).padStart(2, '0');
-      if (time > 0) time--;
-    }
-    updateTimer();
-    setInterval(updateTimer, 1000);
   </script>
 
   <!-- ==================== LIVE DATA ==================== -->
@@ -505,6 +400,15 @@
     import { openModal, showToast } from "/js/modal.js";
 
     const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
+    const CATEGORY_MAP = {
+      "web-development": "تطوير",
+      "web-design": "تصميم",
+      "seo": "SEO",
+      "graphic-design": "جرافيك",
+      "wordpress": "ووردبريس",
+      "blogger": "بلوجر",
+      "other": "أخرى"
+    };
 
     function sortByOrder(a, b) {
       const orderA = typeof a.sortOrder === "number" ? a.sortOrder : Infinity;
@@ -515,203 +419,85 @@
       return timeB - timeA;
     }
 
-    // ===== SERVICE CARD =====
     function createServiceCard(service) {
       const card = document.createElement("div");
       card.className = "service-card";
 
-      const icon = document.createElement("div");
-      icon.className = "icon";
-      icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/></svg>`;
-      card.appendChild(icon);
+      // الصورة
+      const thumb = document.createElement("div");
+      thumb.className = "service-card-thumb";
+      if (service.image && isSafeUrl(service.image)) {
+        const img = document.createElement("img");
+        img.src = service.image;
+        img.alt = service.title || "";
+        img.loading = "lazy";
+        thumb.appendChild(img);
+      } else {
+        thumb.innerHTML = `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 3h18v18H3z"/><path d="M9 9h6v6H9z"/></svg>`;
+      }
+      card.appendChild(thumb);
 
-      const title = document.createElement("h3");
-      title.textContent = service.title || "—";
-      card.appendChild(title);
+      // المحتوى
+      const body = document.createElement("div");
+      body.className = "service-card-body";
 
-      const desc = document.createElement("p");
-      desc.textContent = service.shortDescription || "";
-      card.appendChild(desc);
+      const title = document.createElement("h4");
+      title.className = "service-card-title";
+      const link = document.createElement("a");
+      link.href = "/service-detail.html?slug=" + encodeURIComponent(service.slug || "");
+      link.textContent = service.title || "—";
+      title.appendChild(link);
+      body.appendChild(title);
+
+      const category = document.createElement("div");
+      category.className = "service-card-category";
+      category.textContent = CATEGORY_MAP[service.category] || service.category || "خدمة";
+      body.appendChild(category);
+
+      const rating = document.createElement("div");
+      rating.className = "service-card-rating";
+      rating.innerHTML = '★★★★★ <span class="rating-count">(0)</span>';
+      body.appendChild(rating);
 
       const price = document.createElement("div");
-      price.className = "price";
+      price.className = "service-card-price";
       if (service.price > 0) {
-        price.textContent = `${Number(service.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[service.currency] || service.currency || ""}`;
+        price.innerHTML = `تبدأ من <span>${Number(service.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[service.currency] || service.currency || ""}</span>`;
       } else {
-        price.textContent = "مجاني";
-        price.classList.add("free");
+        price.innerHTML = `<span>مجاني</span>`;
       }
-      card.appendChild(price);
+      body.appendChild(price);
 
-      const btn = document.createElement("a");
-      btn.href = "/services/" + encodeURIComponent(service.slug || "");
-      btn.className = "btn-details";
-      btn.textContent = "تفاصيل";
-      card.appendChild(btn);
-
+      card.appendChild(body);
       return card;
     }
 
-    // ===== PRODUCT CARD =====
-    function createProductCard(product) {
-      const card = document.createElement("div");
-      card.className = "product-card";
-
-      const image = document.createElement("div");
-      image.className = "image";
-      if (product.image && isSafeUrl(product.image)) {
-        const img = document.createElement("img");
-        img.src = product.image;
-        img.alt = product.title || "";
-        img.loading = "lazy";
-        image.appendChild(img);
-      } else {
-        const placeholder = document.createElement("div");
-        placeholder.className = "placeholder";
-        placeholder.textContent = "📦";
-        image.appendChild(placeholder);
-      }
-      card.appendChild(image);
-
-      const info = document.createElement("div");
-      info.className = "info";
-
-      const title = document.createElement("h3");
-      title.textContent = product.title || "—";
-      info.appendChild(title);
-
-      const desc = document.createElement("p");
-      desc.textContent = product.shortDescription || "";
-      info.appendChild(desc);
-
-      const footer = document.createElement("div");
-      footer.className = "footer";
-
-      const price = document.createElement("span");
-      price.className = "price";
-      if (product.price > 0) {
-        price.textContent = `${Number(product.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[product.currency] || product.currency || ""}`;
-      } else {
-        price.textContent = "مجاني";
-        price.classList.add("free");
-      }
-      footer.appendChild(price);
-
-      const btn = document.createElement("a");
-      btn.href = "/products/" + encodeURIComponent(product.slug || "");
-      btn.className = "btn-details";
-      btn.textContent = "تفاصيل";
-      footer.appendChild(btn);
-
-      info.appendChild(footer);
-      card.appendChild(info);
-      return card;
-    }
-
-    // ===== PORTFOLIO CARD =====
-    function createPortfolioCard(project) {
-      const card = document.createElement("div");
-      card.className = "portfolio-card";
-
-      const image = document.createElement("div");
-      image.className = "image";
-      if (project.image && isSafeUrl(project.image)) {
-        const img = document.createElement("img");
-        img.src = project.image;
-        img.alt = project.title || "";
-        img.loading = "lazy";
-        image.appendChild(img);
-      } else {
-        const placeholder = document.createElement("div");
-        placeholder.className = "placeholder";
-        placeholder.textContent = "🎯";
-        image.appendChild(placeholder);
-      }
-      card.appendChild(image);
-
-      const info = document.createElement("div");
-      info.className = "info";
-
-      const title = document.createElement("h3");
-      title.textContent = project.title || "—";
-      info.appendChild(title);
-
-      if (project.tags && project.tags.length > 0) {
-        const tags = document.createElement("div");
-        tags.className = "tags";
-        project.tags.slice(0, 3).forEach(t => {
-          const tag = document.createElement("span");
-          tag.textContent = t;
-          tags.appendChild(tag);
-        });
-        info.appendChild(tags);
-      }
-
-      const btn = document.createElement("a");
-      btn.href = "/portfolio/" + encodeURIComponent(project.slug || "");
-      btn.className = "btn-details";
-      btn.textContent = "تفاصيل";
-      info.appendChild(btn);
-
-      card.appendChild(info);
-      return card;
-    }
-
-    // ===== LOAD =====
     async function loadServices() {
       const grid = document.getElementById("servicesGrid");
       try {
         const snap = await getDocs(collection(db, "services"));
-        const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(s => s.active !== false).sort(sortByOrder).slice(0, 4);
+        const items = snap.docs
+          .map(d => ({ id: d.id, ...d.data() }))
+          .filter(s => s.active !== false)
+          .sort(sortByOrder)
+          .slice(0, 8);
+
         grid.textContent = "";
         if (items.length === 0) {
-          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">لا توجد خدمات حالياً</div>`;
+          grid.innerHTML = `<div class="loading-placeholder">لا توجد خدمات حالياً</div>`;
           return;
         }
         items.forEach(s => grid.appendChild(createServiceCard(s)));
       } catch {
-        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">حدث خطأ في تحميل الخدمات</div>`;
-      }
-    }
-
-    async function loadProducts() {
-      const grid = document.getElementById("productsGrid");
-      try {
-        const snap = await getDocs(collection(db, "products"));
-        const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(p => p.active !== false).sort(sortByOrder).slice(0, 3);
-        grid.textContent = "";
-        if (items.length === 0) {
-          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">لا توجد منتجات حالياً</div>`;
-          return;
-        }
-        items.forEach(p => grid.appendChild(createProductCard(p)));
-      } catch {
-        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">حدث خطأ في تحميل المنتجات</div>`;
-      }
-    }
-
-    async function loadPortfolio() {
-      const grid = document.getElementById("portfolioGrid");
-      try {
-        const snap = await getDocs(collection(db, "portfolio"));
-        const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(p => p.active !== false).sort(sortByOrder).slice(0, 3);
-        grid.textContent = "";
-        if (items.length === 0) {
-          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">لا توجد أعمال حالياً</div>`;
-          return;
-        }
-        items.forEach(p => grid.appendChild(createPortfolioCard(p)));
-      } catch {
-        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#999;font-size:0.875rem;">حدث خطأ في تحميل الأعمال</div>`;
+        grid.innerHTML = `<div class="loading-placeholder">حدث خطأ في تحميل الخدمات</div>`;
       }
     }
 
     loadServices();
-    loadProducts();
-    loadPortfolio();
 
     window.openModal = openModal;
     window.showToast = showToast;
   </script>
+
 </body>
 </html>
