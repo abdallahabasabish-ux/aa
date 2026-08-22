@@ -1,0 +1,568 @@
+/* ============================================
+   HOME — الصفحة الرئيسية (تصميم تسويقي)
+   مع رسالة عرض خاص
+   ============================================ */
+
+/* --- Banner العرض الخاص --- */
+.special-offer-banner {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--text-inverse);
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 20px rgba(255, 102, 0, 0.2);
+}
+
+.special-offer-banner svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.special-offer-banner .highlight {
+  background: rgba(255,255,255,0.15);
+  padding: 2px 14px;
+  border-radius: 20px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.special-offer-banner .btn-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 18px;
+  background: var(--bg-white);
+  color: var(--text-primary);
+  border-radius: 50px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--fast);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.special-offer-banner .btn-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.special-offer-banner .btn-banner svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* --- Hero --- */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0 60px;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: var(--bg-body);
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,102,0,0.04) 0%, transparent 70%);
+  top: -250px;
+  right: -200px;
+  pointer-events: none;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,102,0,0.02) 0%, transparent 70%);
+  bottom: -150px;
+  left: -150px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  max-width: 560px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+  background: rgba(255,102,0,0.06);
+  padding: 6px 16px 6px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,102,0,0.06);
+}
+
+.hero-badge .line {
+  width: 24px;
+  height: 2px;
+  background: var(--primary-gradient);
+  border-radius: 1px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+.hero-title .highlight {
+  color: var(--primary);
+}
+
+.hero-desc {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+/* إحصائيات الهيرو */
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-stats .stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-stats .stat-item .number {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.hero-stats .stat-item .number .accent {
+  color: var(--primary);
+}
+
+.hero-stats .stat-item .label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Visual (الجانب الأيمن) */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-visual-box {
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1/1;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(243,242,239,0.9));
+  border: 1px solid rgba(0,0,0,0.04);
+  border-radius: 32px;
+  padding: 48px 36px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-visual-box .grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hero-visual-box .content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-visual-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, rgba(255,102,0,0.12), rgba(255,102,0,0.2));
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+.hero-visual-icon svg {
+  width: 44px;
+  height: 44px;
+}
+
+.hero-visual-box h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.hero-visual-box p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* --- العناوين العامة --- */
+.section-header-center {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 48px;
+}
+
+.section-header-center .label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: rgba(255,102,0,0.06);
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.section-header-center h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.section-header-center p {
+  font-size: 1.0625rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  line-height: 1.7;
+}
+
+/* --- أقسام الخدمات والمنتجات والأعمال --- */
+.section-padding {
+  padding: 80px 0;
+}
+
+.section-padding--alt {
+  background: var(--bg-white);
+}
+
+/* ===== شهادات العملاء ===== */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.testimonial-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--normal), box-shadow var(--normal);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.testimonial-card .stars {
+  color: #F5A623;
+  font-size: 1.125rem;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+
+.testimonial-card .quote {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.testimonial-card .author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-card .author .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.testimonial-card .author .info .name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.testimonial-card .author .info .role {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ===== قسم CTA ===== */
+.cta-section {
+  background: linear-gradient(135deg, var(--secondary-dark), var(--secondary));
+  border-radius: var(--radius-lg);
+  padding: 64px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section .glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(255,102,0,0.08), transparent 60%);
+  pointer-events: none;
+}
+
+.cta-section .content {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: var(--text-inverse);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  font-size: 1.0625rem;
+  color: rgba(255,255,255,0.6);
+  max-width: 480px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+
+.cta-section .cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.cta-section .btn-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-white);
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all var(--fast);
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.cta-section .btn-cta-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+}
+
+.cta-section .btn-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-family: var(--font);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--fast);
+  text-decoration: none;
+}
+
+.cta-section .btn-cta-secondary:hover {
+  color: var(--text-inverse);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1023px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  .hero-content {
+    max-width: 100%;
+  }
+  .hero-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-stats {
+    justify-content: center;
+  }
+  .hero-visual-box {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cta-section {
+    padding: 48px 32px;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-section {
+    padding: 60px 0 40px;
+    min-height: auto;
+  }
+  .hero-title {
+    font-size: 1.875rem;
+  }
+  .hero-desc {
+    font-size: 1rem;
+  }
+  .hero-stats {
+    gap: 20px;
+  }
+  .hero-stats .stat-item .number {
+    font-size: 1.25rem;
+  }
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  .cta-section {
+    padding: 32px 20px;
+    border-radius: var(--radius);
+  }
+  .cta-section .cta-actions {
+    flex-direction: column;
+  }
+  .cta-section .cta-actions .btn-cta-primary,
+  .cta-section .cta-actions .btn-cta-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+  .special-offer-banner {
+    font-size: 0.8125rem;
+    padding: 10px 16px;
+    gap: 8px;
+  }
+  .special-offer-banner .btn-banner {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-visual-box {
+    padding: 24px 16px;
+    border-radius: 24px;
+  }
+  .hero-visual-icon {
+    width: 72px;
+    height: 72px;
+  }
+  .hero-visual-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-card:hover {
+    transform: none !important;
+  }
+  .cta-section .btn-cta-primary:hover {
+    transform: none !important;
+  }
+}
