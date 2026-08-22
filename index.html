@@ -8,18 +8,32 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.abdallahabas.com/" />
 
+  <!-- Open Graph -->
+  <meta property="og:title" content="عبدالله عباس — حلول رقمية احترافية" />
+  <meta property="og:description" content="بناء حلول رقمية متكاملة: تطوير مواقع، تصميم واجهات، تحسين محركات البحث." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.abdallahabas.com/" />
+  <meta property="og:image" content="https://www.abdallahabas.com/assets/og-image.jpg" />
+
+  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://abdallahsst.firebaseio.com" />
   <link rel="preconnect" href="https://firestore.googleapis.com" />
 
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
 
+  <!-- Styles -->
   <link rel="stylesheet" href="/css/main.css" />
   <link rel="stylesheet" href="/css/design-system.css" />
   <link rel="stylesheet" href="/css/modal.css" />
+  <link rel="stylesheet" href="/css/home.css" />
 
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,18 +48,18 @@
 </head>
 <body>
 
-  <!-- ===== TOAST ===== -->
+  <!-- ==================== TOAST ==================== -->
   <div class="toast-container" id="toastContainer">
     <div class="toast" id="toast">
       <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
       </svg>
-      <span id="toastMessage">✅ تم الإرسال بنجاح</span>
+      <span id="toastMessage">تم الإرسال بنجاح</span>
       <button class="toast-close" id="toastClose" aria-label="إغلاق">✕</button>
     </div>
   </div>
 
-  <!-- ===== MODAL ===== -->
+  <!-- ==================== MODAL ==================== -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-container" id="modalContainer">
       <span class="modal-handle"></span>
@@ -57,7 +71,7 @@
       <div class="modal-features" id="modalFeatures"></div>
       <div class="modal-price" id="modalPrice"></div>
       <form class="modal-form" id="modalForm" novalidate>
-        <div class="modal-form-title">📩 طلب الخدمة</div>
+        <div class="modal-form-title">طلب الخدمة</div>
         <div class="modal-form-group">
           <label class="modal-form-label" for="modalFormName">الاسم الكامل <span style="color:var(--primary);">*</span></label>
           <input type="text" class="modal-form-input" id="modalFormName" required placeholder="أدخل اسمك" />
@@ -78,28 +92,48 @@
     </div>
   </div>
 
-  <!-- ===== NAVIGATION ===== -->
-  <nav class="site-nav" id="siteNav">
+  <!-- ==================== SPECIAL OFFER BANNER ==================== -->
+  <div class="special-offer-banner" id="specialOfferBanner">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+    </svg>
+    <span>
+      🎉 عرض خاص للزوار الجدد:
+      <span class="highlight">خصم 20%</span>
+      على أول خدمة أو منتج
+    </span>
+    <a href="/contact.html" class="btn-banner">
+      احصل على العرض
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    </a>
+  </div>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
       <a href="/" class="nav-brand">
         <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" width="34" height="34" />
         <span>عبدالله عباس</span>
       </a>
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
         <a href="/services/" class="nav-link">الخدمات</a>
         <a href="/products/" class="nav-link">المنتجات</a>
         <a href="/portfolio/" class="nav-link">الأعمال</a>
         <a href="/blog/" class="nav-link">المقالات</a>
-        <a href="/about.html" class="nav-link">عن عبدالله</a>
+        <a href="/about" class="nav-link">عن عبدالله</a>
       </div>
-      <a href="/contact.html" class="nav-cta">تواصل معي</a>
-      <button class="nav-mobile-toggle" id="mobileToggle" aria-label="فتح القائمة">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
       </button>
     </div>
   </nav>
 
-  <!-- ===== MOBILE MENU ===== -->
+  <!-- ==================== MOBILE MENU ==================== -->
   <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
     <div class="nav-mobile-panel" id="mobilePanel">
       <div class="nav-mobile-header">
@@ -107,8 +141,10 @@
           <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo" width="30" height="30" />
           <span>عبدالله عباس</span>
         </span>
-        <button class="nav-mobile-close" id="mobileClose" aria-label="إغلاق القائمة">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
         </button>
       </div>
       <div class="nav-mobile-links">
@@ -116,47 +152,78 @@
         <a href="/products/" class="nav-mobile-link">المنتجات</a>
         <a href="/portfolio/" class="nav-mobile-link">الأعمال</a>
         <a href="/blog/" class="nav-mobile-link">المقالات</a>
-        <a href="/about.html" class="nav-mobile-link">عن عبدالله</a>
-        <a href="/contact.html" class="nav-mobile-link">تواصل معي</a>
-        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/login" class="nav-mobile-link">تسجيل الدخول</a>
       </div>
       <div class="nav-mobile-footer">
-        <a href="/contact.html" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
       </div>
     </div>
   </div>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero" style="position:relative;overflow:hidden;padding:120px 0 80px;min-height:80vh;display:flex;align-items:center;">
-    <div class="container container--wide" style="position:relative;z-index:2;">
-      <div class="hero-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+  <!-- ==================== HERO ==================== -->
+  <section class="hero-section">
+    <div class="container container--wide">
+      <div class="hero-inner">
         <div class="hero-content reveal">
-          <div class="hero-eyebrow" style="display:inline-flex;align-items:center;gap:8px;font-size:0.8125rem;font-weight:600;color:var(--primary);letter-spacing:0.02em;margin-bottom:24px;">
-            <span style="width:24px;height:2px;background:var(--primary);border-radius:1px;"></span>
+          <div class="hero-badge">
+            <span class="line"></span>
             <span>حلول رقمية</span>
           </div>
-          <h1 style="font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;color:var(--text-primary);letter-spacing:-0.03em;margin-bottom:24px;">
+
+          <h1 class="hero-title">
             أحلّل هدفك أولًا،<br />
-            ثم <span style="color:var(--primary);">أبني الحل</span><br />
+            ثم <span class="highlight">أبني الحل</span><br />
             المناسب له.
           </h1>
-          <p style="font-size:1.125rem;color:var(--text-secondary);line-height:1.8;max-width:480px;margin-bottom:36px;">
-            موقع ويب لا يعمل وحده — يحتاج استراتيجية. أقدّم حلولًا رقمية تُبنى حول هدفك الحقيقي.
+
+          <p class="hero-desc">
+            موقع ويب لا يعمل وحده — يحتاج استراتيجية. أقدّم حلولًا رقمية تُبنى حول هدفك الحقيقي، لا حول قالب جاهز يُلصق على مشروعك.
           </p>
-          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-            <a href="/contact.html" class="btn btn--primary btn--lg">ابدأ مشروعك <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg></a>
-            <a href="/portfolio/" class="btn btn--secondary">شاهد أعمالي</a>
+
+          <div class="hero-actions">
+            <a href="/contact" class="btn btn--primary btn--lg">
+              ابدأ مشروعك
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+              </svg>
+            </a>
+            <a href="/portfolio/" class="btn btn--secondary btn--lg">شاهد أعمالي</a>
+          </div>
+
+          <!-- إحصائيات -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="number"><span class="accent">+</span>50</span>
+              <span class="label">مشروع منفذ</span>
+            </div>
+            <div class="stat-item">
+              <span class="number"><span class="accent">+</span>30</span>
+              <span class="label">عميل سعيد</span>
+            </div>
+            <div class="stat-item">
+              <span class="number"><span class="accent">5</span>+</span>
+              <span class="label">سنوات خبرة</span>
+            </div>
+            <div class="stat-item">
+              <span class="number"><span class="accent">100</span>%</span>
+              <span class="label">التزام بالجودة</span>
+            </div>
           </div>
         </div>
-        <div class="hero-visual reveal" aria-hidden="true" style="position:relative;">
-          <div style="background:linear-gradient(135deg,rgba(255,255,255,0.95),rgba(243,242,239,0.9));border:1px solid rgba(0,0,0,0.04);border-radius:28px;padding:48px 36px;text-align:center;box-shadow:var(--shadow-card);position:relative;overflow:hidden;">
-            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03) 1px,transparent 1px);background-size:32px 32px;opacity:0.5;"></div>
-            <div style="position:relative;z-index:1;">
-              <div style="width:100px;height:100px;margin:0 auto 20px;background:linear-gradient(135deg,rgba(255,102,0,0.12),rgba(255,102,0,0.2));border-radius:24px;display:flex;align-items:center;justify-content:center;color:var(--primary);">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
+
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="hero-visual-box">
+            <div class="grid-pattern"></div>
+            <div class="content">
+              <div class="hero-visual-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                </svg>
               </div>
-              <h3 style="font-size:1.125rem;font-weight:700;color:var(--text-primary);margin-bottom:4px;">تطوير · تصميم · تحسين</h3>
-              <p style="color:var(--text-muted);font-size:0.875rem;">حلول رقمية متكاملة بجودة احترافية</p>
+              <h3>تطوير · تصميم · تحسين</h3>
+              <p>حلول رقمية متكاملة بجودة احترافية</p>
             </div>
           </div>
         </div>
@@ -164,88 +231,144 @@
     </div>
   </section>
 
-  <!-- ===== SERVICES PREVIEW ===== -->
-  <section class="section" id="services" style="padding:80px 0;">
+  <!-- ==================== SERVICES PREVIEW ==================== -->
+  <section class="section-padding" id="services">
     <div class="container">
-      <div class="section-header-new reveal">
+      <div class="section-header-center reveal">
         <span class="label">ما أقدّمه</span>
         <h2>خدمات مصممة لحل مشاكل حقيقية</h2>
         <p>كل خدمة تبدأ بفهم المشروع، لا بتقديم قائمة مميزات جاهزة.</p>
       </div>
+
       <div class="card-grid card-grid--asymmetric" id="servicesGrid">
         <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">
           <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border-light);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;"></div>
           <p style="margin-top:12px;">جاري تحميل الخدمات...</p>
         </div>
       </div>
+
       <div style="text-align:center;margin-top:40px;" class="reveal">
         <a href="/services/" class="btn btn--secondary">جميع الخدمات</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== PRODUCTS PREVIEW (مع صور) ===== -->
-  <section class="section" id="products" style="padding:80px 0;background:var(--bg-white);">
+  <!-- ==================== PRODUCTS PREVIEW ==================== -->
+  <section class="section-padding section-padding--alt" id="products">
     <div class="container">
-      <div class="section-header-new reveal">
+      <div class="section-header-center reveal">
         <span class="label">منتجات جاهزة</span>
         <h2>أدوات وقوالب احترافية</h2>
         <p>منتجات مُختبرة فعليًا — قوالب، أدوات، ومصادر رقمية.</p>
       </div>
+
       <div class="card-grid" id="productsGrid" style="grid-template-columns:repeat(3,1fr);gap:24px;">
         <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">
           <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border-light);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;"></div>
           <p style="margin-top:12px;">جاري تحميل المنتجات...</p>
         </div>
       </div>
+
       <div style="text-align:center;margin-top:40px;" class="reveal">
         <a href="/products/" class="btn btn--secondary">جميع المنتجات</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== PORTFOLIO PREVIEW (مع صور) ===== -->
-  <section class="section" id="portfolio" style="padding:80px 0;">
+  <!-- ==================== PORTFOLIO PREVIEW ==================== -->
+  <section class="section-padding" id="portfolio">
     <div class="container">
-      <div class="section-header-new reveal">
+      <div class="section-header-center reveal">
         <span class="label">أعمال مختارة</span>
         <h2>نتائج حقيقية، لا وعود</h2>
         <p>مشاريع نفذتها لعملائي — كل مشروع يحكي قصة حل لمشكلة حقيقية.</p>
       </div>
+
       <div class="card-grid" id="portfolioGrid" style="grid-template-columns:1.2fr 0.8fr 0.8fr;gap:24px;">
         <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">
           <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border-light);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;"></div>
           <p style="margin-top:12px;">جاري تحميل الأعمال...</p>
         </div>
       </div>
+
       <div style="text-align:center;margin-top:40px;" class="reveal">
         <a href="/portfolio/" class="btn btn--secondary">جميع الأعمال</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== CTA ===== -->
-  <section style="padding:80px 0;">
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section class="section-padding section-padding--alt" id="testimonials">
     <div class="container">
-      <div class="cta-section reveal" style="background:linear-gradient(135deg,var(--secondary-dark),var(--secondary));border-radius:var(--radius-lg);padding:64px 48px;text-align:center;position:relative;overflow:hidden;">
-        <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(255,102,0,0.08),transparent 60%);"></div>
-        <div style="position:relative;z-index:1;">
-          <h2 style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;color:var(--text-inverse);line-height:1.2;margin-bottom:12px;">
-            عندك مشروع أو فكرة تحتاج تنفيذها؟
-          </h2>
-          <p style="font-size:1.0625rem;color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 32px;line-height:1.7;">
-            أقدّر مساعدتك في تحديد الحل الأنسب — حتى لو لم تقرر بعد.
-          </p>
-          <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;">
-            <a href="/contact.html" class="btn btn--primary" style="background:var(--bg-white);color:var(--text-primary);box-shadow:none;">تواصل معي الآن</a>
-            <a href="/services/" class="btn btn--ghost" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.15);">تصفح الخدمات</a>
+      <div class="section-header-center reveal">
+        <span class="label">شهادات العملاء</span>
+        <h2>ما يقوله عملائي</h2>
+        <p>آراء حقيقية من أشخاص ومشاريع عملت معهم.</p>
+      </div>
+
+      <div class="testimonials-grid reveal">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"عمل احترافي ودقيق، ساعدني في إطلاق موقعي بسرعة كبيرة. التواصل كان ممتازاً طوال فترة المشروع."</p>
+          <div class="author">
+            <div class="avatar">أ</div>
+            <div class="info">
+              <div class="name">أحمد محمد</div>
+              <div class="role">مؤسس شركة تقنية</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"صمم لي موقعاً متكاملاً مع تحسين SEO، النتائج كانت مذهلة — زادت زيارات موقعي بأكثر من 200%."</p>
+          <div class="author">
+            <div class="avatar">ن</div>
+            <div class="info">
+              <div class="name">نورة سليمان</div>
+              <div class="role">مديرة تسويق</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"قوالب بلوجر الاحترافية غيرت شكل مدونتي بالكامل. سرعة التحميل والتصميم المتميز هما ما يميزان عمله."</p>
+          <div class="author">
+            <div class="avatar">س</div>
+            <div class="info">
+              <div class="name">سعد الدوسري</div>
+              <div class="role">مدون وصانع محتوى</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- ==================== CTA ==================== -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="cta-section reveal">
+        <div class="glow"></div>
+        <div class="content">
+          <h2>عندك مشروع أو فكرة تحتاج تنفيذها؟</h2>
+          <p>أقدّر مساعدتك في تحديد الحل الأنسب — حتى لو لم تقرر بعد.</p>
+          <div class="cta-actions">
+            <a href="/contact" class="btn-cta-primary">
+              تواصل معي الآن
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+              </svg>
+            </a>
+            <a href="/services/" class="btn-cta-secondary">تصفح الخدمات</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
@@ -259,29 +382,29 @@
         <div>
           <div class="footer-heading">الخدمات</div>
           <div class="footer-links">
-            <a href="/services/web-development.html" class="footer-link">تطوير مواقع</a>
-            <a href="/services/web-design.html" class="footer-link">تصميم واجهات</a>
-            <a href="/services/seo.html" class="footer-link">تحسين محركات البحث</a>
-            <a href="/services/wordpress.html" class="footer-link">ووردبريس</a>
-            <a href="/services/blogger.html" class="footer-link">بلوجر</a>
+            <a href="/services/web-development">تطوير مواقع</a>
+            <a href="/services/web-design">تصميم واجهات</a>
+            <a href="/services/seo">تحسين محركات البحث</a>
+            <a href="/services/wordpress">ووردبريس</a>
+            <a href="/services/blogger">بلوجر</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">المحتوى</div>
           <div class="footer-links">
-            <a href="/products/" class="footer-link">المنتجات</a>
-            <a href="/portfolio/" class="footer-link">الأعمال</a>
-            <a href="/blog/" class="footer-link">المقالات</a>
-            <a href="/about.html" class="footer-link">عن عبدالله</a>
+            <a href="/products/">المنتجات</a>
+            <a href="/portfolio/">الأعمال</a>
+            <a href="/blog/">المقالات</a>
+            <a href="/about">عن عبدالله</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">تواصل</div>
           <div class="footer-links">
-            <a href="/contact.html" class="footer-link">أرسل رسالة</a>
-            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
-            <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
-            <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
+            <a href="/contact">أرسل رسالة</a>
+            <a href="/login">تسجيل الدخول</a>
+            <a href="/privacy-policy">سياسة الخصوصية</a>
+            <a href="/terms-conditions">الشروط والأحكام</a>
           </div>
         </div>
       </div>
@@ -292,10 +415,14 @@
     </div>
   </footer>
 
+  <!-- ==================== ANIMATION ==================== -->
   <style>
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 
+  <!-- ==================== SCRIPTS ==================== -->
   <script>
     // ===== NAV SCROLL =====
     const nav = document.getElementById('siteNav');
@@ -349,8 +476,21 @@
     } else {
       revealElements.forEach(el => el.classList.add('reveal--visible'));
     }
+
+    // ===== إغلاق بانر العرض الخاص بعد 5 ثواني (اختياري) =====
+    // يمكنك إزالة هذا إذا أردت البانر ثابتاً
+    // setTimeout(() => {
+    //   const banner = document.getElementById('specialOfferBanner');
+    //   if (banner) {
+    //     banner.style.transition = 'opacity 0.5s, transform 0.5s';
+    //     banner.style.transform = 'translateY(-100%)';
+    //     banner.style.opacity = '0';
+    //     setTimeout(() => { banner.style.display = 'none'; }, 500);
+    //   }
+    // }, 8000);
   </script>
 
+  <!-- ==================== LIVE DATA ==================== -->
   <script type="module">
     import { db } from "/js/firebase-init.js";
     import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
@@ -368,7 +508,7 @@
       return timeB - timeA;
     }
 
-    // ===== SERVICE CARD (مع أيقونة بدلاً من صورة) =====
+    // ===== CREATE SERVICE CARD =====
     function createServiceCard(service) {
       const card = document.createElement("div");
       card.className = "card";
@@ -390,9 +530,10 @@
 
       const footer = document.createElement("div");
       footer.className = "card-footer";
+
       const tags = document.createElement("div");
       tags.className = "card-tags";
-      if (service.features?.length) {
+      if (service.features && service.features.length > 0) {
         service.features.slice(0, 2).forEach(f => {
           const tag = document.createElement("span");
           tag.className = "card-tag";
@@ -410,26 +551,24 @@
 
       const actions = document.createElement("div");
       actions.className = "card-actions";
+
       const detailsBtn = document.createElement("a");
-      detailsBtn.href = "#";
+      detailsBtn.href = "/services/" + encodeURIComponent(service.slug || "");
       detailsBtn.className = "btn btn--ghost btn--sm";
       detailsBtn.textContent = "تفاصيل";
-      detailsBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        openModal(service, "service");
-      });
       actions.appendChild(detailsBtn);
+
       footer.appendChild(actions);
       card.appendChild(footer);
+
       return card;
     }
 
-    // ===== PRODUCT CARD (مع صورة) =====
+    // ===== CREATE PRODUCT CARD =====
     function createProductCard(product) {
       const card = document.createElement("div");
       card.className = "card";
 
-      // صورة المنتج
       const img = document.createElement("img");
       img.className = "card-image";
       if (product.image && isSafeUrl(product.image)) {
@@ -470,21 +609,20 @@
 
       const actions = document.createElement("div");
       actions.className = "card-actions";
+
       const detailsBtn = document.createElement("a");
-      detailsBtn.href = "#";
+      detailsBtn.href = "/products/" + encodeURIComponent(product.slug || "");
       detailsBtn.className = "btn btn--ghost btn--sm";
       detailsBtn.textContent = "تفاصيل";
-      detailsBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        openModal(product, "product");
-      });
       actions.appendChild(detailsBtn);
+
       footer.appendChild(actions);
       card.appendChild(footer);
+
       return card;
     }
 
-    // ===== PORTFOLIO CARD (مع صورة) =====
+    // ===== CREATE PORTFOLIO CARD =====
     function createPortfolioCard(project) {
       const card = document.createElement("div");
       card.className = "card";
@@ -516,9 +654,10 @@
 
       const footer = document.createElement("div");
       footer.className = "card-footer";
+
       const tags = document.createElement("div");
       tags.className = "card-tags";
-      if (project.tags?.length) {
+      if (project.tags && project.tags.length > 0) {
         project.tags.slice(0, 2).forEach(t => {
           const tag = document.createElement("span");
           tag.className = "card-tag";
@@ -530,30 +669,34 @@
 
       const actions = document.createElement("div");
       actions.className = "card-actions";
+
       const detailsBtn = document.createElement("a");
-      detailsBtn.href = "#";
+      detailsBtn.href = "/portfolio/" + encodeURIComponent(project.slug || "");
       detailsBtn.className = "btn btn--ghost btn--sm";
       detailsBtn.textContent = "تفاصيل";
-      detailsBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        openModal(project, "portfolio");
-      });
       actions.appendChild(detailsBtn);
+
       footer.appendChild(actions);
       card.appendChild(footer);
+
       return card;
     }
 
-    // ===== LOAD DATA =====
+    // ===== LOAD FUNCTIONS =====
     async function loadServices() {
       const grid = document.getElementById("servicesGrid");
       try {
         const snap = await getDocs(collection(db, "services"));
         const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(s => s.active !== false).sort(sortByOrder).slice(0, 4);
         grid.textContent = "";
-        if (!items.length) { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد خدمات حالياً</div>`; return; }
+        if (items.length === 0) {
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد خدمات حالياً</div>`;
+          return;
+        }
         items.forEach(s => grid.appendChild(createServiceCard(s)));
-      } catch { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ</div>`; }
+      } catch {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ في تحميل الخدمات</div>`;
+      }
     }
 
     async function loadProducts() {
@@ -562,9 +705,14 @@
         const snap = await getDocs(collection(db, "products"));
         const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(p => p.active !== false).sort(sortByOrder).slice(0, 3);
         grid.textContent = "";
-        if (!items.length) { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد منتجات حالياً</div>`; return; }
+        if (items.length === 0) {
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد منتجات حالياً</div>`;
+          return;
+        }
         items.forEach(p => grid.appendChild(createProductCard(p)));
-      } catch { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ</div>`; }
+      } catch {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ في تحميل المنتجات</div>`;
+      }
     }
 
     async function loadPortfolio() {
@@ -573,15 +721,22 @@
         const snap = await getDocs(collection(db, "portfolio"));
         const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(p => p.active !== false).sort(sortByOrder).slice(0, 3);
         grid.textContent = "";
-        if (!items.length) { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد أعمال حالياً</div>`; return; }
+        if (items.length === 0) {
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد أعمال حالياً</div>`;
+          return;
+        }
         items.forEach(p => grid.appendChild(createPortfolioCard(p)));
-      } catch { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ</div>`; }
+      } catch {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ في تحميل الأعمال</div>`;
+      }
     }
 
+    // ===== START =====
     loadServices();
     loadProducts();
     loadPortfolio();
 
+    // ===== EXPOSE MODAL =====
     window.openModal = openModal;
     window.showToast = showToast;
   </script>
