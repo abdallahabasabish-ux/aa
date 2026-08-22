@@ -32,6 +32,73 @@
       cursor: not-allowed;
       transform: none !important;
     }
+
+    /* ===== أزرار مزدوجة ===== */
+    .pdet-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .pdet-actions .pdet-request-btn {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .pdet-demo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: var(--bg-white);
+      border: 2px solid var(--border-medium);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      text-decoration: none;
+      flex: 1;
+      min-width: 160px;
+      justify-content: center;
+    }
+
+    .pdet-demo-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+    }
+
+    .pdet-demo-btn:active {
+      transform: scale(0.97);
+    }
+
+    .pdet-demo-btn svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .pdet-demo-btn:hover svg {
+      transform: translateX(-4px) scale(1.1);
+    }
+
+    @media (max-width: 480px) {
+      .pdet-actions {
+        flex-direction: column;
+      }
+      .pdet-actions .pdet-request-btn,
+      .pdet-actions .pdet-demo-btn {
+        flex: none;
+        width: 100%;
+        min-width: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -255,7 +322,7 @@
       const grid = document.createElement("div");
       grid.className = "pdet-hero-grid";
 
-      // ===== العمود الأيسر (الصورة) =====
+      // ===== الصورة =====
       const imageCol = document.createElement("div");
       imageCol.className = "pdet-hero-image";
 
@@ -273,7 +340,7 @@
       }
       grid.appendChild(imageCol);
 
-      // ===== العمود الأيمن (المعلومات) =====
+      // ===== المعلومات =====
       const infoCol = document.createElement("div");
       infoCol.className = "pdet-hero-info";
 
@@ -334,21 +401,41 @@
       }
       infoCol.appendChild(price);
 
-      // ===== زر "طلب المنتج" (مرتبط بالدالة الجديدة) =====
-      const btn = document.createElement("button");
-      btn.className = "pdet-request-btn";
-      btn.innerHTML = `
+      // ===== الأزرار (طلب + معاينة) =====
+      const actions = document.createElement("div");
+      actions.className = "pdet-actions";
+
+      // زر طلب المنتج
+      const requestBtn = document.createElement("button");
+      requestBtn.className = "pdet-request-btn";
+      requestBtn.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
         </svg>
         طلب المنتج
       `;
-      
-      btn.addEventListener("click", () => {
+      requestBtn.addEventListener("click", () => {
         requestProduct(product);
       });
-      
-      infoCol.appendChild(btn);
+      actions.appendChild(requestBtn);
+
+      // ===== زر المعاينة (يظهر فقط إذا كان هناك demoUrl) =====
+      if (product.demoUrl && isSafeUrl(product.demoUrl)) {
+        const demoBtn = document.createElement("a");
+        demoBtn.href = product.demoUrl;
+        demoBtn.target = "_blank";
+        demoBtn.rel = "noopener noreferrer";
+        demoBtn.className = "pdet-demo-btn";
+        demoBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+          </svg>
+          معاينة المنتج
+        `;
+        actions.appendChild(demoBtn);
+      }
+
+      infoCol.appendChild(actions);
 
       grid.appendChild(infoCol);
       inner.appendChild(grid);
