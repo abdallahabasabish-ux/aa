@@ -20,7 +20,6 @@
   <link rel="stylesheet" href="/css/blog.css" />
 
   <style>
-    /* تحسينات إضافية للتجاوب */
     @media (max-width: 639px) {
       .post-hero-image {
         aspect-ratio: 16/10 !important;
@@ -63,13 +62,13 @@
         <span>عبدالله عباس</span>
       </a>
       <div class="nav-links">
-        <a href="/services/" class="nav-link">الخدمات</a>
-        <a href="/products/" class="nav-link">المنتجات</a>
-        <a href="/portfolio/" class="nav-link">الأعمال</a>
-        <a href="/blog/" class="nav-link" style="color:var(--primary);">المقالات</a>
-        <a href="/about.html" class="nav-link">عن عبدالله</a>
+        <a href="/services/">الخدمات</a>
+        <a href="/products/">المنتجات</a>
+        <a href="/portfolio/">الأعمال</a>
+        <a href="/blog/" style="color:var(--primary);">المقالات</a>
+        <a href="/about">عن عبدالله</a>
       </div>
-      <a href="/contact.html" class="nav-cta">تواصل معي</a>
+      <a href="/contact" class="nav-cta">تواصل معي</a>
       <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
@@ -93,28 +92,26 @@
         </button>
       </div>
       <div class="nav-mobile-links">
-        <a href="/services/" class="nav-mobile-link">الخدمات</a>
-        <a href="/products/" class="nav-mobile-link">المنتجات</a>
-        <a href="/portfolio/" class="nav-mobile-link">الأعمال</a>
-        <a href="/blog/" class="nav-mobile-link" style="color:var(--primary);">المقالات</a>
-        <a href="/about.html" class="nav-mobile-link">عن عبدالله</a>
-        <a href="/contact.html" class="nav-mobile-link">تواصل معي</a>
-        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+        <a href="/services/">الخدمات</a>
+        <a href="/products/">المنتجات</a>
+        <a href="/portfolio/">الأعمال</a>
+        <a href="/blog/" style="color:var(--primary);">المقالات</a>
+        <a href="/about">عن عبدالله</a>
+        <a href="/contact">تواصل معي</a>
+        <a href="/login">تسجيل الدخول</a>
       </div>
       <div class="nav-mobile-footer">
-        <a href="/contact.html" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
       </div>
     </div>
   </div>
 
   <!-- ===== MAIN ===== -->
   <main id="pageRoot">
-    <!-- Loading -->
     <div class="post-loading" id="loadingState">
       <div class="post-loading-spinner"></div>
     </div>
 
-    <!-- 404 -->
     <div class="post-404" id="notFoundState" style="display:none;">
       <div class="post-404-code">404</div>
       <h1 class="post-404-title">المقال غير موجود</h1>
@@ -122,7 +119,6 @@
       <a href="/blog/" class="btn btn--primary">عودة إلى المدونة</a>
     </div>
 
-    <!-- Content -->
     <div id="contentRoot" style="display:none;"></div>
   </main>
 
@@ -140,29 +136,29 @@
         <div>
           <div class="footer-heading">الخدمات</div>
           <div class="footer-links">
-            <a href="/services/web-development.html" class="footer-link">تطوير مواقع</a>
-            <a href="/services/web-design.html" class="footer-link">تصميم واجهات</a>
-            <a href="/services/seo.html" class="footer-link">تحسين محركات البحث</a>
-            <a href="/services/wordpress.html" class="footer-link">ووردبريس</a>
-            <a href="/services/blogger.html" class="footer-link">بلوجر</a>
+            <a href="/services/web-development">تطوير مواقع</a>
+            <a href="/services/web-design">تصميم واجهات</a>
+            <a href="/services/seo">تحسين محركات البحث</a>
+            <a href="/services/wordpress">ووردبريس</a>
+            <a href="/services/blogger">بلوجر</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">المحتوى</div>
           <div class="footer-links">
-            <a href="/products/" class="footer-link">المنتجات</a>
-            <a href="/portfolio/" class="footer-link">الأعمال</a>
-            <a href="/blog/" class="footer-link">المقالات</a>
-            <a href="/about.html" class="footer-link">عن عبدالله</a>
+            <a href="/products/">المنتجات</a>
+            <a href="/portfolio/">الأعمال</a>
+            <a href="/blog/">المقالات</a>
+            <a href="/about">عن عبدالله</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">تواصل</div>
           <div class="footer-links">
-            <a href="/contact.html" class="footer-link">أرسل رسالة</a>
-            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
-            <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
-            <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
+            <a href="/contact">أرسل رسالة</a>
+            <a href="/login">تسجيل الدخول</a>
+            <a href="/privacy-policy">سياسة الخصوصية</a>
+            <a href="/terms-conditions">الشروط والأحكام</a>
           </div>
         </div>
       </div>
@@ -223,15 +219,18 @@
     });
   </script>
 
-  <!-- ===== DATA (مع إصلاح 404) ===== -->
+  <!-- ===== DATA ===== -->
   <script type="module">
     import { db } from "/js/firebase-init.js";
     import { collection, query, where, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { isSafeUrl, escapeHtml } from "/js/security.js";
 
+    // ===== ✅ دالة استخراج Slug من الرابط الجديد =====
     function getSlug() {
-      var params = new URLSearchParams(window.location.search);
-      return params.get("slug");
+      var path = window.location.pathname;
+      var parts = path.split('/').filter(function(p) { return p !== ''; });
+      // /blog/uk-hidden-fees → ["blog", "uk-hidden-fees"]
+      return parts.length > 1 ? parts[parts.length - 1] : null;
     }
 
     function formatDate(d) {
@@ -271,7 +270,6 @@
 
       var meta = document.createElement("div");
       meta.className = "post-hero-meta";
-      // أيقونة التاريخ بحجم مناسب
       meta.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;vertical-align:middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008z"/></svg> ' + formatDate(post.createdAt);
       if (post.author) {
         meta.innerHTML += ' <span style="display:inline-flex;align-items:center;gap:4px;"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;vertical-align:middle;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg> بواسطة ' + escapeHtml(post.author) + '</span>';
@@ -334,7 +332,7 @@
         canonical.rel = "canonical";
         document.head.appendChild(canonical);
       }
-      canonical.href = "https://www.abdallahabas.com/post.html?slug=" + post.slug;
+      canonical.href = "https://www.abdallahabas.com/blog/" + post.slug;
 
       var old = document.getElementById("postStructuredData");
       if (old) old.remove();
@@ -346,7 +344,7 @@
         "@type": "Article",
         "headline": post.seoTitle || post.title,
         "description": post.metaDescription || post.excerpt,
-        "url": "https://www.abdallahabas.com/post.html?slug=" + post.slug,
+        "url": "https://www.abdallahabas.com/blog/" + post.slug,
         "datePublished": post.createdAt ? formatDate(post.createdAt) : "",
         "author": {
           "@type": "Person",
@@ -367,13 +365,12 @@
       document.title = "المقال غير موجود — عبدالله عباس";
     }
 
-    // ===== LOAD (باستخدام where بدلاً من doc) =====
+    // ===== LOAD =====
     async function loadPost() {
       var slug = getSlug();
       if (!slug) { show404(); return; }
 
       try {
-        // استعلام باستخدام where("slug", "==", slug) بدلاً من doc
         var q = query(collection(db, "blog"), where("slug", "==", slug));
         var snap = await getDocs(q);
         if (snap.empty) { show404(); return; }
