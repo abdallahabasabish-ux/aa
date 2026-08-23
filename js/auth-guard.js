@@ -31,7 +31,6 @@ export async function requireAdmin({
   forbiddenUrl = null,
 } = {}) {
   return new Promise((resolve, reject) => {
-    // Timeout أمان — إذا لم يستجب onAuthStateChanged خلال 10 ثوانٍ
     const timeout = setTimeout(() => {
       unsubscribe();
       window.location.href = loginUrl;
@@ -42,7 +41,6 @@ export async function requireAdmin({
       clearTimeout(timeout);
       unsubscribe();
 
-      // لا يوجد مستخدم → توجه لتسجيل الدخول
       if (!user) {
         window.location.href = loginUrl;
         reject(new Error("Not authenticated"));
@@ -50,17 +48,14 @@ export async function requireAdmin({
       }
 
       try {
-        // تحقق من Custom Claims
         const idTokenResult = await getIdTokenResult(user);
 
         if (idTokenResult.claims.admin === true) {
           resolve(user);
         } else {
-          // مستخدم عادي يحاول الوصول للإدارة
           if (forbiddenUrl) {
             window.location.href = forbiddenUrl;
           } else {
-            //若无403页，显示消息或重定向
             document.body.textContent = "غير مصرح بالوصول.";
             document.body.style.cssText =
               "display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:Cairo,sans-serif;color:#F4F4F5;background:#09090B;font-size:1.125rem;";
@@ -104,6 +99,7 @@ export function requireAuth(loginUrl = "/login.html") {
     });
   });
 }
+
 /**
  * ينتظر المستخدم الحالي ويتحقق من تفعيل البريد الإلكتروني.
  * يستخدم في الصفحات التي تتطلب حساباً مفعّلاً.
@@ -130,16 +126,21 @@ export function requireVerifiedEmail(loginUrl = "/login.html", verifyUrl = "/ver
         return;
       }
 
-      // إعادة تحميل بيانات المستخدم
-      await user.reload();
+      // إعادة تحميل بيانات المستخدم للتأكد من أحدث حالة
+      try {
+        await user.reload();
 
-      if (!user.emailVerified) {
-        window.location.href = verifyUrl;
-        reject(new Error("Email not verified"));
-        return;
+        if (!user.emailVerified) {
+          window.location.href = verifyUrl;
+          reject(new Error("Email not verified"));
+          return;
+        }
+
+        resolve(user);
+      } catch (error) {
+        window.location.href = loginUrl;
+        reject(error);
       }
-
-      resolve(user);
     });
   });
 }
