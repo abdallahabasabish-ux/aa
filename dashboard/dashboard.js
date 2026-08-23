@@ -38,7 +38,9 @@ function closeSidebar() {
 }
 hamburger.addEventListener("click", openSidebar);
 overlay.addEventListener("click", closeSidebar);
-window.matchMedia("(min-width: 1024px)").addEventListener("change", (e) => { if (e.matches) closeSidebar(); });
+window.matchMedia("(min-width: 1024px)").addEventListener("change", (e) => {
+  if (e.matches) closeSidebar();
+});
 
 logoutBtn.addEventListener("click", async () => {
   const r = await logout();
@@ -69,13 +71,17 @@ function getStatusBadge(status) {
   return span;
 }
 
-// Render Products
+// ---------------------- المنتجات ----------------------
 function renderProducts(products) {
   productsArea.textContent = "";
   if (products.length === 0) {
     const empty = document.createElement("div");
     empty.className = "dash-empty";
-    empty.innerHTML = `<div class="dash-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/></svg></div><div class="dash-empty-title">لا توجد منتجات بعد</div><div class="dash-empty-desc">ستظهر المنتجات التي اشتريتها هنا</div>`;
+    empty.innerHTML = `
+      <div class="dash-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/></svg></div>
+      <div class="dash-empty-title">لا توجد منتجات بعد</div>
+      <div class="dash-empty-desc">ستظهر المنتجات التي اشتريتها هنا</div>
+    `;
     productsArea.appendChild(empty);
     return;
   }
@@ -132,13 +138,53 @@ function renderProducts(products) {
   productsArea.appendChild(grid);
 }
 
-// Render Orders
+// ---------------------- الطلبات (مع Fallback) ----------------------
+async function fetchUserOrdersWithFallback(uid) {
+  // المحاولة الأولى: مع orderBy (يتطلب فهرساً مركباً)
+  try {
+    const q = query(
+      collection(db, "orders"),
+      where("userId", "==", uid),
+      orderBy("createdAt", "desc"),
+      limit(5)
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  } catch (error) {
+    console.warn("⚠️ فشل الاستعلام مع orderBy (قد يكون الفهرس مفقوداً). جلب بدون ترتيب:", error);
+
+    // المحاولة الثانية: بدون orderBy (لا يحتاج فهرساً مركباً)
+    try {
+      const fallbackQuery = query(
+        collection(db, "orders"),
+        where("userId", "==", uid)
+      );
+      const snap = await getDocs(fallbackQuery);
+      const orders = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      // ترتيب يدوي في المتصفح
+      orders.sort((a, b) => {
+        const tA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : 0;
+        const tB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : 0;
+        return tB - tA;
+      });
+      return orders.slice(0, 5);
+    } catch (fallbackError) {
+      console.error("❌ فشل جلب الطلبات بالكامل:", fallbackError);
+      return [];
+    }
+  }
+}
+
 function renderOrders(orders) {
   ordersArea.textContent = "";
   if (orders.length === 0) {
     const empty = document.createElement("div");
     empty.className = "dash-empty";
-    empty.innerHTML = `<div class="dash-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg></div><div class="dash-empty-title">لا توجد طلبات</div><div class="dash-empty-desc">ستظهر طلباتك هنا بعد إرسالها</div>`;
+    empty.innerHTML = `
+      <div class="dash-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg></div>
+      <div class="dash-empty-title">لا توجد طلبات</div>
+      <div class="dash-empty-desc">ستظهر طلباتك هنا بعد إرسالها</div>
+    `;
     ordersArea.appendChild(empty);
     return;
   }
@@ -174,31 +220,36 @@ function renderOrders(orders) {
   ordersArea.appendChild(list);
 }
 
-// Fetch
+// ---------------------- جلب البيانات ----------------------
 async function fetchUserProducts(uid) {
   try {
-    const q = query(collection(db, "user_products"), where("userId", "==", uid), orderBy("purchaseDate", "desc"), limit(4));
+    const q = query(
+      collection(db, "user_products"),
+      where("userId", "==", uid),
+      orderBy("purchaseDate", "desc"),
+      limit(4)
+    );
     const snap = await getDocs(q);
     return snap.docs.map((d) => d.data());
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
 async function fetchUserOrders(uid) {
-  try {
-    const q = query(collection(db, "orders"), where("userId", "==", uid), orderBy("createdAt", "desc"), limit(5));
-    const snap = await getDocs(q);
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-  } catch { return []; }
+  return await fetchUserOrdersWithFallback(uid);
 }
 
 async function fetchFavoritesCount(uid) {
   try {
     const snap = await getDocs(query(collection(db, "favorites"), where("userId", "==", uid)));
     return snap.size;
-  } catch { return 0; }
+  } catch {
+    return 0;
+  }
 }
 
-// Init
+// ---------------------- التهيئة ----------------------
 async function init(user) {
   const name = user.displayName || user.email || "مستخدم";
   headerName.textContent = name;
