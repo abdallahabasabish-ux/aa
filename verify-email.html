@@ -94,13 +94,19 @@
     .verify-message {
       margin-top: 16px;
       font-size: 0.875rem;
-      color: var(--auth-success);
       padding: 10px 16px;
       border-radius: var(--auth-radius-sm);
-      background: var(--auth-success-bg);
       display: none;
     }
     .verify-message--visible { display: block; }
+    .verify-message--success {
+      color: var(--auth-success);
+      background: var(--auth-success-bg);
+    }
+    .verify-message--error {
+      color: var(--auth-error);
+      background: var(--auth-error-bg);
+    }
   </style>
 </head>
 <body>
@@ -123,6 +129,7 @@
       <div class="verify-actions">
         <button class="btn-primary" id="resendBtn">إعادة إرسال رابط التفعيل</button>
         <button class="btn-ghost" id="refreshBtn">لقد قمت بالتفعيل — تحقق الآن</button>
+        <button class="btn-ghost" id="logoutBtn">تسجيل الخروج</button>
       </div>
 
       <div class="verify-message" id="verifyMessage"></div>
@@ -135,18 +142,12 @@
 
     const resendBtn = document.getElementById("resendBtn");
     const refreshBtn = document.getElementById("refreshBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
     const messageEl = document.getElementById("verifyMessage");
 
     function showMessage(text, type = "success") {
       messageEl.textContent = text;
-      messageEl.className = "verify-message verify-message--visible";
-      if (type === "error") {
-        messageEl.style.color = "var(--auth-error)";
-        messageEl.style.background = "var(--auth-error-bg)";
-      } else {
-        messageEl.style.color = "var(--auth-success)";
-        messageEl.style.background = "var(--auth-success-bg)";
-      }
+      messageEl.className = "verify-message verify-message--visible verify-message--" + type;
     }
 
     // إعادة إرسال رابط التفعيل
@@ -162,11 +163,20 @@
       refreshBtn.disabled = true;
       const verified = await isEmailVerified();
       if (verified) {
-        // تحديث الصفحة لتوجيه المستخدم
         window.location.href = "/login.html?verified=true";
       } else {
         showMessage("لم يتم التفعيل بعد. تحقق من بريدك الإلكتروني.", "error");
         refreshBtn.disabled = false;
+      }
+    });
+
+    // تسجيل الخروج
+    logoutBtn.addEventListener("click", async () => {
+      const result = await logout();
+      if (result.ok) {
+        window.location.href = "/login.html";
+      } else {
+        showMessage(result.userMessage || "حدث خطأ أثناء تسجيل الخروج.", "error");
       }
     });
 
@@ -179,11 +189,16 @@
       }
     }, 5000);
 
-    // في حالة تسجيل الخروج
+    // التحقق من وجود مستخدم
     const user = auth.currentUser;
     if (!user) {
       window.location.href = "/login.html";
     }
+
+    // إيقاف الفاصل إذا غادر المستخدم الصفحة
+    window.addEventListener("beforeunload", () => {
+      clearInterval(checkInterval);
+    });
   </script>
 </body>
 </html>
