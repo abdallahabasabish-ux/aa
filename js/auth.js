@@ -1,6 +1,7 @@
 /**
  * auth.js
- * منطق المصادقة — تسجيل الدخول، الخروج، إعادة تعيين كلمة المرور.
+ * منطق المصادقة — تسجيل الدخول، الخروج، إعادة تعيين كلمة المرور،
+ * Google/GitHub Login، والتحقق من البريد الإلكتروني.
  *
  * قواعد:
  * 1. لا نعرض Firebase Error Codes للمستخدم.
@@ -15,6 +16,12 @@ import {
   signOut,
   sendPasswordResetEmail,
   getIdTokenResult,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  signInWithPopup,
+  sendEmailVerification,
+  updateProfile,
+  createUserWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
 // -----------------------------------------------
@@ -24,9 +31,6 @@ import {
 /**
  * تسجيل حدث أمني في مجموعة audit_logs.
  * لن يُكتب إذا لم يكن المستخدم admin أو إذا فشلت العملية.
- *
- * ملاحظة: في إنتاج حقيقي، الأفضل استخدام Cloud Function
- * لتسجيل الأحداث بدل السماح للعميل بالكتابة مباشرة.
  */
 async function logAuditEvent(eventType, data = {}) {
   try {
@@ -39,7 +43,6 @@ async function logAuditEvent(eventType, data = {}) {
       ...data,
       timestamp: serverTimestamp(),
       userAgent: navigator.userAgent,
-      // لا نسجل: passwords, tokens, secrets
     });
   } catch {
     // فشل التسجيل لا يُعطّل العملية الأساسية
@@ -166,6 +169,37 @@ export function validatePassword(password) {
   return { valid: true, message: "" };
 }
 
+/**
+ * تحقق من تطابق كلمة المرور وتأكيدها.
+ * @param {string} password
+ * @param {string} confirm
+ * @returns {{ valid: boolean, message: string }}
+ */
+export function validateConfirmPassword(password, confirm) {
+  if (!confirm) {
+    return { valid: false, message: "تأكيد كلمة المرور مطلوب." };
+  }
+  if (password !== confirm) {
+    return { valid: false, message: "كلمة المرور غير متطابقة." };
+  }
+  return { valid: true, message: "" };
+}
+
+/**
+ * تحقق من صحة الاسم.
+ * @param {string} name
+ * @returns {{ valid: boolean, message: string }}
+ */
+export function validateName(name) {
+  if (!name || !name.trim()) {
+    return { valid: false, message: "الاسم الكامل مطلوب." };
+  }
+  if (name.trim().length < 2) {
+    return { valid: false, message: "الاسم قصير جداً." };
+  }
+  return { valid: true, message: "" };
+}
+
 // -----------------------------------------------
 // Authentication Functions
 // -----------------------------------------------
@@ -182,12 +216,10 @@ export async function login(email, password) {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // الحصول على ID Token مع Custom Claims
     const idTokenResult = await getIdTokenResult(user);
 
     await logAuditEvent("login_success", {
       uid: user.uid,
-      // لا نسجل البريد الكامل في الـ logs — فقط جزء منه
       emailPrefix: email.split("@")[0],
     });
 
@@ -205,94 +237,6 @@ export async function login(email, password) {
     return mapAuthError(error);
   }
 }
-
-/**
- * تسجيل الخروج.
- *
- * @returns {Promise<{ ok: boolean, userMessage?: string }>}
- */
-export async function logout() {
-  try {
-    const user = auth.currentUser;
-    if (user) {
-      await logAuditEvent("logout", { uid: user.uid });
-    }
-    await signOut(auth);
-    return { ok: true };
-  } catch {
-    return { ok: false, userMessage: "حدث خطأ أثناء تسجيل الخروج." };
-  }
-}
-
-/**
- * إرسال رابط إعادة تعيين كلمة المرور.
- *
- * @param {string} email
- * @returns {Promise<{ ok: boolean, userMessage?: string }>}
- */
-export async function resetPassword(email) {
-  try {
-    await sendPasswordResetEmail(auth, email);
-
-    await logAuditEvent("password_reset_requested", {
-      emailPrefix: email ? email.split("@")[0] : "empty",
-    });
-
-    return {
-      ok: true,
-      userMessage: "إذا كان البريد مسجلًا، ستصلك رسالة لإعادة تعيين كلمة المرور.",
-    };
-  } catch (error) {
-    await logAuditEvent("password_reset_failure", {
-      emailPrefix: email ? email.split("@")[0] : "empty",
-      errorCode: error.code,
-    });
-
-    // رسالة عامة لمنع User Enumeration
-    // حتى لو كان البريد غير مسجل، لا نخبر المستخدم
-    if (
-      error.code === "auth/user-not-found" ||
-      error.code === "auth/invalid-email"
-    ) {
-      return {
-        ok: true,
-        userMessage: "إذا كان البريد مسجلًا، ستصلك رسالة لإعادة تعيين كلمة المرور.",
-      };
-    }
-
-    return mapAuthError(error);
-  }
-}
-
-
-/**
- * التحقق مما إذا كان المستخدم الحالي لديه صلاحية admin.
- *
- * @param {boolean} forceRefresh — إجبار تحديث Token
- * @returns {Promise<boolean>}
- */
-export async function isAdmin(forceRefresh = false) {
-  const user = auth.currentUser;
-  if (!user) return false;
-
-  try {
-    const idTokenResult = await getIdTokenResult(user, forceRefresh);
-    return idTokenResult.claims.admin === true;
-  } catch {
-    return false;
-  }
-}
-// ============================================
-// دوال تسجيل الدخول عبر مقدمي الخدمات (Google, GitHub)
-// ============================================
-
-import {
-  GoogleAuthProvider,
-  GithubAuthProvider,
-  signInWithPopup,
-  sendEmailVerification,
-  updateProfile,
-} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
 /**
  * تسجيل الدخول عبر Google
@@ -349,6 +293,37 @@ export async function loginWithGithub() {
 }
 
 /**
+ * إنشاء حساب جديد بالبريد وكلمة المرور.
+ */
+export async function register(email, password, displayName) {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // تحديث الاسم
+    if (displayName) {
+      await updateProfile(user, { displayName });
+    }
+
+    await logAuditEvent("register_success", {
+      uid: user.uid,
+      emailPrefix: email.split("@")[0],
+    });
+
+    return {
+      ok: true,
+      user,
+    };
+  } catch (error) {
+    await logAuditEvent("register_failure", {
+      emailPrefix: email ? email.split("@")[0] : "empty",
+      errorCode: error.code,
+    });
+    return mapAuthError(error);
+  }
+}
+
+/**
  * إرسال رابط تفعيل البريد الإلكتروني
  */
 export async function sendVerificationEmail() {
@@ -375,7 +350,81 @@ export async function isEmailVerified() {
   const user = auth.currentUser;
   if (!user) return false;
 
-  // إعادة تحميل بيانات المستخدم للتأكد من أحدث حالة
   await user.reload();
   return user.emailVerified;
+}
+
+/**
+ * تسجيل الخروج.
+ *
+ * @returns {Promise<{ ok: boolean, userMessage?: string }>}
+ */
+export async function logout() {
+  try {
+    const user = auth.currentUser;
+    if (user) {
+      await logAuditEvent("logout", { uid: user.uid });
+    }
+    await signOut(auth);
+    return { ok: true };
+  } catch {
+    return { ok: false, userMessage: "حدث خطأ أثناء تسجيل الخروج." };
+  }
+}
+
+/**
+ * إرسال رابط إعادة تعيين كلمة المرور.
+ *
+ * @param {string} email
+ * @returns {Promise<{ ok: boolean, userMessage?: string }>}
+ */
+export async function resetPassword(email) {
+  try {
+    await sendPasswordResetEmail(auth, email);
+
+    await logAuditEvent("password_reset_requested", {
+      emailPrefix: email ? email.split("@")[0] : "empty",
+    });
+
+    return {
+      ok: true,
+      userMessage: "إذا كان البريد مسجلًا، ستصلك رسالة لإعادة تعيين كلمة المرور.",
+    };
+  } catch (error) {
+    await logAuditEvent("password_reset_failure", {
+      emailPrefix: email ? email.split("@")[0] : "empty",
+      errorCode: error.code,
+    });
+
+    // رسالة عامة لمنع User Enumeration
+    if (
+      error.code === "auth/user-not-found" ||
+      error.code === "auth/invalid-email"
+    ) {
+      return {
+        ok: true,
+        userMessage: "إذا كان البريد مسجلًا، ستصلك رسالة لإعادة تعيين كلمة المرور.",
+      };
+    }
+
+    return mapAuthError(error);
+  }
+}
+
+/**
+ * التحقق مما إذا كان المستخدم الحالي لديه صلاحية admin.
+ *
+ * @param {boolean} forceRefresh — إجبار تحديث Token
+ * @returns {Promise<boolean>}
+ */
+export async function isAdmin(forceRefresh = false) {
+  const user = auth.currentUser;
+  if (!user) return false;
+
+  try {
+    const idTokenResult = await getIdTokenResult(user, forceRefresh);
+    return idTokenResult.claims.admin === true;
+  } catch {
+    return false;
+  }
 }
