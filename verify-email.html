@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>تفعيل البريد الإلكتروني — عبدالله عباس</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/auth.css" />
+  <style>
+    .verify-container {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: var(--auth-bg);
+    }
+    .verify-card {
+      max-width: 480px;
+      width: 100%;
+      background: var(--auth-surface);
+      border: 1px solid var(--auth-border);
+      border-radius: var(--auth-radius-lg);
+      padding: 48px 36px;
+      text-align: center;
+    }
+    .verify-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--auth-accent-soft);
+      color: var(--auth-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .verify-icon svg { width: 36px; height: 36px; }
+    .verify-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--auth-text-primary);
+      margin-bottom: 8px;
+    }
+    .verify-desc {
+      font-size: 0.9375rem;
+      color: var(--auth-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .verify-desc a {
+      color: var(--auth-accent);
+      text-decoration: underline;
+    }
+    .verify-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .verify-actions .btn-primary {
+      width: 100%;
+      padding: 13px;
+      font-family: var(--auth-font);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--auth-text-inverse);
+      background: var(--auth-accent);
+      border: none;
+      border-radius: var(--auth-radius);
+      cursor: pointer;
+      transition: background var(--auth-fast);
+    }
+    .verify-actions .btn-primary:hover { background: var(--auth-accent-hover); }
+    .verify-actions .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+    .verify-actions .btn-ghost {
+      padding: 13px;
+      font-family: var(--auth-font);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--auth-text-muted);
+      background: none;
+      border: 1px solid var(--auth-border);
+      border-radius: var(--auth-radius);
+      cursor: pointer;
+      transition: all var(--auth-fast);
+    }
+    .verify-actions .btn-ghost:hover {
+      border-color: var(--auth-border-focus);
+      color: var(--auth-text-secondary);
+    }
+    .verify-message {
+      margin-top: 16px;
+      font-size: 0.875rem;
+      color: var(--auth-success);
+      padding: 10px 16px;
+      border-radius: var(--auth-radius-sm);
+      background: var(--auth-success-bg);
+      display: none;
+    }
+    .verify-message--visible { display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="verify-container">
+    <div class="verify-card">
+      <div class="verify-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+      </div>
+
+      <h1 class="verify-title">تفعيل حسابك</h1>
+      <p class="verify-desc">
+        تم إرسال رابط التفعيل إلى بريدك الإلكتروني. يرجى التحقق من صندوق الوارد (أو البريد العشوائي) والنقر على الرابط لتفعيل حسابك.
+        <br />
+        <span style="font-size:0.8125rem;color:var(--auth-text-muted);display:block;margin-top:12px;">
+          بعد التفعيل، يمكنك <a href="/login.html">تسجيل الدخول</a>.
+        </span>
+      </p>
+
+      <div class="verify-actions">
+        <button class="btn-primary" id="resendBtn">إعادة إرسال رابط التفعيل</button>
+        <button class="btn-ghost" id="refreshBtn">لقد قمت بالتفعيل — تحقق الآن</button>
+      </div>
+
+      <div class="verify-message" id="verifyMessage"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth } from "/js/firebase-init.js";
+    import { sendVerificationEmail, isEmailVerified, logout } from "/js/auth.js";
+
+    const resendBtn = document.getElementById("resendBtn");
+    const refreshBtn = document.getElementById("refreshBtn");
+    const messageEl = document.getElementById("verifyMessage");
+
+    function showMessage(text, type = "success") {
+      messageEl.textContent = text;
+      messageEl.className = "verify-message verify-message--visible";
+      if (type === "error") {
+        messageEl.style.color = "var(--auth-error)";
+        messageEl.style.background = "var(--auth-error-bg)";
+      } else {
+        messageEl.style.color = "var(--auth-success)";
+        messageEl.style.background = "var(--auth-success-bg)";
+      }
+    }
+
+    // إعادة إرسال رابط التفعيل
+    resendBtn.addEventListener("click", async () => {
+      resendBtn.disabled = true;
+      const result = await sendVerificationEmail();
+      showMessage(result.userMessage, result.ok ? "success" : "error");
+      resendBtn.disabled = false;
+    });
+
+    // التحقق من التفعيل
+    refreshBtn.addEventListener("click", async () => {
+      refreshBtn.disabled = true;
+      const verified = await isEmailVerified();
+      if (verified) {
+        // تحديث الصفحة لتوجيه المستخدم
+        window.location.href = "/login.html?verified=true";
+      } else {
+        showMessage("لم يتم التفعيل بعد. تحقق من بريدك الإلكتروني.", "error");
+        refreshBtn.disabled = false;
+      }
+    });
+
+    // التحقق التلقائي كل 5 ثواني
+    let checkInterval = setInterval(async () => {
+      const verified = await isEmailVerified();
+      if (verified) {
+        clearInterval(checkInterval);
+        window.location.href = "/login.html?verified=true";
+      }
+    }, 5000);
+
+    // في حالة تسجيل الخروج
+    const user = auth.currentUser;
+    if (!user) {
+      window.location.href = "/login.html";
+    }
+  </script>
+</body>
+</html>
