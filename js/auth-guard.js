@@ -1,16 +1,10 @@
 /**
- * auth-guard.js
- * حماية الصفحات — Auth Guard مركزي.
- * 
- * تم إزالة requireVerifiedEmail لأن صفحة التفعيل ملغاة.
+ * auth-guard.js — بدون requireVerifiedEmail
  */
 
 import { auth } from "./firebase-init.js";
 import { getIdTokenResult } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
-/**
- * ينتظر المستخدم الحالي ويتحقق من صلاحية admin.
- */
 export async function requireAdmin({
   loginUrl = "/login.html",
   forbiddenUrl = null,
@@ -54,9 +48,6 @@ export async function requireAdmin({
   });
 }
 
-/**
- * ينتظر المستخدم الحالي فقط (بدون تحقق admin).
- */
 export function requireAuth(loginUrl = "/login.html") {
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
@@ -68,21 +59,17 @@ export function requireAuth(loginUrl = "/login.html") {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       clearTimeout(timeout);
       unsubscribe();
-
       if (!user) {
         window.location.href = loginUrl;
         reject(new Error("Not authenticated"));
         return;
       }
-
       resolve(user);
     });
   });
 }
 
-/**
- * ❌ مهملة — تم إلغاؤها (تبقى للتوافق لكنها تؤدي نفس وظيفة requireAuth)
- */
+// ❌ مهملة — تحتفظ بها للتوافق
 export function requireVerifiedEmail(loginUrl = "/login.html") {
   return requireAuth(loginUrl);
 }
