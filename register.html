@@ -125,7 +125,7 @@
 
   <script type="module">
     import { auth } from "/js/firebase-init.js";
-    import { getIdTokenResult, sendEmailVerification } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+    import { getIdTokenResult } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
     import { register, validateName, validateEmail, validatePassword, validateConfirmPassword } from "/js/auth.js";
     import { showUserMessage, clearUserMessage, showFieldError, clearFieldError } from "/js/error-handler.js";
     import { setButtonLoading, initPasswordToggle, setInputError } from "/js/ui.js";
@@ -162,15 +162,8 @@
       if (user && !redirectDone) {
         redirectDone = true;
         try {
-          // إذا كان البريد مفعلاً، توجه إلى لوحة التحكم
-          await user.reload();
-          if (user.emailVerified) {
-            const r = await getIdTokenResult(user);
-            window.location.replace(r.claims.admin ? "/admin/admin.html" : "/dashboard/dashboard.html");
-            return;
-          }
-          // إذا لم يكن مفعلاً، توجه إلى صفحة التفعيل
-          window.location.replace("/verify-email.html");
+          const r = await getIdTokenResult(user);
+          window.location.replace(r.claims.admin ? "/admin/admin.html" : "/dashboard/dashboard.html");
           return;
         } catch { /* فشل Token */ }
       }
@@ -214,24 +207,12 @@
       setButtonLoading(submitBtn, false);
 
       if (result.ok) {
-        // 🔐 إرسال رابط تفعيل البريد الإلكتروني
-        try {
-          await sendEmailVerification(result.user);
-        } catch (err) {
-          console.warn("⚠️ فشل إرسال رابط التفعيل:", err);
-          // لا نوقف العملية — المستخدم سجل بالفعل
-        }
-
-        showUserMessage(
-          "authMessage",
-          "✅ تم إنشاء الحساب بنجاح. تم إرسال رابط التفعيل إلى بريدك الإلكتروني.",
-          "success"
-        );
-
-        // التوجيه إلى صفحة التفعيل بعد ثانية ونصف
-        setTimeout(() => {
-          window.location.replace("/verify-email.html");
-        }, 1500);
+        // ✅ تم إنشاء الحساب — التوجيه المباشر للوحة التحكم (بدون تحقق)
+        // ننتظر لحظة حتى يتم تحديث حالة المصادقة
+        setTimeout(async () => {
+          const r = await result.user.getIdTokenResult();
+          window.location.replace(r.claims.admin ? "/admin/admin.html" : "/dashboard/dashboard.html");
+        }, 500);
       } else {
         showUserMessage("authMessage", result.userMessage, "error");
         if (result.userMessage.includes("مسجل")) {
