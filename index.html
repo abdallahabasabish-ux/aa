@@ -6,18 +6,24 @@
   <title>عبدالله عباس — حلول رقمية احترافية</title>
   <meta name="description" content="عبدالله عباس — بناء حلول رقمية متكاملة: تطوير مواقع، تصميم واجهات، تحسين محركات البحث، قوالب بلوجر وووردبريس احترافية." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://abdallahabas.web.app/" />
+  <link rel="canonical" href="https://www.abdallahabas.com/" />
 
-  <!-- Fonts -->
+  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://abdallahsst.firebaseio.com" />
+  <link rel="preconnect" href="https://firestore.googleapis.com" />
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Favicon placeholder -->
+  <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/design-system.css" />
+  <link rel="stylesheet" href="/css/modal.css" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -26,32 +32,83 @@
     "@type": "Person",
     "name": "عبدالله عباس",
     "alternateName": "Abdallah Abbas",
-    "url": "https://abdallahsst.web.app",
+    "url": "https://www.abdallahabas.com",
     "jobTitle": "مطور ويب ومصمم رقمي",
-    "knowsAbout": ["تطوير المواقع", "تصميم الويب", "تحسين محركات البحث", "بلوجر", "ووردبريس"],
-    "sameAs": []
+    "knowsAbout": ["تطوير المواقع", "تصميم الويب", "تحسين محركات البحث", "بلوجر", "ووردبريس"]
   }
   </script>
 </head>
 <body>
 
+  <!-- ==================== TOAST ==================== -->
+  <div class="toast-container" id="toastContainer">
+    <div class="toast" id="toast">
+      <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <span id="toastMessage">✅ تم الإرسال بنجاح</span>
+      <button class="toast-close" id="toastClose" aria-label="إغلاق">✕</button>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL ==================== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-container" id="modalContainer">
+      <span class="modal-handle"></span>
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="إغلاق">✕</button>
+
+      <img class="modal-image" id="modalImage" src="" alt="" loading="lazy" />
+      <h2 class="modal-title" id="modalTitle">—</h2>
+      <p class="modal-subtitle" id="modalSubtitle"></p>
+
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-features" id="modalFeatures"></div>
+      <div class="modal-price" id="modalPrice"></div>
+
+      <!-- نموذج الطلب -->
+      <form class="modal-form" id="modalForm" novalidate>
+        <div class="modal-form-title">📩 طلب الخدمة</div>
+
+        <div class="modal-form-group">
+          <label class="modal-form-label" for="modalFormName">الاسم الكامل <span style="color:var(--primary);">*</span></label>
+          <input type="text" class="modal-form-input" id="modalFormName" required placeholder="أدخل اسمك" />
+        </div>
+
+        <div class="modal-form-group">
+          <label class="modal-form-label" for="modalFormEmail">البريد الإلكتروني <span style="color:var(--primary);">*</span></label>
+          <input type="email" class="modal-form-input" id="modalFormEmail" required placeholder="بريدك الإلكتروني" dir="ltr" />
+        </div>
+
+        <div class="modal-form-group">
+          <label class="modal-form-label" for="modalFormMessage">رسالة (اختياري)</label>
+          <textarea class="modal-form-textarea" id="modalFormMessage" placeholder="أي تفاصيل إضافية تريد إضافتها..."></textarea>
+        </div>
+
+        <button type="submit" class="modal-form-submit" id="modalFormSubmit">
+          <span class="btn-text">إرسال الطلب</span>
+          <span class="spinner"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- ==================== NAVIGATION ==================== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
     <div class="nav-inner">
       <a href="/" class="nav-brand">
-        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" />
-        <span>Abdallah Abas</span>
+        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" width="34" height="34" />
+        <span>عبدالله عباس</span>
       </a>
 
       <div class="nav-links" id="navLinks">
-        <a href="/services" class="nav-link">الخدمات</a>
-        <a href="/products" class="nav-link">المنتجات</a>
-        <a href="/portfolio" class="nav-link">الأعمال</a>
-        <a href="/blog" class="nav-link">المقالات</a>
-        <a href="/about" class="nav-link">عن عبدالله</a>
+        <a href="/services/" class="nav-link">الخدمات</a>
+        <a href="/products/" class="nav-link">المنتجات</a>
+        <a href="/portfolio/" class="nav-link">الأعمال</a>
+        <a href="/blog/" class="nav-link">المقالات</a>
+        <a href="/about.html" class="nav-link">عن عبدالله</a>
       </div>
 
-      <a href="/contact" class="nav-cta">تواصل معي</a>
+      <a href="/contact.html" class="nav-cta">تواصل معي</a>
 
       <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
@@ -64,7 +121,7 @@
     <div class="nav-mobile-panel" id="mobilePanel">
       <div class="nav-mobile-header">
         <span class="nav-mobile-brand">
-          <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo" />
+          <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo" width="30" height="30" />
           <span>عبدالله عباس</span>
         </span>
         <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
@@ -72,144 +129,154 @@
         </button>
       </div>
       <div class="nav-mobile-links">
-        <a href="/services" class="nav-mobile-link">الخدمات</a>
-        <a href="/products" class="nav-mobile-link">المنتجات</a>
-        <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
-        <a href="/blog" class="nav-mobile-link">المقالات</a>
-        <a href="/about" class="nav-mobile-link">عن عبدالله</a>
-        <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+        <a href="/services/" class="nav-mobile-link">الخدمات</a>
+        <a href="/products/" class="nav-mobile-link">المنتجات</a>
+        <a href="/portfolio/" class="nav-mobile-link">الأعمال</a>
+        <a href="/blog/" class="nav-mobile-link">المقالات</a>
+        <a href="/about.html" class="nav-mobile-link">عن عبدالله</a>
+        <a href="/contact.html" class="nav-mobile-link">تواصل معي</a>
         <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
       </div>
       <div class="nav-mobile-footer">
-        <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+        <a href="/contact.html" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
       </div>
     </div>
   </div>
 
   <!-- ==================== HERO ==================== -->
-  <section class="hero">
-    <div class="container container--wide">
-      <div class="hero-inner">
+  <section class="hero" style="position:relative;overflow:hidden;padding:120px 0 80px;min-height:80vh;display:flex;align-items:center;">
+    <div class="container container--wide" style="position:relative;z-index:2;">
+      <div class="hero-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
         <div class="hero-content reveal">
-          <div class="hero-eyebrow">
-            <span class="hero-eyebrow-line"></span>
+          <div class="hero-eyebrow" style="display:inline-flex;align-items:center;gap:8px;font-size:0.8125rem;font-weight:600;color:var(--primary);letter-spacing:0.02em;margin-bottom:24px;">
+            <span style="width:24px;height:2px;background:var(--primary);border-radius:1px;"></span>
             <span>حلول رقمية</span>
           </div>
 
-          <h1 class="hero-title">
+          <h1 style="font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;color:var(--text-primary);letter-spacing:-0.03em;margin-bottom:24px;">
             أحلّل هدفك أولًا،<br />
-            ثم<span class="hero-title-accent">أبني الحل</span><br />
+            ثم <span style="color:var(--primary);">أبني الحل</span><br />
             المناسب له.
           </h1>
 
-          <p class="hero-desc">
-            موقع ويب لا يعمل وحده — يحتاج استراتيجية. أقدّم حلولًا رقمية تُبنى حول هدفك الحقيقي، لا حول قالب جاهز يُلصق على مشروعك.
+          <p style="font-size:1.125rem;color:var(--text-secondary);line-height:1.8;max-width:480px;margin-bottom:36px;">
+            موقع ويب لا يعمل وحده — يحتاج استراتيجية. أقدّم حلولًا رقمية تُبنى حول هدفك الحقيقي.
           </p>
 
-          <div class="hero-actions">
-            <a href="/contact" class="btn btn--primary">
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+            <a href="/contact.html" class="btn btn--primary btn--lg">
               ابدأ مشروعك
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
             </a>
-            <a href="/portfolio" class="btn btn--outline">شاهد أعمالي</a>
+            <a href="/portfolio/" class="btn btn--secondary">شاهد أعمالي</a>
           </div>
         </div>
 
-        <div class="hero-visual reveal" aria-hidden="true">
-          <div class="hero-visual-box">
-            <div class="hero-visual-grid"></div>
-            <div class="hero-visual-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
+        <div class="hero-visual reveal" aria-hidden="true" style="position:relative;">
+          <div style="background:linear-gradient(135deg,rgba(255,255,255,0.95),rgba(243,242,239,0.9));border:1px solid rgba(0,0,0,0.04);border-radius:28px;padding:48px 36px;text-align:center;box-shadow:var(--shadow-card);position:relative;overflow:hidden;">
+            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03) 1px,transparent 1px);background-size:32px 32px;opacity:0.5;"></div>
+            <div style="position:relative;z-index:1;">
+              <div style="width:100px;height:100px;margin:0 auto 20px;background:linear-gradient(135deg,rgba(255,102,0,0.12),rgba(255,102,0,0.2));border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--primary);">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
+              </div>
+              <h3 style="font-size:1.125rem;font-weight:700;color:var(--text-primary);margin-bottom:4px;">تطوير · تصميم · تحسين</h3>
+              <p style="color:var(--text-muted);font-size:0.875rem;">حلول رقمية متكاملة بجودة احترافية</p>
             </div>
-            <span class="hero-visual-label">تطوير · تصميم · تحسين</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== SERVICES ==================== -->
-  <section class="section" id="services">
+  <!-- ==================== SERVICES PREVIEW ==================== -->
+  <section class="section" id="services" style="padding:80px 0;">
     <div class="container">
-      <div class="section-header reveal">
-        <div class="section-label">
-          <span class="section-label-line"></span>
-          <span>ما أقدّمه</span>
-        </div>
-        <h2 class="section-title">خدمات مصممة لحل مشاكل حقيقية</h2>
-        <p class="section-desc">كل خدمة تبدأ بفهم المشروع، لا بتقديم قائمة مميزات جاهزة.</p>
+      <div class="section-header-new reveal">
+        <span class="label">ما أقدّمه</span>
+        <h2>خدمات مصممة لحل مشاكل حقيقية</h2>
+        <p>كل خدمة تبدأ بفهم المشروع، لا بتقديم قائمة مميزات جاهزة.</p>
       </div>
 
-      <div class="services-list" id="servicesList">
-        <!-- يُملأ بواسطة JavaScript من Firestore -->
-        <div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;">
-          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:prdt-spin .7s linear infinite;"></div>
+      <div class="card-grid card-grid--asymmetric" id="servicesGrid">
+        <!-- تحميل بواسطة JavaScript -->
+        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">
+          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border-light);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;"></div>
           <p style="margin-top:12px;">جاري تحميل الخدمات...</p>
         </div>
       </div>
+
+      <div style="text-align:center;margin-top:40px;" class="reveal">
+        <a href="/services/" class="btn btn--secondary">جميع الخدمات</a>
+      </div>
     </div>
   </section>
 
-  <!-- ==================== PRODUCTS ==================== -->
-  <section class="section section--sm" id="products" style="background:var(--bg-white)">
+  <!-- ==================== PRODUCTS PREVIEW ==================== -->
+  <section class="section" id="products" style="padding:80px 0;background:var(--bg-white);">
     <div class="container">
-      <div class="section-header reveal" style="text-align:center;max-width:100%">
-        <div class="section-label" style="justify-content:center">
-          <span class="section-label-line"></span>
-          <span>منتجات جاهزة</span>
-        </div>
-        <h2 class="section-title section-title--center">أدوات وقوالب جاهزة للاستخدام الفوري</h2>
-        <p class="section-desc section-desc--center">منتجات مُختبرة فعليًا، ليست مجرد قوالب مُعادة بيع.</p>
+      <div class="section-header-new reveal">
+        <span class="label">منتجات جاهزة</span>
+        <h2>أدوات وقوالب جاهزة للاستخدام الفوري</h2>
+        <p>منتجات مُختبرة فعليًا، ليست مجرد قوالب مُعادة بيع.</p>
       </div>
 
-      <div class="products-grid" id="productsGrid">
-        <!-- يُملأ بواسطة JavaScript من Firestore -->
-        <div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">
-          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:prdt-spin .7s linear infinite;"></div>
+      <div class="card-grid" id="productsGrid" style="grid-template-columns:repeat(3,1fr);gap:24px;">
+        <!-- تحميل بواسطة JavaScript -->
+        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">
+          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border-light);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;"></div>
           <p style="margin-top:12px;">جاري تحميل المنتجات...</p>
         </div>
       </div>
 
-      <div style="text-align:center;margin-top:40px" class="reveal">
-        <a href="/products" class="btn btn--outline btn--sm">جميع المنتجات</a>
+      <div style="text-align:center;margin-top:40px;" class="reveal">
+        <a href="/products/" class="btn btn--secondary">جميع المنتجات</a>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PORTFOLIO ==================== -->
-  <section class="section" id="portfolio">
+  <!-- ==================== PORTFOLIO PREVIEW ==================== -->
+  <section class="section" id="portfolio" style="padding:80px 0;">
     <div class="container">
-      <div class="section-header reveal">
-        <div class="section-label">
-          <span class="section-label-line"></span>
-          <span>أعمال مختارة</span>
-        </div>
-        <h2 class="section-title">نتائج حقيقية، لا وعود</h2>
+      <div class="section-header-new reveal">
+        <span class="label">أعمال مختارة</span>
+        <h2>نتائج حقيقية، لا وعود</h2>
+        <p>مشاريع نفذتها لعملائي — كل مشروع يحكي قصة حل لمشكلة حقيقية.</p>
       </div>
 
-      <div class="portfolio-grid" id="portfolioGrid">
-        <!-- يُملأ بواسطة JavaScript من Firestore -->
-        <div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">
-          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:prdt-spin .7s linear infinite;"></div>
+      <div class="card-grid" id="portfolioGrid" style="grid-template-columns:1.2fr 0.8fr 0.8fr;gap:24px;">
+        <!-- تحميل بواسطة JavaScript -->
+        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">
+          <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--border-light);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;"></div>
           <p style="margin-top:12px;">جاري تحميل الأعمال...</p>
         </div>
       </div>
 
-      <div style="margin-top:40px" class="reveal">
-        <a href="/portfolio" class="btn btn--outline btn--sm">جميع الأعمال</a>
+      <div style="text-align:center;margin-top:40px;" class="reveal">
+        <a href="/portfolio/" class="btn btn--secondary">جميع الأعمال</a>
       </div>
     </div>
   </section>
 
   <!-- ==================== CTA ==================== -->
-  <section class="section section--sm">
+  <section style="padding:80px 0;">
     <div class="container">
-      <div class="cta-section reveal">
-        <h2 class="cta-title">عندك مشروع أو فكرة تحتاج تنفيذها؟</h2>
-        <p class="cta-desc">أقدّر مساعدتك في تحديد الحل الأنسب — حتى لو لم تقرر بعد.</p>
-        <div class="cta-actions">
-          <a href="/contact" class="btn btn--white">تواصل معي الآن</a>
-          <a href="/services" class="btn btn--ghost-light">تصفح الخدمات</a>
+      <div class="cta-section reveal" style="background:linear-gradient(135deg,var(--secondary-dark),var(--secondary));border-radius:var(--radius-lg);padding:64px 48px;text-align:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(255,102,0,0.08),transparent 60%);"></div>
+        <div style="position:relative;z-index:1;">
+          <h2 style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;color:var(--text-inverse);line-height:1.2;margin-bottom:12px;">
+            عندك مشروع أو فكرة تحتاج تنفيذها؟
+          </h2>
+          <p style="font-size:1.0625rem;color:rgba(255,255,255,0.6);max-width:480px;margin:0 auto 32px;line-height:1.7;">
+            أقدّر مساعدتك في تحديد الحل الأنسب — حتى لو لم تقرر بعد.
+          </p>
+          <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;">
+            <a href="/contact.html" class="btn btn--primary" style="background:var(--bg-white);color:var(--text-primary);box-shadow:none;">
+              تواصل معي الآن
+            </a>
+            <a href="/services/" class="btn btn--ghost" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.15);">
+              تصفح الخدمات
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -221,7 +288,7 @@
       <div class="footer-inner">
         <div>
           <div class="footer-brand">
-            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
+            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" width="38" height="38" />
             <div class="footer-brand-name">عبدالله عباس</div>
           </div>
           <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
@@ -229,26 +296,26 @@
         <div>
           <div class="footer-heading">الخدمات</div>
           <div class="footer-links">
-            <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
-            <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
-            <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
-            <a href="/services/wordpress" class="footer-link">ووردبريس</a>
-            <a href="/services/blogger" class="footer-link">بلوجر</a>
+            <a href="/services/web-development.html" class="footer-link">تطوير مواقع</a>
+            <a href="/services/web-design.html" class="footer-link">تصميم واجهات</a>
+            <a href="/services/seo.html" class="footer-link">تحسين محركات البحث</a>
+            <a href="/services/wordpress.html" class="footer-link">ووردبريس</a>
+            <a href="/services/blogger.html" class="footer-link">بلوجر</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">المحتوى</div>
           <div class="footer-links">
-            <a href="/products" class="footer-link">المنتجات</a>
-            <a href="/portfolio" class="footer-link">الأعمال</a>
-            <a href="/blog" class="footer-link">المقالات</a>
-            <a href="/about" class="footer-link">عن عبدالله</a>
+            <a href="/products/" class="footer-link">المنتجات</a>
+            <a href="/portfolio/" class="footer-link">الأعمال</a>
+            <a href="/blog/" class="footer-link">المقالات</a>
+            <a href="/about.html" class="footer-link">عن عبدالله</a>
           </div>
         </div>
         <div>
           <div class="footer-heading">تواصل</div>
           <div class="footer-links">
-            <a href="/contact" class="footer-link">أرسل رسالة</a>
+            <a href="/contact.html" class="footer-link">أرسل رسالة</a>
             <a href="/login.html" class="footer-link">تسجيل الدخول</a>
             <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
             <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
@@ -263,8 +330,12 @@
   </footer>
 
   <!-- ==================== SCRIPTS ==================== -->
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+
   <script>
-    // --- Nav scroll effect ---
+    // ===== NAV SCROLL =====
     const nav = document.getElementById('siteNav');
     function handleNavScroll() {
       nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
@@ -272,7 +343,7 @@
     window.addEventListener('scroll', handleNavScroll, { passive: true });
     handleNavScroll();
 
-    // --- Mobile menu ---
+    // ===== MOBILE MENU =====
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileClose = document.getElementById('mobileClose');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -285,7 +356,6 @@
       mobileToggle.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
     }
-
     function closeMobile() {
       mobileMenu.classList.remove('nav-mobile-menu--open');
       mobilePanel.classList.remove('nav-mobile-panel--open');
@@ -293,21 +363,13 @@
       mobileToggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
-
     mobileToggle.addEventListener('click', openMobile);
     mobileClose.addEventListener('click', closeMobile);
-    mobileMenu.addEventListener('click', (e) => {
-      if (e.target === mobileMenu) closeMobile();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobilePanel.classList.contains('nav-mobile-panel--open')) closeMobile();
-    });
+    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
+    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
 
-    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(link => {
-      link.addEventListener('click', closeMobile);
-    });
-
-    // --- Scroll reveal (IntersectionObserver) ---
+    // ===== SCROLL REVEAL =====
     const revealElements = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const observer = new IntersectionObserver((entries) => {
@@ -318,7 +380,6 @@
           }
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
       revealElements.forEach((el, i) => {
         el.style.transitionDelay = `${i * 60}ms`;
         observer.observe(el);
@@ -328,13 +389,13 @@
     }
   </script>
 
-  <!-- ==================== LIVE DATA (Firestore) ==================== -->
+  <!-- ==================== MODAL & LIVE DATA ==================== -->
   <script type="module">
     import { db } from "/js/firebase-init.js";
     import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
     import { isSafeUrl } from "/js/security.js";
+    import { openModal, showToast } from "/js/modal.js";
 
-    // ===== HELPERS =====
     const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
 
     function sortByOrder(a, b) {
@@ -346,219 +407,242 @@
       return timeB - timeA;
     }
 
-    // ===== 1. إنشاء عنصر الخدمة (مع الرابط الصحيح) =====
-    function createServiceItem(service, index) {
-      const a = document.createElement("a");
-      // ✅ الرابط الصحيح لصفحة تفاصيل الخدمة
-      a.href = `/service-detail.html?slug=${encodeURIComponent(service.slug || "")}`;
-      a.className = "service-item";
+    // ===== CREATE SERVICE CARD (للمعاينة) =====
+    function createServiceCard(service) {
+      const card = document.createElement("div");
+      card.className = "card";
 
-      const num = document.createElement("span");
-      num.className = "service-number";
-      num.textContent = String(index + 1).padStart(2, "0");
+      const icon = document.createElement("div");
+      icon.className = "card-icon";
+      icon.textContent = "✓";
+      card.appendChild(icon);
 
-      const info = document.createElement("div");
-      info.className = "service-info";
-
-      const name = document.createElement("h3");
-      name.className = "service-name";
-      name.textContent = service.title || "—";
-
-      const brief = document.createElement("p");
-      brief.className = "service-brief";
-      brief.textContent = service.shortDescription || "";
-
-      info.appendChild(name);
-      info.appendChild(brief);
-
-      const arrow = document.createElement("span");
-      arrow.className = "service-arrow";
-      arrow.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>`;
-
-      a.appendChild(num);
-      a.appendChild(info);
-      a.appendChild(arrow);
-      return a;
-    }
-
-    // ===== 2. إنشاء بطاقة المنتج =====
-    function createProductCard(product) {
-      const a = document.createElement("a");
-      a.href = `/product-detail.html?slug=${encodeURIComponent(product.slug || "")}`;
-      a.className = "product-card";
-
-      const thumb = document.createElement("div");
-      thumb.className = "product-card-thumb";
-      if (product.image && isSafeUrl(product.image)) {
-        const img = document.createElement("img");
-        img.src = product.image;
-        img.alt = product.title || "";
-        img.loading = "lazy";
-        thumb.appendChild(img);
-      } else {
-        thumb.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
-      }
-
-      const body = document.createElement("div");
-      body.className = "product-card-body";
-
-      const name = document.createElement("h3");
-      name.className = "product-card-name";
-      name.textContent = product.title || "—";
+      const title = document.createElement("h3");
+      title.className = "card-title";
+      title.textContent = service.title || "—";
+      card.appendChild(title);
 
       const desc = document.createElement("p");
-      desc.className = "product-card-desc";
-      desc.textContent = product.shortDescription || "";
+      desc.className = "card-desc";
+      desc.textContent = service.shortDescription || "";
+      card.appendChild(desc);
 
       const footer = document.createElement("div");
-      footer.className = "product-card-footer";
+      footer.className = "card-footer";
+
+      const tags = document.createElement("div");
+      tags.className = "card-tags";
+      if (service.features && service.features.length > 0) {
+        service.features.slice(0, 2).forEach(f => {
+          const tag = document.createElement("span");
+          tag.className = "card-tag";
+          tag.textContent = f;
+          tags.appendChild(tag);
+        });
+        if (service.features.length > 2) {
+          const more = document.createElement("span");
+          more.className = "card-tag";
+          more.textContent = `+${service.features.length - 2}`;
+          tags.appendChild(more);
+        }
+      }
+      footer.appendChild(tags);
+
+      const actions = document.createElement("div");
+      actions.className = "card-actions";
+
+      const detailsBtn = document.createElement("a");
+      detailsBtn.href = "#";
+      detailsBtn.className = "btn btn--ghost btn--sm";
+      detailsBtn.textContent = "تفاصيل";
+      detailsBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal(service, "service");
+      });
+      actions.appendChild(detailsBtn);
+
+      footer.appendChild(actions);
+      card.appendChild(footer);
+
+      return card;
+    }
+
+    // ===== CREATE PRODUCT CARD =====
+    function createProductCard(product) {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const icon = document.createElement("div");
+      icon.className = "card-icon";
+      if (product.image && isSafeUrl(product.image)) {
+        icon.innerHTML = `<img src="${product.image}" alt="${product.title}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-sm);" />`;
+      } else {
+        icon.textContent = "📦";
+      }
+      card.appendChild(icon);
+
+      const title = document.createElement("h3");
+      title.className = "card-title";
+      title.textContent = product.title || "—";
+      card.appendChild(title);
+
+      const desc = document.createElement("p");
+      desc.className = "card-desc";
+      desc.textContent = product.shortDescription || "";
+      card.appendChild(desc);
+
+      const footer = document.createElement("div");
+      footer.className = "card-footer";
 
       const price = document.createElement("span");
       if (product.price > 0) {
-        price.className = "product-card-price";
-        price.textContent = `ابتداءً من ${Number(product.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[product.currency] || product.currency || ""}`;
+        price.className = "card-price";
+        price.textContent = `${Number(product.price).toLocaleString("ar-EG")} ${CURRENCY_MAP[product.currency] || product.currency || ""}`;
       } else {
-        price.className = "product-card-price product-card-price--free";
+        price.className = "card-price card-price--free";
         price.textContent = "مجاني";
       }
-
-      const link = document.createElement("span");
-      link.className = "product-card-link";
-      link.innerHTML = `تصفح <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>`;
-
       footer.appendChild(price);
-      footer.appendChild(link);
 
-      body.appendChild(name);
-      body.appendChild(desc);
-      body.appendChild(footer);
+      const actions = document.createElement("div");
+      actions.className = "card-actions";
 
-      a.appendChild(thumb);
-      a.appendChild(body);
-      return a;
+      const detailsBtn = document.createElement("a");
+      detailsBtn.href = "#";
+      detailsBtn.className = "btn btn--ghost btn--sm";
+      detailsBtn.textContent = "تفاصيل";
+      detailsBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal(product, "product");
+      });
+      actions.appendChild(detailsBtn);
+
+      footer.appendChild(actions);
+      card.appendChild(footer);
+
+      return card;
     }
 
-    // ===== 3. إنشاء بطاقة الأعمال =====
-    function createPortfolioItem(project) {
-      const a = document.createElement("a");
-      a.href = `/portfolio-detail.html?slug=${encodeURIComponent(project.slug || "")}`;
-      a.className = "portfolio-card";
+    // ===== CREATE PORTFOLIO CARD =====
+    function createPortfolioCard(project) {
+      const card = document.createElement("div");
+      card.className = "card";
 
-      const thumb = document.createElement("div");
-      thumb.className = "portfolio-card-thumb";
+      const icon = document.createElement("div");
+      icon.className = "card-icon";
       if (project.image && isSafeUrl(project.image)) {
-        const img = document.createElement("img");
-        img.src = project.image;
-        img.alt = project.title || "";
-        img.loading = "lazy";
-        thumb.appendChild(img);
+        icon.innerHTML = `<img src="${project.image}" alt="${project.title}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-sm);" />`;
       } else {
-        thumb.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M2.25 18.75h19.5a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-.75-.75H2.25a.75.75 0 0 0-.75.75v12c0 .414.336.75.75.75Z"/></svg>`;
+        icon.textContent = "🎯";
       }
-
-      const body = document.createElement("div");
-      body.className = "portfolio-card-body";
+      card.appendChild(icon);
 
       const title = document.createElement("h3");
-      title.className = "portfolio-card-title";
+      title.className = "card-title";
       title.textContent = project.title || "—";
+      card.appendChild(title);
 
-      const cat = document.createElement("span");
-      cat.className = "portfolio-card-cat";
-      cat.textContent = (project.tags && project.tags.length > 0) ? project.tags.slice(0, 2).join(" · ") : "عمل";
+      const desc = document.createElement("p");
+      desc.className = "card-desc";
+      desc.textContent = project.shortDescription || "";
+      card.appendChild(desc);
 
-      body.appendChild(title);
-      body.appendChild(cat);
+      const footer = document.createElement("div");
+      footer.className = "card-footer";
 
-      a.appendChild(thumb);
-      a.appendChild(body);
-      return a;
+      const tags = document.createElement("div");
+      tags.className = "card-tags";
+      if (project.tags && project.tags.length > 0) {
+        project.tags.slice(0, 2).forEach(t => {
+          const tag = document.createElement("span");
+          tag.className = "card-tag";
+          tag.textContent = t;
+          tags.appendChild(tag);
+        });
+      }
+      footer.appendChild(tags);
+
+      const actions = document.createElement("div");
+      actions.className = "card-actions";
+
+      const detailsBtn = document.createElement("a");
+      detailsBtn.href = "#";
+      detailsBtn.className = "btn btn--ghost btn--sm";
+      detailsBtn.textContent = "تفاصيل";
+      detailsBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal(project, "portfolio");
+      });
+      actions.appendChild(detailsBtn);
+
+      footer.appendChild(actions);
+      card.appendChild(footer);
+
+      return card;
     }
 
-    // ===== 4. تحميل الخدمات =====
-    async function loadHomeServices() {
-      const list = document.getElementById("servicesList");
+    // ===== LOAD SERVICES =====
+    async function loadServices() {
+      const grid = document.getElementById("servicesGrid");
       try {
         const snap = await getDocs(collection(db, "services"));
-        const services = snap.docs
-          .map((d) => ({ id: d.id, ...d.data() }))
-          .filter((s) => s.active !== false)
-          .sort(sortByOrder)
-          .slice(0, 5);
-
-        list.textContent = "";
-        if (services.length === 0) {
-          list.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;">لا توجد خدمات حالياً</div>`;
+        const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(s => s.active !== false).sort(sortByOrder).slice(0, 4);
+        grid.textContent = "";
+        if (items.length === 0) {
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد خدمات حالياً</div>`;
           return;
         }
-        services.forEach((s, i) => list.appendChild(createServiceItem(s, i)));
-      } catch (error) {
-        console.error("[home] فشل تحميل الخدمات:", error);
-        list.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;">حدث خطأ في تحميل الخدمات</div>`;
+        items.forEach(s => grid.appendChild(createServiceCard(s)));
+      } catch {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ في تحميل الخدمات</div>`;
       }
     }
 
-    // ===== 5. تحميل المنتجات =====
-    async function loadHomeProducts() {
+    // ===== LOAD PRODUCTS =====
+    async function loadProducts() {
       const grid = document.getElementById("productsGrid");
       try {
         const snap = await getDocs(collection(db, "products"));
-        const products = snap.docs
-          .map((d) => ({ id: d.id, ...d.data() }))
-          .filter((p) => p.active !== false)
-          .sort(sortByOrder)
-          .slice(0, 3);
-
+        const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(p => p.active !== false).sort(sortByOrder).slice(0, 3);
         grid.textContent = "";
-        if (products.length === 0) {
-          grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">لا توجد منتجات حالياً</div>`;
+        if (items.length === 0) {
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد منتجات حالياً</div>`;
           return;
         }
-        products.forEach((p) => grid.appendChild(createProductCard(p)));
-      } catch (error) {
-        console.error("[home] فشل تحميل المنتجات:", error);
-        grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">حدث خطأ في تحميل المنتجات</div>`;
+        items.forEach(p => grid.appendChild(createProductCard(p)));
+      } catch {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ في تحميل المنتجات</div>`;
       }
     }
 
-    // ===== 6. تحميل الأعمال =====
-    async function loadHomePortfolio() {
+    // ===== LOAD PORTFOLIO =====
+    async function loadPortfolio() {
       const grid = document.getElementById("portfolioGrid");
       try {
         const snap = await getDocs(collection(db, "portfolio"));
-        const projects = snap.docs
-          .map((d) => ({ id: d.id, ...d.data() }))
-          .filter((p) => p.active !== false)
-          .sort(sortByOrder)
-          .slice(0, 3);
-
+        const items = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(p => p.active !== false).sort(sortByOrder).slice(0, 3);
         grid.textContent = "";
-        if (projects.length === 0) {
-          grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">لا توجد أعمال حالياً</div>`;
+        if (items.length === 0) {
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">لا توجد أعمال حالياً</div>`;
           return;
         }
-
-        // أول عنصر يكون كبيراً (إذا كان موجوداً)
-        if (projects.length > 0) {
-          const first = createPortfolioItem(projects[0]);
-          first.classList.add("portfolio-card--large");
-          grid.appendChild(first);
-        }
-
-        // باقي العناصر
-        for (let i = 1; i < projects.length; i++) {
-          grid.appendChild(createPortfolioItem(projects[i]));
-        }
-      } catch (error) {
-        console.error("[home] فشل تحميل الأعمال:", error);
-        grid.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--text-muted);width:100%;grid-column:1/-1;">حدث خطأ في تحميل الأعمال</div>`;
+        items.forEach((p, i) => {
+          const card = createPortfolioCard(p);
+          if (i === 0) card.style.gridColumn = "span 1";
+          grid.appendChild(card);
+        });
+      } catch {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--text-muted);">حدث خطأ في تحميل الأعمال</div>`;
       }
     }
 
-    // ===== 7. بدء التحميل =====
-    loadHomeServices();
-    loadHomeProducts();
-    loadHomePortfolio();
+    loadServices();
+    loadProducts();
+    loadPortfolio();
+
+    // ===== EXPOSE MODAL FUNCTIONS GLOBALLY (للاستخدام في الصفحات الأخرى) =====
+    window.openModal = openModal;
+    window.showToast = showToast;
   </script>
 </body>
 </html>
