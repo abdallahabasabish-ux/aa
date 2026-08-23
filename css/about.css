@@ -1,161 +1,137 @@
 /* ============================================
-   ABOUT — صفحة من نحن
-   تصميم احترافي مع تسعير وباقات
+   ABOUT PAGE — CUSTOM STYLES
+   تعتمد على متغيرات main.css بالكامل
    ============================================ */
 
-/* --- Hero --- */
+/* --- Hero About --- */
 .about-hero {
-  padding-top: calc(var(--header-h) + 60px);
-  padding-bottom: 60px;
-  background: linear-gradient(180deg, var(--bg-body) 0%, #f5f3f0 100%);
+  padding: calc(var(--header-h) + 60px) 0 80px;
+  background: var(--bg-white);
   border-bottom: 1px solid var(--border-light);
-  position: relative;
-  overflow: hidden;
-}
-
-.about-hero::before {
-  content: '';
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,102,0,0.04) 0%, transparent 70%);
-  top: -200px;
-  right: -200px;
-  pointer-events: none;
 }
 
 .about-hero-inner {
-  max-width: 720px;
+  max-width: var(--max-w-narrow);
   margin: 0 auto;
   text-align: center;
-  position: relative;
-  z-index: 1;
 }
 
 .about-hero-label {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--primary);
+  font-weight: 600;
+  color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-bottom: 16px;
-  background: rgba(255, 102, 0, 0.08);
-  padding: 6px 20px;
-  border-radius: 50px;
-  border: 1px solid rgba(255, 102, 0, 0.1);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
 }
 
 .about-hero-label-line {
   width: 24px;
-  height: 2px;
-  background: var(--primary-gradient);
-  border-radius: 2px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
 }
 
 .about-hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 800;
-  color: var(--text-primary);
   line-height: 1.15;
-  letter-spacing: -0.03em;
-  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 20px;
 }
 
 .about-hero-title span {
-  background: var(--primary-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent);
 }
 
 .about-hero-desc {
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 32px;
   line-height: 1.8;
-  max-width: 560px;
-  margin: 0 auto;
 }
 
-/* --- القصة --- */
+/* --- Story (الصورة + النص) --- */
 .about-story {
-  padding: 60px 0;
-  background: var(--bg-white);
+  padding: 80px 0;
+  background: var(--bg);
 }
 
 .about-story-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 60px;
   align-items: center;
 }
 
 .about-story-image {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--bg-raised);
-  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
+/* === التعديل هنا === */
 .about-story-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  aspect-ratio: 4/3;
-  display: block;
+  max-width: 400px;
+  height: auto;              /* تمت الإضافة: ضبط الارتفاع تلقائياً */
+  object-fit: contain;       /* تم التغيير: عرض الصورة كاملة دون قص */
+  border-radius: var(--r-lg);
+  border: 4px solid var(--bg-white);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
+  transition: transform var(--normal), box-shadow var(--normal);
+}
+/* ================== */
+
+.about-story-image img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 30px 50px -16px rgba(255, 102, 0, 0.15);
 }
 
-.about-story-image-placeholder {
-  aspect-ratio: 4/3;
-  display: flex;
+.about-story-label {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  color: var(--text-dim);
-  font-size: 4rem;
-  background: var(--bg-raised);
-}
-
-.about-story-content .label {
-  display: inline-block;
+  gap: 8px;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  background: rgba(255,102,0,0.06);
-  padding: 4px 16px;
-  border-radius: 20px;
-  margin-bottom: 12px;
-}
-
-.about-story-content h2 {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: 700;
-  color: var(--text-primary);
   margin-bottom: 16px;
-  line-height: 1.3;
 }
 
-.about-story-content p {
-  font-size: 0.9375rem;
+.about-story-label-line {
+  width: 24px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+.about-story-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.about-story-text p {
+  font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.8;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
-.about-story-content p:last-child {
-  margin-bottom: 0;
-}
-
-/* --- الإحصائيات --- */
+/* --- Stats (الإحصائيات) --- */
 .about-stats {
-  padding: 60px 0;
-  background: var(--bg-body);
+  padding: 70px 0;
+  background: var(--bg-white);
   border-top: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
 }
@@ -163,338 +139,327 @@
 .about-stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 30px;
   text-align: center;
-}
-
-.about-stat {
-  padding: 20px;
-  background: var(--bg-white);
-  border-radius: var(--radius);
-  border: 1px solid var(--border-light);
-  transition: all var(--normal);
-}
-
-.about-stat:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card-hover);
-  border-color: rgba(255,102,0,0.1);
 }
 
 .about-stat-number {
   font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 800;
-  color: var(--primary);
-  line-height: 1.2;
-}
-
-.about-stat-number span {
-  font-size: 1.5rem;
-}
-
-.about-stat-label {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  margin-top: 4px;
-}
-
-/* ============================================
-   باقات التسعير (اختر ميزانيتك)
-   ============================================ */
-.about-pricing {
-  padding: 60px 0 80px;
-  background: var(--bg-white);
-}
-
-.about-pricing-header {
-  text-align: center;
-  max-width: 640px;
-  margin: 0 auto 48px;
-}
-
-.about-pricing-header .label {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  background: rgba(255,102,0,0.06);
-  padding: 4px 16px;
-  border-radius: 20px;
-  margin-bottom: 12px;
-}
-
-.about-pricing-header h2 {
-  font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
-  font-weight: 700;
   color: var(--text-primary);
   line-height: 1.2;
 }
 
-.about-pricing-header p {
-  font-size: 1rem;
-  color: var(--text-muted);
-  margin-top: 8px;
-  line-height: 1.7;
+.about-stat-number .accent {
+  color: var(--accent);
 }
 
-.pricing-grid {
+.about-stat-label {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* --- Values (البطاقات الثلاث) --- */
+.about-values {
+  padding: 80px 0;
+  background: var(--bg);
+}
+
+.about-values-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-.pricing-card {
-  background: var(--bg-white);
-  border-radius: var(--radius-lg);
-  padding: 32px 28px;
-  border: 1px solid var(--border-light);
-  box-shadow: var(--shadow-card);
-  transition: all var(--normal);
+.about-value-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,249,247,0.96));
+  padding: 40px 28px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
   text-align: center;
-  position: relative;
-  overflow: hidden;
+  transition: border-color var(--normal), transform var(--normal), box-shadow var(--normal);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.025);
 }
 
-.pricing-card:hover {
+.about-value-card:hover {
+  border-color: var(--accent-border);
   transform: translateY(-6px);
-  box-shadow: var(--shadow-card-hover);
-  border-color: rgba(255,102,0,0.15);
+  box-shadow: 0 18px 40px -18px rgba(255, 102, 0, 0.2);
 }
 
-.pricing-card.popular {
-  border-color: var(--primary);
-  box-shadow: 0 8px 30px rgba(255,102,0,0.12);
-}
-
-.pricing-card.popular::before {
-  content: 'الأكثر طلباً';
-  position: absolute;
-  top: 16px;
-  right: -30px;
-  background: var(--primary-gradient);
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 4px 36px;
-  transform: rotate(45deg);
-  letter-spacing: 0.05em;
-  width: 120px;
-  text-align: center;
-}
-
-.pricing-card .icon {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 16px;
+.about-value-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  background: var(--accent-soft);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  background: rgba(255,102,0,0.06);
-  color: var(--primary);
+  font-size: 1.6rem;
+  color: var(--accent);
+  transition: background var(--normal), color var(--normal);
 }
 
-.pricing-card .name {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 4px;
+.about-value-card:hover .about-value-icon {
+  background: var(--accent);
+  color: var(--bg-white);
 }
 
-.pricing-card .price {
-  font-size: 2.25rem;
-  font-weight: 800;
-  color: var(--primary);
-  margin: 12px 0;
+.about-value-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.pricing-card .price .currency {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  margin-inline-end: 2px;
-}
-
-.pricing-card .price .period {
-  font-size: 0.8125rem;
-  font-weight: 400;
-  color: var(--text-muted);
-}
-
-.pricing-card .features {
-  list-style: none;
-  padding: 0;
-  margin: 16px 0 24px;
-  text-align: start;
-}
-
-.pricing-card .features li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 0;
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.pricing-card .features li:last-child {
-  border-bottom: none;
-}
-
-.pricing-card .features li .check {
-  color: #22C55E;
-  flex-shrink: 0;
-}
-
-.pricing-card .btn {
-  width: 100%;
-  justify-content: center;
-}
-
-/* ============================================
-   AdSense Section (خانة القبول)
-   ============================================ */
-.about-adsense {
-  padding: 40px 0;
-  background: var(--bg-body);
-  border-top: 1px solid var(--border-light);
-}
-
-.adsense-box {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 24px 32px;
-  background: var(--bg-white);
-  border-radius: var(--radius);
-  border: 1px solid var(--border-light);
-  text-align: center;
-  box-shadow: var(--shadow-card);
-}
-
-.adsense-box .badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #22C55E;
-  background: rgba(34,197,94,0.08);
-  padding: 6px 16px;
-  border-radius: 50px;
-  margin-bottom: 12px;
-}
-
-.adsense-box .badge svg {
-  width: 16px;
-  height: 16px;
-}
-
-.adsense-box h3 {
-  font-family: var(--font-display);
+.about-value-title {
   font-size: 1.125rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 8px;
 }
 
-.adsense-box p {
-  font-size: 0.875rem;
-  color: var(--text-muted);
+.about-value-desc {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
   line-height: 1.7;
-  max-width: 480px;
+}
+
+/* --- CTA خاص بالصفحة --- */
+.about-cta {
+  padding: 80px 0;
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  text-align: center;
+}
+
+.about-cta-inner {
+  max-width: var(--max-w-narrow);
   margin: 0 auto;
 }
 
-.adsense-code {
-  margin-top: 16px;
-  padding: 12px 16px;
-  background: var(--bg-raised);
-  border-radius: var(--radius-sm);
-  font-family: monospace;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  direction: ltr;
-  text-align: start;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  word-break: break-all;
-  border: 1px solid var(--border-light);
+.about-cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  margin-bottom: 12px;
 }
 
-/* ============================================
-   RESPONSIVE
-   ============================================ */
+.about-cta-desc {
+  font-size: 1.0625rem;
+  opacity: 0.7;
+  margin-bottom: 32px;
+}
 
+.about-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+/* --- Section Headers (for Skills, Process, Values) --- */
+.about-section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.about-section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+.about-section-label-line {
+  width: 24px;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+.about-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+/* --- Skills Section --- */
+.about-skills {
+  padding: 80px 0;
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.about-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.about-skill-card {
+  background: var(--bg);
+  padding: 32px 24px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: all var(--normal);
+}
+
+.about-skill-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px -12px rgba(255, 102, 0, 0.12);
+  background: var(--bg-white);
+}
+
+.skill-icon {
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+  display: inline-block;
+  line-height: 1;
+}
+
+.skill-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.skill-tech {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --- Process Timeline --- */
+.about-process {
+  padding: 80px 0;
+  background: var(--bg);
+}
+
+.about-process-timeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  position: relative;
+}
+
+.about-process-timeline::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  z-index: 0;
+}
+
+.process-step {
+  background: var(--bg-white);
+  padding: 32px 24px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  transition: all var(--normal);
+}
+
+.process-step:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.06);
+}
+
+.process-number {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-family: var(--font-display);
+}
+
+.process-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.process-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --- استجابة (Responsive) --- */
 @media (max-width: 1023px) {
   .about-story-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 40px;
+    text-align: center;
   }
-  .about-story-image {
-    order: -1;
+  .about-story-image img {
+    max-width: 280px;
   }
-  .pricing-grid {
+  .about-values-grid {
     grid-template-columns: 1fr 1fr;
+  }
+  .about-skills-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
   .about-stats-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
-  .pricing-card.popular {
-    order: -1;
+  .about-process-timeline {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .about-process-timeline::before {
+    display: none;
   }
 }
 
 @media (max-width: 639px) {
   .about-hero {
-    padding-top: calc(var(--header-h) + 40px);
-    padding-bottom: 40px;
+    padding: calc(var(--header-h) + 40px) 0 48px;
   }
-  .pricing-grid {
+  .about-values-grid {
     grid-template-columns: 1fr;
   }
-  .about-stats-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+  .about-skills-grid {
+    grid-template-columns: 1fr;
   }
-  .about-stat {
-    padding: 16px;
+  .about-process-timeline {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
   .about-stat-number {
-    font-size: 1.75rem;
+    font-size: 2.2rem;
   }
-  .adsense-box {
-    padding: 16px;
-    margin: 0 16px;
+  .about-cta-actions {
+    flex-direction: column;
+    align-items: center;
   }
-  .pricing-card {
-    padding: 24px 20px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .pricing-grid {
-    gap: 32px;
-  }
-  .pricing-card {
-    padding: 36px 32px;
-  }
-}
-
-/* ============================================
-   REDUCED MOTION
-   ============================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  .pricing-card:hover,
-  .about-stat:hover {
-    transform: none !important;
+  .about-cta-actions .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
