@@ -1,9 +1,5 @@
 /**
- * auth.js
- * منطق المصادقة — تسجيل الدخول، الخروج، إعادة تعيين كلمة المرور،
- * Google/GitHub Login.
- *
- * تم إزالة التحقق الإلزامي من البريد الإلكتروني.
+ * auth.js — نسخة محدثة (بدون تحقق إلزامي من البريد)
  */
 
 import { auth } from "./firebase-init.js";
@@ -19,9 +15,6 @@ import {
   createUserWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
-// -----------------------------------------------
-// Audit Logging
-// -----------------------------------------------
 async function logAuditEvent(eventType, data = {}) {
   try {
     const { getFirestore, collection, addDoc, serverTimestamp } =
@@ -33,12 +26,9 @@ async function logAuditEvent(eventType, data = {}) {
       timestamp: serverTimestamp(),
       userAgent: navigator.userAgent,
     });
-  } catch { /* فشل التسجيل لا يُعطّل العملية */ }
+  } catch { /* silent fail */ }
 }
 
-// -----------------------------------------------
-// Error Mapping
-// -----------------------------------------------
 function mapAuthError(error) {
   const code = error.code || "";
   const credentialErrors = [
@@ -75,173 +65,89 @@ function mapAuthError(error) {
   return { ok: false, userMessage: "حدث خطأ غير متوقع. حاول مجددًا." };
 }
 
-// -----------------------------------------------
-// Client-Side Validation
-// -----------------------------------------------
+// التحقق من صحة المدخلات
 export function validateEmail(email) {
-  if (!email || !email.trim()) {
-    return { valid: false, message: "البريد الإلكتروني مطلوب." };
-  }
+  if (!email || !email.trim()) return { valid: false, message: "البريد الإلكتروني مطلوب." };
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!re.test(email.trim())) {
-    return { valid: false, message: "صيغة البريد الإلكتروني غير صحيحة." };
-  }
+  if (!re.test(email.trim())) return { valid: false, message: "صيغة البريد الإلكتروني غير صحيحة." };
   return { valid: true, message: "" };
 }
 
 export function validatePassword(password) {
-  if (!password) {
-    return { valid: false, message: "كلمة المرور مطلوبة." };
-  }
-  if (password.length < 8) {
-    return { valid: false, message: "كلمة المرور يجب أن تكون 8 أحرف على الأقل." };
-  }
+  if (!password) return { valid: false, message: "كلمة المرور مطلوبة." };
+  if (password.length < 8) return { valid: false, message: "كلمة المرور يجب أن تكون 8 أحرف على الأقل." };
   return { valid: true, message: "" };
 }
 
 export function validateConfirmPassword(password, confirm) {
-  if (!confirm) {
-    return { valid: false, message: "تأكيد كلمة المرور مطلوب." };
-  }
-  if (password !== confirm) {
-    return { valid: false, message: "كلمة المرور غير متطابقة." };
-  }
+  if (!confirm) return { valid: false, message: "تأكيد كلمة المرور مطلوب." };
+  if (password !== confirm) return { valid: false, message: "كلمة المرور غير متطابقة." };
   return { valid: true, message: "" };
 }
 
 export function validateName(name) {
-  if (!name || !name.trim()) {
-    return { valid: false, message: "الاسم الكامل مطلوب." };
-  }
-  if (name.trim().length < 2) {
-    return { valid: false, message: "الاسم قصير جداً." };
-  }
+  if (!name || !name.trim()) return { valid: false, message: "الاسم الكامل مطلوب." };
+  if (name.trim().length < 2) return { valid: false, message: "الاسم قصير جداً." };
   return { valid: true, message: "" };
 }
 
-// -----------------------------------------------
-// Authentication Functions
-// -----------------------------------------------
-
-/**
- * تسجيل الدخول بالبريد وكلمة المرور.
- * ❌ لا يتحقق من تفعيل البريد — يسمح بالدخول مباشرة.
- */
+// دوال المصادقة
 export async function login(email, password) {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     const idTokenResult = await getIdTokenResult(user);
-
-    await logAuditEvent("login_success", {
-      uid: user.uid,
-      emailPrefix: email.split("@")[0],
-    });
-
-    return {
-      ok: true,
-      user,
-      claims: idTokenResult.claims,
-    };
+    await logAuditEvent("login_success", { uid: user.uid, emailPrefix: email.split("@")[0] });
+    return { ok: true, user, claims: idTokenResult.claims };
   } catch (error) {
-    await logAuditEvent("login_failure", {
-      emailPrefix: email ? email.split("@")[0] : "empty",
-      errorCode: error.code,
-    });
+    await logAuditEvent("login_failure", { emailPrefix: email ? email.split("@")[0] : "empty", errorCode: error.code });
     return mapAuthError(error);
   }
 }
 
-/**
- * تسجيل الدخول عبر Google
- */
 export async function loginWithGoogle() {
   try {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-
-    await logAuditEvent("login_google_success", {
-      uid: user.uid,
-      emailPrefix: user.email ? user.email.split("@")[0] : "unknown",
-    });
-
-    return {
-      ok: true,
-      user,
-      isNewUser: result._tokenResponse?.isNewUser || false,
-    };
+    await logAuditEvent("login_google_success", { uid: user.uid, emailPrefix: user.email?.split("@")[0] || "unknown" });
+    return { ok: true, user, isNewUser: result._tokenResponse?.isNewUser || false };
   } catch (error) {
     await logAuditEvent("login_google_failure", { errorCode: error.code });
     return mapAuthError(error);
   }
 }
 
-/**
- * تسجيل الدخول عبر GitHub
- */
 export async function loginWithGithub() {
   try {
     const provider = new GithubAuthProvider();
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-
-    await logAuditEvent("login_github_success", {
-      uid: user.uid,
-      emailPrefix: user.email ? user.email.split("@")[0] : "unknown",
-    });
-
-    return {
-      ok: true,
-      user,
-      isNewUser: result._tokenResponse?.isNewUser || false,
-    };
+    await logAuditEvent("login_github_success", { uid: user.uid, emailPrefix: user.email?.split("@")[0] || "unknown" });
+    return { ok: true, user, isNewUser: result._tokenResponse?.isNewUser || false };
   } catch (error) {
     await logAuditEvent("login_github_failure", { errorCode: error.code });
     return mapAuthError(error);
   }
 }
 
-/**
- * إنشاء حساب جديد بالبريد وكلمة المرور.
- * ❌ لا يرسل رابط تفعيل — يتم التوجيه مباشرة للوحة التحكم.
- */
 export async function register(email, password, displayName) {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-
-    if (displayName) {
-      await updateProfile(user, { displayName });
-    }
-
-    await logAuditEvent("register_success", {
-      uid: user.uid,
-      emailPrefix: email.split("@")[0],
-    });
-
-    return {
-      ok: true,
-      user,
-    };
+    if (displayName) await updateProfile(user, { displayName });
+    await logAuditEvent("register_success", { uid: user.uid, emailPrefix: email.split("@")[0] });
+    return { ok: true, user };
   } catch (error) {
-    await logAuditEvent("register_failure", {
-      emailPrefix: email ? email.split("@")[0] : "empty",
-      errorCode: error.code,
-    });
+    await logAuditEvent("register_failure", { emailPrefix: email ? email.split("@")[0] : "empty", errorCode: error.code });
     return mapAuthError(error);
   }
 }
 
-/**
- * تسجيل الخروج.
- */
 export async function logout() {
   try {
     const user = auth.currentUser;
-    if (user) {
-      await logAuditEvent("logout", { uid: user.uid });
-    }
+    if (user) await logAuditEvent("logout", { uid: user.uid });
     await signOut(auth);
     return { ok: true };
   } catch {
@@ -249,40 +155,20 @@ export async function logout() {
   }
 }
 
-/**
- * إرسال رابط إعادة تعيين كلمة المرور.
- */
 export async function resetPassword(email) {
   try {
     await sendPasswordResetEmail(auth, email);
-    await logAuditEvent("password_reset_requested", {
-      emailPrefix: email ? email.split("@")[0] : "empty",
-    });
-    return {
-      ok: true,
-      userMessage: "إذا كان البريد مسجلًا، ستصلك رسالة لإعادة تعيين كلمة المرور.",
-    };
+    await logAuditEvent("password_reset_requested", { emailPrefix: email ? email.split("@")[0] : "empty" });
+    return { ok: true, userMessage: "إذا كان البريد مسجلًا، ستصلك رسالة لإعادة تعيين كلمة المرور." };
   } catch (error) {
-    await logAuditEvent("password_reset_failure", {
-      emailPrefix: email ? email.split("@")[0] : "empty",
-      errorCode: error.code,
-    });
-    if (
-      error.code === "auth/user-not-found" ||
-      error.code === "auth/invalid-email"
-    ) {
-      return {
-        ok: true,
-        userMessage: "إذا كان البريد مسجلًا، ستصلك رسالة لإعادة تعيين كلمة المرور.",
-      };
+    await logAuditEvent("password_reset_failure", { emailPrefix: email ? email.split("@")[0] : "empty", errorCode: error.code });
+    if (error.code === "auth/user-not-found" || error.code === "auth/invalid-email") {
+      return { ok: true, userMessage: "إذا كان البريد مسجلًا، ستصلك رسالة لإعادة تعيين كلمة المرور." };
     }
     return mapAuthError(error);
   }
 }
 
-/**
- * التحقق مما إذا كان المستخدم الحالي لديه صلاحية admin.
- */
 export async function isAdmin(forceRefresh = false) {
   const user = auth.currentUser;
   if (!user) return false;
