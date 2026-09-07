@@ -1,578 +1,642 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>جارٍ التحميل... — عبدالله عباس</title>
-  <meta name="robots" content="index, follow" />
-  <meta name="description" content="" id="metaDesc" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://abdallahsst.firebaseio.com" />
-  <link rel="preconnect" href="https://firestore.googleapis.com" />
+    <!-- ============================================================
+    SEO — صفحة تفاصيل المنتج
+    ============================================================ -->
+    <title>جارٍ التحميل... — عبدالله عباس</title>
+    <meta name="description" content="" id="metaDesc" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="" id="metaCanonical" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="icon" href="/favicon.ico" sizes="any" />
+    <!-- ============================================================
+    Open Graph — سيتم تحديثها عبر JavaScript
+    ============================================================ -->
+    <meta property="og:title" content="" id="ogTitle" />
+    <meta property="og:description" content="" id="ogDesc" />
+    <meta property="og:url" content="" id="ogUrl" />
+    <meta property="og:image" content="" id="ogImage" />
+    <meta property="og:type" content="product" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="/css/design-system.css" />
-  <link rel="stylesheet" href="/css/product-detail.css" />
+    <!-- ============================================================
+    Fonts & CSS
+    ============================================================ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
-  <style>
-    @keyframes pdet-toast-slide {
-      0% { opacity: 0; transform: translateX(-50%) translateY(-30px) scale(0.95); }
-      100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
-    }
-    .pdet-toast.visible {
-      animation: pdet-toast-slide 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-    .pdet-request-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none !important;
-    }
-
-    /* ===== أزرار مزدوجة ===== */
-    .pdet-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
-
-    .pdet-actions .pdet-request-btn {
-      flex: 1;
-      min-width: 180px;
-    }
-
-    .pdet-demo-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 28px;
-      font-family: var(--font);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      background: var(--bg-white);
-      border: 2px solid var(--border-medium);
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      text-decoration: none;
-      flex: 1;
-      min-width: 160px;
-      justify-content: center;
-    }
-
-    .pdet-demo-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
-    }
-
-    .pdet-demo-btn:active {
-      transform: scale(0.97);
-    }
-
-    .pdet-demo-btn svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      transition: transform 0.3s;
-    }
-
-    .pdet-demo-btn:hover svg {
-      transform: translateX(-4px) scale(1.1);
-    }
-
-    @media (max-width: 480px) {
-      .pdet-actions {
-        flex-direction: column;
-      }
-      .pdet-actions .pdet-request-btn,
-      .pdet-actions .pdet-demo-btn {
-        flex: none;
-        width: 100%;
-        min-width: 0;
-      }
-    }
-  </style>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/product-detail.css" />
 </head>
 <body>
 
-  <!-- ===== TOAST ===== -->
-  <div class="pdet-toast" id="pdetToast">
-    <svg class="pdet-toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-    </svg>
-    <span id="pdetToastMessage">✅ تم الإرسال بنجاح</span>
-    <button class="pdet-toast-close" id="pdetToastClose" aria-label="إغلاق">✕</button>
-  </div>
-
-  <!-- ===== NAVIGATION ===== -->
-  <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
-    <div class="nav-inner">
-      <a href="/" class="nav-brand">
-        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" width="34" height="34" />
-        <span>عبدالله عباس</span>
-      </a>
-      <div class="nav-links">
-        <a href="/services/" class="nav-link">الخدمات</a>
-        <a href="/products/" class="nav-link" style="color:var(--primary)">المنتجات</a>
-        <a href="/portfolio/" class="nav-link">الأعمال</a>
-        <a href="/blog/" class="nav-link">المقالات</a>
-        <a href="/about.html" class="nav-link">عن عبدالله</a>
-      </div>
-      <a href="/contact.html" class="nav-cta">تواصل معي</a>
-      <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-      </button>
-    </div>
-  </nav>
-
-  <!-- ===== MOBILE MENU ===== -->
-  <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
-    <div class="nav-mobile-panel" id="mobilePanel">
-      <div class="nav-mobile-header">
-        <span class="nav-mobile-brand">
-          <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo" width="30" height="30" />
-          <span>عبدالله عباس</span>
-        </span>
-        <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
-        </button>
-      </div>
-      <div class="nav-mobile-links">
-        <a href="/services/" class="nav-mobile-link">الخدمات</a>
-        <a href="/products/" class="nav-mobile-link" style="color:var(--primary)">المنتجات</a>
-        <a href="/portfolio/" class="nav-mobile-link">الأعمال</a>
-        <a href="/blog/" class="nav-mobile-link">المقالات</a>
-        <a href="/about.html" class="nav-mobile-link">عن عبدالله</a>
-        <a href="/contact.html" class="nav-mobile-link">تواصل معي</a>
-        <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
-      </div>
-      <div class="nav-mobile-footer">
-        <a href="/contact.html" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== MAIN ===== -->
-  <main id="pageRoot">
-    <!-- Loading -->
-    <div class="pdet-loading" id="loadingState" style="display:flex;align-items:center;justify-content:center;min-height:60vh;background:var(--bg-body);">
-      <div style="width:32px;height:32px;border:3px solid var(--border-light);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;"></div>
-    </div>
-
-    <!-- 404 -->
-    <div class="pdet-404" id="notFoundState" style="display:none;padding:calc(var(--header-h)+80px) 0 100px;text-align:center;background:var(--bg-body);">
-      <div style="font-family:var(--font-display);font-size:6rem;font-weight:800;color:var(--border);line-height:1;letter-spacing:-0.04em;margin-bottom:16px;">404</div>
-      <h1 style="font-size:1.375rem;font-weight:600;color:var(--text-primary);margin-bottom:8px;">المنتج غير موجود</h1>
-      <p style="font-size:0.9375rem;color:var(--text-muted);margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7;">المنتج الذي تبحث عنه غير موجود أو تم حذفه.</p>
-      <a href="/products/" class="btn btn--primary">جميع المنتجات</a>
-    </div>
-
-    <!-- Content -->
-    <div id="contentRoot" style="display:none;"></div>
-  </main>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="site-footer" id="siteFooter" style="display:none;">
-    <div class="container">
-      <div class="footer-inner">
-        <div>
-          <div class="footer-brand">
-            <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" width="38" height="38" />
-            <div class="footer-brand-name">عبدالله عباس</div>
-          </div>
-          <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+    <!-- ============================================================
+    HEADER
+    ============================================================ -->
+    <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
+        <div class="nav-inner">
+            <a href="/" class="nav-brand">
+                <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" />
+                <span>عبدالله عباس</span>
+            </a>
+            <div class="nav-links">
+                <a href="/services" class="nav-link">الخدمات</a>
+                <a href="/products" class="nav-link" style="color:var(--primary)">المنتجات</a>
+                <a href="/portfolio" class="nav-link">الأعمال</a>
+                <a href="/blog" class="nav-link">المقالات</a>
+                <a href="/about" class="nav-link">عن عبدالله</a>
+            </div>
+            <a href="/contact" class="nav-cta">تواصل معي</a>
+            <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+            </button>
         </div>
-        <div>
-          <div class="footer-heading">الخدمات</div>
-          <div class="footer-links">
-            <a href="/services/web-development.html" class="footer-link">تطوير مواقع</a>
-            <a href="/services/web-design.html" class="footer-link">تصميم واجهات</a>
-            <a href="/services/seo.html" class="footer-link">تحسين محركات البحث</a>
-            <a href="/services/wordpress.html" class="footer-link">ووردبريس</a>
-            <a href="/services/blogger.html" class="footer-link">بلوجر</a>
-          </div>
+    </nav>
+
+    <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="nav-mobile-panel" id="mobilePanel">
+            <div class="nav-mobile-header">
+                <span class="nav-mobile-brand">عبدالله عباس</span>
+                <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="nav-mobile-links">
+                <a href="/services" class="nav-mobile-link">الخدمات</a>
+                <a href="/products" class="nav-mobile-link" style="color:var(--primary)">المنتجات</a>
+                <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
+                <a href="/blog" class="nav-mobile-link">المقالات</a>
+                <a href="/about" class="nav-mobile-link">عن عبدالله</a>
+                <a href="/contact" class="nav-mobile-link">تواصل معي</a>
+                <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
+            </div>
+            <div class="nav-mobile-footer">
+                <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
+            </div>
         </div>
-        <div>
-          <div class="footer-heading">المحتوى</div>
-          <div class="footer-links">
-            <a href="/products/" class="footer-link">المنتجات</a>
-            <a href="/portfolio/" class="footer-link">الأعمال</a>
-            <a href="/blog/" class="footer-link">المقالات</a>
-            <a href="/about.html" class="footer-link">عن عبدالله</a>
-          </div>
-        </div>
-        <div>
-          <div class="footer-heading">تواصل</div>
-          <div class="footer-links">
-            <a href="/contact.html" class="footer-link">أرسل رسالة</a>
-            <a href="/login.html" class="footer-link">تسجيل الدخول</a>
-            <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
-            <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span class="footer-copy">&copy; 2025 عبدالله عباس</span>
-        <span class="footer-copy">جميع الحقوق محفوظة</span>
-      </div>
     </div>
-  </footer>
 
-  <!-- ===== STYLES ===== -->
-  <style>
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .pdet-404 .btn { display: inline-flex; align-items: center; gap: 8px; }
-  </style>
+    <!-- ============================================================
+    MAIN
+    ============================================================ -->
+    <main id="pageRoot">
+        <div class="pdet-loading" id="loadingState">
+            <div class="pdet-loading-spinner"></div>
+        </div>
 
-  <!-- ===== SCRIPTS ===== -->
-  <script>
-    // ===== NAV SCROLL =====
-    const nav = document.getElementById('siteNav');
-    function handleNavScroll() {
-      nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
-    }
-    window.addEventListener('scroll', handleNavScroll, { passive: true });
-    handleNavScroll();
+        <div class="pdet-404" id="notFoundState" style="display:none">
+            <div class="pdet-404-code">404</div>
+            <h1 class="pdet-404-title">المنتج غير موجود</h1>
+            <p class="pdet-404-desc">المنتج الذي تبحث عنه غير موجود أو تم حذفه.</p>
+            <a href="/products" class="btn btn--primary btn--sm">عرض جميع المنتجات</a>
+        </div>
 
-    // ===== MOBILE MENU =====
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mobileClose = document.getElementById('mobileClose');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobilePanel = document.getElementById('mobilePanel');
+        <div id="contentRoot" style="display:none"></div>
+    </main>
 
-    function openMobile() {
-      mobileMenu.classList.add('nav-mobile-menu--open');
-      mobilePanel.classList.add('nav-mobile-panel--open');
-      mobileMenu.setAttribute('aria-hidden', 'false');
-      mobileToggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeMobile() {
-      mobileMenu.classList.remove('nav-mobile-menu--open');
-      mobilePanel.classList.remove('nav-mobile-panel--open');
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      mobileToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-    mobileToggle.addEventListener('click', openMobile);
-    mobileClose.addEventListener('click', closeMobile);
-    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobile(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobile(); });
-    mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click', closeMobile));
-  </script>
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="site-footer" id="siteFooter" style="display:none">
+        <div class="container">
+            <div class="footer-inner">
+                <div>
+                    <div class="footer-brand">
+                        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
+                        <div class="footer-brand-name">عبدالله عباس</div>
+                    </div>
+                    <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+                </div>
+                <div>
+                    <div class="footer-heading">الخدمات</div>
+                    <div class="footer-links">
+                        <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
+                        <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
+                        <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
+                        <a href="/services/wordpress" class="footer-link">ووردبريس</a>
+                        <a href="/services/blogger" class="footer-link">بلوجر</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="footer-heading">المحتوى</div>
+                    <div class="footer-links">
+                        <a href="/products" class="footer-link">المنتجات</a>
+                        <a href="/portfolio" class="footer-link">الأعمال</a>
+                        <a href="/blog" class="footer-link">المقالات</a>
+                        <a href="/about" class="footer-link">عن عبدالله</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="footer-heading">تواصل</div>
+                    <div class="footer-links">
+                        <a href="/contact" class="footer-link">أرسل رسالة</a>
+                        <a href="/login.html" class="footer-link">تسجيل الدخول</a>
+                        <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
+                        <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 عبدالله عباس</span>
+                <span>جميع الحقوق محفوظة</span>
+            </div>
+        </div>
+    </footer>
 
-  <!-- ===== DATA ===== -->
-  <script type="module">
-    import { db, auth } from "/js/firebase-init.js";
-    import { collection, query, where, limit, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-    import { isSafeUrl, escapeHtml } from "/js/security.js";
-    import { requestProduct, showProductToast } from "/js/product-request.js";
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script type="importmap">
+        {
+            "imports": {
+                "firebase": "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js",
+                "firebase/firestore": "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js"
+            }
+        }
+    </script>
 
-    // ===== HELPERS =====
-    const CURRENCY_MAP = { EGP: "ج.م", USD: "$", SAR: "ر.س", AED: "د.إ" };
-    const TYPE_MAP = {
-      template: { label: "قالب", cls: "template" },
-      tool: { label: "أداة", cls: "tool" },
-      resource: { label: "مصدر", cls: "resource" },
-      "digital-product": { label: "منتج رقمي", cls: "digital-product" }
-    };
+    <script type="module">
+        import { initializeApp } from "firebase";
+        import { getFirestore, collection, query, where, limit, getDocs, Timestamp } from "firebase/firestore";
+        import { isSafeUrl } from "/js/security.js";
 
-    function getSlug() {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("slug");
-    }
-
-    function formatDate(d) {
-      if (!d) return "";
-      const date = d instanceof Timestamp ? d.toDate() : new Date(d);
-      return date.toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
-    }
-
-    // ===== BUILD BREADCRUMB =====
-    function buildBreadcrumb(product) {
-      const navEl = document.createElement("nav");
-      navEl.className = "pdet-breadcrumb";
-      navEl.setAttribute("aria-label", "مسار التنقل");
-      navEl.innerHTML = `
-        <a href="/">الرئيسية</a>
-        <span class="sep">/</span>
-        <a href="/products/">المنتجات</a>
-        <span class="sep">/</span>
-        <span class="current">${escapeHtml(product.title)}</span>
-      `;
-      return navEl;
-    }
-
-    // ===== BUILD HERO =====
-    function buildHero(product) {
-      const section = document.createElement("section");
-      section.className = "pdet-hero";
-
-      const inner = document.createElement("div");
-      inner.className = "pdet-hero-inner";
-
-      const grid = document.createElement("div");
-      grid.className = "pdet-hero-grid";
-
-      // ===== الصورة =====
-      const imageCol = document.createElement("div");
-      imageCol.className = "pdet-hero-image";
-
-      if (product.image && isSafeUrl(product.image)) {
-        const img = document.createElement("img");
-        img.src = product.image;
-        img.alt = product.title || "";
-        img.loading = "lazy";
-        imageCol.appendChild(img);
-      } else {
-        const placeholder = document.createElement("div");
-        placeholder.className = "pdet-hero-image-placeholder";
-        placeholder.textContent = "📦";
-        imageCol.appendChild(placeholder);
-      }
-      grid.appendChild(imageCol);
-
-      // ===== المعلومات =====
-      const infoCol = document.createElement("div");
-      infoCol.className = "pdet-hero-info";
-
-      // الشارات
-      const badges = document.createElement("div");
-      badges.className = "pdet-hero-badges";
-
-      const typeInfo = TYPE_MAP[product.type] || { label: product.type || "منتج", cls: "" };
-      const typeBadge = document.createElement("span");
-      typeBadge.className = "pdet-hero-badge";
-      typeBadge.textContent = typeInfo.label;
-      badges.appendChild(typeBadge);
-
-      if (product.version) {
-        const verBadge = document.createElement("span");
-        verBadge.className = "pdet-hero-badge pdet-hero-badge--version";
-        verBadge.textContent = `الإصدار v${product.version}`;
-        badges.appendChild(verBadge);
-      }
-
-      if (product.status === "available") {
-        const statusBadge = document.createElement("span");
-        statusBadge.className = "pdet-hero-badge";
-        statusBadge.textContent = "متاح";
-        statusBadge.style.background = "rgba(34,197,94,0.08)";
-        statusBadge.style.color = "#22C55E";
-        statusBadge.style.borderColor = "rgba(34,197,94,0.1)";
-        badges.appendChild(statusBadge);
-      }
-
-      infoCol.appendChild(badges);
-
-      // العنوان
-      const title = document.createElement("h1");
-      title.className = "pdet-hero-title";
-      title.textContent = product.title || "—";
-      infoCol.appendChild(title);
-
-      if (product.shortDescription) {
-        const subtitle = document.createElement("p");
-        subtitle.className = "pdet-hero-subtitle";
-        subtitle.textContent = product.shortDescription;
-        infoCol.appendChild(subtitle);
-      }
-
-      // السعر
-      const price = document.createElement("div");
-      if (product.price > 0) {
-        price.className = "pdet-hero-price";
-        price.textContent = `${Number(product.price).toLocaleString("ar-EG")} `;
-        const curr = document.createElement("span");
-        curr.className = "pdet-hero-price-currency";
-        curr.textContent = CURRENCY_MAP[product.currency] || product.currency || "";
-        price.appendChild(curr);
-      } else {
-        price.className = "pdet-hero-price pdet-hero-price-free";
-        price.textContent = "مجاني";
-      }
-      infoCol.appendChild(price);
-
-      // ===== الأزرار (طلب + معاينة) =====
-      const actions = document.createElement("div");
-      actions.className = "pdet-actions";
-
-      // زر طلب المنتج
-      const requestBtn = document.createElement("button");
-      requestBtn.className = "pdet-request-btn";
-      requestBtn.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-        </svg>
-        طلب المنتج
-      `;
-      requestBtn.addEventListener("click", () => {
-        requestProduct(product);
-      });
-      actions.appendChild(requestBtn);
-
-      // ===== زر المعاينة (يظهر فقط إذا كان هناك demoUrl) =====
-      if (product.demoUrl && isSafeUrl(product.demoUrl)) {
-        const demoBtn = document.createElement("a");
-        demoBtn.href = product.demoUrl;
-        demoBtn.target = "_blank";
-        demoBtn.rel = "noopener noreferrer";
-        demoBtn.className = "pdet-demo-btn";
-        demoBtn.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
-          </svg>
-          معاينة المنتج
-        `;
-        actions.appendChild(demoBtn);
-      }
-
-      infoCol.appendChild(actions);
-
-      grid.appendChild(infoCol);
-      inner.appendChild(grid);
-      section.appendChild(inner);
-
-      return section;
-    }
-
-    // ===== BUILD CONTENT =====
-    function buildContent(product) {
-      const div = document.createElement("div");
-      div.className = "pdet-content";
-      div.style.cssText = "max-width:var(--max-w);margin:0 auto;padding:0 24px 60px;background:var(--bg-body);";
-
-      if (!product.description) return div;
-
-      const section = document.createElement("div");
-      section.style.cssText = "max-width:720px;margin:0 auto;";
-
-      const title = document.createElement("h2");
-      title.style.cssText = "font-family:var(--font-display);font-size:1.25rem;font-weight:700;color:var(--text-primary);margin-bottom:16px;";
-      title.textContent = "تفاصيل المنتج";
-      section.appendChild(title);
-
-      const paragraphs = product.description.split("\n").filter(p => p.trim());
-      paragraphs.forEach(p => {
-        const para = document.createElement("p");
-        para.style.cssText = "font-size:0.9375rem;color:var(--text-secondary);line-height:1.9;margin-bottom:16px;";
-        para.textContent = p;
-        section.appendChild(para);
-      });
-
-      if (product.features && product.features.length > 0) {
-        const featTitle = document.createElement("h3");
-        featTitle.style.cssText = "font-family:var(--font-display);font-size:1.0625rem;font-weight:700;color:var(--text-primary);margin:28px 0 12px;";
-        featTitle.textContent = "المميزات";
-        section.appendChild(featTitle);
-
-        const list = document.createElement("ul");
-        list.style.cssText = "padding-inline-start:24px;margin-bottom:16px;";
-        product.features.forEach(f => {
-          const li = document.createElement("li");
-          li.style.cssText = "font-size:0.875rem;color:var(--text-secondary);line-height:1.8;margin-bottom:6px;";
-          li.textContent = f;
-          list.appendChild(li);
-        });
-        section.appendChild(list);
-      }
-
-      div.appendChild(section);
-      return div;
-    }
-
-    // ===== BUILD PAGE =====
-    function buildPage(product) {
-      const root = document.getElementById("contentRoot");
-      root.appendChild(buildBreadcrumb(product));
-      root.appendChild(buildHero(product));
-      root.appendChild(buildContent(product));
-      root.style.display = "block";
-    }
-
-    // ===== UPDATE SEO =====
-    function updateSEO(product) {
-      const title = product.seoTitle || product.title || "المنتج";
-      const desc = product.metaDescription || product.shortDescription || "";
-      document.title = `${title} — عبدالله عباس`;
-      document.getElementById("metaDesc").setAttribute("content", desc);
-
-      let canonical = document.querySelector('link[rel="canonical"]');
-      if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
-      canonical.href = `https://www.abdallahabas.com/product-detail.html?slug=${product.slug}`;
-
-      const old = document.getElementById("productStructuredData");
-      if (old) old.remove();
-      const script = document.createElement("script");
-      script.type = "application/ld+json";
-      script.id = "productStructuredData";
-      const sd = {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": product.seoTitle || product.title,
-        "description": product.metaDescription || product.shortDescription,
-        "url": `https://www.abdallahabas.com/product-detail.html?slug=${product.slug}`,
-        "brand": { "@type": "Brand", "name": "عبدالله عباس" }
-      };
-      if (product.price > 0) {
-        sd.offers = {
-          "@type": "Offer",
-          "price": product.price,
-          "priceCurrency": product.currency || "EGP",
+        // ============================================================
+        // Firebase Config
+        // ============================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyDg-oSbA_UdlzMS8HZGE0pHtr_zWg5rrXY",
+            authDomain: "abdallahsst.firebaseapp.com",
+            projectId: "abdallahsst",
+            storageBucket: "abdallahsst.firebasestorage.app",
+            messagingSenderId: "1011946194938",
+            appId: "1:1011946194938:web:9bee94362711431368c643",
+            measurementId: "G-ZP5BJH98CS"
         };
-      }
-      if (product.image && isSafeUrl(product.image)) {
-        sd.image = product.image;
-      }
-      script.textContent = JSON.stringify(sd);
-      document.head.appendChild(script);
-    }
 
-    // ===== 404 =====
-    function show404() {
-      document.getElementById("loadingState").style.display = "none";
-      document.getElementById("notFoundState").style.display = "block";
-      document.title = "المنتج غير موجود — عبدالله عباس";
-    }
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-    // ===== LOAD =====
-    async function loadProduct() {
-      const slug = getSlug();
-      if (!slug) { show404(); return; }
+        // ============================================================
+        // Helpers
+        // ============================================================
+        function formatPrice(price, currency = 'USD') {
+            const map = { EGP: 'ج.م', USD: '$', SAR: 'ر.س', AED: 'د.إ' };
+            const sym = map[currency] || currency;
+            if (price > 0) return `${price.toLocaleString('ar-EG')} ${sym}`;
+            return 'مجاني';
+        }
 
-      try {
-        const q = query(collection(db, "products"), where("slug", "==", slug), limit(1));
-        const snap = await getDocs(q);
-        if (snap.empty) { show404(); return; }
+        function formatDate(d) {
+            if (!d) return '';
+            const date = d instanceof Timestamp ? d.toDate() : new Date(d);
+            return date.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
 
-        const docSnap = snap.docs[0];
-        const product = { id: docSnap.id, ...docSnap.data() };
-        if (product.active === false) { show404(); return; }
+        function escapeHtml(str) {
+            if (typeof str !== 'string') return '';
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;' };
+            return str.replace(/[&<>"']/g, (ch) => map[ch] || ch);
+        }
 
-        updateSEO(product);
-        buildPage(product);
-        document.getElementById("siteFooter").style.display = "block";
-        document.getElementById("loadingState").style.display = "none";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } catch (error) {
-        console.error("خطأ في تحميل المنتج:", error);
-        show404();
-      }
-    }
+        function truncate(str, max = 160) {
+            if (!str) return '';
+            return str.length > max ? str.slice(0, max) + '...' : str;
+        }
 
-    loadProduct();
+        function getSlug() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('slug');
+        }
 
-    // ===== EXPOSE =====
-    window.requestProduct = requestProduct;
-    window.showProductToast = showProductToast;
-  </script>
+        // ============================================================
+        // Cart Functions
+        // ============================================================
+        function getCart() { try { return JSON.parse(localStorage.getItem('cart')) || []; } catch { return []; } }
+
+        function saveCart(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartBadge();
+        }
+
+        function addToCart(id, type, title, price, currency = 'USD') {
+            const cart = getCart();
+            const existing = cart.find(item => item.id === id && item.type === type);
+            if (existing) {
+                existing.qty = (existing.qty || 1) + 1;
+            } else {
+                cart.push({ id, type, title, price, currency, qty: 1 });
+            }
+            saveCart(cart);
+            const btn = document.querySelector('.pdet-add-to-cart-btn');
+            if (btn) {
+                const origText = btn.innerHTML;
+                btn.classList.add('added');
+                btn.innerHTML =
+                    '<svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> أضيفت للسلة';
+                setTimeout(() => {
+                    btn.classList.remove('added');
+                    btn.innerHTML = origText;
+                }, 2000);
+            }
+        }
+
+        function updateCartBadge() {
+            const cart = getCart();
+            const count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+            const badge = document.getElementById('cartBadge');
+            if (badge) badge.textContent = count;
+        }
+
+        // ============================================================
+        // Build Page
+        // ============================================================
+        function buildBreadcrumb(product) {
+            const nav = document.createElement('nav');
+            nav.className = 'pdet-breadcrumb';
+            nav.setAttribute('aria-label', 'مسار التنقل');
+            nav.innerHTML = `
+                <a href="/">الرئيسية</a>
+                <span class="sep">/</span>
+                <a href="/products">المنتجات</a>
+                <span class="sep">/</span>
+                <span class="current">${escapeHtml(product.title)}</span>
+            `;
+            return nav;
+        }
+
+        function buildHero(product) {
+            const section = document.createElement('section');
+            section.className = 'pdet-hero';
+
+            const inner = document.createElement('div');
+            inner.className = 'pdet-hero-inner';
+
+            // Top tags
+            const top = document.createElement('div');
+            top.className = 'pdet-hero-top';
+
+            if (product.type) {
+                const typeMap = {
+                    template: 'قالب',
+                    tool: 'أداة',
+                    resource: 'مصدر',
+                    'digital-product': 'منتج رقمي'
+                };
+                const typeTag = document.createElement('span');
+                typeTag.className = 'pdet-category';
+                typeTag.textContent = typeMap[product.type] || product.type;
+                top.appendChild(typeTag);
+            }
+
+            if (product.version) {
+                const verTag = document.createElement('span');
+                verTag.className = 'pdet-version-tag';
+                verTag.textContent = `الإصدار v${product.version}`;
+                top.appendChild(verTag);
+            }
+
+            if (product.status) {
+                const statusMap = {
+                    available: { label: 'متاح', cls: 'available' },
+                    'coming-soon': { label: 'قريباً', cls: 'coming-soon' },
+                    draft: { label: 'مسودة', cls: 'draft' },
+                    discontinued: { label: 'متوقف', cls: 'discontinued' }
+                };
+                const s = statusMap[product.status] || { label: product.status, cls: 'draft' };
+                const statusTag = document.createElement('span');
+                statusTag.className = `pdet-status-tag pdet-status-tag--${s.cls}`;
+                statusTag.textContent = s.label;
+                top.appendChild(statusTag);
+            }
+
+            inner.appendChild(top);
+
+            // Title
+            const title = document.createElement('h1');
+            title.className = 'pdet-hero-title';
+            title.textContent = product.title || '—';
+            inner.appendChild(title);
+
+            // Price
+            const priceDiv = document.createElement('div');
+            priceDiv.className = 'pdet-hero-price';
+            if (product.price > 0) {
+                const priceSpan = document.createElement('span');
+                priceSpan.textContent = product.price.toLocaleString('ar-EG');
+                const currSpan = document.createElement('span');
+                currSpan.className = 'pdet-hero-price-currency';
+                const map = { EGP: 'ج.م', USD: '$', SAR: 'ر.س', AED: 'د.إ' };
+                currSpan.textContent = map[product.currency] || product.currency || '';
+                priceDiv.appendChild(priceSpan);
+                priceDiv.appendChild(currSpan);
+            } else {
+                priceDiv.className = 'pdet-hero-price pdet-hero-price-free';
+                priceDiv.textContent = 'مجاني';
+            }
+            inner.appendChild(priceDiv);
+
+            // Actions
+            const actions = document.createElement('div');
+            actions.className = 'pdet-hero-actions';
+
+            const addBtn = document.createElement('button');
+            addBtn.className = 'btn btn--primary pdet-add-to-cart-btn';
+            addBtn.innerHTML =
+                '<svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> أضف للسلة';
+            addBtn.addEventListener('click', () => {
+                addToCart(product.id, 'product', product.title, product.price || 0, product.currency || 'USD');
+            });
+            actions.appendChild(addBtn);
+
+            if (product.demoUrl && isSafeUrl(product.demoUrl)) {
+                const demo = document.createElement('a');
+                demo.href = product.demoUrl;
+                demo.target = '_blank';
+                demo.rel = 'noopener noreferrer';
+                demo.className = 'btn btn--outline';
+                demo.innerHTML =
+                    '<svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg> معاينة حية';
+                actions.appendChild(demo);
+            }
+
+            inner.appendChild(actions);
+
+            // Image
+            if (product.image && isSafeUrl(product.image)) {
+                const imageDiv = document.createElement('div');
+                imageDiv.className = 'pdet-hero-image';
+                const img = document.createElement('img');
+                img.src = product.image;
+                img.alt = product.title || '';
+                img.loading = 'lazy';
+                imageDiv.appendChild(img);
+                inner.appendChild(imageDiv);
+            }
+
+            section.appendChild(inner);
+            return section;
+        }
+
+        function buildContent(product) {
+            const container = document.createElement('div');
+            container.className = 'pdet-content';
+
+            // Description
+            if (product.description) {
+                const section = document.createElement('div');
+                section.className = 'pdet-section';
+
+                const label = document.createElement('div');
+                label.className = 'pdet-section-label';
+                label.innerHTML =
+                    '<span class="pdet-section-label-line"></span> وصف المنتج';
+                section.appendChild(label);
+
+                const title = document.createElement('h2');
+                title.className = 'pdet-section-title';
+                title.textContent = 'عن المنتج';
+                section.appendChild(title);
+
+                const text = document.createElement('div');
+                text.className = 'pdet-section-text';
+                const paragraphs = product.description.split('\n').filter(p => p.trim());
+                paragraphs.forEach(p => {
+                    const para = document.createElement('p');
+                    para.textContent = p;
+                    text.appendChild(para);
+                });
+                section.appendChild(text);
+                container.appendChild(section);
+            }
+
+            // Features
+            if (product.features && product.features.length > 0) {
+                const section = document.createElement('div');
+                section.className = 'pdet-section';
+
+                const label = document.createElement('div');
+                label.className = 'pdet-section-label';
+                label.innerHTML =
+                    '<span class="pdet-section-label-line"></span> المميزات';
+                section.appendChild(label);
+
+                const title = document.createElement('h2');
+                title.className = 'pdet-section-title';
+                title.textContent = 'مميزات المنتج';
+                section.appendChild(title);
+
+                const grid = document.createElement('div');
+                grid.className = 'pdet-features-grid';
+
+                product.features.forEach(f => {
+                    const card = document.createElement('div');
+                    card.className = 'pdet-feature-card';
+                    card.innerHTML = `
+                        <svg class="pdet-feature-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <span class="pdet-feature-text">${escapeHtml(f)}</span>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                section.appendChild(grid);
+                container.appendChild(section);
+            }
+
+            // Download Info
+            if (product.downloadType) {
+                const section = document.createElement('div');
+                section.className = 'pdet-section';
+
+                const downloadMap = {
+                    free: 'تحميل مجاني مباشر',
+                    paid: 'مدفوع (طلب المنتج)',
+                    contact: 'تواصل للحصول عليه'
+                };
+
+                const info = document.createElement('div');
+                info.className = 'pdet-download-info';
+                info.innerHTML = `
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <span class="pdet-download-info-text">
+                        <strong>طريقة التحميل:</strong> ${downloadMap[product.downloadType] || product.downloadType}
+                    </span>
+                `;
+                section.appendChild(info);
+                container.appendChild(section);
+            }
+
+            return container;
+        }
+
+        function buildPage(product) {
+            const root = document.getElementById('contentRoot');
+
+            // Breadcrumb
+            root.appendChild(buildBreadcrumb(product));
+
+            // Hero
+            root.appendChild(buildHero(product));
+
+            // Content
+            root.appendChild(buildContent(product));
+
+            root.style.display = 'block';
+        }
+
+        // ============================================================
+        // SEO Update
+        // ============================================================
+        function updateSEO(product) {
+            const title = product.seoTitle || product.title || 'المنتج';
+            const desc = product.metaDescription || product.shortDescription || '';
+            const siteUrl = 'https://www.abdallahabas.com';
+
+            document.title = `${title} — عبدالله عباس`;
+            document.getElementById('metaDesc').setAttribute('content', truncate(desc, 160));
+            document.getElementById('metaCanonical').setAttribute('href', `${siteUrl}/product-detail?slug=${product.slug}`);
+
+            document.getElementById('ogTitle').setAttribute('content', title);
+            document.getElementById('ogDesc').setAttribute('content', truncate(desc, 160));
+            document.getElementById('ogUrl').setAttribute('content', `${siteUrl}/product-detail?slug=${product.slug}`);
+
+            const img = product.image && isSafeUrl(product.image) ? product.image : `${siteUrl}/assets/og-image.jpg`;
+            document.getElementById('ogImage').setAttribute('content', img);
+
+            // JSON-LD Product
+            const old = document.getElementById('productStructuredData');
+            if (old) old.remove();
+
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.id = 'productStructuredData';
+
+            const sd = {
+                '@context': 'https://schema.org',
+                '@type': 'Product',
+                'name': title,
+                'description': truncate(desc, 200),
+                'url': `${siteUrl}/product-detail?slug=${product.slug}`,
+                'sku': product.id,
+                'brand': {
+                    '@type': 'Brand',
+                    'name': 'عبدالله عباس'
+                },
+                'offers': {
+                    '@type': 'Offer',
+                    'price': product.price || 0,
+                    'priceCurrency': product.currency || 'USD',
+                    'availability': product.status === 'available' ? 'https://schema.org/InStock' :
+                        'https://schema.org/OutOfStock',
+                    'url': `${siteUrl}/product-detail?slug=${product.slug}`
+                }
+            };
+
+            if (product.image && isSafeUrl(product.image)) {
+                sd.image = product.image;
+            }
+
+            script.textContent = JSON.stringify(sd);
+            document.head.appendChild(script);
+        }
+
+        // ============================================================
+        // Load Product
+        // ============================================================
+        function show404() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('notFoundState').style.display = 'block';
+            document.title = 'المنتج غير موجود — عبدالله عباس';
+        }
+
+        async function loadProduct() {
+            const slug = getSlug();
+            if (!slug) { show404(); return; }
+
+            try {
+                const q = query(
+                    collection(db, 'products'),
+                    where('slug', '==', slug),
+                    where('active', '==', true),
+                    limit(1)
+                );
+                const snap = await getDocs(q);
+
+                if (snap.empty) { show404(); return; }
+
+                const docSnap = snap.docs[0];
+                const product = { id: docSnap.id, ...docSnap.data() };
+
+                updateSEO(product);
+                buildPage(product);
+                document.getElementById('siteFooter').style.display = 'block';
+
+                // تحديث عداد السلة
+                updateCartBadge();
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                console.error('خطأ في تحميل المنتج:', error);
+                show404();
+            }
+        }
+
+        // ============================================================
+        // Nav Functions
+        // ============================================================
+        const nav = document.getElementById('siteNav');
+
+        function handleNavScroll() {
+            nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
+        }
+        window.addEventListener('scroll', handleNavScroll, { passive: true });
+        handleNavScroll();
+
+        // Mobile Menu
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileClose = document.getElementById('mobileClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobilePanel = document.getElementById('mobilePanel');
+
+        function openMobile() {
+            mobileMenu.classList.add('nav-mobile-menu--open');
+            mobilePanel.classList.add('nav-mobile-panel--open');
+            mobileMenu.setAttribute('aria-hidden', 'false');
+            mobileToggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobile() {
+            mobileMenu.classList.remove('nav-mobile-menu--open');
+            mobilePanel.classList.remove('nav-mobile-panel--open');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+
+        mobileToggle.addEventListener('click', openMobile);
+        mobileClose.addEventListener('click', closeMobile);
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) closeMobile();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMobile();
+        });
+
+        mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click',
+        closeMobile));
+
+        // ============================================================
+        // Init
+        // ============================================================
+        loadProduct();
+
+        console.log('🚀 صفحة تفاصيل المنتج جاهزة!');
+    </script>
+
 </body>
 </html>
