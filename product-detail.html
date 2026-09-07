@@ -12,9 +12,6 @@
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="" id="metaCanonical" />
 
-    <!-- ============================================================
-    Open Graph — سيتم تحديثها عبر JavaScript
-    ============================================================ -->
     <meta property="og:title" content="" id="ogTitle" />
     <meta property="og:description" content="" id="ogDesc" />
     <meta property="og:url" content="" id="ogUrl" />
@@ -36,48 +33,63 @@
 <body>
 
     <!-- ============================================================
-    HEADER
+    HEADER — تم إصلاح الهيكل ليتوافق مع main.css
     ============================================================ -->
-    <nav class="site-nav" id="siteNav" role="navigation" aria-label="التنقل الرئيسي">
-        <div class="nav-inner">
-            <a href="/" class="nav-brand">
-                <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--nav" />
-                <span>عبدالله عباس</span>
+    <header class="site-header" id="siteHeader" role="banner">
+        <div class="header-inner">
+            <a href="/" class="logo" aria-label="عبدالله عباس - الرئيسية">
+                <img src="/assets/logo.png" alt="شعار عبدالله عباس" />
+                <span>عبدالله <span>عباس</span></span>
             </a>
-            <div class="nav-links">
-                <a href="/services" class="nav-link">الخدمات</a>
-                <a href="/products" class="nav-link" style="color:var(--primary)">المنتجات</a>
-                <a href="/portfolio" class="nav-link">الأعمال</a>
-                <a href="/blog" class="nav-link">المقالات</a>
-                <a href="/about" class="nav-link">عن عبدالله</a>
-            </div>
-            <a href="/contact" class="nav-cta">تواصل معي</a>
-            <button class="nav-mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-            </button>
-        </div>
-    </nav>
 
-    <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
-        <div class="nav-mobile-panel" id="mobilePanel">
-            <div class="nav-mobile-header">
-                <span class="nav-mobile-brand">عبدالله عباس</span>
-                <button class="nav-mobile-close" id="mobileClose" type="button" aria-label="إغلاق القائمة">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+            <div class="header-actions">
+                <a href="/services">الخدمات</a>
+                <a href="/products" style="color:var(--primary);">المنتجات</a>
+                <a href="/portfolio">الأعمال</a>
+                <a href="/login.html" class="btn-outline-nav">
+                    <svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 12c-1.67 0-3.14-.85-4-2.15 0-1.33 2.67-2.05 4-2.05s4 .72 4 2.05c-.86 1.3-2.33 2.15-4 2.15z"/></svg>
+                    دخول
+                </a>
+                <a href="/register.html" class="btn-primary-nav">
+                    <svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    حساب جديد
+                </a>
+                <button class="cart-btn" id="cartToggle" aria-label="فتح السلة" title="عربة التسوق">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-8.9-5h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4l-3.87 7H8.53L4.27 2H1v2h2l3.6 7.59-1.35 2.45C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2z"/></svg>
+                    <span class="badge" id="cartBadge">0</span>
+                </button>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="فتح القائمة" aria-expanded="false">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
                 </button>
             </div>
-            <div class="nav-mobile-links">
-                <a href="/services" class="nav-mobile-link">الخدمات</a>
-                <a href="/products" class="nav-mobile-link" style="color:var(--primary)">المنتجات</a>
-                <a href="/portfolio" class="nav-mobile-link">الأعمال</a>
-                <a href="/blog" class="nav-mobile-link">المقالات</a>
-                <a href="/about" class="nav-mobile-link">عن عبدالله</a>
-                <a href="/contact" class="nav-mobile-link">تواصل معي</a>
-                <a href="/login.html" class="nav-mobile-link">تسجيل الدخول</a>
-            </div>
-            <div class="nav-mobile-footer">
-                <a href="/contact" class="nav-mobile-cta">ابدأ مشروعك الآن</a>
-            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    MOBILE MENU
+    ============================================================ -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="القائمة">
+        <button class="mobile-menu-close" id="mobileClose" aria-label="إغلاق القائمة">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+        <a href="/services"><svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg> الخدمات</a>
+        <a href="/products" style="color:var(--primary);"><svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm4 12h-4v3h-2v-3H8v-2h4V9h2v4h4v2z"/></svg> المنتجات</a>
+        <a href="/portfolio"><svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg> الأعمال</a>
+        <a href="/login.html"><svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 12c-1.67 0-3.14-.85-4-2.15 0-1.33 2.67-2.05 4-2.05s4 .72 4 2.05c-.86 1.3-2.33 2.15-4 2.15z"/></svg> تسجيل الدخول</a>
+        <a href="/register.html" class="btn-primary-nav"><svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> حساب جديد</a>
+    </div>
+
+    <!-- ============================================================
+    MINI CART
+    ============================================================ -->
+    <div class="mini-cart" id="miniCart" role="dialog" aria-label="عربة التسوق">
+        <h4><svg class="icon-svg" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-8.9-5h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4l-3.87 7H8.53L4.27 2H1v2h2l3.6 7.59-1.35 2.45C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2z"/></svg> عربة التسوق</h4>
+        <div id="cartItems"></div>
+        <div class="mini-cart-total" id="cartTotal">المجموع: 0 $</div>
+        <div class="mini-cart-actions">
+            <a href="/cart.html" class="btn-outline">عرض السلة</a>
+            <button id="clearCartBtn" class="btn-outline" style="border-color:var(--text-muted);color:var(--text-muted);">إفراغ</button>
         </div>
     </div>
 
@@ -104,46 +116,47 @@
     ============================================================ -->
     <footer class="site-footer" id="siteFooter" style="display:none">
         <div class="container">
-            <div class="footer-inner">
+            <div class="footer-grid">
                 <div>
                     <div class="footer-brand">
-                        <img src="/assets/logo.png" alt="شعار عبدالله عباس" class="brand-logo brand-logo--footer" />
-                        <div class="footer-brand-name">عبدالله عباس</div>
+                        <img src="/assets/logo.png" alt="شعار عبدالله عباس" />
+                        <span class="footer-brand-name">عبدالله عباس</span>
                     </div>
-                    <p class="footer-brand-desc">بناء حلول رقمية متكاملة تتميز بالجودة والاحترافية والالتزام بالنتائج.</p>
+                    <p class="footer-brand-desc">استشارات رقمية متكاملة — متخصصون في أدسنس، السيو، وإدارة المواقع لتحقيق أرباح مستدامة.</p>
                 </div>
                 <div>
                     <div class="footer-heading">الخدمات</div>
                     <div class="footer-links">
-                        <a href="/services/web-development" class="footer-link">تطوير مواقع</a>
-                        <a href="/services/web-design" class="footer-link">تصميم واجهات</a>
-                        <a href="/services/seo" class="footer-link">تحسين محركات البحث</a>
-                        <a href="/services/wordpress" class="footer-link">ووردبريس</a>
-                        <a href="/services/blogger" class="footer-link">بلوجر</a>
+                        <a href="/services/adsense">تحسين أدسنس</a>
+                        <a href="/services/seo">استراتيجيات سيو</a>
+                        <a href="/services/blog-management">إدارة المدونات</a>
+                        <a href="/services/wordpress">تطوير ووردبريس</a>
                     </div>
                 </div>
                 <div>
                     <div class="footer-heading">المحتوى</div>
                     <div class="footer-links">
-                        <a href="/products" class="footer-link">المنتجات</a>
-                        <a href="/portfolio" class="footer-link">الأعمال</a>
-                        <a href="/blog" class="footer-link">المقالات</a>
-                        <a href="/about" class="footer-link">عن عبدالله</a>
+                        <a href="/blog">المدونة</a>
+                        <a href="/portfolio">الأعمال</a>
+                        <a href="/about">عن عبدالله</a>
                     </div>
                 </div>
                 <div>
                     <div class="footer-heading">تواصل</div>
                     <div class="footer-links">
-                        <a href="/contact" class="footer-link">أرسل رسالة</a>
-                        <a href="/login.html" class="footer-link">تسجيل الدخول</a>
-                        <a href="/privacy-policy.html" class="footer-link">سياسة الخصوصية</a>
-                        <a href="/terms-conditions.html" class="footer-link">الشروط والأحكام</a>
+                        <a href="/contact">
+                            <svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6zm0 4h8v2H6zm10 0h2v2h-2zm-6-4h8v2h-8z"/></svg>
+                            أرسل رسالة
+                        </a>
+                        <a href="/login.html">تسجيل الدخول</a>
+                        <a href="/privacy-policy.html">سياسة الخصوصية</a>
+                        <a href="/terms-conditions.html">الشروط والأحكام</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>&copy; 2025 عبدالله عباس</span>
-                <span>جميع الحقوق محفوظة</span>
+                <span>&copy; 2026 عبدالله عباس — جميع الحقوق محفوظة</span>
+                <span><svg class="icon-svg icon-svg--sm" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg> استشارات رقمية احترافية</span>
             </div>
         </div>
     </footer>
@@ -476,13 +489,8 @@
         function buildPage(product) {
             const root = document.getElementById('contentRoot');
 
-            // Breadcrumb
             root.appendChild(buildBreadcrumb(product));
-
-            // Hero
             root.appendChild(buildHero(product));
-
-            // Content
             root.appendChild(buildContent(product));
 
             root.style.display = 'block';
@@ -574,8 +582,6 @@
                 updateSEO(product);
                 buildPage(product);
                 document.getElementById('siteFooter').style.display = 'block';
-
-                // تحديث عداد السلة
                 updateCartBadge();
 
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -586,49 +592,35 @@
         }
 
         // ============================================================
-        // Nav Functions
+        // Header scroll
         // ============================================================
-        const nav = document.getElementById('siteNav');
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('site-header--scrolled', window.scrollY > 40);
+        }, { passive: true });
 
-        function handleNavScroll() {
-            nav.classList.toggle('site-nav--scrolled', window.scrollY > 40);
-        }
-        window.addEventListener('scroll', handleNavScroll, { passive: true });
-        handleNavScroll();
+        // ============================================================
+        // Mobile menu
+        // ============================================================
+        const toggle = document.getElementById('mobileToggle');
+        const closeBtn = document.getElementById('mobileClose');
+        const menu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('overlay');
 
-        // Mobile Menu
-        const mobileToggle = document.getElementById('mobileToggle');
-        const mobileClose = document.getElementById('mobileClose');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobilePanel = document.getElementById('mobilePanel');
+        function openMenu() { menu.classList.add('open');
+            overlay.classList.add('active');
+            toggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden'; }
 
-        function openMobile() {
-            mobileMenu.classList.add('nav-mobile-menu--open');
-            mobilePanel.classList.add('nav-mobile-panel--open');
-            mobileMenu.setAttribute('aria-hidden', 'false');
-            mobileToggle.setAttribute('aria-expanded', 'true');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMobile() {
-            mobileMenu.classList.remove('nav-mobile-menu--open');
-            mobilePanel.classList.remove('nav-mobile-panel--open');
-            mobileMenu.setAttribute('aria-hidden', 'true');
-            mobileToggle.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-        }
-
-        mobileToggle.addEventListener('click', openMobile);
-        mobileClose.addEventListener('click', closeMobile);
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) closeMobile();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeMobile();
-        });
-
-        mobilePanel.querySelectorAll('.nav-mobile-link, .nav-mobile-cta').forEach(l => l.addEventListener('click',
-        closeMobile));
+        function closeMenu() { menu.classList.remove('open');
+            overlay.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = ''; }
+        toggle?.addEventListener('click', openMenu);
+        closeBtn?.addEventListener('click', closeMenu);
+        overlay?.addEventListener('click', closeMenu);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+        menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
         // ============================================================
         // Init
