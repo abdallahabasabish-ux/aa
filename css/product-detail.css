@@ -119,6 +119,39 @@
     flex-wrap: wrap;
     margin-top: 8px;
 }
+.pdet-hero-actions .btn {
+    height: var(--btn-height);
+    padding: 0 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+.pdet-hero-actions .btn--primary {
+    background: var(--primary);
+    color: var(--bg-primary);
+    border: 1px solid var(--primary);
+}
+.pdet-hero-actions .btn--primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: #fff;
+}
+.pdet-hero-actions .btn--outline {
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+}
+.pdet-hero-actions .btn--outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.pdet-hero-actions .pdet-add-to-cart-btn.added {
+    background: var(--success, #22C55E);
+    border-color: var(--success, #22C55E);
+    color: #fff;
+}
 .pdet-hero-image {
     margin-top: 32px;
     border-radius: var(--radius);
@@ -219,26 +252,6 @@
     font-size: 0.9375rem;
     color: var(--text-secondary);
     line-height: 1.7;
-}
-
-/* --- Demo Link --- */
-.pdet-demo-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--primary);
-    font-weight: 600;
-    padding: 10px 20px;
-    border: 1px solid var(--primary);
-    transition: all var(--transition);
-}
-.pdet-demo-link:hover {
-    background: var(--primary);
-    color: var(--bg-primary);
-}
-.pdet-demo-link .icon-svg {
-    width: 18px;
-    height: 18px;
 }
 
 /* --- Download Info --- */
@@ -348,6 +361,9 @@
         width: 100%;
         justify-content: center;
     }
+    .pdet-hero-image {
+        aspect-ratio: 4/3;
+    }
 }
 
 @media (max-width: 480px) {
@@ -357,7 +373,8 @@
     .pdet-hero-top {
         gap: 8px;
     }
-    .pdet-hero-image {
-        aspect-ratio: 4/3;
+    .pdet-breadcrumb {
+        padding: calc(var(--header-h) + 16px) 0 20px;
+        font-size: 0.75rem;
     }
 }
