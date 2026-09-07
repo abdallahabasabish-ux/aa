@@ -46,7 +46,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
 
-    <!-- ===== تم فصل الـ CSS بالكامل ===== -->
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/services.css" />
 </head>
@@ -222,7 +221,7 @@
     </footer>
 
     <!-- ============================================================
-    SCRIPTS
+    SCRIPTS — جلب البيانات الحقيقية فقط (بدون fallback)
     ============================================================ -->
     <script type="importmap">
         {
@@ -285,99 +284,6 @@
                 return m;
             });
         }
-
-        // ============================================================
-        // Default Services (جميعها بالدولار الأمريكي)
-        // ============================================================
-        const defaultServices = [{
-            id: 'default-1',
-            title: 'تحسين أدسنس احترافي',
-            category: 'أدسنس',
-            shortDescription: 'زيادة أرباحك من أدسنس بنسبة تصل إلى 200% خلال 3 أشهر مع تحليل دقيق.',
-            price: 5,
-            currency: 'USD',
-            slug: 'adsense-optimization',
-            image: '',
-            active: true,
-            sortOrder: 1
-        }, {
-            id: 'default-2',
-            title: 'استراتيجية سيو متكاملة',
-            category: 'سيو',
-            shortDescription: 'تحليل المنافسين، بحث كلمات مفتاحية، وتحسين الترتيب في محركات البحث.',
-            price: 10,
-            currency: 'USD',
-            slug: 'seo-strategy',
-            image: '',
-            active: true,
-            sortOrder: 2
-        }, {
-            id: 'default-3',
-            title: 'إدارة مدونة احترافية',
-            category: 'إدارة محتوى',
-            shortDescription: 'تخطيط المحتوى، كتابة مقالات، وتحسين الأداء لزيادة الزوار والأرباح.',
-            price: 8,
-            currency: 'USD',
-            slug: 'blog-management',
-            image: '',
-            active: true,
-            sortOrder: 3
-        }, {
-            id: 'default-4',
-            title: 'تطوير موقع ووردبريس',
-            category: 'تطوير',
-            shortDescription: 'تصميم وتطوير موقع ووردبريس احترافي متجاوب وسريع مع لوحة تحكم سهلة.',
-            price: 15,
-            currency: 'USD',
-            slug: 'wordpress-development',
-            image: '',
-            active: true,
-            sortOrder: 4
-        }, {
-            id: 'default-5',
-            title: 'تصميم هوية بصرية متكاملة',
-            category: 'تصميم',
-            shortDescription: 'شعار، بطاقات، هوية متكاملة تعكس شخصية علامتك التجارية.',
-            price: 6,
-            currency: 'USD',
-            slug: 'brand-identity',
-            image: '',
-            active: true,
-            sortOrder: 5
-        }, {
-            id: 'default-6',
-            title: 'تحليل بيانات المواقع',
-            category: 'تحليل',
-            shortDescription: 'تحليل متقدم لبيانات موقعك باستخدام Google Analytics لفهم سلوك الزوار.',
-            price: 4,
-            currency: 'USD',
-            slug: 'data-analytics',
-            image: '',
-            active: true,
-            sortOrder: 6
-        }, {
-            id: 'default-7',
-            title: 'كتابة محتوى تسويقي',
-            category: 'كتابة',
-            shortDescription: 'نصوص إعلانية، منشورات سوشيال ميديا، ومقالات احترافية جاهزة للنشر.',
-            price: 3,
-            currency: 'USD',
-            slug: 'content-writing',
-            image: '',
-            active: true,
-            sortOrder: 7
-        }, {
-            id: 'default-8',
-            title: 'تصميم قالب بلوجر مخصص',
-            category: 'بلوجر',
-            shortDescription: 'قالب بلوجر عصري متجاوب مع تحسينات سرعة وSEO مدمجة.',
-            price: 12,
-            currency: 'USD',
-            slug: 'blogger-template',
-            image: '',
-            active: true,
-            sortOrder: 8
-        }];
 
         // ============================================================
         // Cart Functions
@@ -483,9 +389,9 @@
         });
 
         // ============================================================
-        // Fetch Services
+        // جلب البيانات الحقيقية فقط (بدون fallback)
         // ============================================================
-        async function fetchServices() {
+        async function fetchRealServices() {
             try {
                 const q = query(
                     collection(db, 'services'),
@@ -493,15 +399,10 @@
                     orderBy('sortOrder', 'asc')
                 );
                 const snap = await getDocs(q);
-                const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-                if (data.length === 0) {
-                    console.log('⚠️ لا توجد خدمات في Firestore، نستخدم البيانات الافتراضية (بالدولار).');
-                    return defaultServices;
-                }
-                return data;
+                return snap.docs.map(d => ({ id: d.id, ...d.data() }));
             } catch (e) {
                 console.warn('⚠️ فشل تحميل الخدمات:', e);
-                return defaultServices;
+                return []; // إرجاع مصفوفة فارغة بدلاً من بيانات افتراضية
             }
         }
 
@@ -526,8 +427,8 @@
                 grid.innerHTML = `
                     <div class="services-empty">
                         <svg class="icon-svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                        <div class="services-empty-title">لا توجد خدمات تطابق بحثك</div>
-                        <div class="services-empty-desc">جرّب كلمات بحث مختلفة أو تصفح جميع الخدمات</div>
+                        <div class="services-empty-title">${searchTerm ? 'لا توجد خدمات تطابق بحثك' : 'لا توجد خدمات حالياً'}</div>
+                        <div class="services-empty-desc">${searchTerm ? 'جرّب كلمات بحث مختلفة' : 'سيتم إضافة الخدمات قريباً'}</div>
                     </div>
                 `;
                 return;
@@ -596,9 +497,9 @@
         searchInput?.addEventListener('input', performSearch);
 
         // ============================================================
-        // Init
+        // Init — تحميل البيانات الحقيقية فقط
         // ============================================================
-        allServices = await fetchServices();
+        allServices = await fetchRealServices();
         renderServices(allServices);
         updateCartBadge();
         renderMiniCart();
@@ -662,7 +563,7 @@
             });
         });
 
-        console.log('🚀 صفحة الخدمات جاهزة (العملة: دولار أمريكي) مع جميع الخدمات وعربة التسوق!');
+        console.log('🚀 صفحة الخدمات تعرض البيانات الحقيقية فقط (بدون بيانات وهمية).');
     </script>
 
 </body>
