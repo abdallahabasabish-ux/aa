@@ -1,6 +1,6 @@
 /**
  * admin/articles.js
- * إدارة المقالات — CRUD كامل مع TinyMCE v8، رفع صور، حفظ تلقائي، معاينة، وإحصائيات
+ * إدارة المقالات — مع تهيئة TinyMCE بشكل مؤجل (عند فتح النموذج)
  */
 
 import { requireAdmin } from "/js/auth-guard.js";
@@ -93,22 +93,39 @@ const statScheduled = document.getElementById("statScheduled");
 let allArticles = [];
 let deleteTargetId = null;
 let editor = null;
+let editorInitialized = false;
 let isEditMode = false;
 let uploadedImageUrl = "";
 let autoSaveTimer = null;
-let editorReady = false;
+let initializingEditor = false;
 
 // ============================================
-// TinyMCE v8 — التهيئة
+// TinyMCE — تهيئة مؤجلة (فقط عند فتح النموذج)
 // ============================================
-function initEditor() {
+async function initEditor() {
+  // لو المحرر مُهيأ مسبقاً، فقط أعده
+  if (editorInitialized && editor) return editor;
+
+  // لو جاري التهيئة الآن، انتظر
+  if (initializingEditor) {
+    return new Promise((resolve) => {
+      const check = setInterval(() => {
+        if (editorInitialized && editor) {
+          clearInterval(check);
+          resolve(editor);
+        }
+      }, 100);
+    });
+  }
+
+  if (typeof tinymce === "undefined") {
+    console.warn("⚠️ TinyMCE غير محمّل — سيتم استخدام textarea بدلاً منه.");
+    return null;
+  }
+
+  initializingEditor = true;
+
   return new Promise((resolve) => {
-    if (typeof tinymce === "undefined") {
-      console.warn("⚠️ TinyMCE not loaded — سيتم استخدام textarea بدلاً منه.");
-      resolve(false);
-      return;
-    }
-
     tinymce.init({
       selector: "#artBody",
       language: "ar",
@@ -139,13 +156,18 @@ function initEditor() {
           direction: rtl;
           text-align: right;
           padding: 12px 20px;
+          background: #0C0C0E;
+          color: #F0EDE8;
         }
       `,
       setup: (ed) => {
-        editor = ed;
         ed.on("init", () => {
-          editorReady = true;
-          resolve(true);
+          editor = ed;
+          editorInitialized = true;
+          initializingEditor = false;
+          // تحديث حقل artBody المخفي
+          artBody.value = ed.getContent();
+          resolve(ed);
         });
         ed.on("change keyup input undo redo", () => {
           artBody.value = ed.getContent();
@@ -291,12 +313,21 @@ removeImageBtn.addEventListener("click", async () => {
 });
 
 // ============================================
-// فتح/إغلاق النموذج
+// فتح / إغلاق النموذج (مع تهيئة المحرر)
 // ============================================
-function openForm(article = null) {
+async function openForm(article = null) {
   isEditMode = !!article;
+
+  // 1. إظهار النموذج أولاً
   formContainer.classList.add("active");
 
+  // 2. انتظر ظهور العنصر في DOM
+  await new Promise((r) => setTimeout(r, 50));
+
+  // 3. تهيئة المحرر (لو لم يُهيأ بعد)
+  await initEditor();
+
+  // 4. الآن املأ الحقول
   if (article) {
     articleId.value = article.id;
     artTitle.value = article.title || "";
@@ -305,8 +336,6 @@ function openForm(article = null) {
     artCategory.value = article.category || "";
     artAuthor.value = article.author || "";
     artExcerpt.value = article.excerpt || "";
-    if (editor && editorReady) editor.setContent(article.body || "");
-    else artBody.value = article.body || "";
     uploadedImageUrl = article.image || "";
     artImage.value = uploadedImageUrl;
     updateImagePreview(uploadedImageUrl);
@@ -315,6 +344,14 @@ function openForm(article = null) {
     artActive.checked = article.active !== false;
     artSeoTitle.value = article.seoTitle || "";
     artMetaDesc.value = article.metaDescription || "";
+
+    // تعيين محتوى المحرر
+    if (editor) {
+      editor.setContent(article.body || "");
+    } else {
+      artBody.value = article.body || "";
+    }
+
     saveArticleBtn.querySelector(".btn-text").textContent = "💾 تحديث المقال";
   } else {
     resetForm();
@@ -333,8 +370,10 @@ function resetForm() {
   artCategory.value = "";
   artAuthor.value = "";
   artExcerpt.value = "";
-  if (editor && editorReady) editor.setContent("");
-  else artBody.value = "";
+  if (editor) {
+    editor.setContent("");
+  }
+  artBody.value = "";
   uploadedImageUrl = "";
   artImage.value = "";
   updateImagePreview("");
@@ -357,14 +396,14 @@ cancelEditBtn.addEventListener("click", closeForm);
 
 addArticleBtn.addEventListener("click", () => {
   openForm(null);
-  setTimeout(() => artTitle.focus(), 300);
+  setTimeout(() => artTitle.focus(), 400);
 });
 
 // ============================================
 // التحقق من الأخطاء
 // ============================================
 function clearErrors() {
-  document.querySelectorAll(".error").forEach(el => el.textContent = "");
+  document.querySelectorAll(".error").forEach((el) => (el.textContent = ""));
 }
 
 function validateForm() {
@@ -378,7 +417,7 @@ function validateForm() {
     document.getElementById("artExcerptErr").textContent = "ملخص المقال مطلوب.";
     valid = false;
   }
-  const body = editor && editorReady ? editor.getContent() : artBody.value.trim();
+  const body = editor ? editor.getContent() : artBody.value.trim();
   if (!body) {
     document.getElementById("artBodyErr").textContent = "محتوى المقال مطلوب.";
     valid = false;
@@ -387,14 +426,12 @@ function validateForm() {
 }
 
 // ============================================
-// حفظ تلقائي
+// الحفظ التلقائي (يفعّل المسودة)
 // ============================================
 function triggerAutoSave() {
   if (!formContainer.classList.contains("active")) return;
   clearTimeout(autoSaveTimer);
-  autoSaveTimer = setTimeout(() => {
-    performAutoSave();
-  }, 30000);
+  autoSaveTimer = setTimeout(() => performAutoSave(), 30000);
 }
 
 async function performAutoSave() {
@@ -408,26 +445,30 @@ async function performAutoSave() {
   try {
     const id = articleId.value;
     if (id) {
+      // تحديث المسودة الحالية (نُبقي حالة active كما هي)
       await updateDoc(doc(db, "blog", id), {
         ...data,
         updatedAt: serverTimestamp(),
       });
+      const idx = allArticles.findIndex((a) => a.id === id);
+      if (idx !== -1) allArticles[idx] = { ...allArticles[idx], ...data, updatedAt: new Date() };
     } else {
+      // إنشاء مسودة جديدة — الحالة "غير نشطة" لأنها مسودة
       const docRef = await addDoc(collection(db, "blog"), {
         ...data,
+        active: false,          // ← مسودة
+        isDraft: true,          // ← علامة تمييز
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
-        active: false,
-        isDraft: true,
       });
       articleId.value = docRef.id;
-      allArticles.push({
+      allArticles.unshift({
         id: docRef.id,
         ...data,
-        createdAt: new Date(),
-        updatedAt: new Date(),
         active: false,
         isDraft: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       });
       renderArticles(allArticles);
       updateStats(allArticles);
@@ -454,7 +495,7 @@ function getFormData() {
     category: artCategory.value,
     author: artAuthor.value.trim() || "عبدالله عباس",
     excerpt: artExcerpt.value.trim(),
-    body: editor && editorReady ? editor.getContent() : artBody.value.trim(),
+    body: editor ? editor.getContent() : artBody.value.trim(),
     image: artImage.value || "",
     sortOrder: parseInt(artSortOrder.value, 10) || 0,
     active: artActive.checked,
@@ -480,21 +521,27 @@ articleForm.addEventListener("submit", async (e) => {
   try {
     const id = articleId.value;
     if (id) {
+      // تحديث — إزالة علامة "مسودة" عند الحفظ اليدوي
       await updateDoc(doc(db, "blog", id), {
         ...data,
+        isDraft: false,
         updatedAt: serverTimestamp(),
       });
-      const idx = allArticles.findIndex(a => a.id === id);
-      if (idx !== -1) allArticles[idx] = { ...allArticles[idx], ...data, updatedAt: new Date() };
+      const idx = allArticles.findIndex((a) => a.id === id);
+      if (idx !== -1) {
+        allArticles[idx] = { ...allArticles[idx], ...data, isDraft: false, updatedAt: new Date() };
+      }
     } else {
       const docRef = await addDoc(collection(db, "blog"), {
         ...data,
+        isDraft: false,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
       allArticles.unshift({
         id: docRef.id,
         ...data,
+        isDraft: false,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -519,7 +566,7 @@ previewBtn.addEventListener("click", () => {
   const title = artTitle.value.trim() || "عنوان المقال";
   const author = artAuthor.value.trim() || "عبدالله عباس";
   const date = new Date().toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
-  const content = editor && editorReady ? editor.getContent() : artBody.value.trim() || "لا يوجد محتوى لعرضه.";
+  const content = editor ? editor.getContent() : artBody.value.trim() || "لا يوجد محتوى لعرضه.";
   const image = artImage.value;
 
   previewTitle.textContent = title;
@@ -576,6 +623,7 @@ function renderArticles(articles) {
     <th>المقال</th>
     <th>التصنيف</th>
     <th>الكاتب</th>
+    <th>الحالة</th>
     <th>نشط</th>
     <th>الإجراءات</th>
   </tr>`;
@@ -620,7 +668,20 @@ function renderArticles(articles) {
     tdAuthor.textContent = article.author || "—";
     tr.appendChild(tdAuthor);
 
-    // نشط
+    // الحالة (مسودة / منشور)
+    const tdStatus = document.createElement("td");
+    const isDraft = article.isDraft === true || article.active === false;
+    const statusBadge = document.createElement("span");
+    statusBadge.style.cssText =
+      "font-size:0.75rem;padding:3px 10px;border-radius:20px;font-weight:600;" +
+      (isDraft ?
+        "background:rgba(245,158,11,0.1);color:#F59E0B;" :
+        "background:rgba(34,197,94,0.1);color:#22C55E;");
+    statusBadge.textContent = isDraft ? "مسودة" : "منشور";
+    tdStatus.appendChild(statusBadge);
+    tr.appendChild(tdStatus);
+
+    // نشط (Toggle)
     const tdActive = document.createElement("td");
     const toggleLabel = document.createElement("label");
     toggleLabel.className = "toggle-switch";
@@ -652,7 +713,7 @@ function renderArticles(articles) {
     delBtn.setAttribute("aria-label", "حذف");
     delBtn.addEventListener("click", () => {
       deleteTargetId = article.id;
-      confirmMessage.textContent = `هل أنت متأكد من حذف المقال "${article.title}"؟ لا يمكن التراجع عن هذا الإجراء.`;
+      confirmMessage.textContent = `هل أنت متأكد من حذف المقال "${article.title}"؟`;
       confirmModal.classList.add("active");
     });
     actionsDiv.appendChild(delBtn);
@@ -672,9 +733,9 @@ function renderArticles(articles) {
 // ============================================
 function updateStats(articles) {
   const total = articles.length;
-  const published = articles.filter(a => a.active === true && !a.isDraft).length;
-  const draft = articles.filter(a => a.active === false || a.isDraft).length;
-  const scheduled = articles.filter(a => a.scheduledDate).length;
+  const published = articles.filter((a) => a.active === true && !a.isDraft).length;
+  const draft = articles.filter((a) => a.isDraft === true || a.active === false).length;
+  const scheduled = articles.filter((a) => a.scheduledDate).length;
 
   statTotal.textContent = total;
   statPublished.textContent = published;
@@ -687,9 +748,17 @@ function updateStats(articles) {
 // ============================================
 async function toggleActive(id, value) {
   try {
-    await updateDoc(doc(db, "blog", id), { active: value, updatedAt: serverTimestamp() });
-    const article = allArticles.find(a => a.id === id);
-    if (article) article.active = value;
+    await updateDoc(doc(db, "blog", id), {
+      active: value,
+      isDraft: false, // عند التفعيل، لم تعد مسودة
+      updatedAt: serverTimestamp(),
+    });
+    const article = allArticles.find((a) => a.id === id);
+    if (article) {
+      article.active = value;
+      article.isDraft = false;
+    }
+    renderArticles(allArticles);
     updateStats(allArticles);
   } catch (e) {
     console.error("Error toggling active:", e);
@@ -702,12 +771,16 @@ async function toggleActive(id, value) {
 // ============================================
 searchInput.addEventListener("input", () => {
   const q = searchInput.value.trim().toLowerCase();
-  if (!q) { renderArticles(allArticles); return; }
-  const filtered = allArticles.filter(a =>
-    (a.title || "").toLowerCase().includes(q) ||
-    (a.slug || "").toLowerCase().includes(q) ||
-    (a.category || "").toLowerCase().includes(q) ||
-    (a.author || "").toLowerCase().includes(q)
+  if (!q) {
+    renderArticles(allArticles);
+    return;
+  }
+  const filtered = allArticles.filter(
+    (a) =>
+      (a.title || "").toLowerCase().includes(q) ||
+      (a.slug || "").toLowerCase().includes(q) ||
+      (a.category || "").toLowerCase().includes(q) ||
+      (a.author || "").toLowerCase().includes(q)
   );
   renderArticles(filtered);
 });
@@ -723,7 +796,7 @@ confirmDeleteBtn.addEventListener("click", async () => {
   if (!deleteTargetId) return;
   try {
     await deleteDoc(doc(db, "blog", deleteTargetId));
-    allArticles = allArticles.filter(a => a.id !== deleteTargetId);
+    allArticles = allArticles.filter((a) => a.id !== deleteTargetId);
     renderArticles(allArticles);
     updateStats(allArticles);
     confirmModal.classList.remove("active");
@@ -748,7 +821,7 @@ async function fetchArticles() {
   try {
     const q = query(collection(db, "blog"), orderBy("createdAt", "desc"));
     const snap = await getDocs(q);
-    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
   } catch (e) {
     console.error("Error fetching articles:", e);
     return [];
@@ -765,13 +838,13 @@ function setUserInfo(user) {
 }
 
 // ============================================
-// التهيئة
+// التهيئة — بدون تهيئة TinyMCE هنا
 // ============================================
 async function init(user) {
   setUserInfo(user);
 
-  // ✅ تهيئة TinyMCE قبل تحميل المقالات
-  await initEditor();
+  // ❌ لا نُهيّئ TinyMCE هنا — فقط عند فتح النموذج
+  // await initEditor();
 
   allArticles = await fetchArticles();
   renderArticles(allArticles);
@@ -782,7 +855,6 @@ async function init(user) {
 
   if (new URLSearchParams(location.search).get("action") === "new") {
     openForm(null);
-    setTimeout(() => artTitle.focus(), 300);
   }
 }
 
