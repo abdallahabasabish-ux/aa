@@ -1,12 +1,12 @@
 /**
  * admin/articles.js
- * إدارة المقالات — CRUD كامل مع TinyMCE، رفع صور، حفظ تلقائي، معاينة، وإحصائيات
+ * إدارة المقالات — CRUD كامل مع TinyMCE v8، رفع صور، حفظ تلقائي، معاينة، وإحصائيات
  */
 
 import { requireAdmin } from "/js/auth-guard.js";
 import { auth, db, storage } from "/js/firebase-init.js";
 import { logout } from "/js/auth.js";
-import { isSafeUrl, escapeHtml } from "/js/security.js";
+import { isSafeUrl } from "/js/security.js";
 import {
   collection,
   query,
@@ -44,7 +44,6 @@ const articleForm = document.getElementById("articleForm");
 const cancelEditBtn = document.getElementById("cancelEditBtn");
 const saveArticleBtn = document.getElementById("saveArticleBtn");
 const previewBtn = document.getElementById("previewBtn");
-const autoSaveNotice = document.getElementById("autoSaveNotice");
 const autoSaveDot = document.getElementById("autoSaveDot");
 const autoSaveText = document.getElementById("autoSaveText");
 
@@ -97,40 +96,63 @@ let editor = null;
 let isEditMode = false;
 let uploadedImageUrl = "";
 let autoSaveTimer = null;
-let currentAutoSaveData = null;
+let editorReady = false;
 
 // ============================================
-// TinyMCE تهيئة المحرر
+// TinyMCE v8 — التهيئة
 // ============================================
-async function initEditor() {
-  if (typeof tinymce === "undefined") {
-    console.warn("TinyMCE not loaded. Using textarea fallback.");
-    return;
-  }
+function initEditor() {
+  return new Promise((resolve) => {
+    if (typeof tinymce === "undefined") {
+      console.warn("⚠️ TinyMCE not loaded — سيتم استخدام textarea بدلاً منه.");
+      resolve(false);
+      return;
+    }
 
-  await tinymce.init({
-    selector: "#artBody",
-    language: "ar",
-    directionality: "rtl",
-    height: 400,
-    menubar: true,
-    plugins: [
-      "advlist", "autolink", "lists", "link", "image", "charmap", "preview",
-      "anchor", "searchreplace", "visualblocks", "code", "fullscreen",
-      "insertdatetime", "media", "table", "help", "wordcount"
-    ],
-    toolbar: "undo redo | blocks | " +
-      "bold italic backcolor | alignleft aligncenter " +
-      "alignright alignjustify | bullist numlist outdent indent | " +
-      "removeformat | help",
-    content_style: "body { font-family: Cairo, sans-serif; font-size: 16px; line-height: 1.8; }",
-    setup: function(ed) {
-      editor = ed;
-      ed.on("change", function() {
-        artBody.value = ed.getContent();
-        triggerAutoSave();
-      });
-    },
+    tinymce.init({
+      selector: "#artBody",
+      language: "ar",
+      directionality: "rtl",
+      height: 420,
+      menubar: false,
+      branding: false,
+      promotion: false,
+      resize: true,
+      statusbar: true,
+      plugins: [
+        "advlist", "autolink", "lists", "link", "image", "charmap", "preview",
+        "anchor", "searchreplace", "visualblocks", "code", "fullscreen",
+        "insertdatetime", "media", "table", "help", "wordcount", "codesample"
+      ],
+      toolbar:
+        "undo redo | blocks | " +
+        "bold italic underline strikethrough | forecolor backcolor | " +
+        "alignright aligncenter alignleft alignjustify | " +
+        "bullist numlist outdent indent | " +
+        "link image media table | " +
+        "codesample | removeformat | fullscreen code help",
+      content_style: `
+        body {
+          font-family: 'Cairo', sans-serif;
+          font-size: 16px;
+          line-height: 1.8;
+          direction: rtl;
+          text-align: right;
+          padding: 12px 20px;
+        }
+      `,
+      setup: (ed) => {
+        editor = ed;
+        ed.on("init", () => {
+          editorReady = true;
+          resolve(true);
+        });
+        ed.on("change keyup input undo redo", () => {
+          artBody.value = ed.getContent();
+          triggerAutoSave();
+        });
+      },
+    });
   });
 }
 
@@ -193,7 +215,7 @@ artSlug.addEventListener("input", () => {
 // ============================================
 uploadImageBtn.addEventListener("click", () => imageFileInput.click());
 
-imageFileInput.addEventListener("change", async (e) => {
+imageFileInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
   if (!file.type.startsWith("image/")) {
@@ -253,11 +275,13 @@ function updateImagePreview(url) {
 }
 
 removeImageBtn.addEventListener("click", async () => {
-  if (uploadedImageUrl) {
+  if (uploadedImageUrl && uploadedImageUrl.startsWith("https://firebasestorage")) {
     try {
       const oldRef = ref(storage, uploadedImageUrl);
       await deleteObject(oldRef);
-    } catch (e) { console.warn("Could not delete old image:", e); }
+    } catch (e) {
+      console.warn("Could not delete old image:", e);
+    }
   }
   uploadedImageUrl = "";
   artImage.value = "";
@@ -281,7 +305,7 @@ function openForm(article = null) {
     artCategory.value = article.category || "";
     artAuthor.value = article.author || "";
     artExcerpt.value = article.excerpt || "";
-    if (editor) editor.setContent(article.body || "");
+    if (editor && editorReady) editor.setContent(article.body || "");
     else artBody.value = article.body || "";
     uploadedImageUrl = article.image || "";
     artImage.value = uploadedImageUrl;
@@ -309,7 +333,7 @@ function resetForm() {
   artCategory.value = "";
   artAuthor.value = "";
   artExcerpt.value = "";
-  if (editor) editor.setContent("");
+  if (editor && editorReady) editor.setContent("");
   else artBody.value = "";
   uploadedImageUrl = "";
   artImage.value = "";
@@ -354,7 +378,7 @@ function validateForm() {
     document.getElementById("artExcerptErr").textContent = "ملخص المقال مطلوب.";
     valid = false;
   }
-  const body = editor ? editor.getContent() : artBody.value.trim();
+  const body = editor && editorReady ? editor.getContent() : artBody.value.trim();
   if (!body) {
     document.getElementById("artBodyErr").textContent = "محتوى المقال مطلوب.";
     valid = false;
@@ -370,13 +394,13 @@ function triggerAutoSave() {
   clearTimeout(autoSaveTimer);
   autoSaveTimer = setTimeout(() => {
     performAutoSave();
-  }, 30000); // 30 ثانية
+  }, 30000);
 }
 
 async function performAutoSave() {
   if (!formContainer.classList.contains("active")) return;
   const data = getFormData();
-  if (!data.title && !data.body) return; // لا شيء للحفظ
+  if (!data.title && !data.body) return;
 
   autoSaveDot.className = "dot saving";
   autoSaveText.textContent = "جاري الحفظ...";
@@ -389,7 +413,6 @@ async function performAutoSave() {
         updatedAt: serverTimestamp(),
       });
     } else {
-      // إذا كان مقالاً جديداً، نحفظه كمسودة مؤقتة
       const docRef = await addDoc(collection(db, "blog"), {
         ...data,
         createdAt: serverTimestamp(),
@@ -398,7 +421,6 @@ async function performAutoSave() {
         isDraft: true,
       });
       articleId.value = docRef.id;
-      // إضافة للمصفوفة المحلية
       allArticles.push({
         id: docRef.id,
         ...data,
@@ -432,7 +454,7 @@ function getFormData() {
     category: artCategory.value,
     author: artAuthor.value.trim() || "عبدالله عباس",
     excerpt: artExcerpt.value.trim(),
-    body: editor ? editor.getContent() : artBody.value.trim(),
+    body: editor && editorReady ? editor.getContent() : artBody.value.trim(),
     image: artImage.value || "",
     sortOrder: parseInt(artSortOrder.value, 10) || 0,
     active: artActive.checked,
@@ -453,6 +475,8 @@ articleForm.addEventListener("submit", async (e) => {
   saveArticleBtn.querySelector(".spinner").style.display = "block";
 
   const data = getFormData();
+  const wasEdit = isEditMode;
+
   try {
     const id = articleId.value;
     if (id) {
@@ -463,9 +487,12 @@ articleForm.addEventListener("submit", async (e) => {
       const idx = allArticles.findIndex(a => a.id === id);
       if (idx !== -1) allArticles[idx] = { ...allArticles[idx], ...data, updatedAt: new Date() };
     } else {
-      data.createdAt = serverTimestamp();
-      const docRef = await addDoc(collection(db, "blog"), data);
-      allArticles.push({
+      const docRef = await addDoc(collection(db, "blog"), {
+        ...data,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+      allArticles.unshift({
         id: docRef.id,
         ...data,
         createdAt: new Date(),
@@ -475,7 +502,7 @@ articleForm.addEventListener("submit", async (e) => {
     renderArticles(allArticles);
     updateStats(allArticles);
     closeForm();
-    alert(isEditMode ? "✅ تم تحديث المقال بنجاح." : "✅ تم إضافة المقال بنجاح.");
+    alert(wasEdit ? "✅ تم تحديث المقال بنجاح." : "✅ تم إضافة المقال بنجاح.");
   } catch (error) {
     console.error("Error saving article:", error);
     alert("❌ حدث خطأ أثناء حفظ المقال.");
@@ -492,7 +519,7 @@ previewBtn.addEventListener("click", () => {
   const title = artTitle.value.trim() || "عنوان المقال";
   const author = artAuthor.value.trim() || "عبدالله عباس";
   const date = new Date().toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
-  const content = editor ? editor.getContent() : artBody.value.trim() || "لا يوجد محتوى لعرضه.";
+  const content = editor && editorReady ? editor.getContent() : artBody.value.trim() || "لا يوجد محتوى لعرضه.";
   const image = artImage.value;
 
   previewTitle.textContent = title;
@@ -524,7 +551,7 @@ document.addEventListener("keydown", (e) => {
 });
 
 // ============================================
-// عرض المقالات في جدول + إحصائيات
+// عرض المقالات في جدول
 // ============================================
 function renderArticles(articles) {
   tableWrapper.textContent = "";
@@ -558,7 +585,7 @@ function renderArticles(articles) {
   articles.forEach((article) => {
     const tr = document.createElement("tr");
 
-    // العمود الأول: الصورة + العنوان
+    // المقال (صورة + عنوان)
     const tdTitle = document.createElement("td");
     const flexDiv = document.createElement("div");
     flexDiv.style.cssText = "display:flex;align-items:center;gap:12px;";
@@ -569,6 +596,7 @@ function renderArticles(articles) {
       const img = document.createElement("img");
       img.src = article.image;
       img.alt = "";
+      img.loading = "lazy";
       thumbDiv.appendChild(img);
     } else {
       thumbDiv.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/></svg>`;
@@ -592,7 +620,7 @@ function renderArticles(articles) {
     tdAuthor.textContent = article.author || "—";
     tr.appendChild(tdAuthor);
 
-    // نشط (Toggle)
+    // نشط
     const tdActive = document.createElement("td");
     const toggleLabel = document.createElement("label");
     toggleLabel.className = "toggle-switch";
@@ -644,9 +672,9 @@ function renderArticles(articles) {
 // ============================================
 function updateStats(articles) {
   const total = articles.length;
-  const published = articles.filter(a => a.active === true).length;
-  const draft = articles.filter(a => a.active === false).length;
-  const scheduled = articles.filter(a => a.scheduledDate).length; // إذا كانت هناك ميزة جدولة
+  const published = articles.filter(a => a.active === true && !a.isDraft).length;
+  const draft = articles.filter(a => a.active === false || a.isDraft).length;
+  const scheduled = articles.filter(a => a.scheduledDate).length;
 
   statTotal.textContent = total;
   statPublished.textContent = published;
@@ -741,7 +769,10 @@ function setUserInfo(user) {
 // ============================================
 async function init(user) {
   setUserInfo(user);
+
+  // ✅ تهيئة TinyMCE قبل تحميل المقالات
   await initEditor();
+
   allArticles = await fetchArticles();
   renderArticles(allArticles);
   updateStats(allArticles);
